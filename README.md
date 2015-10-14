@@ -1,19 +1,23 @@
 # Exremit
 
-To start your Phoenix app:
+Prototype remit implementation in phoenix and react
 
-  1. Install dependencies with `mix deps.get`
-  2. Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  3. Start Phoenix endpoint with `mix phoenix.server`
+# todo:
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+- get data locally
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+# Load data dump from regular remit
 
-## Learn more
+   heroku pg:backups capture -a remit-cr
+   curl --output /tmp/data.dump `heroku pg:backups public-url -a remit-cr`
+   mix ecto.create
+   pg_restore --no-acl --no-owner -d exremit_dev /tmp/data.dump
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: http://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+# Commands used to deploy to heroku
+
+    heroku apps:create exremit --region eu
+    heroku buildpacks:set https://github.com/gjaldon/phoenix-static-buildpack
+    heroku buildpacks:add --index 1 https://github.com/HashNuke/heroku-buildpack-elixir
+    heroku config:set SECRET_KEY_BASE=$(elixir -e "IO.puts :crypto.strong_rand_bytes(64) |> Base.encode64")
+    heroku config:set USER_TOKEN=$(elixir -e "IO.puts Regex.replace(~r/[^a-zA-Z0-9]/, (:crypto.strong_rand_bytes(64) |> Base.encode64), \"\")")
+    git push heroku

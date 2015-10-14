@@ -14,7 +14,8 @@ use Mix.Config
 config :exremit, Exremit.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/manifest.json"
+  cache_static_manifest: "priv/static/manifest.json",
+  secret_key_base: {:system, "SECRET_KEY_BASE"}
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -54,8 +55,11 @@ config :logger, level: :info
 # start per endpoint:
 #
 #     config :exremit, Exremit.Endpoint, server: true
-#
 
-# Finally import the config/prod.secret.exs
-# which should be versioned separately.
-import_config "prod.secret.exs"
+# Configure your database
+config :exremit, Exremit.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "exremit_prod",
+  pool_size: 20
