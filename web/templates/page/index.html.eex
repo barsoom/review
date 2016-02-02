@@ -1,6 +1,7 @@
 <div class="jumbotron">
   <h2>Welcome to Phoenix!</h2>
-  <p class="lead">A productive web framework that<br />does not compromise speed and maintainability.</p>
+  <p class="lead" id="js-run">A productive web framework that<br />does not compromise speed and maintainability.</p>
+  <a href="javascript:document.getElementById('js-run').innerHTML = 'test-output'; false">Run script</a>
 </div>
 
 <div class="row marketing">
