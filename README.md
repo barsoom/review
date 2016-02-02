@@ -8,6 +8,7 @@ Exploring the phoenix and elm based development by reimplementing [remit](github
 * [ ] Set up ELM
 * [ ] Set up client side testing tools
 * [ ] Look into full stack javascript testing for overall acceptance test (not required, but good to know how)
+* [ ] Token auth in prod
 
 # Load data dump from regular remit
 
