@@ -1,10 +1,6 @@
 # Exremit
 
-Prototype remit implementation in phoenix and react
-
-# todo:
-
-- get data locally
+Exploring the phoenix and elm based development by reimplementing [remit](github.com/henrik/remit).
 
 # Load data dump from regular remit
 
