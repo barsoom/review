@@ -14,7 +14,7 @@ cd $INSTALL_PATH
 
 # Install erlang
 if [ ! -e $ERLANG_PATH/bin/erl ]; then
-  curl -O http://www.erlang.org/download/otp_src_$ERLANG_VERSION.tar.gz
+  curl -O http://erlang.org/download/otp_src_$ERLANG_VERSION.tar.gz
   tar xzf otp_src_$ERLANG_VERSION.tar.gz
   cd $ERLANG_PATH
   ./configure --enable-smp-support \
