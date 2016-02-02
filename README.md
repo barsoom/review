@@ -10,10 +10,10 @@ Exploring the phoenix and elm based development by reimplementing [remit](github
 
 # Load data dump from regular remit
 
-   heroku pg:backups capture -a remit-cr
-   curl --output /tmp/data.dump `heroku pg:backups public-url -a remit-cr`
-   mix ecto.create
-   pg_restore --no-acl --no-owner -d exremit_dev /tmp/data.dump
+    heroku pg:backups capture -a remit-cr
+    curl --output /tmp/data.dump `heroku pg:backups public-url -a remit-cr`
+    mix ecto.create
+    pg_restore --no-acl --no-owner -d exremit_dev /tmp/data.dump
 
 # Commands used to deploy to heroku
 
