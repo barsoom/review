@@ -7,6 +7,7 @@ Exploring the phoenix and elm based development by reimplementing [remit](github
 * [ ] Import data on heroku and test the model layer code
 * [ ] Set up ELM
 * [ ] Set up client side testing tools
+* [ ] Look into full stack javascript testing for overall acceptance test (not required, but good to know how)
 
 # Load data dump from regular remit
 
