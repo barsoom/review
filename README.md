@@ -26,3 +26,9 @@ Exploring the phoenix and elm based development by reimplementing [remit](github
     heroku config:set SECRET_KEY_BASE=$(elixir -e "IO.puts :crypto.strong_rand_bytes(64) |> Base.encode64")
     heroku config:set USER_TOKEN=$(elixir -e "IO.puts Regex.replace(~r/[^a-zA-Z0-9]/, (:crypto.strong_rand_bytes(64) |> Base.encode64), \"\")")
     git push heroku
+
+# Running tests
+
+    mix deps.get
+    phantomjs -w # in another tab
+    mix test
