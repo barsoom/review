@@ -2,6 +2,12 @@
 
 Exploring the phoenix and elm based development by reimplementing [remit](github.com/henrik/remit).
 
+# TODO
+
+* [ ] Import data on heroku and test the model layer code
+* [ ] Set up ELM
+* [ ] Set up client side testing tools
+
 # Load data dump from regular remit
 
    heroku pg:backups capture -a remit-cr
