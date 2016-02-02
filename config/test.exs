@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :exremit, Exremit.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "jocke",
+  password: "",
   database: "exremit_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
