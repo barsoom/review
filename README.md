@@ -12,12 +12,13 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
   * [x] Get CI working including js tests https://circleci.com/gh/joakimk/exremit/4
   * [x] Add CI deploy step
 * [x] Document dev usage
-* [ ] Set up ELM
+* [x] Set up ELM
 * [ ] Token auth in prod
 
 ## Building the app
 
 * [ ] Render listing of commits
+* [ ] Set up instructions from scratch, bootstrapping scripts, etc
 
 # Running tests
 
@@ -27,10 +28,29 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
 
 # Running in dev
 
-First load data dump as explained below, then:
+First load data dump:
+
+    heroku pg:backups capture -a your-remit
+    curl --output /tmp/data.dump `heroku pg:backups public-url -a your-remit`
+    mix ecto.create
+    pg_restore --no-acl --no-owner -d exremit_dev /tmp/data.dump
+
+Then start the server:
 
     mix phoenix.server
     # open http://localhost:4000
+
+The server also runs assets compilation for development including the elm compiler when saving. It also triggers a refresh of the browser on any change.
+
+# Troubleshooting
+
+If you have problems with javascript tools, you can try reinstalling them using `rm -rf node_modules && npm install`.
+
+# Installing an elm package or running other elm tools
+
+    cd web/elm
+    source paths.env
+    elm package install name
 
 # Load data dump from regular remit
 

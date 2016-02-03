@@ -19,3 +19,6 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import {Socket} from "phoenix"
+
+var div = document.getElementById("js-elm-test")
+var app = Elm.embed(Elm.CommitList, div);
