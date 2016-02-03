@@ -59,6 +59,11 @@ exports.config = {
       mainModules: ["modules/CommitList.elm"],
       outputFolder: "../static/vendor/compiled_elm"
     },
+    assetsmanager: {
+      copyTo: {
+        "fonts" : ["web/static/vendor/css/font-awesome-4.5.0/fonts/*"]
+      }
+    }
   },
 
   modules: {

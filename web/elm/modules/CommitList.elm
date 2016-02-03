@@ -18,7 +18,13 @@ renderCommit commit =
   li [ id ("commit-" ++ toString commit.id), class "test-commit" ] [
     a [ class "block-link" ] [
       div [ class "commit-wrapper" ] [
-        div [ class "commit-controls" ] []
+        div [ class "commit-controls" ] [
+          div [] [
+            button [ class "small start-review" ] [
+              i [ class "fa fa-eye" ] [ text "Start review" ]
+            ]
+          ]
+        ]
       , img [ class "commit-avatar", src "" ] []
       , div [ class "commit-summary-and-details" ] [
           div [ class "commit-summary test-summary" ] [ text commit.summary ]
