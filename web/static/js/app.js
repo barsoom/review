@@ -22,6 +22,6 @@ import "phoenix_html"
 
 var commitListDiv = document.getElementById("js-commit-list")
 if(commitListDiv) {
-  Elm.embed(Elm.CommitList, commitListDiv);
+  Elm.embed(Elm.CommitList, commitListDiv, { commits: JSON.parse(commitListDiv.dataset.commits) });
 }
 

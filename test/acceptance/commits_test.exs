@@ -10,9 +10,6 @@ defmodule Exremit.CommitsTest do
     navigate_to "/commits"
 
     elements = find_all_elements(:css, ".test-commit")
-    IO.inspect wip_test: length(elements)
-
-    find_element(:css, ".test-temp")
-    #assert length(elements) == 3
+    assert length(elements) == 3
   end
 end

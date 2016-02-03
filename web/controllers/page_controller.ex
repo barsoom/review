@@ -6,6 +6,13 @@ defmodule Exremit.PageController do
   end
 
   def commits(conn, _params) do
-    render conn, "commits.html"
+    render conn, "commits.html", commits_json: commits_json
+  end
+
+  defp commits_json do
+    Exremit.Repo.commits
+    |> Exremit.Repo.all
+    |> Exremit.CommitSerializer.serialize
+    |> Exremit.JSON.encode
   end
 end
