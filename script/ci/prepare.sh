@@ -59,5 +59,7 @@ mix do deps.get, deps.compile, compile
 
 npm install
 
+export PATH="$HOME/$CIRCLE_PROJECT_REPONAME/node_modules/.bin:$PATH"
+
 echo "Running brunch build, this can take a little while the first time"
 brunch build
