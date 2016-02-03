@@ -65,4 +65,4 @@ config :exremit, Exremit.Repo,
   pool_size: 20
 
 config :exremit,
-  auth_key: System.get_env("AUTH_KEY") || raise("You need to set AUTH_KEY config")
+  auth_key: System.get_env("AUTH_KEY")
