@@ -21,6 +21,7 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
 * [x] Add css
 * [x] Unbreak CI
   * [ ] try other options for babel-preset if it works
+* [ ] Calculate gravatar base url server side for simplicity?
 * [ ] Convert config to coffee script for less noisy config
 * [ ] Add complete markup from react prototype and see if anything is missing from angular
 * [ ] Set up instructions from scratch, bootstrapping scripts, etc
