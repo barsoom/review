@@ -24,6 +24,8 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
 * [ ] Convert config to coffee script for less noisy config
 * [ ] Add complete markup from react prototype and see if anything is missing from angular
 * [ ] Set up instructions from scratch, bootstrapping scripts, etc
+  * [ ] Rewrite instructions in more of a step-by-step start phoenix, start phantom, etc.
+    - Possibly make phantomjs part of the phoenix.server in dev.
 
 ## Later
 
@@ -31,9 +33,20 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
 
 # Running tests
 
+Install dependencies:
+
+    npm install
     mix deps.get
-    phantomjs -w # in another tab
+
+Start headless browser in another terminal window:
+
+    phantomjs -w
+
+Run tests:
+
     mix test
+
+If the tests does not pass, start the web server `mix phoenix.server` once so that assets are built. `node_modules/.bin/brunch build` does not seem to work in all cases.
 
 # Running in dev
 
@@ -50,6 +63,7 @@ Then start the server:
     # we need to load it into path so that elm-brunch can find it.
     source web/elm/paths.env
 
+    npm install
     mix phoenix.server
     # open http://localhost:4000
 
