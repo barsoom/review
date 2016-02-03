@@ -5,4 +5,4 @@ import Html.Attributes exposing (..)
 --import Html.Events exposing (..)
 
 main =
-  div [] [ text "Hello from ELM" ]
+  div [ class "test-temp" ] [ text "Hello from ELM" ]

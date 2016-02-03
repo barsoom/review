@@ -12,8 +12,7 @@ defmodule Exremit.CommitsTest do
     elements = find_all_elements(:css, ".test-commit")
     IO.inspect wip_test: length(elements)
 
-    :timer.sleep 500
-    assert page_source() =~ ~r/Hello from ELM/
+    find_element(:css, ".test-temp")
     #assert length(elements) == 3
   end
 end
