@@ -20,5 +20,8 @@ import "phoenix_html"
 
 // import {Socket} from "phoenix"
 
-var div = document.getElementById("js-elm-test")
-var app = Elm.embed(Elm.CommitList, div);
+var commitListDiv = document.getElementById("js-commit-list")
+if(commitListDiv) {
+  Elm.embed(Elm.CommitList, commitListDiv);
+}
+

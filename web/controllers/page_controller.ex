@@ -4,4 +4,8 @@ defmodule Exremit.PageController do
   def index(conn, _params) do
     render conn, "index.html"
   end
+
+  def commits(conn, _params) do
+    render conn, "commits.html"
+  end
 end
