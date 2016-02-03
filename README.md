@@ -2,15 +2,20 @@
 
 Exploring the phoenix and elm based development by reimplementing [remit](github.com/henrik/remit).
 
-# TODO
+# TODO: Bootstrap tools
 
-* [ ] Import data on heroku and test the model layer code
-* [ ] Set up ELM
-* [ ] Set up client side testing tools
 * [x] Look into full stack javascript testing for overall acceptance test (not required, but good to know how)
-  * [ ] Get CI working including js tests https://circleci.com/gh/joakimk/exremit/4
+  * [x] Get CI working including js tests https://circleci.com/gh/joakimk/exremit/4
+  * [ ] Add CI deploy step
+  * [ ] Add unit test running in CI
 * [ ] Can jasmine tests be run though hound or some other way though phantomjs?
 * [ ] Token auth in prod
+* [ ] Set up ELM
+* [ ] Set up client side testing tools
+
+# TODO: Building the app
+
+* [ ] Render listing of commits
 
 # Load data dump from regular remit
 
