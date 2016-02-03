@@ -6,7 +6,7 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
 
 ## Bootstrap tools
 
-* [x] Set up client side testing tools **skipped since there is no simple setup available and this app does not strictly needed them (as full stack test will be few and fast too and it's not expected to grow), will research more for later apps, or simply later**
+* [x] Set up client side testing tools **skipped** (since there is no simple setup available, and acceptance tests will probably be good enough for a small app like this)
   * For later: look in http://brunch.io/skeletons.html, and then blog or gist a basic phoenix js testing setup.
 * [x] Look into full stack javascript testing for overall acceptance test (not required, but good to know how)
   * [x] Get CI working including js tests https://circleci.com/gh/joakimk/exremit/4
@@ -20,6 +20,7 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
 * [x] Render listing of commits
 * [x] Add css
 * [ ] Unbreak CI
+  * [ ] try other options for babel-preset if it works
 * [ ] Convert config to coffee script for less noisy config
 * [ ] Add complete markup from react prototype and see if anything is missing from angular
 * [ ] Set up instructions from scratch, bootstrapping scripts, etc
