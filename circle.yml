@@ -10,3 +10,9 @@ dependencies:
 test:
   override:
     - script/ci/tests.sh
+
+deployment:
+  production:
+    branch: master
+    heroku:
+      appname: exremit
