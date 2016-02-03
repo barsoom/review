@@ -59,9 +59,7 @@ config :logger, level: :info
 # Configure your database
 config :exremit, Exremit.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "exremit_prod",
+  url: System.get_env("DATABASE_URL"),
   pool_size: 20
 
 config :exremit,
