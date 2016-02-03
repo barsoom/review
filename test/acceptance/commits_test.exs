@@ -25,7 +25,7 @@ defmodule Exremit.CommitsTest do
   end
 
   test "shows interesting info about commits" do
-    commit1 = create(:commit)
+    create(:commit)
 
     navigate_to "/commits?auth_key=secret"
 

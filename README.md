@@ -13,11 +13,15 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
   * [x] Add CI deploy step
 * [x] Document dev usage
 * [x] Set up ELM
-* [ ] Token auth in prod
+* [x] Token auth in prod
 
 ## Building the app
 
-* [ ] Render listing of commits
+* [x] Render listing of commits
+* [x] Add css
+* [ ] Unbreak CI
+* [ ] Convert config to coffee script for less noisy config
+* [ ] Add complete markup from react prototype and see if anything is missing from angular
 * [ ] Set up instructions from scratch, bootstrapping scripts, etc
 
 ## Later
