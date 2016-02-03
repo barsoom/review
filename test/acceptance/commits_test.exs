@@ -3,9 +3,9 @@ defmodule Exremit.CommitsTest do
   import Exremit.Factory
 
   test "shows a list of commits, with the newest on top" do
-    commit1 = create(:commit, %{ sha: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" })
-    commit2 = create(:commit, %{ sha: "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" })
-    commit3 = create(:commit, %{ sha: "cccccccccccccccccccccccccccccccccccccccc" })
+    commit1 = create(:commit)
+    commit2 = create(:commit)
+    commit3 = create(:commit)
 
     navigate_to "/commits?auth_key=secret"
 
@@ -22,5 +22,16 @@ defmodule Exremit.CommitsTest do
       "commit-#{commit2.id}",
       "commit-#{commit1.id}",
     ]
+  end
+
+  test "shows interesting info about commits" do
+    commit1 = create(:commit)
+
+    navigate_to "/commits?auth_key=secret"
+
+    element = find_element(:css, ".test-commit")
+    summary = find_within_element(element, :css, ".test-summary") |> inner_text
+
+    assert summary =~ "This is a very"
   end
 end

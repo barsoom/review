@@ -12,7 +12,17 @@ type alias Commit =
   }
 
 main =
-  div [ ] (List.map renderCommit commits)
+  ul [ class "commits-list" ] (List.map renderCommit commits)
 
 renderCommit commit =
-  div [ id ("commit-" ++ toString commit.id), class "test-commit" ] [ text (toString commit.id) ]
+  li [ id ("commit-" ++ toString commit.id), class "test-commit" ] [
+    a [ class "block-link" ] [
+      div [ class "commit-wrapper" ] [
+        div [ class "commit-controls" ] []
+      , img [ class "commit-avatar", src "" ] []
+      , div [ class "commit-summary-and-details" ] [
+          div [ class "commit-summary test-summary" ] [ text commit.summary ]
+        ]
+      ]
+    ]
+  ]
