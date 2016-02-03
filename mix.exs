@@ -36,6 +36,7 @@ defmodule Exremit.Mixfile do
      {:phoenix_ecto, "~> 1.1"},
      {:postgrex, ">= 0.0.0"},
      {:hound, "~> 0.8", only: :test},
+     {:ex_machina, "~> 0.6.1", only: :test},
      {:cowboy, "~> 1.0"}]
   end
 
