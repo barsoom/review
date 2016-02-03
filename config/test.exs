@@ -12,7 +12,7 @@ config :logger, level: :warn
 # Configure your database
 config :exremit, Exremit.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "jocke",
+  username: System.get_env("POSTGRES_USER") || System.get_env("USER"),
   password: "",
   database: "exremit_test",
   hostname: "localhost",
