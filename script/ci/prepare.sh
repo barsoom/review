@@ -59,6 +59,9 @@ mix do deps.get, deps.compile, compile
 
 npm install
 
+# TODO: try other options: https://github.com/phoenixframework/phoenix/issues/1410
+npm install --save-dev babel-preset-es2015
+
 export PATH="$HOME/$CIRCLE_PROJECT_REPONAME/node_modules/.bin:$PATH"
 
 echo "Running brunch build, this can take a little while the first time"
