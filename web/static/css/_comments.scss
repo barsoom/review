@@ -1,0 +1,112 @@
+.comment-settings {
+  margin: 20px 10px;
+  text-align: center;
+
+  label {
+    margin-left: 20px;
+    &:first-child { margin-left: 0; }
+  }
+}
+
+.comments-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 4px;
+}
+
+.comment {
+  margin: 10px 0;
+}
+
+.comment-proper-body {
+  padding: 10px 10px;
+}
+
+.comment-proper-body,
+.comment-proper-author {
+  @include truncate-ellipsis;
+}
+
+.comment-proper-author {
+  padding: 5px 10px;
+  line-height: 24px;
+  font-size: $font-small;
+}
+
+.comment-commit-author-gravatar,
+.comment-proper-author-gravatar {
+  @include small-gravatar;
+  // No idea why we need this, but the avatar is aligned wrong otherwise.
+  margin-bottom: -6px;
+}
+
+.comment-commit-author-gravatar {
+  margin-right: 4px;
+}
+
+.comment-proper {
+  @include listing;
+  margin-top: 10px;
+  &:hover { border-color: $dark-gray; }
+}
+
+.comment-proper-author {
+  background: $gray;
+}
+
+.comment.authored-by-you,
+.comment.is-resolved {
+  opacity: 0.4;
+}
+
+.comment.your-last-clicked {
+  &, &.on-your-commit {  // Be higher specificity than the regular .on-your-commit
+    .comment-proper-author { background: $yellow; }
+  }
+}
+
+.comment.on-your-commit {
+  .comment-proper-author {
+    background: $dark-blue;
+  }
+
+  .comment-proper-body {
+    background: $blue;
+  }
+}
+
+.hide-comments-by-me {
+  .comment.authored-by-you { display: none; }
+}
+
+.hide-comments-on-others {
+  .comment { display: none; }
+  .comment.on-your-commit { display: block; }
+  .comment.on-your-comment { display: block; }
+}
+
+// If we show comments by me but hide comments on others,
+// my comments on others should keep showing.
+.hide-comments-on-others .comment.authored-by-you { display: block; }
+.hide-comments-on-others.hide-comments-by-me .comment.authored-by-you { display: none; }
+
+.commenter-to-committer-arrow {
+  color: $darker-gray;
+  margin: 0 2px 0 3px;
+}
+
+.comment-controls {
+  float: right;
+  margin-left: 5px;
+  margin-top: 2px;
+  margin-bottom: -6px;  // No idea why we need this, but without it we get extra height.
+
+  button {
+    vertical-align: top;
+  }
+}
+
+.comment-resolver-avatar {
+  @include small-gravatar;
+  margin-right: 6px;
+}

@@ -1,0 +1,102 @@
+.ng-cloak {
+  opacity: 0;
+}
+
+.top-nav {
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    display: inline-block;
+    width: 33%;
+    text-align: center;
+    font-size: $font-large;
+
+    border-right: 1px solid $border-color;
+    &:last-child { border-right: 0; }
+
+    border-bottom: 1px solid $border-color;
+    &.current { border-bottom-color: transparent; }
+
+    // Put the opacity on the link, not the li,
+    // so it doesn't affect the borders.
+    a { opacity: 0.5; }
+    &.current a {
+      opacity: 1;
+      font-weight: $weight-bold;
+    }
+
+    .fa {
+      margin-right: 5px;
+      color: $darker-gray;
+    }
+  }
+
+  a {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    padding: 15px 10px;
+    text-decoration: none;
+  }
+}
+
+.commits-badge {
+  background: $dark-gray;
+  font-size: $font-small;
+  font-weight: $weight-thin;
+  border-radius: 5px;
+  padding: 4px 6px;
+  margin: -4px 0 -4px 4px;
+  color: $black;
+  text-shadow: rgba($white, 0.7) 1px 1px 0;
+
+  // Don't jump in size when changing between one and two digits.
+  display: inline-block;
+  min-width: 1.5em;
+
+  // Change color with counts
+
+  $low-color: $dark-gray;
+  $high-color: $red;
+  $max-out-at: 25;
+
+  // For counts higher than the max (we don't show the element at 0).
+  background: $high-color;
+
+  @for $i from 1 through $max-out-at {
+    $percent: percentage(($i - 1) / $max-out-at);
+    &.commits-badge-count-#{$i} { background: mix($high-color, $low-color, $percent) }
+  }
+}
+
+.wrapper {
+  background: #fff;
+  width: 100%;
+  max-width: 700px;
+  padding: 0 0 $vspace 0;
+}
+
+footer {
+  text-align: center;
+  margin: ($vspace * 2) $left-column-inset;
+  font-size: $font-small;
+}
+
+.footer-logo {
+  max-height: 50px;
+}
+
+.settings-gravatar {
+  @include small-gravatar;
+  vertical-align: middle;
+  margin: 0 5px;
+}
+
+.please-provide-details {
+  @include block-message;
+  background: $red;
+}

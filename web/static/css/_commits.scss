@@ -1,0 +1,166 @@
+.no-data {
+  margin: $vspace;
+  text-align: center;
+  font-size: $font-large;
+}
+
+.left-to-review {
+  @include block-message;
+  background: $mid-gray;
+}
+
+.nothing-left-to-review {
+  @include block-message;
+  background: $gold;
+  font-size: $font-large;
+
+  .trophy {
+    color: #fff;
+    margin-right: 0.4em;
+    vertical-align: middle;
+  }
+
+  .text {
+    // Fix vertical centering in relation to trophy.
+    position: relative;
+    top: 2px;
+  }
+}
+
+.commits-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.commit {
+  @include listing;
+  @include contain-floats;
+  margin: 2px 4px;
+}
+
+.commit-wrapper {
+  @include contain-floats;
+  margin: 0 10px;
+}
+
+.commit-avatar {
+  @include big-gravatar;
+  background: $gray;
+  float: left;
+  margin: 8px 10px 4px 0;
+}
+
+.commit-summary-and-details {
+  margin: 10px 0;
+}
+
+.commit-summary, .commit-details {
+  margin: 6px 0;
+}
+
+.commit-details {
+  font-size: $font-small;
+}
+
+.commit.is-reviewed {
+  background: $green;
+}
+
+.commit.is-being-reviewed {
+  background: $blue;
+}
+
+.commit.your-last-clicked {
+  background: $yellow;
+}
+
+.commit.your-last-clicked.is-reviewed {
+  background: $yellow-green;
+}
+
+.commit.your-last-clicked.is-being-reviewed {
+  background: $yellow;
+}
+
+.commit.authored-by-you,
+.commit.is-reviewed {
+  padding: 8px 0;
+
+  .commit-avatar {
+    @include small-gravatar;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .sha, .by-author {
+    display: none;
+  }
+
+  .commit-summary-and-details {
+    @include truncate-ellipsis;
+    margin: 0;
+  }
+
+  .commit-summary, .commit-details {
+    display: inline;
+    line-height: $small-gravatar-side;
+  }
+}
+
+.commit.authored-by-you {
+  .commit-wrapper {
+    opacity: 0.6;
+  }
+
+  button {
+    display: none;
+  }
+}
+
+.commit-controls {
+  float: right;
+  margin-left: 5px;
+  margin-top: 13px;
+
+  button {
+    vertical-align: top;
+  }
+}
+
+.commit.is-reviewed, .commit.authored-by-you {
+  .commit-controls {
+    margin-top: 0;
+  }
+}
+
+.commit-reviewer-avatar {
+  @include small-gravatar;
+  margin-left: 6px;
+  // No idea why we need this, but without it we get extra height.
+  margin-bottom: -3px;
+}
+
+.start-review {
+  // Not sure why this is 10px and not 6px (the margin), but it is.
+  margin-right: $small-gravatar-side + 10px;
+}
+
+.mark-as-reviewed {
+  background-color: $green;
+  font-weight: $weight-bold;
+  &:hover { background-color: darken($green, 5%); }
+  &:active { background-color: darken($green, 15%); }
+}
+
+.mark-as-new {
+  opacity: 0.5;
+  .commit:hover & { opacity: 1; }
+}
+
+.mark-as-new,
+.abandon-review {
+  background-color: $white;
+  &:hover { background-color: darken($white, 5%); }
+  &:active { background-color: darken($white, 15%); }
+}

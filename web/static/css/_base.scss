@@ -1,0 +1,44 @@
+body {
+  font-family: Helvetica, sans-serif;
+  font-size: $font-medium;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #555;
+  &:hover { color: #777; }
+}
+
+a.block-link {
+  text-decoration: none;
+  color: inherit;
+  &:hover { color: inherit; }
+}
+
+label {
+  font-weight: $weight-bold;
+}
+
+input {
+  font-size: $font-medium;
+  padding: 5px 10px;
+}
+
+input {
+  border: 1px solid $darker-gray;
+}
+
+button {
+  cursor: pointer;
+  background: $gray;
+  border: 1px solid $darker-gray;
+  &:active { background: $mid-gray; }
+  &:focus { outline: 0; }
+
+  &.small {
+    border-radius: 3px;
+    font-size: $font-smaller;
+    padding: 3px 5px;
+  }
+}

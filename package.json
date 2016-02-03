@@ -12,6 +12,7 @@
     "elm-brunch": "~0.4.3"
   },
   "devDependencies": {
-    "elm": "~0.16.0"
+    "elm": "~0.16.0",
+    "sass-brunch": "^2.0.0"
   }
 }

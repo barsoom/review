@@ -1,0 +1,37 @@
+@mixin small-gravatar {
+  width: $small-gravatar-side;
+  height: $small-gravatar-side;
+  border-radius: 3px;
+}
+
+@mixin big-gravatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+@mixin contain-floats {
+  overflow: auto;
+}
+
+@mixin grow-on-hover {
+  &:hover { -webkit-transform: scale(1.01); }
+}
+
+@mixin listing {
+  @include grow-on-hover;
+  border: 1px solid $border-color;
+  border-radius: 3px;
+}
+
+@mixin truncate-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@mixin block-message {
+  margin: 10px 0;
+  padding: 10px;
+  text-align: center;
+}
