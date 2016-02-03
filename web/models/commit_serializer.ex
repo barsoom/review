@@ -4,7 +4,7 @@ defmodule Exremit.CommitSerializer do
   @message_summary_length 50
 
   def serialize(commits) when is_list(commits) do
-    commits |> Enum.map &serialize/1
+    commits |> Enum.map(&serialize/1)
   end
 
   def serialize(commit) do
