@@ -20,6 +20,10 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
 * [ ] Render listing of commits
 * [ ] Set up instructions from scratch, bootstrapping scripts, etc
 
+## Later
+
+* [ ] Pull request to elm-brunch to add custom path to elm binary so we can remove `source web/elm/paths.env` when running `mix phoenix.server`
+
 # Running tests
 
     mix deps.get
@@ -36,6 +40,10 @@ First load data dump:
     pg_restore --no-acl --no-owner -d exremit_dev /tmp/data.dump
 
 Then start the server:
+
+    # Since we install elm locally to be able to lock down the version for this project,
+    # we need to load it into path so that elm-brunch can find it.
+    source web/elm/paths.env
 
     mix phoenix.server
     # open http://localhost:4000
