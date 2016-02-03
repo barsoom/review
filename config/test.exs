@@ -18,4 +18,7 @@ config :exremit, Exremit.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
+config :exremit,
+  auth_key: "secret"
+
 config :hound, driver: "phantomjs"

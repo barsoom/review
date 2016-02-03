@@ -7,7 +7,7 @@ defmodule Exremit.CommitsTest do
     create(:commit, %{ sha: "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" })
     create(:commit, %{ sha: "cccccccccccccccccccccccccccccccccccccccc" })
 
-    navigate_to "/commits"
+    navigate_to "/commits?auth_key=secret"
 
     elements = find_all_elements(:css, ".test-commit")
     assert length(elements) == 3

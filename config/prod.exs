@@ -63,3 +63,6 @@ config :exremit, Exremit.Repo,
   password: "postgres",
   database: "exremit_prod",
   pool_size: 20
+
+config :exremit,
+  auth_key: System.get_env("AUTH_KEY") || raise("You need to set AUTH_KEY config")

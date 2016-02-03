@@ -35,6 +35,20 @@ defmodule Exremit.Web do
       import Ecto.Query, only: [from: 1, from: 2]
 
       import Exremit.Router.Helpers
+
+      plug :authenticate
+
+      defp authenticate(conn, _options) do
+        if conn.params["auth_key"] == Application.get_env(:exremit, :auth_key) do
+          conn
+        else
+          conn |> deny_and_halt
+        end
+      end
+
+      defp deny_and_halt(conn) do
+        conn |> send_resp(403, "Denied (probably an invalid auth_key?)") |> halt
+      end
     end
   end
 

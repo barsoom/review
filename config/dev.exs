@@ -40,3 +40,6 @@ config :exremit, Exremit.Repo,
   database: "exremit_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :exremit,
+  auth_key: nil # no auth_key needed in dev
