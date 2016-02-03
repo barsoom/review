@@ -2,7 +2,9 @@
 
 Exploring phoenix and elm based development by reimplementing [remit](github.com/henrik/remit).
 
-# TODO: Bootstrap tools
+# TODO
+
+## Bootstrap tools
 
 * [x] Look into full stack javascript testing for overall acceptance test (not required, but good to know how)
   * [x] Get CI working including js tests https://circleci.com/gh/joakimk/exremit/4
@@ -13,7 +15,7 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
 * [ ] Set up ELM
 * [ ] Set up client side testing tools
 
-# TODO: Building the app
+## Building the app
 
 * [ ] Render listing of commits
 
