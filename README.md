@@ -1,6 +1,6 @@
 # Exremit
 
-Exploring the phoenix and elm based development by reimplementing [remit](github.com/henrik/remit).
+Exploring phoenix and elm based development by reimplementing [remit](github.com/henrik/remit).
 
 # TODO: Bootstrap tools
 
