@@ -57,12 +57,16 @@ export MIX_ENV="test"
 cd $HOME/$CIRCLE_PROJECT_REPONAME
 mix do deps.get, deps.compile, compile
 
-npm install
+if [ ! -e _build/.node-fixed ]; then
+  npm install
 
-# TODO: try other options: https://github.com/phoenixframework/phoenix/issues/1410
-npm install --save-dev babel-preset-es2015
+  # TODO: try other options: https://github.com/phoenixframework/phoenix/issues/1410
+  npm install --save-dev babel-preset-es2015 && touch _build/.node-fixed
+
+  echo
+  echo "Running brunch build for the first time, this can take several minutes."
+  echo
+fi
 
 export PATH="$HOME/$CIRCLE_PROJECT_REPONAME/node_modules/.bin:$PATH"
-
-echo "Running brunch build, this can take a little while the first time"
 brunch build
