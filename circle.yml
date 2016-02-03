@@ -10,6 +10,8 @@ dependencies:
     - ~/.mix
     - _build
     - deps
+    - priv/static
+    - web/elm/elm-stuff
 
 test:
   override:

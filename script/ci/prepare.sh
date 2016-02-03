@@ -56,3 +56,8 @@ fi
 export MIX_ENV="test"
 cd $HOME/$CIRCLE_PROJECT_REPONAME
 mix do deps.get, deps.compile, compile
+
+npm install
+
+echo "Running brunch build, this can take a little while the first time"
+brunch build
