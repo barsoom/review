@@ -19,7 +19,7 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
 
 * [x] Render listing of commits
 * [x] Add css
-* [ ] Unbreak CI
+* [x] Unbreak CI
   * [ ] try other options for babel-preset if it works
 * [ ] Convert config to coffee script for less noisy config
 * [ ] Add complete markup from react prototype and see if anything is missing from angular
