@@ -6,14 +6,12 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
 
 ## Bootstrap tools
 
+* [x] Set up client side testing tools **skipped since there is no simple setup available and this app does not strictly needed them (as full stack test will be few and fast too and it's not expected to grow), will research more for later apps, or simply later**
 * [x] Look into full stack javascript testing for overall acceptance test (not required, but good to know how)
   * [x] Get CI working including js tests https://circleci.com/gh/joakimk/exremit/4
   * [ ] Add CI deploy step
-  * [ ] Add unit test running in CI
-* [ ] Can jasmine tests be run though hound or some other way though phantomjs?
-* [ ] Token auth in prod
 * [ ] Set up ELM
-* [ ] Set up client side testing tools
+* [ ] Token auth in prod
 * [ ] Document dev usage
 
 ## Building the app
