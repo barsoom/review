@@ -15,7 +15,7 @@ main =
   ul [ class "commits-list" ] (List.map renderCommit commits)
 
 renderCommit commit =
-  li [ id ("commit-" ++ toString commit.id), class "test-commit" ] [
+  li [ id (commitId commit), class "test-commit" ] [
     a [ class "block-link" ] [
       div [ class "commit-wrapper" ] [
         div [ class "commit-controls" ] [
@@ -32,3 +32,6 @@ renderCommit commit =
       ]
     ]
   ]
+
+commitId commit =
+  "commit-" ++ toString commit.id
