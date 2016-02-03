@@ -3,4 +3,8 @@ defmodule Exremit.JSON do
   def encode(text) do
     Poison.encode!(text)
   end
+
+  def decode(text) do
+    Poison.decode!(text)
+  end
 end

@@ -6,12 +6,13 @@ import Html.Attributes exposing (..)
 
 port commits : List Commit
 
-type alias Commit = {
-  id : Int
-}
+type alias Commit =
+  { id : Int
+  , summary : String
+  }
 
 main =
   div [ ] (List.map renderCommit commits)
 
 renderCommit commit =
-  div [ class "test-commit" ] [ text (toString commit.id) ]
+  div [ id ("commit-" ++ toString commit.id), class "test-commit" ] [ text (toString commit.id) ]

@@ -3,7 +3,11 @@ defmodule Exremit.Commit do
 
   schema "commits" do
     field :sha, :string
+
+    # This is the yaml payload the ruby app uses. It's difficult to load in elixir since is uses special syntax for symbols.
     field :payload, :string
+
+    field :json_payload, :string
     field :created_at, Ecto.DateTime
     field :updated_at, Ecto.DateTime
     field :reviewed_at, Ecto.DateTime

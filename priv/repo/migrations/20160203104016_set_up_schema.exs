@@ -30,6 +30,7 @@ defmodule Exremit.Repo.Migrations.SetUpSchema do
     create table(:commits) do
       add :sha, :string, null: false
       add :payload, :text, null: false
+      add :json_payload, :text, null: false
       add :created_at, :datetime
       add :updated_at, :datetime
       add :reviewed_at, :datetime
