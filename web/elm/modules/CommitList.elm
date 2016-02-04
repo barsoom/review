@@ -30,10 +30,12 @@ renderCommit commit =
         , div [ class "commit-details" ] [
             text " in "
           , strong [] [ text commit.repository ]
-          , text " by "
-          , span [] [ text commit.authorName ]
-          , text " on "
-          , span [] [ text (formattedTime commit.timestamp) ]
+          , span [ class "by-author" ] [
+              text " by "
+            , strong [] [ text commit.authorName ]
+            , text " on "
+            , span [] [ text (formattedTime commit.timestamp) ]
+            ]
           ]
         ]
       ]
