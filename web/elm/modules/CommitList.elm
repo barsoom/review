@@ -45,6 +45,7 @@ commitClassList commit =
   classList [
     ("commit", True)
   , ("is-reviewed", commit.isReviewed)
+  , ("test-commit", True)
   ]
 
 formattedTime : String -> String
