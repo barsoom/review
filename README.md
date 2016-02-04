@@ -26,6 +26,7 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
 * [ ] Add mark as posted button and websockets to update other clients
 * [ ] Show commits you can review based on who you are
 * [ ] Send entire state when you re-connect, show that this works as it's kind of a killer feature for this version
+* [ ] Consider if temporary state-sync could be setup so both apps could be used at once for a while
 
 ## Add github hook for commits
 
