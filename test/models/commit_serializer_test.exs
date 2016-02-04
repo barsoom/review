@@ -16,6 +16,7 @@ defmodule Exremit.CommitSerializerTest do
       repository: "gridlook",
       authorName: "Joe",
       timestamp: "2016-01-25T08:41:25+01:00",
+      isReviewed: false,
     }
   end
 end

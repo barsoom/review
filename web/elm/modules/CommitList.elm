@@ -15,6 +15,7 @@ type alias Commit =
   , repository : String
   , authorName : String
   , timestamp : String
+  , isReviewed : Bool
   }
 
 main : Html
@@ -23,7 +24,7 @@ main =
 
 renderCommit : Commit -> Html
 renderCommit commit =
-  li [ id (commitId commit), class "test-commit" ] [
+  li [ id (commitId commit), commitClassList(commit) ] [
     a [ class "block-link" ] [
       div [ class "commit-wrapper" ] [
         div [ class "commit-controls" ] [
@@ -47,6 +48,13 @@ renderCommit commit =
         ]
       ]
     ]
+  ]
+
+commitClassList : Commit -> Attribute
+commitClassList commit =
+  classList [
+    ("commit", True)
+  , ("is-reviewed", commit.isReviewed)
   ]
 
 formattedTime : String -> String
