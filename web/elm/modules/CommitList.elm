@@ -32,7 +32,7 @@ renderCommit commit =
               text " by "
             , strong [] [ text commit.authorName ]
             , text " on "
-            , span [] [ text (formattedTime commit.timestamp) ]
+            , span [ class "test-timestamp" ] [ text (formattedTime commit.timestamp) ]
             ]
           ]
         ]
@@ -45,6 +45,7 @@ commitClassList commit =
   classList [
     ("commit", True)
   , ("is-reviewed", commit.isReviewed)
+  , ("test-is-reviewed", commit.isReviewed)
   , ("test-commit", True)
   ]
 

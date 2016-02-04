@@ -25,13 +25,27 @@ defmodule Exremit.CommitsTest do
   end
 
   test "shows interesting info about commits" do
-    create(:commit)
+    commit1 = create(:commit, reviewed_at: nil)
+    commit2 = create(:commit, reviewed_at: Ecto.DateTime.utc)
 
     navigate_to "/commits?auth_key=secret"
 
-    element = find_element(:css, ".test-commit")
-    summary = find_within_element(element, :css, ".test-summary") |> inner_text
+    status = read_status(commit1)
+    assert status.summary =~ "This is a very"
+    assert status.timestamp =~ "Mon 25 Jan at 08:41"
+    assert !status.is_reviewed
 
-    assert summary =~ "This is a very"
+    status = read_status(commit2)
+    assert status.is_reviewed
+  end
+
+  defp read_status(commit) do
+    element = find_element(:id, "commit-#{commit.id}")
+
+    %{
+      summary: find_within_element(element, :css, ".test-summary") |> inner_text,
+      timestamp: find_within_element(element, :css, ".test-timestamp") |> inner_text,
+      is_reviewed: element |> attribute_value("class") =~ ~r/test-is-reviewed/,
+    }
   end
 end
