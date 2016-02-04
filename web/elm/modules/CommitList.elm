@@ -8,16 +8,6 @@ import Date.Format exposing (..)
 
 port commits : List Commit
 
-type alias Commit =
-  { id : Int
-  , summary : String
-  , gravatarHash : String
-  , repository : String
-  , authorName : String
-  , timestamp : String
-  , isReviewed : Bool
-  }
-
 main : Html
 main =
   ul [ class "commits-list" ] (List.map renderCommit commits)
@@ -71,3 +61,13 @@ avatarUrl commit =
 commitId : Commit -> String
 commitId commit =
   "commit-" ++ toString commit.id
+
+type alias Commit =
+  { id : Int
+  , summary : String
+  , gravatarHash : String
+  , repository : String
+  , authorName : String
+  , timestamp : String
+  , isReviewed : Bool
+  }
