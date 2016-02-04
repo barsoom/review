@@ -29,7 +29,7 @@ defmodule Exremit.CommitSerializer do
   end
 
   defp gravatar_hash(commit) do
-    :crypto.md5(commit.author.email)
+    :crypto.hash(:md5, commit.author.email)
     |> Base.encode16(case: :lower)
   end
 
