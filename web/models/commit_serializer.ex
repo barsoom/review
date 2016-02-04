@@ -8,30 +8,35 @@ defmodule Exremit.CommitSerializer do
   end
 
   def serialize(commit) do
+    payload = parse_payload(commit)
+
     %{
       id: commit.id,
-      summary: summary(commit),
-      gravatarHash: gravatarHash(commit),
+      summary: summary(payload),
+      gravatarHash: gravatar_hash(commit),
+      repository: repository(payload),
+      authorName: author_name(commit),
+      timestamp: timestamp(payload),
     }
   end
 
-  defp summary(commit) do
-    message(commit)
+  defp summary(payload) do
+    payload.message
     |> String.split("\n")
     |> List.first
     |> String.slice(0, @message_summary_length)
   end
 
-  defp gravatarHash(commit) do
+  defp gravatar_hash(commit) do
     :crypto.md5(commit.author.email)
     |> Base.encode16(case: :lower)
   end
 
-  defp message(commit) do
-    {:ok, message } =
-      Exremit.JSON.decode(commit.json_payload)
-      |> Map.fetch("message")
+  defp repository(payload), do: payload.repository.name
+  defp author_name(commit), do: commit.author.name
+  defp timestamp(payload), do: payload.timestamp
 
-    message
+  defp parse_payload(commit) do
+    Poison.decode!(commit.json_payload, keys: :atoms)
   end
 end

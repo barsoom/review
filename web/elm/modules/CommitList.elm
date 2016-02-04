@@ -3,6 +3,8 @@ module CommitList where
 import Html exposing (..)
 import Html.Attributes exposing (..)
 --import Html.Events exposing (..)
+import Date exposing (..)
+import Date.Format exposing (..)
 
 port commits : List Commit
 
@@ -10,6 +12,9 @@ type alias Commit =
   { id : Int
   , summary : String
   , gravatarHash : String
+  , repository : String
+  , authorName : String
+  , timestamp : String
   }
 
 main =
@@ -29,10 +34,24 @@ renderCommit commit =
       , img [ class "commit-avatar", src (avatarUrl commit) ] []
       , div [ class "commit-summary-and-details" ] [
           div [ class "commit-summary test-summary" ] [ text commit.summary ]
+        , div [ class "commit-details" ] [
+            text " in "
+          , strong [] [ text commit.repository ]
+          , text " by "
+          , span [] [ text commit.authorName ]
+          , text " on "
+          , span [] [ text (date commit.timestamp) ]
+          ]
         ]
       ]
     ]
   ]
+
+date timestamp =
+  timestamp
+  |> Date.fromString
+  |> Result.withDefault (Date.fromTime 0)
+  |> Date.Format.format "%a %e %b at %H:%M" -- E.g. Wed 3 Feb at 15:14
 
 avatarUrl commit =
  "https://secure.gravatar.com/avatar/" ++ commit.gravatarHash ++ "?size=40&amp;rating=x&amp;default=mm"

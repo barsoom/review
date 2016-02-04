@@ -13,6 +13,6 @@ defmodule Exremit.PageController do
     Exremit.Repo.commits
     |> Exremit.Repo.all
     |> Exremit.CommitSerializer.serialize
-    |> Exremit.JSON.encode
+    |> Poison.encode!
   end
 end
