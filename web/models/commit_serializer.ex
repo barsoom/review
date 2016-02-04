@@ -18,6 +18,7 @@ defmodule Exremit.CommitSerializer do
       authorName: author_name(commit),
       timestamp: timestamp(payload),
       isReviewed: !!commit.reviewed_at,
+      isBeingReviewed: !!commit.review_started_at,
     }
   end
 

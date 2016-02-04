@@ -39,6 +39,57 @@ defmodule Exremit.CommitsTest do
     assert status.is_reviewed
   end
 
+  test "works for simultaneous visitors" do
+    create(:commit)
+
+    visitor "ada", fn ->
+      navigate_to "/commits?auth_key=secret"
+      can_see_commit
+    end
+
+    visitor "charles", fn ->
+      navigate_to "/commits?auth_key=secret"
+      can_see_commit
+    end
+
+    visitor "ada", fn ->
+      commit_looks_new
+      click_button "Start review"
+      commit_looks_pending
+    end
+
+    visitor "charles", fn ->
+      # TODO: push to server update via websocket
+      # commit_looks_pending
+    end
+
+    # WIP
+  end
+
+  defp visitor(name, callback), do: in_browser_session name, callback
+
+  defp can_see_commit do
+    find_element(:css, ".test-commit")
+  end
+
+  defp commit_looks_new do
+    assert button_class =~ "test-start-review"
+  end
+
+  defp commit_looks_pending do
+    assert button_class =~ "test-abandon-review"
+  end
+
+  def button_class do
+    find_element(:css, ".test-button") |> attribute_value("class")
+  end
+
+  defp click_button(name) do
+    button = find_element(:css, ".test-button")
+    assert inner_text(button) == name
+    button |> click
+  end
+
   defp read_status(commit) do
     element = find_element(:id, "commit-#{commit.id}")
 

@@ -17,6 +17,7 @@ defmodule Exremit.CommitSerializerTest do
       authorName: "Joe",
       timestamp: "2016-01-25T08:41:25+01:00",
       isReviewed: false,
+      isBeingReviewed: false,
     }
   end
 end
