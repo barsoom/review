@@ -27,6 +27,10 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
 * [ ] Show commits you can review based on who you are
 * [ ] Send entire state when you re-connect, show that this works as it's kind of a killer feature for this version
 
+## Add github hook for commits
+
+* [ ] Store "repository" outside of payload so that they commit payload can be stored directly into the db?
+
 ## Later
 
 * [ ] Set up instructions from scratch, bootstrapping scripts, etc
