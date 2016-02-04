@@ -46,12 +46,14 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [ ] Does created\_at and updated\_at get updated by ecto?
 * [ ] Pull request to elm-brunch to add custom path to elm binary so we can remove `source web/elm/paths.env` when running `mix phoenix.server`
 
+# Install dependencies
+
+    source web/elm/paths.env && npm install && mix deps.get && cd web/elm && elm package install -y && cd ..
+
+    # start web server and build assets
+    mix phoenix.server
+
 # Running tests
-
-Install dependencies:
-
-    npm install
-    mix deps.get
 
 Start headless browser in another terminal window:
 
@@ -60,8 +62,6 @@ Start headless browser in another terminal window:
 Run tests:
 
     mix test
-
-If the tests does not pass, start the web server `mix phoenix.server` once so that assets are built. `node_modules/.bin/brunch build` does not seem to work in all cases.
 
 # Running in dev
 
@@ -78,7 +78,6 @@ Then start the server:
     # we need to load it into path so that elm-brunch can find it.
     source web/elm/paths.env
 
-    npm install
     mix phoenix.server
     # open http://localhost:4000
 
