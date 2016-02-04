@@ -17,9 +17,11 @@ type alias Commit =
   , timestamp : String
   }
 
+main : Html
 main =
   ul [ class "commits-list" ] (List.map renderCommit commits)
 
+renderCommit : Commit -> Html
 renderCommit commit =
   li [ id (commitId commit), class "test-commit" ] [
     a [ class "block-link" ] [
@@ -40,21 +42,24 @@ renderCommit commit =
           , text " by "
           , span [] [ text commit.authorName ]
           , text " on "
-          , span [] [ text (date commit.timestamp) ]
+          , span [] [ text (formattedTime commit.timestamp) ]
           ]
         ]
       ]
     ]
   ]
 
-date timestamp =
+formattedTime : String -> String
+formattedTime timestamp =
   timestamp
   |> Date.fromString
   |> Result.withDefault (Date.fromTime 0)
   |> Date.Format.format "%a %e %b at %H:%M" -- E.g. Wed 3 Feb at 15:14
 
+avatarUrl : Commit -> String
 avatarUrl commit =
  "https://secure.gravatar.com/avatar/" ++ commit.gravatarHash ++ "?size=40&amp;rating=x&amp;default=mm"
 
+commitId : Commit -> String
 commitId commit =
   "commit-" ++ toString commit.id
