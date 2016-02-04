@@ -25,6 +25,7 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
 * [ ] Add complete markup from react prototype and see if anything is missing from angular
 * [ ] Add mark as posted button and websockets to update other clients
 * [ ] Show commits you can review based on who you are
+* [ ] Send entire state when you re-connect, show that this works as it's kind of a killer feature for this version
 
 ## Later
 
