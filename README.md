@@ -20,7 +20,7 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
 * [x] Render listing of commits
 * [x] Add css
 * [x] Unbreak CI
-  * [ ] try other options for babel-preset if it works
+  * [x] **skip for now** try other options for babel-preset if it works
 * [ ] Calculate gravatar base url server side for simplicity?
 * [ ] Convert config to coffee script for less noisy config
 * [ ] Add complete markup from react prototype and see if anything is missing from angular
@@ -30,6 +30,7 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
 
 ## Later
 
+* [ ] Does created\_at and updated\_at get updated by ecto?
 * [ ] Pull request to elm-brunch to add custom path to elm binary so we can remove `source web/elm/paths.env` when running `mix phoenix.server`
 
 # Running tests
