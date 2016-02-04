@@ -18,10 +18,20 @@ import "phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-// import {Socket} from "phoenix"
+import {Socket} from "phoenix"
 
 var commitListDiv = document.getElementById("js-commit-list")
 if(commitListDiv) {
   Elm.embed(Elm.CommitList, commitListDiv, { commits: JSON.parse(commitListDiv.dataset.commits) });
 }
 
+let socket = new Socket("/socket", { params: { auth_key: window.authKey } })
+socket.connect()
+
+let channel = socket.channel("commits", {})
+channel.join()
+channel.on("updated_commit", (commit) => console.log(commit))
+
+// Debug:
+window.channel = channel;
+//channel.push("start_review", { id: 15423 })

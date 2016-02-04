@@ -2,7 +2,7 @@ defmodule Exremit.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "rooms:*", Exremit.RoomChannel
+  channel "commits", Exremit.CommitChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
