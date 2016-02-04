@@ -15,21 +15,23 @@ Exploring phoenix and elm based development by reimplementing [remit](github.com
 * [x] Set up ELM
 * [x] Token auth in prod
 
-## Building the app
+## Make code review possible
 
 * [x] Render listing of commits
 * [x] Add css
 * [x] Unbreak CI
   * [x] **skip for now** try other options for babel-preset if it works
 * [ ] Calculate gravatar base url server side for simplicity?
-* [ ] Convert config to coffee script for less noisy config
 * [ ] Add complete markup from react prototype and see if anything is missing from angular
-* [ ] Set up instructions from scratch, bootstrapping scripts, etc
-  * [ ] Rewrite instructions in more of a step-by-step start phoenix, start phantom, etc.
-    - Possibly make phantomjs part of the phoenix.server in dev.
+* [ ] Add mark as posted button and websockets to update other clients
+* [ ] Show commits you can review based on who you are
 
 ## Later
 
+* [ ] Set up instructions from scratch, bootstrapping scripts, etc
+  * [ ] Rewrite instructions in more of a step-by-step start phoenix, start phantom, etc.
+    - Possibly make phantomjs part of the phoenix.server in dev.
+* [ ] Convert config to coffee script for less noisy config
 * [ ] Does created\_at and updated\_at get updated by ecto?
 * [ ] Pull request to elm-brunch to add custom path to elm binary so we can remove `source web/elm/paths.env` when running `mix phoenix.server`
 
