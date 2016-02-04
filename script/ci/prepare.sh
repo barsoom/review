@@ -69,4 +69,7 @@ if [ ! -e _build/.node-fixed ]; then
 fi
 
 export PATH="$HOME/$CIRCLE_PROJECT_REPONAME/node_modules/.bin:$PATH"
+cd web/elm
+elm package install -y
+cd ../..
 brunch build
