@@ -32,7 +32,7 @@ defmodule Exremit.CommitsTest do
 
     status = read_status(commit1)
     assert status.summary =~ "This is a very"
-    assert status.timestamp =~ "Mon 25 Jan at 08:41"
+    assert status.timestamp =~ "Mon 25 Jan"
     assert !status.is_reviewed
 
     status = read_status(commit2)
