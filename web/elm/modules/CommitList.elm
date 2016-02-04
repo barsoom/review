@@ -18,10 +18,8 @@ renderCommit commit =
     a [ class "block-link" ] [
       div [ class "commit-wrapper" ] [
         div [ class "commit-controls" ] [
-          div [] [
-            button [ class "small start-review" ] [
-              i [ class "fa fa-eye" ] [ text "Start review" ]
-            ]
+          button [ class "small start-review" ] [
+            i [ class "fa fa-eye" ] [ text "Start review" ]
           ]
         ]
       , img [ class "commit-avatar", src (avatarUrl commit) ] []
