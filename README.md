@@ -46,12 +46,19 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [ ] Does created\_at and updated\_at get updated by ecto?
 * [ ] Pull request to elm-brunch to add custom path to elm binary so we can remove `source web/elm/paths.env` when running `mix phoenix.server`
 
-# Install dependencies
+# Installing dependencies
 
-    source web/elm/paths.env && npm install && mix deps.get && cd web/elm && elm package install -y && cd ..
+    source web/elm/paths.env && npm install && mix deps.get && cd web/elm && elm package install -y && cd ../..
 
     # start web server and build assets
     mix phoenix.server
+
+# Loading data for dev
+
+    heroku pg:backups capture -a your-remit
+    curl --output /tmp/data.dump `heroku pg:backups public-url -a your-remit`
+    mix ecto.create
+    pg_restore --no-acl --no-owner -d exremit_dev /tmp/data.dump
 
 # Running tests
 
@@ -62,26 +69,6 @@ Start headless browser in another terminal window:
 Run tests:
 
     mix test
-
-# Running in dev
-
-First load data dump:
-
-    heroku pg:backups capture -a your-remit
-    curl --output /tmp/data.dump `heroku pg:backups public-url -a your-remit`
-    mix ecto.create
-    pg_restore --no-acl --no-owner -d exremit_dev /tmp/data.dump
-
-Then start the server:
-
-    # Since we install elm locally to be able to lock down the version for this project,
-    # we need to load it into path so that elm-brunch can find it.
-    source web/elm/paths.env
-
-    mix phoenix.server
-    # open http://localhost:4000
-
-The server also runs assets compilation for development including the elm compiler when saving. It also triggers a refresh of the browser on any change.
 
 # Troubleshooting
 
