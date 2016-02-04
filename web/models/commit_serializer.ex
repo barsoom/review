@@ -11,6 +11,7 @@ defmodule Exremit.CommitSerializer do
     %{
       id: commit.id,
       summary: summary(commit),
+      gravatarHash: gravatarHash(commit),
     }
   end
 
@@ -19,6 +20,11 @@ defmodule Exremit.CommitSerializer do
     |> String.split("\n")
     |> List.first
     |> String.slice(0, @message_summary_length)
+  end
+
+  defp gravatarHash(commit) do
+    :crypto.md5(commit.author.email)
+    |> Base.encode16(case: :lower)
   end
 
   defp message(commit) do

@@ -9,6 +9,7 @@ port commits : List Commit
 type alias Commit =
   { id : Int
   , summary : String
+  , gravatarHash : String
   }
 
 main =
@@ -25,13 +26,16 @@ renderCommit commit =
             ]
           ]
         ]
-      , img [ class "commit-avatar", src "" ] []
+      , img [ class "commit-avatar", src (avatarUrl commit) ] []
       , div [ class "commit-summary-and-details" ] [
           div [ class "commit-summary test-summary" ] [ text commit.summary ]
         ]
       ]
     ]
   ]
+
+avatarUrl commit =
+ "https://secure.gravatar.com/avatar/" ++ commit.gravatarHash ++ "?size=40&amp;rating=x&amp;default=mm"
 
 commitId commit =
   "commit-" ++ toString commit.id
