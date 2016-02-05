@@ -7,20 +7,13 @@ import Html.Lazy exposing (lazy)
 import Date exposing (..)
 import Date.Format exposing (..)
 import Signal exposing (Address)
-import String
 
 import CommitList.Model exposing(..)
+import CommitList.Update exposing(..)
 
-port commits : List Commit
-port updatedCommit : Signal Commit
-
-port outgoingCommands : Signal (List String)
-port outgoingCommands =
-  Signal.map (\action ->
-    action |> toString |> String.split(" ")
-  ) inbox.signal
-
--- action-type and id
+main : Signal Html
+main =
+  Signal.map (view inbox.address) model
 
 view address model =
   ul [ class "commits-list" ] (List.map (lazyRenderCommit address) model.commits)
@@ -94,61 +87,3 @@ avatarUrl commit =
 commitId : Commit -> String
 commitId commit =
   "commit-" ++ toString commit.id
-
--- UPDATE
-
-update : Action -> Model -> Model
-update action model =
-  case action of
-    NoOp ->
-      model
-
-    StartReview id ->
-      updateCommitById (\commit -> { commit | isBeingReviewed = True }) id model
-
-    AbandonReview id ->
-      updateCommitById (\commit -> { commit | isBeingReviewed = False }) id model
-
-    UpdatedCommit commit ->
-      updateCommitById (\_ -> commit) commit.id model
-
-updateCommitById : (Commit -> Commit) -> Int -> Model -> Model
-updateCommitById callback id model =
-  let
-    updateCommit commit =
-      if commit.id == id then
-        (callback commit)
-      else
-        commit
-  in
-     { model | commits = (List.map updateCommit model.commits)}
-
--- Signals
-
-main : Signal Html
-main =
-  Signal.map (view inbox.address) model
-
-inbox : Signal.Mailbox Action
-inbox =
-  Signal.mailbox NoOp
-
--- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
-updatedCommitActions : Signal Action
-updatedCommitActions =
-  Signal.map (\commit -> (UpdatedCommit commit)) updatedCommit
-
-actions : Signal Action
-actions =
-  Signal.merge inbox.signal updatedCommitActions
-
-model =
-  let initialModel = { commits = commits }
-  in Signal.foldp update initialModel actions
-
-type Action
-  = NoOp
-  | StartReview Int
-  | AbandonReview Int
-  | UpdatedCommit Commit
-
