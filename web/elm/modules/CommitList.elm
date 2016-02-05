@@ -7,7 +7,6 @@ import Html.Lazy exposing (lazy)
 import Date exposing (..)
 import Date.Format exposing (..)
 import Signal exposing (Address)
-import StartApp.Simple as StartApp
 
 port commits : List Commit
 
@@ -18,7 +17,19 @@ port commits : List Commit
 
 main : Signal Html
 main =
-  StartApp.start { model = { commits = commits }, view = view, update = update }
+  Signal.map (view inbox.address) model
+
+inbox : Signal.Mailbox Action
+inbox =
+  Signal.mailbox NoOp
+
+actions : Signal Action
+actions =
+  inbox.signal
+
+model =
+  let initialModel = { commits = commits }
+  in Signal.foldp update initialModel actions
 
 view address model =
   ul [ class "commits-list" ] (List.map (lazyRenderCommit address) model.commits)
@@ -98,6 +109,9 @@ commitId commit =
 update : Action -> Model -> Model
 update action model =
   case action of
+    NoOp ->
+      model
+
     StartReview id ->
       updateCommitById (\commit -> { commit | isBeingReviewed = True }) id model
 
@@ -134,5 +148,6 @@ type alias Model =
   }
 
 type Action
-  = StartReview Int
+  = NoOp
+  | StartReview Int
   | AbandonReview Int
