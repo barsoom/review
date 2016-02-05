@@ -59,9 +59,9 @@ PHANTOMJS_SHA="86dd9a4bf4aee45f1a84c9f61cf1947c1d6dce9b9e8d2a907105da7852460d2f"
 if [ ! -e $PHANTOMJS_PATH ]; then
   cd ~
   wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOMJS_VERSION.tar.bz2
+  echo "$PHANTOMJS_SHA  phantomjs-2.1.1-linux-x86_64.tar.bz2" | sha256sum -c -
   tar xfj $PHANTOMJS_VERSION.tar.bz2
   ln -sf $PHANTOMJS_PATH $HOME/dependencies/phantomjs
-  echo "$PHANTOMJS_SHA  phantomjs-2.1.1-linux-x86_64.tar.bz2" | sha256sum -c -
 fi
 
 # Fetch and compile dependencies and application code (and include testing tools)
