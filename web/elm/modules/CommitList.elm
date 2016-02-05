@@ -11,6 +11,11 @@ import StartApp.Simple as StartApp
 
 port commits : List Commit
 
+-- todo:
+--port updatedCommit : Signal Commit
+--port outgoingCommands : Signal ?
+-- action-type and id
+
 main : Signal Html
 main =
   StartApp.start { model = { commits = commits }, view = view, update = update }
