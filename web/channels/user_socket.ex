@@ -19,8 +19,12 @@ defmodule Exremit.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket) do
-    {:ok, socket}
+  def connect(%{ "auth_key" => auth_key }, socket) do
+    if auth_key == Application.get_env(:exremit, :auth_key) do
+      {:ok, socket}
+    else
+      :error
+    end
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:

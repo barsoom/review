@@ -7,12 +7,17 @@ import Html.Lazy exposing (lazy)
 import Date exposing (..)
 import Date.Format exposing (..)
 import Signal exposing (Address)
+import String
 
 port commits : List Commit
 port updatedCommit : Signal Commit
 
--- todo:
---port outgoingCommands : Signal ?
+port outgoingCommands : Signal (List String)
+port outgoingCommands =
+  Signal.map (\action ->
+    action |> toString |> String.split(" ")
+  ) inbox.signal
+
 -- action-type and id
 
 view address model =

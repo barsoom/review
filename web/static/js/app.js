@@ -20,7 +20,10 @@ import "phoenix_html"
 
 import {Socket} from "phoenix"
 
+import {_} from "lodash"
+
 var commitListDiv = document.getElementById("js-commit-list")
+
 if(commitListDiv) {
   var commits = JSON.parse(commitListDiv.dataset.commits);
   var app = Elm.embed(Elm.CommitList, commitListDiv, { commits: commits, updatedCommit: commits[0] });
@@ -32,8 +35,10 @@ if(commitListDiv) {
   channel.join()
   channel.on("updated_commit", (commit) => app.ports.updatedCommit.send(commit))
 
-  // Debug:
-  window.channel = channel;
-  //channel.push("start_review", { id: 15423 })
+  app.ports.outgoingCommands.subscribe((event) => {
+    var action = event[0];
+    var commitId = event[1];
+    channel.push(action, { id: commitId })
+  })
 }
 

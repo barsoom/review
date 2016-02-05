@@ -9,14 +9,19 @@ defmodule Exremit.CommitChannel do
     {:ok, socket}
   end
 
-  def handle_in("start_review", %{ "id" => id }, socket) do
-    if Mix.env != :dev do
-      raise "auth not done in user_socket yet, fix that before removing this line"
-    end
+  def handle_in("StartReview", %{ "id" => id }, socket) do
+    update_commit_and_broadcast_changes(id, %{ review_started_at: Ecto.DateTime.utc }, socket)
+  end
 
-    commit = Repo.get!(Exremit.Repo.commits, id)
-    commit = %{commit | review_started_at: Ecto.DateTime.local}
-    Repo.update(commit)
+  def handle_in("AbandonReview", %{ "id" => id }, socket) do
+    update_commit_and_broadcast_changes(id, %{ review_started_at: nil }, socket)
+  end
+
+  defp update_commit_and_broadcast_changes(id, changes, socket) do
+    commit =
+      Repo.get!(Exremit.Repo.commits, id)
+      |> Ecto.Changeset.change(changes)
+      |> Repo.update!
 
     broadcast! socket, "updated_commit", CommitSerializer.serialize(commit)
 

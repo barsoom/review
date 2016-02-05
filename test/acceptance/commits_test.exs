@@ -58,12 +58,20 @@ defmodule Exremit.CommitsTest do
       commit_looks_pending
     end
 
+    # NOTE: you need a new phantomjs for this, newer than 2, 2.1.1 is known to work.
     visitor "charles", fn ->
-      # TODO: push to server update via websocket
-      # commit_looks_pending
+      commit_looks_pending
     end
 
-    # WIP
+    visitor "ada", fn ->
+      commit_looks_pending
+      click_button "Abandon review"
+      commit_looks_new
+    end
+
+    visitor "charles", fn ->
+      commit_looks_new
+    end
   end
 
   defp visitor(name, callback), do: in_browser_session name, callback
