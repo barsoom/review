@@ -144,6 +144,12 @@ model =
   let initialModel = { commits = commits }
   in Signal.foldp update initialModel actions
 
+type Action
+  = NoOp
+  | StartReview Int
+  | AbandonReview Int
+  | UpdatedCommit Commit
+
 -- MODEL
 
 type alias Commit =
@@ -161,9 +167,3 @@ type alias Model =
   {
     commits : List Commit
   }
-
-type Action
-  = NoOp
-  | StartReview Int
-  | AbandonReview Int
-  | UpdatedCommit Commit
