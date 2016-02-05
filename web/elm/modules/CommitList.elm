@@ -9,6 +9,8 @@ import Date.Format exposing (..)
 import Signal exposing (Address)
 import String
 
+import CommitList.Model exposing(..)
+
 port commits : List Commit
 port updatedCommit : Signal Commit
 
@@ -150,20 +152,3 @@ type Action
   | AbandonReview Int
   | UpdatedCommit Commit
 
--- MODEL
-
-type alias Commit =
-  { id : Int
-  , summary : String
-  , gravatarHash : String
-  , repository : String
-  , authorName : String
-  , timestamp : String
-  , isReviewed : Bool
-  , isBeingReviewed : Bool
-  }
-
-type alias Model =
-  {
-    commits : List Commit
-  }

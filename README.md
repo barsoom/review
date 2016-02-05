@@ -39,7 +39,6 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 ## Later
 
-* [ ] Improve elm-brunch so that the code can be split into several different files
 * [ ] Figure out how to test the auth\_key check in UserSocket
 * [ ] Add a install/update dependencies script
 * [ ] Set up instructions from scratch, bootstrapping scripts, etc
