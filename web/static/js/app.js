@@ -20,8 +20,6 @@ import "phoenix_html"
 
 import {Socket} from "phoenix"
 
-import {_} from "lodash"
-
 var commitListDiv = document.getElementById("js-commit-list")
 
 if(commitListDiv) {
