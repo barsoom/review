@@ -22,16 +22,18 @@ import {Socket} from "phoenix"
 
 var commitListDiv = document.getElementById("js-commit-list")
 if(commitListDiv) {
-  Elm.embed(Elm.CommitList, commitListDiv, { commits: JSON.parse(commitListDiv.dataset.commits) });
+  var commits = JSON.parse(commitListDiv.dataset.commits);
+  var app = Elm.embed(Elm.CommitList, commitListDiv, { commits: commits, updatedCommit: commits[0] });
+
+  let socket = new Socket("/socket", { params: { auth_key: window.authKey } })
+  socket.connect()
+
+  let channel = socket.channel("commits", {})
+  channel.join()
+  channel.on("updated_commit", (commit) => app.ports.updatedCommit.send(commit))
+
+  // Debug:
+  window.channel = channel;
+  //channel.push("start_review", { id: 15423 })
 }
 
-let socket = new Socket("/socket", { params: { auth_key: window.authKey } })
-socket.connect()
-
-let channel = socket.channel("commits", {})
-channel.join()
-channel.on("updated_commit", (commit) => console.log(commit))
-
-// Debug:
-window.channel = channel;
-//channel.push("start_review", { id: 15423 })

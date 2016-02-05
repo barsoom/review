@@ -11,7 +11,7 @@ import Signal exposing (Address)
 port commits : List Commit
 
 -- todo:
---port updatedCommit : Signal Commit
+port updatedCommit : Signal Commit
 --port outgoingCommands : Signal ?
 -- action-type and id
 
@@ -25,7 +25,9 @@ inbox =
 
 actions : Signal Action
 actions =
-  inbox.signal
+  let commitSignal = Signal.map (\commit -> (UpdatedCommit commit)) updatedCommit
+  in
+    Signal.merge inbox.signal commitSignal
 
 model =
   let initialModel = { commits = commits }
@@ -118,6 +120,9 @@ update action model =
     AbandonReview id ->
       updateCommitById (\commit -> { commit | isBeingReviewed = False }) id model
 
+    UpdatedCommit commit ->
+      updateCommitById (\_ -> commit) commit.id model
+
 updateCommitById : (Commit -> Commit) -> Int -> Model -> Model
 updateCommitById callback id model =
   let
@@ -151,3 +156,4 @@ type Action
   = NoOp
   | StartReview Int
   | AbandonReview Int
+  | UpdatedCommit Commit
