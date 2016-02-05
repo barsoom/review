@@ -15,7 +15,8 @@ config :exremit, Exremit.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [host: "example.com", port: 80],
   cache_static_manifest: "priv/static/manifest.json",
-  secret_key_base: {:system, "SECRET_KEY_BASE"}
+  secret_key_base: {:system, "SECRET_KEY_BASE"},
+  check_origin: [ "https://exremit.herokuapp.com" ]
 
 # Do not print debug messages in production
 config :logger, level: :info
