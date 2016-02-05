@@ -20,6 +20,8 @@ defmodule Exremit.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   def connect(%{ "auth_key" => auth_key }, socket) do
+    auth_key = if auth_key == "", do: nil, else: auth_key
+
     if auth_key == Application.get_env(:exremit, :auth_key) do
       {:ok, socket}
     else
