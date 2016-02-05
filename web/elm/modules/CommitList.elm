@@ -9,33 +9,11 @@ import Date.Format exposing (..)
 import Signal exposing (Address)
 
 port commits : List Commit
-
 port updatedCommit : Signal Commit
 
 -- todo:
 --port outgoingCommands : Signal ?
 -- action-type and id
-
-main : Signal Html
-main =
-  Signal.map (view inbox.address) model
-
-inbox : Signal.Mailbox Action
-inbox =
-  Signal.mailbox NoOp
-
--- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
-updatedCommitActions : Signal Action
-updatedCommitActions =
-  Signal.map (\commit -> (UpdatedCommit commit)) updatedCommit
-
-actions : Signal Action
-actions =
-  Signal.merge inbox.signal updatedCommitActions
-
-model =
-  let initialModel = { commits = commits }
-  in Signal.foldp update initialModel actions
 
 view address model =
   ul [ class "commits-list" ] (List.map (lazyRenderCommit address) model.commits)
@@ -137,6 +115,29 @@ updateCommitById callback id model =
         commit
   in
      { model | commits = (List.map updateCommit model.commits)}
+
+-- Signals
+
+main : Signal Html
+main =
+  Signal.map (view inbox.address) model
+
+inbox : Signal.Mailbox Action
+inbox =
+  Signal.mailbox NoOp
+
+-- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
+updatedCommitActions : Signal Action
+updatedCommitActions =
+  Signal.map (\commit -> (UpdatedCommit commit)) updatedCommit
+
+actions : Signal Action
+actions =
+  Signal.merge inbox.signal updatedCommitActions
+
+model =
+  let initialModel = { commits = commits }
+  in Signal.foldp update initialModel actions
 
 -- MODEL
 
