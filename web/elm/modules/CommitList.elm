@@ -10,6 +10,7 @@ import CommitList.View exposing(view)
 port commits : List Commit
 port updatedCommit : Signal Commit
 
+-- publishes events like [ "StartReview", "12" ]
 port outgoingCommands : Signal (List String)
 port outgoingCommands =
   Signal.map (\action ->
