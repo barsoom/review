@@ -39,6 +39,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 ## Later
 
+* [ ] Add a install/update dependencies script
 * [ ] Set up instructions from scratch, bootstrapping scripts, etc
   * [ ] Rewrite instructions in more of a step-by-step start phoenix, start phantom, etc.
     - Possibly make phantomjs part of the phoenix.server in dev.
