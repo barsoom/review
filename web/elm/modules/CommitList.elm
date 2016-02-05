@@ -10,9 +10,9 @@ import Signal exposing (Address)
 
 port commits : List Commit
 
--- todo:
 port updatedCommit : Signal Commit
 
+-- todo:
 --port outgoingCommands : Signal ?
 -- action-type and id
 
