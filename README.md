@@ -99,7 +99,7 @@ If you have problems with javascript tools, you can try reinstalling them using 
 
 ## License
 
-Copyright (c) 2016 [Auctionet.com](https://dev.auctionet.com/)
+Copyright (c) 2016 [Auctionet.com](http://dev.auctionet.com/)
 
 MIT License
 
