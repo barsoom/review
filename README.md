@@ -23,7 +23,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   * [x] **skip for now** try other options for babel-preset if it works
 * [x] Calculate gravatar base url server side for simplicity?
 * [x] Add complete markup and behavior from the react prototype
-* [ ] Add mark as posted button and websockets to update other clients
+* [x] Add mark as posted button and websockets to update other clients
 * [ ] Show commits you can review based on who you are
 * [ ] Send entire state when you re-connect, show that this works as it's kind of a killer feature for this version
   * [ ] Does re-connect solve if you're offline for 3 seconds while an update is sent out?
