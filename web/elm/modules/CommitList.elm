@@ -12,6 +12,7 @@ port commits : List Commit
 
 -- todo:
 port updatedCommit : Signal Commit
+
 --port outgoingCommands : Signal ?
 -- action-type and id
 
@@ -23,11 +24,14 @@ inbox : Signal.Mailbox Action
 inbox =
   Signal.mailbox NoOp
 
+-- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
+updatedCommitActions : Signal Action
+updatedCommitActions =
+  Signal.map (\commit -> (UpdatedCommit commit)) updatedCommit
+
 actions : Signal Action
 actions =
-  let commitSignal = Signal.map (\commit -> (UpdatedCommit commit)) updatedCommit
-  in
-    Signal.merge inbox.signal commitSignal
+  Signal.merge inbox.signal updatedCommitActions
 
 model =
   let initialModel = { commits = commits }
