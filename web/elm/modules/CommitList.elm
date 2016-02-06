@@ -7,7 +7,16 @@ import CommitList.Update exposing(..)
 import CommitList.Model exposing(..)
 import CommitList.View exposing(view)
 
-port commits : List Commit
+main : Signal Html
+main =
+  Signal.map (view inbox.address) model
+
+---- API to the outside world (javascript/server) ----
+
+--- receives commits to display at the start
+port initialCommits : List Commit
+
+-- receives updated commit data
 port updatedCommit : Signal Commit
 
 -- publishes events like [ "StartReview", "12" ]
@@ -17,9 +26,8 @@ port outgoingCommands =
     action |> toString |> String.split(" ")
   ) inbox.signal
 
-main : Signal Html
-main =
-  Signal.map (view inbox.address) model
+
+---- All possible ways state can change ----
 
 update : Action -> Model -> Model
 update action model =
@@ -33,6 +41,7 @@ update action model =
     AbandonReview id ->
       updateCommitById (\commit -> { commit | isBeingReviewed = False }) id model
 
+    -- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
     UpdatedCommit commit ->
       updateCommitById (\_ -> commit) commit.id model
 
@@ -47,15 +56,17 @@ updateCommitById callback id model =
   in
      { model | commits = (List.map updateCommit model.commits)}
 
--- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
-updatedCommitActions : Signal Action
-updatedCommitActions =
-  Signal.map (\commit -> (UpdatedCommit commit)) updatedCommit
+
+---- current state and action collection ----
+
+model =
+  let initialModel = { commits = initialCommits }
+  in Signal.foldp update initialModel actions
 
 actions : Signal Action
 actions =
   Signal.merge inbox.signal updatedCommitActions
 
-model =
-  let initialModel = { commits = commits }
-  in Signal.foldp update initialModel actions
+updatedCommitActions : Signal Action
+updatedCommitActions =
+  Signal.map (\commit -> (UpdatedCommit commit)) updatedCommit
