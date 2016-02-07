@@ -13,3 +13,12 @@ fi
 cd /app
 
 mix do deps.get, deps.compile, compile
+npm install
+
+export PATH="/app/node_modules/.bin:$PATH"
+
+cd web/elm
+elm package install -y
+cd ../..
+
+brunch build
