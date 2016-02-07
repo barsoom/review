@@ -41,6 +41,3 @@ ENV MIX_ENV=test
 
 RUN yes Y | LC_ALL=en_GB.UTF-8 mix local.hex
 RUN yes Y | LC_ALL=en_GB.UTF-8 mix local.rebar
-
-RUN cd /project \
- && mix do deps.get, deps.compile, compile

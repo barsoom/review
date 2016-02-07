@@ -8,7 +8,9 @@ fi
 export IMAGE_PATH="$HOME/$CIRCLE_PROJECT_REPONAME/script/ci/docker_image"
 cd $IMAGE_PATH
 
-docker build -v ~/exremit:/project -t exremit .
+docker build -t exremit .
+docker run -v ~/exremit:/app exremit "cd /app && mix do deps.get, deps.compile, compile"
+docker commit $(docker ps -l|grep -v CONTAINER|awk '{ print $1 }') exremit
 
 mkdir -p ~/docker
 docker save exremit > ~/docker/exremit.tar
