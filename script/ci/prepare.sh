@@ -9,11 +9,12 @@ export IMAGE_PATH="$HOME/$CIRCLE_PROJECT_REPONAME/script/ci/docker_image"
 cd $IMAGE_PATH
 
 docker build -t exremit .
-docker run -v ~/exremit:/app exremit /app/script/ci/docker_image/bootstrap.sh
-docker commit $(docker ps -l|grep -v CONTAINER|awk '{ print $1 }') exremit
 
 mkdir -p ~/docker
 docker save exremit > ~/docker/exremit.tar
+
+# writes packages and such to the host system so it can be cached
+docker run -v ~/exremit:/app -v ~/.mix:/root/.mix exremit /app/script/ci/docker_image/bootstrap.sh
 
 exit 0
 

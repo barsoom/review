@@ -38,6 +38,3 @@ RUN set -xe \
   && rm -rf /usr/src/elixir
 
 ENV MIX_ENV=test
-
-RUN yes Y | LC_ALL=en_GB.UTF-8 mix local.hex
-RUN yes Y | LC_ALL=en_GB.UTF-8 mix local.rebar
