@@ -18,3 +18,21 @@ RUN set -xe \
   && make install \
   && find /usr/local -name examples |xargs rm -rf \
   && rm -rf /usr/src/otp-src
+
+ENV ELIXIR_VERSION=1.2.1 \
+    ELIXIR_SHA=9def4c1ee8eede93bf7e64c1861956dc30b2edda233fef423b790c4b31aeda54 \
+    DEBIAN_FRONTEND=noninteractive \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US.UTF-8 \
+    LC_ALL=en_US.UTF-8
+
+RUN set -xe \
+  && curl -SL https://github.com/elixir-lang/elixir/archive/v${ELIXIR_VERSION}.tar.gz -o elixir.tar.gz \
+  && echo "${ELIXIR_SHA}  elixir.tar.gz" | sha256sum -c - \
+  && mkdir -p /usr/src/elixir \
+  && tar -xzC /usr/src/elixir --strip-components=1 -f elixir.tar.gz \
+  && rm elixir.tar.gz \
+  && cd /usr/src/elixir \
+  && make -j $(nproc) \
+  && make install \
+  && rm -rf /usr/src/elixir
