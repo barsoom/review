@@ -36,6 +36,8 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   - [ ] Make basic elxir caching work
   - [ ] Add node
   - [ ] Build and cache assets
+  - [ ] Make the tests pass
+  - [ ] Generalize the scripts and make a gist, etc.
 * [ ] Make the enviornment more reliable by making elm-brunch work better. Handle any number of files without having to specify any or specify regexes.
 
 ## Make code review fully featured
