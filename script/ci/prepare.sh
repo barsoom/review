@@ -8,7 +8,7 @@ fi
 export IMAGE_PATH="$HOME/$CIRCLE_PROJECT_REPONAME/script/ci/docker_image"
 cd $IMAGE_PATH
 
-docker build -t exremit .
+docker build -v ~/exremit:/project -t exremit .
 
 mkdir -p ~/docker
 docker save exremit > ~/docker/exremit.tar
