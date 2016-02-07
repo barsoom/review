@@ -37,4 +37,9 @@ RUN set -xe \
   && make install \
   && rm -rf /usr/src/elixir
 
-ENV MIX_ENV=test
+ENV NODE_VERSION=5.5.0 \
+    NODE_SHA=3e593d91b6d2ad871efaaf8e9a17b3608ca98904959bcfb7c42e6acce89e80f4
+
+RUN curl -SL https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz -o node.tar.gz \
+  && echo "${NODE_SHA}  node.tar.gz" | sha256sum -c - \
+  && tar -xzC /usr/local --strip-components=1 -f node.tar.gz
