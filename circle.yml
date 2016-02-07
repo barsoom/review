@@ -8,6 +8,8 @@ dependencies:
   cache_directories:
     - ~/docker
     - ~/.mix
+    - _build
+    - deps
 
 test:
   override:
