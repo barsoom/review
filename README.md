@@ -32,6 +32,10 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 ## Make the tools reliable
 
 * [ ] Can assets build be fast in CI by using docker to run everything?
+  - [x] Make basic image work
+  - [ ] Make basic elxir caching work
+  - [ ] Add node
+  - [ ] Build and cache assets
 * [ ] Make the enviornment more reliable by making elm-brunch work better. Handle any number of files without having to specify any or specify regexes.
 
 ## Make code review fully featured
