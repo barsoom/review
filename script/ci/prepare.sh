@@ -11,7 +11,7 @@ cd $IMAGE_PATH
 docker build -t exremit .
 
 mkdir -p ~/docker
-docker save exremit> ~/docker/exremit.tar
+docker save exremit > ~/docker/exremit.tar
 
 exit 0
 
