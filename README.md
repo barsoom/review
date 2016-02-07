@@ -33,7 +33,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 * [ ] Can assets build be fast in CI by using docker to run everything?
   - [x] Make basic image work
-  - [ ] Make basic elxir caching work
+  - [x] Make basic elixir caching work
   - [ ] Add node
   - [ ] Build and cache assets
   - [ ] Make the tests pass
