@@ -1,6 +1,8 @@
 #!/bin/bash
 
-echo "Not running test yet"
+echo "Not running tests yet"
+
+docker run exremit erl -v
 
 exit 0
 
