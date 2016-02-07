@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 
 if [[ -e ~/docker/exremit.tar ]]; then
   docker load -i ~/docker/exremit.tar
