@@ -3,6 +3,7 @@
 echo "Not running tests yet"
 
 docker run exremit erl -v
+docker run exremit elixir -v
 
 exit 0
 
