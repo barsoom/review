@@ -9,7 +9,7 @@ export IMAGE_PATH="$HOME/$CIRCLE_PROJECT_REPONAME/script/ci/docker_image"
 cd $IMAGE_PATH
 
 docker build -t exremit .
-docker run -v ~/exremit:/app exremit cd /app && mix do deps.get, deps.compile, compile
+docker run -v ~/exremit:/app exremit /app/script/ci/docker_image/bootstrap.sh
 docker commit $(docker ps -l|grep -v CONTAINER|awk '{ print $1 }') exremit
 
 mkdir -p ~/docker
