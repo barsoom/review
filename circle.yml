@@ -1,23 +1,19 @@
 machine:
-  node:
-    version: 4.2.2
+  services:
+      - docker
 
 dependencies:
-  pre:
+  override:
     - script/ci/prepare.sh
   cache_directories:
-    - ~/dependencies
-    - ~/.mix
-    - _build
-    - deps
-    - web/elm/elm-stuff
+    - ~/docker
 
 test:
   override:
     - script/ci/tests.sh
 
-deployment:
-  production:
-    branch: master
-    heroku:
-      appname: exremit
+#deployment:
+#  production:
+#    branch: master
+#    heroku:
+#      appname: exremit

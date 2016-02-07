@@ -1,5 +1,20 @@
 #!/bin/bash
 
+
+if [[ -e ~/docker/exremit.tar ]]; then
+  docker load -i ~/docker/exremit.tar
+fi
+
+export IMAGE_PATH="$HOME/$CIRCLE_PROJECT_REPONAME/script/ci/docker_image"
+cd $IMAGE_PATH
+
+docker build -t exremit .
+
+mkdir -p ~/docker
+docker save exremit> ~/docker/exremit.tar
+
+exit 0
+
 set -e
 
 export ERLANG_VERSION=$(cat elixir_buildpack.config | grep erlang_version | tr "=" " " | awk '{ print $2 }')
