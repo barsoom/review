@@ -1,6 +1,5 @@
 # Ubuntu 14.04 and build deps
 from buildpack-deps:trusty
-RUN touch /tmp/a
 
 ENV OTP_VERSION=18.2.3
 
