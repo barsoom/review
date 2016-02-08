@@ -14,4 +14,4 @@ mkdir -p ~/docker
 docker save exremit > ~/docker/exremit.tar
 
 # writes packages and such to the host system so it can be cached
-docker run -v ~/exremit:/app -v ~/.mix:/root/.mix exremit /app/script/install_dependences
+docker run -v ~/exremit:/app -v ~/.mix:/root/.mix exremit /app/script/install_dependencies
