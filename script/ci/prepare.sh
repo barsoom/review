@@ -61,7 +61,8 @@ if [ ! -e $PHANTOMJS_PATH ]; then
   wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOMJS_VERSION.tar.bz2
   echo "$PHANTOMJS_SHA  phantomjs-2.1.1-linux-x86_64.tar.bz2" | sha256sum -c -
   tar xfj $PHANTOMJS_VERSION.tar.bz2
-  ln -sf $PHANTOMJS_PATH $HOME/dependencies/phantomjs
+  rm -f $HOME/dependencies/phantomjs
+  cp -rf $PHANTOMJS_PATH $HOME/dependencies/phantomjs
 fi
 
 # Fetch and compile dependencies and application code (and include testing tools)
