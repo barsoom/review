@@ -70,7 +70,7 @@ cd $HOME/$CIRCLE_PROJECT_REPONAME
 
 DEPS_CACHE_PATH="$HOME/.mix/project_deps.tar"
 
-if [ ! -e $DEPS_CACHE_PATH ]; then
+if [ -e $DEPS_CACHE_PATH ]; then
   tar xf $DEPS_CACHE_PATH
 fi
 
