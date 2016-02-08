@@ -6,7 +6,7 @@ set -e
 cd "$(dirname "$0")"/..
 
 export MIX_ENV="test"
-export LC_ALL=en_GB.UTF-8
+export LC_ALL=en_US.UTF-8
 
 source web/elm/paths.env
 mix do deps.get, deps.compile, compile
