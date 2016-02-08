@@ -55,10 +55,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 # Installing dependencies
 
-    source web/elm/paths.env && npm install && mix deps.get && cd web/elm && elm package install -y && cd ../..
-
-    # start web server and build assets
-    mix phoenix.server
+    script/install_dependencies
 
 # Loading data for dev
 
