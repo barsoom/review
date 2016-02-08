@@ -55,18 +55,16 @@ fi
 PHANTOMJS_VERSION=phantomjs-2.1.1-linux-x86_64
 PHANTOMJS_PATH=$HOME/$PHANTOMJS_VERSION
 PHANTOMJS_SHA="86dd9a4bf4aee45f1a84c9f61cf1947c1d6dce9b9e8d2a907105da7852460d2f"
+PHANTOMJS_INSTALL_PATH=$HOME/dependencies/phantomjs
 
-if [ ! -e $PHANTOMJS_PATH ]; then
+if [ ! -e $PHANTOMJS_INSTALL_PATH ]; then
   cd ~
   wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOMJS_VERSION.tar.bz2
   echo "$PHANTOMJS_SHA  phantomjs-2.1.1-linux-x86_64.tar.bz2" | sha256sum -c -
   tar xfj $PHANTOMJS_VERSION.tar.bz2
-  cp -rf $PHANTOMJS_PATH $HOME/dependencies/phantomjs
+  cp -rf $PHANTOMJS_PATH $PHANTOMJS_INSTALL_PATH
 fi
 
 # Fetch and compile dependencies and application code (and include testing tools)
-export MIX_ENV="test"
 cd $HOME/$CIRCLE_PROJECT_REPONAME
-mix do deps.get, compile
-
 script/install_dependencies
