@@ -42,6 +42,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   - [ ] Document the setup in readme
 * [ ] Make the enviornment more reliable by making elm-brunch work better. Handle any number of files without having to specify any or specify regexes.
   - Make elm-brunch work correctly on "brunch build" so that the ELM_FILES hack in install_dependences can be removed
+    - If possible, also auto-install elm packages as part of build?
 
 ## Make code review fully featured
 
