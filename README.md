@@ -4,26 +4,8 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 # TODO
 
-## Bootstrap tools
-
-* [x] Set up client side testing tools **skipped** (since there is no simple setup available, and acceptance tests will probably be good enough for a small app like this)
-  * For later: look in http://brunch.io/skeletons.html, and then blog or gist a basic phoenix js testing setup.
-* [x] Look into full stack javascript testing for overall acceptance test (not required, but good to know how)
-  * [x] Get CI working including js tests https://circleci.com/gh/joakimk/exremit/4
-  * [x] Add CI deploy step
-* [x] Document dev usage
-* [x] Set up ELM
-* [x] Token auth in prod
-
 ## Make code review possible
 
-* [x] Render listing of commits
-* [x] Add css
-* [x] Unbreak CI
-  * [x] **skip for now** try other options for babel-preset if it works
-* [x] Calculate gravatar base url server side for simplicity?
-* [x] Add complete markup and behavior from the react prototype
-* [x] Add mark as posted button and websockets to update other clients
 * [ ] Show commits you can review based on who you are
 * [ ] Send entire state when you re-connect, show that this works as it's kind of a killer feature for this version
   * [ ] Does re-connect solve if you're offline for 3 seconds while an update is sent out?
@@ -31,7 +13,6 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 ## Make the tools reliable
 
-* [x] **No speed boost, lots of deps to manage** Can assets build be fast in CI by using docker to run everything?
 * [ ] Support multiple files in elm-brunch
   - Would fix deploy by making `brunch build` work for elm code. Then the workaround in `install_dependencies` can be removed.
 
