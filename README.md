@@ -37,18 +37,20 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [ ] Pull request to elm-brunch to add custom path to elm binary so we can remove `source web/elm/paths.env` when running `mix phoenix.server`
 * [ ] Cache the last build step
 
-# Installing dependencies
+# Development
+
+## Installing dependencies
 
     script/install_dependencies
 
-# Loading data for dev
+## Loading data for dev
 
     heroku pg:backups capture -a your-remit
     curl --output /tmp/data.dump `heroku pg:backups public-url -a your-remit`
     mix ecto.create
     pg_restore --no-acl --no-owner -d exremit_dev /tmp/data.dump
 
-# Running tests
+## Running tests
 
 Start headless browser in another terminal window:
 
@@ -58,24 +60,24 @@ Run tests:
 
     mix test
 
-# Troubleshooting
+## Troubleshooting
 
 If you have problems with javascript tools, you can try reinstalling them using `rm -rf node_modules && npm install`.
 
-# Installing an elm package or running other elm tools
+## Installing an elm package or running other elm tools
 
     cd web/elm
     source paths.env
     elm package install name
 
-# Load data dump from regular remit
+## Load data dump from regular remit
 
     heroku pg:backups capture -a your-remit
     curl --output /tmp/data.dump `heroku pg:backups public-url -a your-remit`
     mix ecto.create
     pg_restore --no-acl --no-owner -d exremit_dev /tmp/data.dump
 
-# Commands used to deploy to heroku
+## Commands used to deploy to heroku
 
     heroku apps:create exremit --region eu
     heroku buildpacks:set https://github.com/gjaldon/phoenix-static-buildpack
@@ -84,7 +86,7 @@ If you have problems with javascript tools, you can try reinstalling them using 
     heroku config:set USER_TOKEN=$(elixir -e "IO.puts Regex.replace(~r/[^a-zA-Z0-9]/, (:crypto.strong_rand_bytes(64) |> Base.encode64), \"\")")
     git push heroku
 
-## License
+# License
 
 Copyright (c) 2016 [Auctionet.com](http://dev.auctionet.com/)
 
