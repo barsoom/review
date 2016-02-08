@@ -1,18 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 
-echo "Not running tests yet"
-
-docker run exremit erl -v
-docker run exremit elixir -v
-docker run exremit node -v
-
-exit 0
-
-export MIX_ENV="test"
-export PATH="$HOME/dependencies/phantomjs/bin:$HOME/dependencies/erlang/bin:$HOME/dependencies/elixir/bin:$PATH"
-
-# Start headless browser server used by javascript-enabled acceptance tests
-phantomjs -w > /dev/null &
-sleep 2
-
-mix test
+docker run -v ~/exremit:/app -v ~/.mix:/root/.mix exremit /app/script/ci/docker_image/tests.sh
