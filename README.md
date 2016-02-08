@@ -36,7 +36,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   - [x] Make basic elixir caching work
   - [x] Add node
   - [x] Build and cache assets
-  - [ ] Add phantomjs
+  - [x] Add phantomjs
   - [ ] Make the tests pass
   - [ ] Generalize the scripts and make a gist, etc.
 * [ ] Make the enviornment more reliable by making elm-brunch work better. Handle any number of files without having to specify any or specify regexes.
