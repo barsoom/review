@@ -8,9 +8,6 @@ dependencies:
   cache_directories:
     - ~/dependencies
     - ~/.mix
-    - _build
-    - deps
-    - web/elm/elm-stuff
 
 test:
   override:
