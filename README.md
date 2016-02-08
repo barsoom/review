@@ -39,6 +39,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   - [x] Add phantomjs
   - [ ] Make the tests pass
   - [ ] Generalize the scripts and make a gist, etc.
+  - [ ] Document the setup in readme
 * [ ] Make the enviornment more reliable by making elm-brunch work better. Handle any number of files without having to specify any or specify regexes.
 
 ## Make code review fully featured
