@@ -50,4 +50,6 @@ ENV PHANTOMJS_VERSION=phantomjs-2.1.1-linux-x86_64 \
 
 RUN wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOMJS_VERSION.tar.bz2 \
  && echo "$PHANTOMJS_SHA  phantomjs-2.1.1-linux-x86_64.tar.bz2" | sha256sum -c - \
- && tar xfj $PHANTOMJS_VERSION.tar.bz2 -C /usr/local
+ && tar xfj $PHANTOMJS_VERSION.tar.bz2 -C /tmp \
+ && cp -rf /tmp/$PHANTOMJS_VERSION/* /usr/local \
+ && rm -rf /tmp/$PHANTOMJS_VERSION
