@@ -3,7 +3,7 @@ machine:
     version: 4.2.2
 
 dependencies:
-  pre:
+  override:
     - script/ci/prepare.sh
   cache_directories:
     - ~/dependencies
