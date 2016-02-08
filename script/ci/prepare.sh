@@ -70,12 +70,3 @@ cd $HOME/$CIRCLE_PROJECT_REPONAME
 mix do deps.get, deps.compile, compile
 
 script/install_dependencies
-
-#if [ ! -e _build/.node-fixed ]; then
-#  # TODO: try other options: https://github.com/phoenixframework/phoenix/issues/1410
-#  npm install --save-dev babel-preset-es2015 && touch _build/.node-fixed
-#
-#  echo
-#  echo "Running brunch build for the first time, this can take several minutes."
-#  echo
-#fi
