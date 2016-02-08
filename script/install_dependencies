@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+# Ensure we're in the app root directory. Required when running
+# directly within a docker container without any wrapping script.
+cd "$(dirname "$0")"/..
+
 export MIX_ENV="test"
 
 source web/elm/paths.env
