@@ -33,6 +33,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 * [ ] Can assets build be fast in CI by using docker to run everything?
 * [ ] Make the enviornment more reliable by making elm-brunch work better. Handle any number of files without having to specify any or specify regexes.
+  - Make elm-brunch work correctly on "brunch build" so that the ELM_FILES hack in install_dependences can be removed
 
 ## Make code review fully featured
 
@@ -55,7 +56,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 # Installing dependencies
 
-    source web/elm/paths.env && npm install && mix deps.get && cd web/elm && elm package install -y && cd ../..
+    script/install_dependencies
 
     # start web server and build assets
     mix phoenix.server

@@ -67,7 +67,6 @@ fi
 # Fetch and compile dependencies and application code (and include testing tools)
 export MIX_ENV="test"
 cd $HOME/$CIRCLE_PROJECT_REPONAME
-mix do deps.get, deps.compile, compile
 
 if [ ! -e _build/.node-fixed ]; then
   # TODO: try other options: https://github.com/phoenixframework/phoenix/issues/1410
@@ -78,10 +77,4 @@ if [ ! -e _build/.node-fixed ]; then
   echo
 fi
 
-npm install
-
-export PATH="$HOME/$CIRCLE_PROJECT_REPONAME/node_modules/.bin:$PATH"
-cd web/elm
-elm package install -y
-cd ../..
-brunch build
+script/install_dependencies

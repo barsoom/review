@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+export MIX_ENV="test"
+
+source web/elm/paths.env
+mix do deps.get, deps.compile, compile
+npm install
+
+cd web/elm
+elm package install -y
+
+# The elm-brunch plugin does not compile elm when brunch-build is run, only
+# when changes are detected. This makes it work on the first run too.
+ELM_FILES=$(cd ../.. && mix run -e 'IO.puts Regex.scan(~r/mainModules.+?"(.+?)"]/, File.read!("brunch-config.js")) |> hd |> tl |> hd')
+rm -f ../static/vendor/compiled_elm/*
+elm make $ELM_FILES --output ../static/vendor/compiled_elm/elm-app.js
+
+cd ../..
+
+node_modules/brunch/bin/brunch build
