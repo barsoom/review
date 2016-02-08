@@ -43,3 +43,11 @@ ENV NODE_VERSION=5.5.0 \
 RUN curl -SL https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz -o node.tar.gz \
   && echo "${NODE_SHA}  node.tar.gz" | sha256sum -c - \
   && tar -xzC /usr/local --strip-components=1 -f node.tar.gz
+
+ENV PHANTOMJS_VERSION=phantomjs-2.1.1-linux-x86_64 \
+    PHANTOMJS_PATH=$HOME/$PHANTOMJS_VERSION \
+    PHANTOMJS_SHA="86dd9a4bf4aee45f1a84c9f61cf1947c1d6dce9b9e8d2a907105da7852460d2f"
+
+RUN wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOMJS_VERSION.tar.bz2 \
+ && echo "$PHANTOMJS_SHA  phantomjs-2.1.1-linux-x86_64.tar.bz2" | sha256sum -c - \
+ && tar xfj $PHANTOMJS_VERSION.tar.bz2 -C /usr/local
