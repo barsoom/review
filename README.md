@@ -31,7 +31,6 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 ## Make the tools reliable
 
-* [ ] Cache the last build step
 * [x] **No speed boost, lots of deps to manage** Can assets build be fast in CI by using docker to run everything?
 * [ ] Make the enviornment more reliable by making elm-brunch work better. Handle any number of files without having to specify any or specify regexes.
 
@@ -54,6 +53,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [ ] Convert config to coffee script for less noisy config
 * [ ] Does created\_at and updated\_at get updated by ecto?
 * [ ] Pull request to elm-brunch to add custom path to elm binary so we can remove `source web/elm/paths.env` when running `mix phoenix.server`
+* [ ] Cache the last build step
 
 # Installing dependencies
 
