@@ -67,13 +67,4 @@ fi
 
 # Fetch and compile dependencies and application code (and include testing tools)
 cd $HOME/$CIRCLE_PROJECT_REPONAME
-
-DEPS_CACHE_PATH="$HOME/.mix/project_deps.tar"
-
-if [ -e $DEPS_CACHE_PATH ]; then
-  tar xf $DEPS_CACHE_PATH
-fi
-
 script/install_dependencies
-
-tar cf $DEPS_CACHE_PATH _build deps web/elm/elm-stuff
