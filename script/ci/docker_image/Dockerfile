@@ -1,5 +1,4 @@
-# Ubuntu 14.04 and build deps
-from buildpack-deps:trusty
+from buildpack-deps:jessie
 
 ENV OTP_VERSION=18.2.3
 
