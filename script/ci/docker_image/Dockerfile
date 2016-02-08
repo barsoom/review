@@ -52,5 +52,3 @@ RUN wget https://bitbucket.org/ariya/phantomjs/downloads/$PHANTOMJS_VERSION.tar.
  && tar xfj $PHANTOMJS_VERSION.tar.bz2 -C /tmp \
  && cp -rf /tmp/$PHANTOMJS_VERSION/* /usr/local \
  && rm -rf /tmp/$PHANTOMJS_VERSION
-
-RUN locale-gen "en_US.UTF-8"
