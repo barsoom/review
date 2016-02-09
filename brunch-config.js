@@ -56,7 +56,9 @@ exports.config = {
     },
     elmBrunch: {
       elmFolder: "web/elm",
-      mainModules: ["modules/CommitList.elm modules/CommitList/View.elm modules/CommitList/Action.elm modules/CommitList/Model.elm"],
+      mainModules: {
+        "modules/CommitList.elm": [ "modules/CommitList/View.elm", "modules/CommitList/Action.elm", "modules/CommitList/Model.elm" ]
+      },
       outputFolder: "../static/vendor/compiled_elm"
     },
     assetsmanager: {
