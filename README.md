@@ -13,8 +13,9 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 ## Make the tools reliable
 
-* [ ] Support multiple files in elm-brunch
+* [x] Support multiple files in elm-brunch
   - Would fix deploy by making `brunch build` work for elm code. Then the workaround in `install_dependencies` can be removed.
+* [ ] Look into using [node-elm-compiler](https://github.com/rtfeldman/node-elm-compiler) in elm-brunch instead of finishing up my current pull request
 
 ## Make code review fully featured
 
