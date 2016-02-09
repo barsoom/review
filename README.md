@@ -72,10 +72,7 @@ If you have problems with javascript tools, you can try reinstalling them using 
 
 ## Load data dump from regular remit
 
-    heroku pg:backups capture -a your-remit
-    curl --output /tmp/data.dump `heroku pg:backups public-url -a your-remit`
-    mix ecto.create
-    pg_restore --no-acl --no-owner -d exremit_dev /tmp/data.dump
+    script/download_and_import_database your-exremit-or-remit-app-name
 
 ## Commands used to deploy to heroku
 
