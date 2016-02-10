@@ -67,4 +67,4 @@ fi
 
 # Fetch and compile dependencies and application code (and include testing tools)
 cd $HOME/$CIRCLE_PROJECT_REPONAME
-script/install_dependencies
+script/bootstrap

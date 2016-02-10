@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+echo ">> Getting elixir dependencies"
+
 # Ensure we're in the app root directory.
 cd "$(dirname "$0")"/..
 
@@ -9,10 +11,17 @@ export LC_ALL=en_US.UTF-8
 
 source web/elm/paths.env
 mix do deps.get, compile
+
+echo
+echo ">> Getting Brunch dependencies"
 npm install
 
 cd web/elm
+echo
+echo ">> Getting Elm dependencies"
 elm package install -y
 cd ../..
 
+echo
+echo ">> Building assets using brunch"
 node_modules/brunch/bin/brunch build
