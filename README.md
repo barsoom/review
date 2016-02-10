@@ -16,6 +16,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [x] Support multiple files in elm-brunch
   - Would fix deploy by making `brunch build` work for elm code. Then the workaround in `install_dependencies` can be removed.
 * [ ] Look into using [node-elm-compiler](https://github.com/rtfeldman/node-elm-compiler) in elm-brunch instead of finishing up my current pull request
+* [ ] Figure out why no app.js is available in heroku prod now... :(
 
 ## Make code review fully featured
 
