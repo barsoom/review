@@ -35,6 +35,9 @@ exports.config =
       outputFile: "../static/vendor/compiled_elm.js"
 
     assetsmanager:
+      # only copy on boot to not trigger double live reloads when other files change
+      minTimeSpanSeconds: 10000
+
       copyTo:
         "fonts": [ "web/static/vendor/css/font-awesome-4.5.0/fonts/*" ]
 
