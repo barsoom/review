@@ -63,7 +63,7 @@ Run tests:
 
 ## Troubleshooting
 
-If you have problems with javascript tools, you can try reinstalling them using `rm -rf node_modules && npm install`.
+If you have problems with the dependencies, elixir, javascript or elm, try running `script/clean` and then `script/bootstrap` to reinstall all of it.
 
 ## Installing an elm package or running other elm tools
 

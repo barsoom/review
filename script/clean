@@ -1,0 +1,17 @@
+#!/bin/sh
+echo ">> Removing elixir deps"
+set -e
+mix deps.clean --all
+mix clean
+rm -rf _build
+
+echo
+echo ">> Removing javascript deps"
+rm -rf node_modules
+
+echo
+echo ">> Removing elm deps"
+rm -rf web/elm/elm-stuff
+
+echo
+echo "Done"
