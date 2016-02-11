@@ -33,7 +33,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [ ] Set up instructions from scratch, bootstrapping scripts, etc
   * [ ] Rewrite instructions in more of a step-by-step start phoenix, start phantom, etc.
     - Possibly make phantomjs part of the phoenix.server in dev.
-* [ ] Convert config to coffee script for less noisy config
+* [x] Convert config to coffee script for less noisy config
 * [ ] Does created\_at and updated\_at get updated by ecto?
 * [ ] Pull request to elm-brunch to add custom path to elm binary so we can remove `source web/elm/paths.env` when running `mix phoenix.server`
 * [ ] Cache the last build step
