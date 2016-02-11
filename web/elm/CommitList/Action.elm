@@ -1,4 +1,4 @@
-module CommitList.Update (Action (..), inbox) where
+module CommitList.Action (Action (..), inbox) where
 
 import CommitList.Model exposing(..)
 

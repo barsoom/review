@@ -32,7 +32,16 @@ exports.config = {
     // This option sets where we should place non-css and non-js assets in.
     // By default, we set this to "/web/static/assets". Files in this directory
     // will be copied to `paths.public`, which is "priv/static" by default.
-    assets: /^(web\/static\/assets)/
+    assets: /^(web\/static\/assets)/,
+
+    // Elm code needs to be in the elm-root for it's auto-require-of-imports feature
+    // to work, so we need to ignore everything else there.
+    ignored: [
+      /\/_.*/, // re-add default ignore of files starting with underscore
+      /elm-stuff/,
+      /elm-package\.json/,
+      /elm\/paths\.env/
+    ]
   },
 
   // Phoenix paths configuration
@@ -40,7 +49,7 @@ exports.config = {
     // Dependencies and current project directories to watch
     watched: [
       "web/static",
-      "web/elm/modules",
+      "web/elm",
       "test/static"
     ],
 
@@ -57,12 +66,11 @@ exports.config = {
     elmBrunch: {
       elmFolder: "web/elm",
       mainModules: {
-        "modules/Comments.elm": [
-        ],
-        "modules/CommitList.elm": [
-          "modules/CommitList/View.elm",
-          "modules/CommitList/Action.elm",
-          "modules/CommitList/Model.elm"
+        // TODO: Explore the auto-require feature, needs changes in elm-brunch
+        "CommitList.elm": [
+          "CommitList/Action.elm",
+          "CommitList/Model.elm",
+          "CommitList/View.elm"
         ]
       },
       outputFolder: "../static/vendor/compiled_elm"

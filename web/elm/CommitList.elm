@@ -3,7 +3,7 @@ module CommitList where
 import Html exposing (..)
 import String
 
-import CommitList.Update exposing(..)
+import CommitList.Action exposing(..)
 import CommitList.Model exposing(..)
 import CommitList.View exposing(view)
 
