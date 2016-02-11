@@ -65,15 +65,7 @@ exports.config = {
     },
     elmBrunch: {
       elmFolder: "web/elm",
-      mainModules: {
-        // TODO: Explore the auto-require feature, needs changes in elm-brunch
-        "CommitList.elm": [
-          "CommitList/Action.elm",
-          "CommitList/Model.elm",
-          "CommitList/View.elm"
-        ]
-      },
-      outputFolder: "../static/vendor/compiled_elm"
+      outputFile: "../static/vendor/compiled_elm.js"
     },
     assetsmanager: {
       copyTo: {
