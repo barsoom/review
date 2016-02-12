@@ -10,6 +10,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [ ] Send entire state when you re-connect, show that this works as it's kind of a killer feature for this version
   * [ ] Does re-connect solve if you're offline for 3 seconds while an update is sent out?
 * [ ] Consider if temporary state-sync could be setup so both apps could be used at once for a while
+* [ ] Use port to redirect to commit? Also remove the "a" tag?
 
 ## Make the tools reliable
 
