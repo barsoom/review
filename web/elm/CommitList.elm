@@ -1,15 +1,11 @@
 module CommitList where
 
-import Html exposing (..)
-import String
-
 import CommitList.Types exposing (..)
 import CommitList.View exposing (view)
 import CommitList.Update exposing (update)
 
-main : Signal Html
-main =
-  Signal.map (view inbox.address) model
+import Html exposing (..)
+import String
 
 
 ---- API to the outside world (javascript/server) ----
@@ -28,25 +24,38 @@ port outgoingCommands =
   |> Signal.filter isOutgoing []
 
 isOutgoing event =
-  let name = event |> List.head |> Maybe.withDefault ""
-  in  List.member name [ "StartReview", "AbandonReview" ]
+  List.member (eventName event) [ "StartReview", "AbandonReview" ]
+
+eventName event =
+  event
+  |> List.head
+  |> Maybe.withDefault ""
 
 
 ---- current state and action collection ----
 
+model : Signal Model
 model =
-  let initialModel = { commits = initialCommits, lastClickedCommitId = 0 }
-  in Signal.foldp update initialModel actions
+  Signal.foldp update initialModel actions
+
+initialModel : Model
+initialModel =
+  { commits = initialCommits
+  , lastClickedCommitId = 0
+  }
 
 actions : Signal Action
 actions =
-  Signal.merge inbox.signal updatedCommitActions
+  Signal.merge inbox.signal updatedCommitSignal
 
-updatedCommitActions : Signal Action
-updatedCommitActions =
+updatedCommitSignal =
   updatedCommit
   |> Signal.map UpdatedCommit
 
 inbox : Signal.Mailbox Action
 inbox =
   Signal.mailbox NoOp
+
+main : Signal Html
+main =
+  Signal.map (view inbox.address) model
