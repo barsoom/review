@@ -44,7 +44,8 @@ actions =
 
 updatedCommitActions : Signal Action
 updatedCommitActions =
-  Signal.map (\commit -> (UpdatedCommit commit)) updatedCommit
+  updatedCommit
+  |> Signal.map UpdatedCommit
 
 inbox : Signal.Mailbox Action
 inbox =
