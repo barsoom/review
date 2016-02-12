@@ -10,7 +10,9 @@ main : Signal Html
 main =
   Signal.map (view inbox.address) model
 
+
 ---- API to the outside world (javascript/server) ----
+
 
 --- receives commits to display at the start
 port initialCommits : List Commit
@@ -31,7 +33,9 @@ isOutgoing event =
   in
     List.member name [ "StartReview", "AbandonReview" ]
 
+
 ---- All possible ways state can change ----
+
 
 update : Action -> Model -> Model
 update action model =
@@ -65,6 +69,7 @@ updateCommitById callback id model =
 
 
 ---- current state and action collection ----
+
 
 model =
   let initialModel = { commits = initialCommits, lastClickedCommitId = 0 }
