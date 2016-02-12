@@ -28,10 +28,8 @@ port outgoingCommands =
   |> Signal.filter isOutgoing []
 
 isOutgoing event =
-  let
-     name = event |> List.head |> Maybe.withDefault ""
-  in
-    List.member name [ "StartReview", "AbandonReview" ]
+  let name = event |> List.head |> Maybe.withDefault ""
+  in  List.member name [ "StartReview", "AbandonReview" ]
 
 
 ---- current state and action collection ----
