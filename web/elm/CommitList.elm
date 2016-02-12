@@ -25,7 +25,7 @@ port outgoingCommands : Signal (List String)
 port outgoingCommands =
   inbox.signal
   |> Signal.map (\action -> action |> toString |> String.split(" "))
-  |> Signal.filter (\event -> isOutgoing event) []
+  |> Signal.filter isOutgoing []
 
 isOutgoing event =
   let
