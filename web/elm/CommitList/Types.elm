@@ -8,7 +8,8 @@ type Action
   | UpdatedCommit Commit
 
 type alias Commit =
-  { id : Int
+  {
+    id : Int
   , summary : String
   , gravatarHash : String
   , repository : String

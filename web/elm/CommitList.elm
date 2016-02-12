@@ -40,7 +40,8 @@ model =
 
 initialModel : Model
 initialModel =
-  { commits = initialCommits
+  {
+    commits = initialCommits
   , lastClickedCommitId = 0
   }
 
