@@ -19,6 +19,7 @@ defmodule Exremit.CommitSerializer do
       timestamp: timestamp(payload),
       isReviewed: !!commit.reviewed_at,
       isBeingReviewed: !!commit.review_started_at,
+      url: url(payload),
     }
   end
 
@@ -37,6 +38,7 @@ defmodule Exremit.CommitSerializer do
   defp repository(payload), do: payload.repository.name
   defp author_name(commit), do: commit.author.name
   defp timestamp(payload), do: payload.timestamp
+  defp url(payload), do: payload.url
 
   defp parse_payload(commit) do
     Poison.decode!(commit.json_payload, keys: :atoms)

@@ -18,6 +18,7 @@ defmodule Exremit.CommitSerializerTest do
       timestamp: "2016-01-25T08:41:25+01:00",
       isReviewed: false,
       isBeingReviewed: false,
+      url: "https://github.com/barsoom/gridlook/commit/c5472c5276f564621afe4b56b14f50e7c298dff9",
     }
   end
 end

@@ -9,6 +9,7 @@ type alias Commit =
   , timestamp : String
   , isReviewed : Bool
   , isBeingReviewed : Bool
+  , url : String
   }
 
 type alias Model =

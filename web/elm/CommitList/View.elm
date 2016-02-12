@@ -27,7 +27,7 @@ renderCommit : Address Action -> Model -> Commit -> Html
 renderCommit address model commit =
   --let _ = Debug.log "commit" commit.id in
   li [ id (commitId commit), (commitClassList model commit) ] [
-    a [ class "block-link" ] [
+    a [ class "block-link", href commit.url, target "_blank" ] [
       div [ class "commit-wrapper", onClick address (ShowCommit commit.id)  ] [
         div [ class "commit-controls" ] [ (renderButton address model commit) ]
       , img [ class "commit-avatar", src (avatarUrl commit) ] []
