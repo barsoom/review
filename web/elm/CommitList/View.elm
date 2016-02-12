@@ -8,8 +8,7 @@ import Date exposing (..)
 import Date.Format exposing (..)
 import Signal exposing (Address)
 
-import CommitList.Model exposing(..)
-import CommitList.Action exposing(..)
+import CommitList.Types exposing (..)
 
 view address model =
   ul [ class "commits-list" ] (List.map (lazyRenderCommit address model) model.commits)

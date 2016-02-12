@@ -3,9 +3,8 @@ module CommitList where
 import Html exposing (..)
 import String
 
-import CommitList.Action exposing(..)
-import CommitList.Model exposing(..)
-import CommitList.View exposing(view)
+import CommitList.Types exposing (..)
+import CommitList.View exposing (view)
 
 main : Signal Html
 main =
@@ -78,3 +77,7 @@ actions =
 updatedCommitActions : Signal Action
 updatedCommitActions =
   Signal.map (\commit -> (UpdatedCommit commit)) updatedCommit
+
+inbox : Signal.Mailbox Action
+inbox =
+  Signal.mailbox NoOp

@@ -1,4 +1,11 @@
-module CommitList.Model (Commit, Model) where
+module CommitList.Types (Action (..), Commit, Model) where
+
+type Action
+  = NoOp
+  | StartReview Int
+  | AbandonReview Int
+  | ShowCommit Int
+  | UpdatedCommit Commit
 
 type alias Commit =
   { id : Int
