@@ -15,9 +15,9 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 * [x] Support multiple files in elm-brunch
 * [x] assetsmanager makes the live reload run twice
-* [ ] follow up the elm-brunch discussion on what changes to make
-* [ ] Look into using [node-elm-compiler](https://github.com/rtfeldman/node-elm-compiler) in elm-brunch instead of finishing up my current pull request
-* [ ] Figure out why no app.js is available in heroku prod now... :(
+* [ ] follow up the [elm-brunch discussion](https://github.com/madsflensted/elm-brunch/pull/14) on what changes to make
+* [ ] Look into using [node-elm-compiler](https://github.com/rtfeldman/node-elm-compiler) in elm-brunch
+* [ ] Figure out why prod sometimes tries to use the non-digested app.js name
 
 ## Make code review fully featured
 
