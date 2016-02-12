@@ -10,4 +10,5 @@ type Action
   = NoOp
   | StartReview Int
   | AbandonReview Int
+  | ShowCommit Int
   | UpdatedCommit Commit

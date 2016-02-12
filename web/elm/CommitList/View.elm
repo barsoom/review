@@ -12,24 +12,24 @@ import CommitList.Model exposing(..)
 import CommitList.Action exposing(..)
 
 view address model =
-  ul [ class "commits-list" ] (List.map (lazyRenderCommit address) model.commits)
+  ul [ class "commits-list" ] (List.map (lazyRenderCommit address model) model.commits)
 
-lazyRenderCommit : Address Action -> Commit -> Html
-lazyRenderCommit address commit =
+lazyRenderCommit : Address Action -> Model -> Commit -> Html
+lazyRenderCommit address model commit =
   let
-    render = (renderCommit address)
+    render = (renderCommit address model)
   in
     -- TODO: figure out if this actually works, the Debug.log is called
     --       for each commit even if only one has changed
     lazy render commit
 
-renderCommit : Address Action -> Commit -> Html
-renderCommit address commit =
+renderCommit : Address Action -> Model -> Commit -> Html
+renderCommit address model commit =
   --let _ = Debug.log "commit" commit.id in
-  li [ id (commitId commit), commitClassList(commit) ] [
+  li [ id (commitId commit), (commitClassList model commit) ] [
     a [ class "block-link" ] [
-      div [ class "commit-wrapper" ] [
-        div [ class "commit-controls" ] [ (renderButton address commit) ]
+      div [ class "commit-wrapper", onClick address (ShowCommit commit.id)  ] [
+        div [ class "commit-controls" ] [ (renderButton address model commit) ]
       , img [ class "commit-avatar", src (avatarUrl commit) ] []
       , div [ class "commit-summary-and-details" ] [
           div [ class "commit-summary test-summary" ] [ text commit.summary ]
@@ -48,8 +48,8 @@ renderCommit address commit =
     ]
   ]
 
-renderButton : Address Action -> Commit -> Html
-renderButton address commit =
+renderButton : Address Action -> Model -> Commit -> Html
+renderButton address model commit =
   if commit.isBeingReviewed then -- todo should be isNew
     button [ class "small abandon-review test-button test-abandon-review", onClick address (AbandonReview commit.id) ] [
       i [ class "fa fa-eye-slash" ] [ text "Abandon review" ]
@@ -59,12 +59,13 @@ renderButton address commit =
       i [ class "fa fa-eye" ] [ text "Start review" ]
     ]
 
-commitClassList : Commit -> Attribute
-commitClassList commit =
+commitClassList : Model -> Commit -> Attribute
+commitClassList model commit =
   classList [
     ("commit", True)
   , ("is-being-reviewed", commit.isBeingReviewed)
   , ("is-reviewed", commit.isReviewed)
+  , ("your-last-clicked", model.lastClickedCommitId == commit.id)
   , ("test-is-reviewed", commit.isReviewed)
   , ("test-commit", True)
   ]

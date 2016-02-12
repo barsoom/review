@@ -14,4 +14,5 @@ type alias Commit =
 type alias Model =
   {
     commits : List Commit
+  , lastClickedCommitId : Int
   }

@@ -22,10 +22,15 @@ port updatedCommit : Signal Commit
 -- publishes events like [ "StartReview", "12" ]
 port outgoingCommands : Signal (List String)
 port outgoingCommands =
-  Signal.map (\action ->
-    action |> toString |> String.split(" ")
-  ) inbox.signal
+  inbox.signal
+  |> Signal.map (\action -> action |> toString |> String.split(" "))
+  |> Signal.filter (\event -> isOutgoing event) []
 
+isOutgoing event =
+  let
+     name = event |> List.head |> Maybe.withDefault ""
+  in
+    List.member name [ "StartReview", "AbandonReview" ]
 
 ---- All possible ways state can change ----
 
@@ -45,6 +50,9 @@ update action model =
     UpdatedCommit commit ->
       updateCommitById (\_ -> commit) commit.id model
 
+    ShowCommit id ->
+      { model | lastClickedCommitId = id }
+
 updateCommitById : (Commit -> Commit) -> Int -> Model -> Model
 updateCommitById callback id model =
   let
@@ -60,7 +68,7 @@ updateCommitById callback id model =
 ---- current state and action collection ----
 
 model =
-  let initialModel = { commits = initialCommits }
+  let initialModel = { commits = initialCommits, lastClickedCommitId = 0 }
   in Signal.foldp update initialModel actions
 
 actions : Signal Action
