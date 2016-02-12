@@ -13,14 +13,11 @@ import CommitList.Types exposing (..)
 view address model =
   ul [ class "commits-list" ] (List.map (lazyRenderCommit address model) model.commits)
 
+-- TODO: figure out if this actually works, the Debug.log is called
+--       for each commit even if only one has changed
 lazyRenderCommit : Address Action -> Model -> Commit -> Html
 lazyRenderCommit address model commit =
-  let
-    render = (renderCommit address model)
-  in
-    -- TODO: figure out if this actually works, the Debug.log is called
-    --       for each commit even if only one has changed
-    lazy render commit
+  lazy (renderCommit address model) commit
 
 renderCommit : Address Action -> Model -> Commit -> Html
 renderCommit address model commit =
