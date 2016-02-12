@@ -78,7 +78,7 @@ formattedTime timestamp =
 
 avatarUrl : Commit -> String
 avatarUrl commit =
- "https://secure.gravatar.com/avatar/" ++ commit.gravatarHash ++ "?size=40&amp;rating=x&amp;default=mm"
+  "https://secure.gravatar.com/avatar/" ++ commit.gravatarHash ++ "?size=40&amp;rating=x&amp;default=mm"
 
 commitId : Commit -> String
 commitId commit =
