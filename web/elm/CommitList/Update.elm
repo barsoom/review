@@ -14,8 +14,8 @@ update action model =
     AbandonReview id ->
       updateCommitById (\commit -> { commit | isBeingReviewed = False }) id model
 
-    -- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
     UpdatedCommit commit ->
+      -- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
       updateCommitById (\_ -> commit) commit.id model
 
     ShowCommit id ->
@@ -31,4 +31,3 @@ updateCommitById callback id model =
         commit
   in
      { model | commits = (List.map updateCommit model.commits)}
-
