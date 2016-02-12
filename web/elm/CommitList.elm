@@ -5,6 +5,7 @@ import String
 
 import CommitList.Types exposing (..)
 import CommitList.View exposing (view)
+import CommitList.Update exposing (update)
 
 main : Signal Html
 main =
@@ -12,7 +13,6 @@ main =
 
 
 ---- API to the outside world (javascript/server) ----
-
 
 --- receives commits to display at the start
 port initialCommits : List Commit
@@ -34,42 +34,7 @@ isOutgoing event =
     List.member name [ "StartReview", "AbandonReview" ]
 
 
----- All possible ways state can change ----
-
-
-update : Action -> Model -> Model
-update action model =
-  case action of
-    NoOp ->
-      model
-
-    StartReview id ->
-      updateCommitById (\commit -> { commit | isBeingReviewed = True }) id model
-
-    AbandonReview id ->
-      updateCommitById (\commit -> { commit | isBeingReviewed = False }) id model
-
-    -- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
-    UpdatedCommit commit ->
-      updateCommitById (\_ -> commit) commit.id model
-
-    ShowCommit id ->
-      { model | lastClickedCommitId = id }
-
-updateCommitById : (Commit -> Commit) -> Int -> Model -> Model
-updateCommitById callback id model =
-  let
-    updateCommit commit =
-      if commit.id == id then
-        (callback commit)
-      else
-        commit
-  in
-     { model | commits = (List.map updateCommit model.commits)}
-
-
 ---- current state and action collection ----
-
 
 model =
   let initialModel = { commits = initialCommits, lastClickedCommitId = 0 }
