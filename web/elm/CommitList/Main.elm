@@ -35,6 +35,10 @@ eventName event =
 
 ---- current state and action collection ----
 
+main : Signal Html
+main =
+  Signal.map (view inbox.address) model
+
 model : Signal Model
 model =
   Signal.foldp update initialModel actions
@@ -58,7 +62,3 @@ updatedCommitSignal =
 inbox : Signal.Mailbox Action
 inbox =
   Signal.mailbox NoOp
-
-main : Signal Html
-main =
-  Signal.map (view inbox.address) model
