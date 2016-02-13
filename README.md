@@ -6,9 +6,12 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 ## Make code review possible
 
+* [ ] Implement completing a review
+* [ ] Implement undoing a review
 * [ ] Show commits you can review based on who you are
-* [ ] Send entire state when you re-connect, show that this works as it's kind of a killer feature for this version
-  * [ ] Does re-connect solve if you're offline for 3 seconds while an update is sent out?
+* [ ] Store payload from Github commit
+  * [ ] In remit: store "repository" outside of payload so that the commit payload can be stored directly into the db?
+  * [ ] Does created\_at and updated\_at get updated by ecto?
 * [ ] Consider if temporary state-sync could be setup so both apps could be used at once for a while
 
 ## Make the tools better
@@ -20,27 +23,27 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [ ] follow up the [elm-brunch discussion](https://github.com/madsflensted/elm-brunch/pull/14) on what changes to make
 * [ ] Look into using [node-elm-compiler](https://github.com/rtfeldman/node-elm-compiler) in elm-brunch
 * [ ] Figure out why prod sometimes tries to use the non-digested app.js name
+* [ ] elm-brunch: add custom path to elm binary so we can remove `source web/elm/paths.env` when running `mix phoenix.server`
+
+## More reliable state sync
+
+* [ ] Send entire state when you re-connect, show that this works as it's kind of a killer feature for this version
+  * [ ] Does re-connect solve if you're offline for 3 seconds while an update is sent out?
 
 ## Make code review fully featured
 
-* [ ] Add any more behavior from the angular code
-
-## Add github hook for commits
-
-* [ ] Store "repository" outside of payload so that they commit payload can be stored directly into the db?
+* [ ] Add any missing behavior from the angular code
 
 ## Later
 
+* [x] Convert config to coffee script for less noisy config
+* [x] Add a install/update dependencies script
+* [x] Set up instructions from scratch, bootstrapping scripts, etc
 * [ ] Use shasum checking for downloads in CI
 * [ ] Figure out how to test the auth\_key check in UserSocket
-* [ ] Add a install/update dependencies script
-* [ ] Set up instructions from scratch, bootstrapping scripts, etc
-  * [ ] Rewrite instructions in more of a step-by-step start phoenix, start phantom, etc.
-    - Possibly make phantomjs part of the phoenix.server in dev.
-* [x] Convert config to coffee script for less noisy config
-* [ ] Does created\_at and updated\_at get updated by ecto?
-* [ ] Pull request to elm-brunch to add custom path to elm binary so we can remove `source web/elm/paths.env` when running `mix phoenix.server`
+* [ ] Possibly make phantomjs part of the phoenix.server in dev
 * [ ] Cache the last build step
+* [ ] Extract a mix package for `render_elm` and maybe a npm for the ujs
 
 # Development
 
