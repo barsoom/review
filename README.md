@@ -53,10 +53,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 ## Loading data for dev
 
-    heroku pg:backups capture -a your-remit
-    curl --output /tmp/data.dump `heroku pg:backups public-url -a your-remit`
-    mix ecto.create
-    pg_restore --no-acl --no-owner -d exremit_dev /tmp/data.dump
+    script/download_and_import_database your-exremit-or-remit-app-name
 
 ## Running tests
 
@@ -68,19 +65,15 @@ Run tests:
 
     mix test
 
-## Troubleshooting
-
-If you have problems with the dependencies, elixir, javascript or elm, try running `script/clean` and then `script/bootstrap` to reinstall all of it.
-
 ## Installing an elm package or running other elm tools
 
     cd web/elm
     source paths.env
     elm package install name
 
-## Load data dump from regular remit
+## Troubleshooting
 
-    script/download_and_import_database your-exremit-or-remit-app-name
+If you have problems with the dependencies, elixir, javascript or elm, try running `script/clean` and then `script/bootstrap` to reinstall all of it.
 
 ## Commands used to deploy to heroku
 
