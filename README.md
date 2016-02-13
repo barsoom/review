@@ -45,6 +45,13 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [ ] Cache the last build step
 * [ ] Extract a mix package for `render_elm` and maybe a npm for the ujs
 
+## Collect info on how to work with Phoenix and Elm in one place
+
+There is already blog posts, but haven't found anything that describes a development enviornment that works as well as something like react / rails. Might write one based on this.
+
+* [ ] Write down ideas for a blog post or gist or something
+* [ ] Finish up tools (elm-phoenix, elm-brunch, elm-phoenix-ujs)
+
 # Development
 
 ## Installing or updating dependencies
