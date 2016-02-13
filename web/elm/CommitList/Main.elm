@@ -10,7 +10,7 @@ import String
 
 ---- API to the outside world (javascript/server) ----
 
---- receives commits to display at the start
+--- receives initial data
 port initialCommits : List Commit
 port environment : String
 
