@@ -15,11 +15,11 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 * [x] Support multiple files in elm-brunch
 * [x] assetsmanager makes the live reload run twice
+* [x] Explore if a view helper like `<%= render_elm "CommitList", environment: Mix.env, initialCommits: [] %>` is pracical, how to expose a way to handle outgoing commands? Maybe something like `window.elmApps.CommitList.ports.subscribe`?
+  - This type of helper does make react feel very easy to use in our rails apps. Like rendering a dynamic partial.
 * [ ] follow up the [elm-brunch discussion](https://github.com/madsflensted/elm-brunch/pull/14) on what changes to make
 * [ ] Look into using [node-elm-compiler](https://github.com/rtfeldman/node-elm-compiler) in elm-brunch
 * [ ] Figure out why prod sometimes tries to use the non-digested app.js name
-* [x] Explore if a view helper like `<%= render_elm "CommitList", environment: Mix.env, initialCommits: [] %>` is pracical, how to expose a way to handle outgoing commands? Maybe something like `window.elmApps.CommitList.ports.subscribe`?
-  - This type of helper does make react feel very easy to use in our rails apps. Like rendering a dynamic partial.
 
 ## Make code review fully featured
 
