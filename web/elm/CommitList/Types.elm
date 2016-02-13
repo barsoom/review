@@ -24,4 +24,5 @@ type alias Model =
   {
     commits : List Commit
   , lastClickedCommitId : Int
+  , environment : String
   }

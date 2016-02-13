@@ -14,7 +14,7 @@
     </script>
   </head>
 
-  <body>
+  <body data-environment="<%= Mix.env %>">
     <div class="wrapper">
       <div class="top-nav">
       </div>

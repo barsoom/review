@@ -12,6 +12,7 @@ import String
 
 --- receives commits to display at the start
 port initialCommits : List Commit
+port environment : String
 
 -- receives updated commit data
 port updatedCommit : Signal Commit
@@ -43,6 +44,7 @@ initialModel =
   {
     commits = initialCommits
   , lastClickedCommitId = 0
+  , environment = environment
   }
 
 actions : Signal Action

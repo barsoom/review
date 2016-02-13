@@ -21,6 +21,7 @@ import "phoenix_html"
 import {Socket} from "phoenix"
 
 var commitListDiv = document.getElementById("js-commit-list")
+var environment = document.body.dataset.environment;
 
 if(commitListDiv) {
   // Set up websocket
@@ -31,7 +32,7 @@ if(commitListDiv) {
 
   // Start ELM app
   var commits = JSON.parse(commitListDiv.dataset.commits);
-  var app = Elm.embed(Elm.CommitList, commitListDiv, { initialCommits: commits, updatedCommit: commits[0] });
+  var app = Elm.embed(Elm.CommitList, commitListDiv, { initialCommits: commits, updatedCommit: commits[0], environment: environment });
 
   // Connect ELM app to websockets
   channel.on("updated_commit", (commit) => app.ports.updatedCommit.send(commit))

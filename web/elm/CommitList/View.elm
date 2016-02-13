@@ -23,7 +23,7 @@ renderCommit : Address Action -> Model -> Commit -> Html
 renderCommit address model commit =
   --let _ = Debug.log "commit" commit.id in
   li [ id (commitId commit), (commitClassList model commit) ] [
-    a [ class "block-link" ] [
+    a [ class "block-link", href (commitUrl model commit) ] [
       div [ class "commit-wrapper", onClick address (ShowCommit commit.id)  ] [
         div [ class "commit-controls" ] [ (renderButton address model commit) ]
       , img [ class "commit-avatar", src (avatarUrl commit) ] []
@@ -43,6 +43,10 @@ renderCommit address model commit =
       ]
     ]
   ]
+
+-- don't link to github in tests since that makes testing difficult
+commitUrl model commit =
+  if model.environment /= "test" then commit.url else "#"
 
 renderButton : Address Action -> Model -> Commit -> Html
 renderButton address model commit =
