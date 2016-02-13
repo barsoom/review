@@ -51,6 +51,7 @@ There is already blog posts, but haven't found anything that describes a develop
 
 * [ ] Write down ideas for a blog post or gist or something
 * [ ] Finish up tools (elm-phoenix, elm-brunch, elm-phoenix-ujs)
+* [ ] Figure out a good way to do unit testing
 
 # Development
 
