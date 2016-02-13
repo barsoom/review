@@ -11,13 +11,15 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   * [ ] Does re-connect solve if you're offline for 3 seconds while an update is sent out?
 * [ ] Consider if temporary state-sync could be setup so both apps could be used at once for a while
 
-## Make the tools reliable
+## Make the tools better
 
 * [x] Support multiple files in elm-brunch
 * [x] assetsmanager makes the live reload run twice
 * [ ] follow up the [elm-brunch discussion](https://github.com/madsflensted/elm-brunch/pull/14) on what changes to make
 * [ ] Look into using [node-elm-compiler](https://github.com/rtfeldman/node-elm-compiler) in elm-brunch
 * [ ] Figure out why prod sometimes tries to use the non-digested app.js name
+* [ ] Explore if a view helper like `<%= render_elm "CommitList", environment: Mix.env, initialCommits: [] %>` is pracical, how to expose a way to handle outgoing commands? Maybe something like `window.elmApps.CommitList.ports.subscribe`?
+  - This type of helper does make react feel very easy to use in our rails apps. Like rendering a dynamic partial.
 
 ## Make code review fully featured
 
