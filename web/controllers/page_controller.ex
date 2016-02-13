@@ -13,6 +13,10 @@ defmodule Exremit.PageController do
     render conn, "commits.html", commits_data: commits_data
   end
 
+  def comments(conn, _params) do
+    render conn, "comments.html"
+  end
+
   defp commits_data do
     Exremit.Repo.commits
     |> Ecto.Query.limit(@max_records)

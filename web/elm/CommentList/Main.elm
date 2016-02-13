@@ -1,4 +1,6 @@
+module CommentList where
+
 import Html exposing (..)
 
 main =
-  div [] []
+  div [] [ text "TODO: Add comment listing" ]

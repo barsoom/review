@@ -18,6 +18,7 @@ defmodule Exremit.Router do
 
     get "/", PageController, :index
     get "/commits", PageController, :commits
+    get "/comments", PageController, :comments
   end
 
   # Other scopes may use custom stacks.
