@@ -20,21 +20,28 @@ import "phoenix_html"
 
 import {Socket} from "phoenix"
 
-var commitListDiv = document.getElementById("js-commit-list")
-var environment = document.body.dataset.environment;
+// Generic elm app code, works with render_elm in PageView
+window.elmApps = {};
+var elmAppElements = document.getElementsByClassName("js-elm-app");
 
-if(commitListDiv) {
+for(var i = 0; i < elmAppElements.length; i += 1) {
+  var element = elmAppElements[i];
+  var appName = element.dataset.appName;
+  var options = JSON.parse(atob(element.dataset.options));
+
+  window.elmApps[appName] = Elm.embed(Elm[appName], element, options);
+}
+
+// Specific code for CommitList
+if(elmApps.CommitList) {
   // Set up websocket
   let socket = new Socket("/socket", { params: { auth_key: window.authKey } })
   socket.connect()
   let channel = socket.channel("commits", {})
   channel.join()
 
-  // Start ELM app
-  var commits = JSON.parse(commitListDiv.dataset.commits);
-  var app = Elm.embed(Elm.CommitList, commitListDiv, { initialCommits: commits, updatedCommit: commits[0], environment: environment });
-
-  // Connect ELM app to websockets
+  // Connect Elm app to websockets
+  var app = elmApps.CommitList;
   channel.on("updated_commit", (commit) => app.ports.updatedCommit.send(commit))
 
   app.ports.outgoingCommands.subscribe((event) => {
@@ -43,4 +50,3 @@ if(commitListDiv) {
     channel.push(action, { id: commitId })
   })
 }
-

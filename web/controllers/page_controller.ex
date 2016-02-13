@@ -10,14 +10,13 @@ defmodule Exremit.PageController do
   end
 
   def commits(conn, _params) do
-    render conn, "commits.html", commits_json: commits_json
+    render conn, "commits.html", commits_data: commits_data
   end
 
-  defp commits_json do
+  defp commits_data do
     Exremit.Repo.commits
     |> Ecto.Query.limit(@max_records)
     |> Exremit.Repo.all
     |> Exremit.CommitSerializer.serialize
-    |> Poison.encode!
   end
 end
