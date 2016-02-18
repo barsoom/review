@@ -25,7 +25,7 @@ renderCommit address model commit =
   li [ id (commitId commit), (commitClassList model commit) ] [
     a [ class "block-link", href (commitUrl model commit) ] [
       div [ class "commit-wrapper", onClick address (ShowCommit commit.id)  ] [
-        div [ class "commit-controls" ] [ (renderButton address model commit) ]
+        div [ class "commit-controls" ] (renderButtons address model commit)
       , img [ class "commit-avatar", src (avatarUrl commit) ] []
       , div [ class "commit-summary-and-details" ] [
           div [ class "commit-summary test-summary" ] [ text commit.summary ]
@@ -46,17 +46,27 @@ renderCommit address model commit =
 
 -- don't link to github in tests since that makes testing difficult
 commitUrl model commit =
-  if model.environment /= "test" then commit.url else "#"
+  "#"
+  --if model.environment /= "test" then commit.url else "#"
 
-renderButton : Address Action -> Model -> Commit -> Html
-renderButton address model commit =
-  if commit.isBeingReviewed then -- todo should be isNew
-    button [ class "small abandon-review test-button test-abandon-review", onClick address (AbandonReview commit.id) ] [
-      i [ class "fa fa-eye-slash" ] [ text "Abandon review" ]
+renderButtons : Address Action -> Model -> Commit -> List Html
+renderButtons address model commit =
+  if commit.isReviewed then
+    [ ] -- todo
+  else if commit.isBeingReviewed then -- todo should be isNew
+    [
+      button [ class "small abandon-review test-button test-abandon-review", onClick address (AbandonReview commit.id) ] [
+        i [ class "fa fa-eye-slash" ] [ text "Abandon review" ]
+      ]
+    , button [ class "small mark-as-reviewed test-button", onClick address (MarkAsReviewed commit.id) ] [
+        i [ class "fa fa-eye-slash" ] [ text "Mark as reviewed" ]
+      ]
     ]
   else
-    button [ class "small start-review test-button test-start-review", onClick address (StartReview commit.id) ] [
-      i [ class "fa fa-eye" ] [ text "Start review" ]
+    [
+      button [ class "small start-review test-button test-start-review", onClick address (StartReview commit.id) ] [
+        i [ class "fa fa-eye" ] [ text "Start review" ]
+      ]
     ]
 
 commitClassList : Model -> Commit -> Attribute

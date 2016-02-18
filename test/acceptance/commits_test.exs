@@ -71,6 +71,13 @@ defmodule Exremit.CommitsTest do
 
     visitor "charles", fn ->
       commit_looks_new
+      click_button "Start review"
+      click_button "Mark as reviewed"
+      commit_looks_reviewed
+    end
+
+    visitor "ada", fn ->
+      commit_looks_reviewed
     end
   end
 
@@ -86,16 +93,33 @@ defmodule Exremit.CommitsTest do
 
   defp commit_looks_pending do
     assert button_class =~ "test-abandon-review"
+    assert button_classes == [ "test-abandon-review" ]
   end
 
-  def button_class do
-    find_element(:css, ".test-button") |> attribute_value("class")
+  defp commit_looks_reviewed do
+    #assert commit_has_class?("test-is-reviewed")
+    assert button_classes == [ "test-is-reviewed" ]
+  end
+
+  defp commit_has_class?(name) do
+    assert button_classes =~ name
+    #button_classes |> Enum.member?(name)
+  end
+
+  def button_class_string do
+    button_classes |> Enum.join(" ")
+  end
+
+  def button_classes do
+    find_all_elements(:css, ".test-button")
+    |> Enum.map(fn (element) -> attribute_value(element, "class") end)
+    |> Enum.flat_map(&String.split/1)
   end
 
   defp click_button(name) do
-    button = find_element(:css, ".test-button")
-    assert inner_text(button) == name
-    button |> click
+    find_all_elements(:css, ".test-button")
+    |> Enum.find(fn (element) -> inner_text(element) == name end)
+    |> click
   end
 
   defp read_status(commit) do
