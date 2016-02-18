@@ -15,6 +15,7 @@ type alias Commit =
   , repository : String
   , authorName : String
   , timestamp : String
+  , isNew : Bool
   , isReviewed : Bool
   , isBeingReviewed : Bool
   , url : String

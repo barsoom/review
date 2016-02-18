@@ -51,11 +51,11 @@ commitUrl model commit =
 renderButton : Address Action -> Model -> Commit -> Html
 renderButton address model commit =
   if commit.isBeingReviewed then -- todo should be isNew
-    button [ class "small abandon-review test-button test-abandon-review", onClick address (AbandonReview commit.id) ] [
+    button [ class "small abandon-review test-button", onClick address (AbandonReview commit.id) ] [
       i [ class "fa fa-eye-slash" ] [ text "Abandon review" ]
     ]
   else
-    button [ class "small start-review test-button test-start-review", onClick address (StartReview commit.id) ] [
+    button [ class "small start-review test-button", onClick address (StartReview commit.id) ] [
       i [ class "fa fa-eye" ] [ text "Start review" ]
     ]
 
@@ -63,9 +63,14 @@ commitClassList : Model -> Commit -> Attribute
 commitClassList model commit =
   classList [
     ("commit", True)
+
+  , ("your-last-clicked", model.lastClickedCommitId == commit.id)
+
   , ("is-being-reviewed", commit.isBeingReviewed)
   , ("is-reviewed", commit.isReviewed)
-  , ("your-last-clicked", model.lastClickedCommitId == commit.id)
+
+  , ("test-is-new", commit.isNew)
+  , ("test-is-being-reviewed", commit.isBeingReviewed)
   , ("test-is-reviewed", commit.isReviewed)
   , ("test-commit", True)
   ]

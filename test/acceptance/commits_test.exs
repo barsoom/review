@@ -76,20 +76,24 @@ defmodule Exremit.CommitsTest do
 
   defp visitor(name, callback), do: in_browser_session name, callback
 
-  defp can_see_commit do
-    find_element(:css, ".test-commit")
-  end
+  defp can_see_commit, do: commit_element
 
   defp commit_looks_new do
-    assert "test-start-review" in button_classes
+    assert "test-is-new" in commit_classes
   end
 
   defp commit_looks_pending do
-    assert "test-abandon-review" in button_classes
+    assert "test-is-being-reviewed" in commit_classes
   end
 
   def button_classes do
     find_element(:css, ".test-button")
+    |> attribute_value("class")
+    |> String.split
+  end
+
+  def commit_classes do
+    commit_element
     |> attribute_value("class")
     |> String.split
   end
@@ -99,6 +103,8 @@ defmodule Exremit.CommitsTest do
     assert inner_text(button) == name
     button |> click
   end
+
+  defp commit_element, do: find_element(:css, ".test-commit")
 
   defp read_status(commit) do
     element = find_element(:id, "commit-#{commit.id}")

@@ -12,7 +12,7 @@ update action model =
       updateCommitById (\commit -> { commit | isBeingReviewed = True }) id model
 
     AbandonReview id ->
-      updateCommitById (\commit -> { commit | isBeingReviewed = False }) id model
+      updateCommitById (\commit -> { commit | isBeingReviewed = False, isNew = True }) id model
 
     UpdatedCommit commit ->
       -- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
