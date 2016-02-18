@@ -15,3 +15,6 @@ update action model =
     UpdateName name ->
       let settings = model.settings
       in {model | settings = {settings | name = name}}
+
+    UpdateSettings settings ->
+      {model | settings = settings}

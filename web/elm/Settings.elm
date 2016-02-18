@@ -7,8 +7,10 @@ import Settings.Update exposing (update)
 
 ---- API to the outside world (javascript/server) ----
 
-port updatedSettings : Signal Settings
-port updatedSettings =
+port settings : Signal Settings
+
+port settingsChange : Signal Settings
+port settingsChange =
   model |> Signal.map .settings
 
 ---- current state and action collection ----
@@ -32,7 +34,7 @@ initialModel =
 
 actions : Signal Action
 actions =
-  inbox.signal
+  Signal.merge inbox.signal (Signal.map UpdateSettings settings)
 
 inbox : Signal.Mailbox Action
 inbox =

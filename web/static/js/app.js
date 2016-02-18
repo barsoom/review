@@ -55,7 +55,10 @@ if(elmApps.CommitList) {
 if(elmApps.Settings) {
   var app = elmApps.Settings;
 
-  app.ports.updatedSettings.subscribe((settings) => {
+  // wip
+  app.ports.settings.send({ name: "", email: "" });
+
+  app.ports.settingsChange.subscribe((settings) => {
     console.log(settings)
   })
 }

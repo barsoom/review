@@ -6,6 +6,7 @@ type Action
   = NoOp
   | UpdateEmail String
   | UpdateName String
+  | UpdateSettings Settings
 
 type alias Model = {
     settings: Settings
