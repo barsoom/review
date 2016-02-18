@@ -8,6 +8,7 @@ import Settings.Update exposing (update)
 ---- API to the outside world (javascript/server) ----
 
 port settings : Signal Settings
+port initialized : Signal Bool
 
 port settingsChange : Signal Settings
 port settingsChange =
@@ -29,12 +30,17 @@ initialModel =
       email = ""
     , name = ""
     }
+  , initialized = False
   , exampleAuthor = "Charles Babbage"
   }
 
 actions : Signal Action
 actions =
-  Signal.merge inbox.signal (Signal.map UpdateSettings settings)
+  Signal.mergeMany [
+    inbox.signal
+  , (Signal.map UpdateSettings settings)
+  , (Signal.map Initialized initialized)
+  ]
 
 inbox : Signal.Mailbox Action
 inbox =

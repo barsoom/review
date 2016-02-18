@@ -7,10 +7,12 @@ type Action
   | UpdateEmail String
   | UpdateName String
   | UpdateSettings Settings
+  | Initialized Bool
 
 type alias Model = {
     settings: Settings
   , exampleAuthor : String
+  , initialized : Bool
   }
 
 type alias Settings = {

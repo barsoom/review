@@ -11,35 +11,38 @@ import String
 import Settings.Types exposing (..)
 
 view address model =
-  div [ class "settings-wrapper" ] [
-    form [] [
-      -- type="email" causes "bouncing" of .please-provide-details
-      -- because "foo@bar." is not considered a real value.
-      textField {
-        id = "settings-email"
-      , name = "email"
-      , label = "Your email:"
-      , value = model.settings.email
-      , onInput = (onInput address UpdateEmail)
-    }
-    , emailHelpText
+  if not model.initialized then
+    div [] []
+  else
+    div [ class "settings-wrapper" ] [
+      form [] [
+        -- type="email" causes "bouncing" of .please-provide-details
+        -- because "foo@bar." is not considered a real value.
+        textField {
+          id = "settings-email"
+        , name = "email"
+        , label = "Your email:"
+        , value = model.settings.email
+        , onInput = (onInput address UpdateEmail)
+      }
+      , emailHelpText
 
-    , textField {
-      id = "settings-name"
-    , name = "name"
-    , label = "Your name:"
-    , value = model.settings.name
-    , onInput = (onInput address UpdateName)
-    }
-  ]
+      , textField {
+        id = "settings-name"
+      , name = "name"
+      , label = "Your name:"
+      , value = model.settings.name
+      , onInput = (onInput address UpdateName)
+      }
+    ]
 
-  , helpText [
-      p [ innerHtml "Determines <em>your</em> commits and comments by substring." ] []
-    , p [] [
-        span [ class "test-usage-explanation" ] [ text (usageExample model) ]
+    , helpText [
+        p [ innerHtml "Determines <em>your</em> commits and comments by substring." ] []
+      , p [] [
+          span [ class "test-usage-explanation" ] [ text (usageExample model) ]
+        ]
       ]
     ]
-  ]
 
 -- borrowed from https://online.pragmaticstudio.com/courses/elm/steps/36
 onInput : Address a -> (String -> a) -> Attribute

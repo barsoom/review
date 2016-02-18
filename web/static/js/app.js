@@ -61,4 +61,8 @@ if(elmApps.Settings) {
   app.ports.settingsChange.subscribe((settings) => {
     Cookies.set("settings", JSON.stringify(settings))
   })
+
+  // We don't show anything until we're fully initialized to avoid
+  // a flicker of the settings page without any loaded settings.
+  app.ports.initialized.send(true);
 }

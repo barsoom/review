@@ -8,7 +8,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 * [x] Implement completing a review
 * [x] Implement undoing a review
-* [ ] Add settings dialog to save the reviewer email and name, probably in a cookie
+* [x] Add settings dialog to save the reviewer email and name, probably in a cookie
 * [ ] Show commits you can review based on who you are
 * [ ] Show who reviewed what based on email, and so on
 * [ ] Store payload from Github commit
@@ -50,6 +50,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [ ] Possibly make phantomjs part of the phoenix.server in dev
 * [ ] Cache the last build step
 * [ ] Extract a mix package for `render_elm` and maybe a npm for the ujs
+* [ ] Handle "initialized" cleaner in settings, maybe use a elm cookie lib?
 
 ## Collect info on how to work with Phoenix and Elm in one place
 

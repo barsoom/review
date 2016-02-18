@@ -18,3 +18,6 @@ update action model =
 
     UpdateSettings settings ->
       {model | settings = settings}
+
+    Initialized value ->
+      {model | initialized = value}
