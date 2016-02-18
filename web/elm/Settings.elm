@@ -4,11 +4,9 @@ import Html exposing (div, span, form, p, label, text, input, Html)
 import Html.Attributes exposing (class, for, id, value, property, name)
 import String.Interpolate exposing (interpolate)
 import Json.Encode
+import Signal exposing (Address)
 
-main =
-  render { email = "", name = "", exampleAuthor = "Charles Babbage" }
-
-render model =
+view address model =
   div [ class "settings-wrapper" ] [
     form [] [
       -- type="email" causes "bouncing" of .please-provide-details
@@ -64,3 +62,39 @@ type alias Field = {
   , name : String
   , value : String
   }
+
+
+-- update --
+
+update : Action -> Model -> Model
+update action model =
+  model
+
+---- current state and action collection ----
+
+type Action
+  = NoOp
+
+main : Signal Html
+main =
+  Signal.map (view inbox.address) model
+
+model : Signal Model
+model =
+  Signal.foldp update initialModel actions
+
+initialModel : Model
+initialModel =
+  {
+    email = ""
+  , name = ""
+  , exampleAuthor = "Charles Babbage"
+  }
+
+actions : Signal Action
+actions =
+  inbox.signal
+
+inbox : Signal.Mailbox Action
+inbox =
+  Signal.mailbox NoOp
