@@ -110,13 +110,21 @@ defmodule Exremit.CommitsTest do
   end
 
   defp click_button(name) do
-    find_all_elements(:css, ".test-button")
-    |> Enum.find(fn (element) -> inner_text(element) == name end)
-    |> click_button_element(name)
+    find_button(name) |> click
   end
 
-  defp click_button_element(nil, name), do: raise "Could not find any button named \"#{name}\""
-  defp click_button_element(element, name), do: click(element)
+  def find_button(name, attempt \\ 0) do
+    find_all_elements(:css, ".test-button")
+    |> Enum.find(fn (element) -> inner_text(element) == name end)
+    |> retry_find_button(name, attempt)
+  end
+
+  defp retry_find_button(nil, name, 5), do: raise "Could not find any button named \"#{name}\""
+  defp retry_find_button(nil, name, attempt) do
+    :timer.sleep 10
+    find_button(name, attempt + 1)
+  end
+  defp retry_find_button(element, _name, _attemp), do: element
 
   defp commit_element, do: find_element(:css, ".test-commit")
 
