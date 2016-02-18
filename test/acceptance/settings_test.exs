@@ -15,11 +15,9 @@ defmodule Exremit.SettingsTest do
     :timer.sleep 50
     assert usage_explaination == "A commit authored e.g. by \"Joe\" or by \"Ada Lovelace and Joe\" will be considered yours."
 
-    # WIP:
-
     # Is still around when the page reloads
-    #navigate_to_settings_page
-    #assert usage_explaination == "A commit authored e.g. by \"Joe\" or by \"Ada Lovelace and Joe\" will be considered yours."
+    navigate_to_settings_page
+    assert usage_explaination == "A commit authored e.g. by \"Joe\" or by \"Ada Lovelace and Joe\" will be considered yours."
   end
 
   defp usage_explaination, do: find_element(:css, ".test-usage-explanation") |> inner_text

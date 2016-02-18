@@ -56,9 +56,10 @@ if(elmApps.Settings) {
   var app = elmApps.Settings;
 
   // wip
-  app.ports.settings.send({ name: "", email: "" });
+  var savedSettingsJson = Cookies.get("settings");
+  if(savedSettingsJson) { app.ports.settings.send(JSON.parse(savedSettingsJson)) }
 
   app.ports.settingsChange.subscribe((settings) => {
-    console.log(settings)
+    Cookies.set("settings", JSON.stringify(settings))
   })
 }
