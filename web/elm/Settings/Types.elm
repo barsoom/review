@@ -1,4 +1,4 @@
-module Settings.Types (Action (..), Model, Field) where
+module Settings.Types (Action (..), Model, Field, Settings) where
 
 import Html exposing (Attribute)
 

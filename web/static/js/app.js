@@ -50,3 +50,12 @@ if(elmApps.CommitList) {
     channel.push(action, { id: commitId })
   })
 }
+
+// Specific code for Settings
+if(elmApps.Settings) {
+  var app = elmApps.Settings;
+
+  app.ports.updatedSettings.subscribe((settings) => {
+    console.log(settings)
+  })
+}

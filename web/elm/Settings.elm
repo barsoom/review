@@ -7,7 +7,9 @@ import Settings.Update exposing (update)
 
 ---- API to the outside world (javascript/server) ----
 
--- none so far
+port updatedSettings : Signal Settings
+port updatedSettings =
+  model |> Signal.map .settings
 
 ---- current state and action collection ----
 
