@@ -50,9 +50,16 @@ commitUrl model commit =
 
 renderButtons : Address Action -> Model -> Commit -> List Html
 renderButtons address model commit =
-  if commit.isReviewed then
-    [ ] -- todo
-  else if commit.isBeingReviewed then -- todo should be isNew
+  if commit.isNew then
+    [
+      commitButton address {
+        name = "Start review"
+      , class = "start-review"
+      , iconClass = "fa-eye"
+      , action = (StartReview commit.id)
+      }
+    ]
+  else if commit.isBeingReviewed then
     [
       commitButton address {
         name = "Abandon review"
@@ -67,15 +74,11 @@ renderButtons address model commit =
       , action = (MarkAsReviewed commit.id)
       }
     ]
+  else if commit.isReviewed then
+    []
   else
-    [
-      commitButton address {
-        name = "Start review"
-      , class = "start-review"
-      , iconClass = "fa-eye"
-      , action = (StartReview commit.id)
-      }
-    ]
+    -- This should never happen
+    []
 
 commitButton : Address Action -> CommitButton -> Html
 commitButton address commitButton =
