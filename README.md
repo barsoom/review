@@ -6,11 +6,11 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 ## Make code review possible
 
-* [ ] Simplify / Usability: Explore the UI-feel when not doing any local updates at all, just displaying the server updates
-  - [ ] Have a offline-label displayed by js (or set as elm state?) on send-to-server-errors, and hidden on join?
-* [ ] Implement completing a review
-* [ ] Implement undoing a review
+* [x] Implement completing a review
+* [x] Implement undoing a review
+* [ ] Add settings dialog to save the reviewer email and name, probably in a cookie
 * [ ] Show commits you can review based on who you are
+* [ ] Show who reviewed what based on email, and so on
 * [ ] Store payload from Github commit
   * [ ] In remit: store "repository" outside of payload so that the commit payload can be stored directly into the db?
   * [ ] Does created\_at and updated\_at get updated by ecto?
@@ -29,6 +29,8 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 ## More reliable state sync
 
+* [ ] Simplify / Usability: Explore the UI-feel when not doing any local updates at all, just displaying the server updates
+  - [ ] Have a offline-label displayed by js (or set as elm state?) on send-to-server-errors, and hidden on join?
 * [ ] Send entire state when you re-connect, show that this works as it's kind of a killer feature for this version
   * [ ] Does re-connect solve if you're offline for 3 seconds while an update is sent out?
     * [ ] If so: Keep a list of all actions that have happened in server memory, with an incrementing id?
