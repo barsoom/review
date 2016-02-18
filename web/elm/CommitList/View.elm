@@ -54,19 +54,34 @@ renderButtons address model commit =
     [ ] -- todo
   else if commit.isBeingReviewed then -- todo should be isNew
     [
-      button [ class "small abandon-review test-button", onClick address (AbandonReview commit.id) ] [
-        i [ class "fa fa-eye-slash" ] [ text "Abandon review" ]
-      ]
-    , button [ class "small mark-as-reviewed test-button", onClick address (MarkAsReviewed commit.id) ] [
-        i [ class "fa fa-eye-slash" ] [ text "Mark as reviewed" ]
-      ]
+      commitButton address {
+        name = "Abandon review"
+      , class = "abandon-review"
+      , iconClass = "fa-eye-slash"
+      , action = (AbandonReview commit.id)
+      }
+    , commitButton address {
+        name = "Mark as reviewed"
+      , class = "mark-as-reviewed"
+      , iconClass = "fa-eye-slash"
+      , action = (MarkAsReviewed commit.id)
+      }
     ]
   else
     [
-      button [ class "small start-review test-button", onClick address (StartReview commit.id) ] [
-        i [ class "fa fa-eye" ] [ text "Start review" ]
-      ]
+      commitButton address {
+        name = "Start review"
+      , class = "start-review"
+      , iconClass = "fa-eye"
+      , action = (StartReview commit.id)
+      }
     ]
+
+commitButton : Address Action -> CommitButton -> Html
+commitButton address commitButton =
+  button [ class ("small test-button" ++ " " ++ commitButton.class), onClick address commitButton.action ] [
+    i [ class ("fa" ++ " " ++ commitButton.iconClass) ] [ text commitButton.name ]
+  ]
 
 commitClassList : Model -> Commit -> Attribute
 commitClassList model commit =

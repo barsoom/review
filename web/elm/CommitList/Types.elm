@@ -1,4 +1,4 @@
-module CommitList.Types (Action (..), Commit, Model) where
+module CommitList.Types (Action (..), Commit, Model, CommitButton) where
 
 type Action
   = NoOp
@@ -7,6 +7,14 @@ type Action
   | MarkAsReviewed Int
   | ShowCommit Int
   | UpdatedCommit Commit
+
+type alias CommitButton =
+  {
+    name : String
+  , class : String
+  , iconClass : String
+  , action : Action
+  }
 
 type alias Commit =
   {
