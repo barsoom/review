@@ -9,7 +9,9 @@ update action model =
       model
 
     UpdateEmail email ->
-      {model | email = email}
+      let settings = model.settings
+      in {model | settings = {settings | email = email}}
 
     UpdateName name ->
-      {model | name = name}
+      let settings = model.settings
+      in {model | settings = {settings | name = name}}

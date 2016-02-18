@@ -9,7 +9,6 @@ import Settings.Update exposing (update)
 
 -- none so far
 
-
 ---- current state and action collection ----
 
 main =
@@ -22,8 +21,10 @@ model =
 initialModel : Model
 initialModel =
   {
-    email = ""
-  , name = ""
+    settings = {
+      email = ""
+    , name = ""
+    }
   , exampleAuthor = "Charles Babbage"
   }
 

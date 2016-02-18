@@ -19,7 +19,7 @@ view address model =
         id = "settings-email"
       , name = "email"
       , label = "Your email:"
-      , value = model.email
+      , value = model.settings.email
       , onInput = (onInput address UpdateEmail)
     }
     , emailHelpText
@@ -28,7 +28,7 @@ view address model =
       id = "settings-name"
     , name = "name"
     , label = "Your name:"
-    , value = model.name
+    , value = model.settings.name
     , onInput = (onInput address UpdateName)
     }
   ]
@@ -63,10 +63,10 @@ textField field =
   ]
 
 usageExample model =
-  if String.isEmpty(model.name) then
+  if String.isEmpty(model.settings.name) then
     interpolate """If your name is "{0}", a commit authored e.g. by "{0}" or by "Ada Lovelace and {0}" will be considered yours."""  [ model.exampleAuthor ]
   else
-    interpolate """A commit authored e.g. by "{0}" or by "Ada Lovelace and {0}" will be considered yours."""  [ model.name ]
+    interpolate """A commit authored e.g. by "{0}" or by "Ada Lovelace and {0}" will be considered yours."""  [ model.settings.name ]
 
 innerHtml htmlString =
   property "innerHTML" (Json.Encode.string htmlString)

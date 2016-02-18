@@ -8,9 +8,13 @@ type Action
   | UpdateName String
 
 type alias Model = {
+    settings: Settings
+  , exampleAuthor : String
+  }
+
+type alias Settings = {
     name : String
   , email : String
-  , exampleAuthor : String
   }
 
 type alias Field = {
