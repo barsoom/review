@@ -17,6 +17,10 @@ defmodule Exremit.PageController do
     render conn, "comments.html"
   end
 
+  def settings(conn, _params) do
+    render conn, "settings.html"
+  end
+
   defp commits_data do
     Exremit.Repo.commits
     |> Ecto.Query.limit(@max_records)
