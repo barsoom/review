@@ -99,9 +99,9 @@ defmodule Exremit.CommitsTest do
   end
 
   defp click_button(name) do
-    button = find_element(:css, ".test-button")
-    assert inner_text(button) == name
-    button |> click
+    find_all_elements(:css, ".test-button")
+    |> Enum.find(fn (element) -> inner_text(element) == name end)
+    |> click
   end
 
   defp commit_element, do: find_element(:css, ".test-commit")
