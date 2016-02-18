@@ -4,6 +4,7 @@ type Action
   = NoOp
   | StartReview Int
   | AbandonReview Int
+  | MarkAsReviewed Int
   | ShowCommit Int
   | UpdatedCommit Commit
 

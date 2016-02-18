@@ -50,10 +50,15 @@ commitUrl model commit =
 
 renderButtons : Address Action -> Model -> Commit -> List Html
 renderButtons address model commit =
-  if commit.isBeingReviewed then -- todo should be isNew
+  if commit.isReviewed then
+    [ ] -- todo
+  else if commit.isBeingReviewed then -- todo should be isNew
     [
       button [ class "small abandon-review test-button", onClick address (AbandonReview commit.id) ] [
         i [ class "fa fa-eye-slash" ] [ text "Abandon review" ]
+      ]
+    , button [ class "small mark-as-reviewed test-button", onClick address (MarkAsReviewed commit.id) ] [
+        i [ class "fa fa-eye-slash" ] [ text "Mark as reviewed" ]
       ]
     ]
   else

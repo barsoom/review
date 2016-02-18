@@ -17,6 +17,10 @@ defmodule Exremit.CommitChannel do
     update_commit_and_broadcast_changes(id, %{ review_started_at: nil }, socket)
   end
 
+  def handle_in("MarkAsReviewed", %{ "id" => id }, socket) do
+    update_commit_and_broadcast_changes(id, %{ reviewed_at: Ecto.DateTime.utc }, socket)
+  end
+
   defp update_commit_and_broadcast_changes(id, changes, socket) do
     commit =
       Repo.get!(Exremit.Repo.commits, id)

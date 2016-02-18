@@ -14,6 +14,9 @@ update action model =
     AbandonReview id ->
       updateCommitById (\commit -> { commit | isBeingReviewed = False, isNew = True }) id model
 
+    MarkAsReviewed id ->
+      updateCommitById (\commit -> { commit | isReviewed = True }) id model
+
     UpdatedCommit commit ->
       -- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
       updateCommitById (\_ -> commit) commit.id model

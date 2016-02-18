@@ -71,6 +71,13 @@ defmodule Exremit.CommitsTest do
 
     visitor "charles", fn ->
       commit_looks_new
+      click_button "Start review"
+      click_button "Mark as reviewed"
+      commit_looks_reviewed
+    end
+
+    visitor "ada", fn ->
+      commit_looks_reviewed
     end
   end
 
@@ -84,6 +91,10 @@ defmodule Exremit.CommitsTest do
 
   defp commit_looks_pending do
     assert "test-is-being-reviewed" in commit_classes
+  end
+
+  defp commit_looks_reviewed do
+    assert "test-is-reviewed" in commit_classes
   end
 
   def button_classes do
