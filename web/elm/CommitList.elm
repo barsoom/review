@@ -25,7 +25,7 @@ port outgoingCommands =
   |> Signal.filter isOutgoing []
 
 isOutgoing event =
-  List.member (eventName event) [ "StartReview", "AbandonReview", "MarkAsReviewed" ]
+  List.member (eventName event) [ "StartReview", "AbandonReview", "MarkAsReviewed", "MarkAsNew" ]
 
 eventName event =
   event

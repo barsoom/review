@@ -5,6 +5,7 @@ type Action
   | StartReview Int
   | AbandonReview Int
   | MarkAsReviewed Int
+  | MarkAsNew Int
   | ShowCommit Int
   | UpdatedCommit Commit
 

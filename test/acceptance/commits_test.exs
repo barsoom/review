@@ -78,6 +78,12 @@ defmodule Exremit.CommitsTest do
 
     visitor "ada", fn ->
       commit_looks_reviewed
+      click_button "Mark as new"
+      commit_looks_new
+    end
+
+    visitor "charles", fn ->
+      commit_looks_new
     end
   end
 

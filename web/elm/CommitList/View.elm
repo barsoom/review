@@ -75,7 +75,14 @@ renderButtons address model commit =
       }
     ]
   else if commit.isReviewed then
-    []
+    [
+      commitButton address {
+        name = "Mark as new"
+      , class = "mark-as-new"
+      , iconClass = "fa-eye-slash"
+      , action = (MarkAsNew commit.id)
+      }
+    ]
   else
     -- This should never happen
     []

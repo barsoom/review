@@ -15,7 +15,10 @@ update action model =
       updateCommitById (\commit -> { commit | isBeingReviewed = False, isNew = True }) id model
 
     MarkAsReviewed id ->
-      updateCommitById (\commit -> { commit | isReviewed = True }) id model
+      updateCommitById (\commit -> { commit | isBeingReviewed = False, isReviewed = True }) id model
+
+    MarkAsNew id ->
+      updateCommitById (\commit -> { commit | isReviewed = False, isNew = True }) id model
 
     UpdatedCommit commit ->
       -- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
