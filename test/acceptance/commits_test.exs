@@ -81,15 +81,17 @@ defmodule Exremit.CommitsTest do
   end
 
   defp commit_looks_new do
-    assert button_class =~ "test-start-review"
+    assert "test-start-review" in button_classes
   end
 
   defp commit_looks_pending do
-    assert button_class =~ "test-abandon-review"
+    assert "test-abandon-review" in button_classes
   end
 
-  def button_class do
-    find_element(:css, ".test-button") |> attribute_value("class")
+  def button_classes do
+    find_element(:css, ".test-button")
+    |> attribute_value("class")
+    |> String.split
   end
 
   defp click_button(name) do
