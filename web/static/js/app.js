@@ -51,7 +51,7 @@ if(elmApps.CommitList) {
   })
 }
 
-// Persist changes to setings
+// Persist changes to settings
 if(elmApps.Settings) {
   var app = elmApps.Settings;
 
