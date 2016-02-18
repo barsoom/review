@@ -51,11 +51,10 @@ if(elmApps.CommitList) {
   })
 }
 
-// Specific code for Settings
+// Persist changes to setings
 if(elmApps.Settings) {
   var app = elmApps.Settings;
 
-  // wip
   var savedSettingsJson = Cookies.get("settings");
   if(savedSettingsJson) { app.ports.settings.send(JSON.parse(savedSettingsJson)) }
 
