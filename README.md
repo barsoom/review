@@ -51,6 +51,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [ ] Cache the last build step
 * [ ] Extract a mix package for `render_elm` and maybe a npm for the ujs
 * [ ] Handle "initialized" cleaner in settings, maybe use a elm cookie lib?
+* [ ] Display gravatar in settings (didn't do it to start with since we have no other js gravatar code yet and it's not strictly needed)
 
 ## Collect info on how to work with Phoenix and Elm in one place
 
