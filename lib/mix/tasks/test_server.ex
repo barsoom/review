@@ -2,7 +2,10 @@ defmodule Mix.Tasks.TestServer do
   use Mix.Task
 
   def run([]) do
-    Mix.Tasks.Phoenix.Server.run([])
+    spawn fn ->
+      Mix.Tasks.Phoenix.Server.run([])
+    end
+
     run_test_commands
   end
 
