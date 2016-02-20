@@ -89,6 +89,10 @@ Run tests:
 
     mix test
 
+## Running tests and phoenix server in the same console
+
+If you use a editor plugin to issue a test command in a separate console, you can use `mix test_server` to do both that and run the phoenix.server in the same console window.
+
 ## Installing an elm package or running other elm tools
 
     cd web/elm
