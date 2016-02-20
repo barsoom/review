@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+echo ">> Making backup and downloading database from $1"
+heroku pg:backups capture --app $1
+
+echo ">> Importing database from $1 to $2"
+heroku pg:backups restore `heroku pg:backups public-url --app $1` DATABASE_URL --app $2 --confirm $2
+echo ">> Done"

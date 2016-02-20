@@ -73,6 +73,12 @@ There is already blog posts, but haven't found anything that describes a develop
 
     script/download_and_import_database your-exremit-or-remit-app-name
 
+## Copy data from one remit installation to another
+
+Can be used to copy from remit to exremit, or just to copy data between two deploys of the same type.
+
+    script/copy_data_between_remit_deploys remit-app exremit-app
+
 ## Running tests
 
 Start headless browser in another terminal window:
