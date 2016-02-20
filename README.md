@@ -15,6 +15,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   * [ ] In remit: store "repository" outside of payload so that the commit payload can be stored directly into the db?
   * [ ] Does created\_at and updated\_at get updated by ecto?
 * [ ] Consider if temporary state-sync could be setup so both apps could be used at once for a while
+* [ ] Auto reload on code changes to keep everyone up to date (as changes will come somewhat often), or a notice that you are behind like trello
 
 ## Make the tools better
 
