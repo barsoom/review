@@ -89,9 +89,17 @@ Run tests:
 
     mix test
 
-## Running tests and phoenix server in the same console
+## Developing
 
-If you use a editor plugin to issue a test command in a separate console, you can use `mix test_server` to do both that and run the phoenix.server in the same console window.
+If you use a editor plugin to issue a test command in a separate console, you can use `test_server` to do handle both that and run the phoenix.server in the same console window.
+
+    mix test_server
+
+Otherwise, start a phoenix.server in a separate console to get a dev server and build Elm code when it changes.
+
+    mix phoenix.server
+
+And run tests somewhere else.
 
 ## Installing an elm package or running other elm tools
 
