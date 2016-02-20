@@ -7,6 +7,7 @@ import Html.Lazy exposing (lazy)
 import Date exposing (..)
 import Date.Format exposing (..)
 import Signal exposing (Address)
+import String
 
 import CommitList.Types exposing (..)
 
@@ -21,7 +22,6 @@ lazyRenderCommit address model commit =
 
 renderCommit : Address Action -> Model -> Commit -> Html
 renderCommit address model commit =
-  --let _ = Debug.log "commit" commit.id in
   li [ id (commitId commit), (commitClassList model commit) ] [
     a [ class "block-link", href (commitUrl model commit) ] [
       div [ class "commit-wrapper", onClick address (ShowCommit commit.id)  ] [
@@ -99,6 +99,7 @@ commitClassList model commit =
     ("commit", True)
 
   , ("your-last-clicked", model.lastClickedCommitId == commit.id)
+  , ("authored-by-you", authoredByYou model commit)
 
   , ("is-being-reviewed", commit.isBeingReviewed)
   , ("is-reviewed", commit.isReviewed)
@@ -107,7 +108,11 @@ commitClassList model commit =
   , ("test-is-being-reviewed", commit.isBeingReviewed)
   , ("test-is-reviewed", commit.isReviewed)
   , ("test-commit", True)
+  , ("test-authored-by-you", authoredByYou model commit)
   ]
+
+authoredByYou model commit =
+  String.contains model.settings.name commit.authorName
 
 formattedTime : String -> String
 formattedTime timestamp =

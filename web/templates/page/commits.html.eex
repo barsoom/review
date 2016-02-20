@@ -1,1 +1,1 @@
-<%= render_elm "CommitList", initialCommits: @commits_data, updatedCommit: hd(@commits_data), environment: Mix.env %>
+<%= render_elm "CommitList", initialCommits: @commits_data, updatedCommit: hd(@commits_data), environment: Mix.env, settings: %{ email: "", name: "" } %>

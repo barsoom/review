@@ -3,6 +3,7 @@
 ExUnit.start
 
 Code.require_file "test/support/factory.exs"
+Code.require_file "test/support/acceptance_test_helpers.exs"
 
 Mix.Task.run "ecto.create", ["--quiet"]
 Mix.Task.run "ecto.migrate", ["--quiet"]

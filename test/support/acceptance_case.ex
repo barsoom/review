@@ -10,6 +10,7 @@ defmodule Exremit.AcceptanceCase do
       import Ecto.Query, only: [from: 2]
 
       import Exremit.Router.Helpers
+      import AcceptanceTestHelpers
 
       # The default endpoint for testing
       @endpoint Exremit.Endpoint

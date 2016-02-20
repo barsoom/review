@@ -32,6 +32,8 @@ for(var i = 0; i < elmAppElements.length; i += 1) {
   window.elmApps[appName] = Elm.embed(Elm[appName], element, options);
 }
 
+var savedSettingsJson = Cookies.get("settings");
+
 // Specific code for CommitList
 if(elmApps.CommitList) {
   // Set up websocket
@@ -49,13 +51,15 @@ if(elmApps.CommitList) {
     var commitId = event[1];
     channel.push(action, { id: commitId })
   })
+
+  // Load settings
+  if(savedSettingsJson) { app.ports.settings.send(JSON.parse(savedSettingsJson)) }
 }
 
 // Persist changes to settings
 if(elmApps.Settings) {
   var app = elmApps.Settings;
 
-  var savedSettingsJson = Cookies.get("settings");
   if(savedSettingsJson) { app.ports.settings.send(JSON.parse(savedSettingsJson)) }
 
   app.ports.settingsChange.subscribe((settings) => {

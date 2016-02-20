@@ -21,8 +21,4 @@ defmodule Exremit.SettingsTest do
   end
 
   defp usage_explaination, do: find_element(:css, ".test-usage-explanation") |> inner_text
-
-  defp navigate_to_settings_page, do: navigate_to "/settings?auth_key=secret"
-
-  defp fill_in(field, with: value), do: find_element(:name, field) |> fill_field(value)
 end

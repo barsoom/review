@@ -3,6 +3,7 @@ module CommitList where
 import CommitList.Types exposing (..)
 import CommitList.View exposing (view)
 import CommitList.Update exposing (update)
+import Settings.Types exposing (Settings)
 
 import Html exposing (..)
 import String
@@ -16,6 +17,7 @@ port environment : String
 
 -- receives updated commit data
 port updatedCommit : Signal Commit
+port settings : Signal Settings
 
 -- publishes events like [ "StartReview", "12" ]
 port outgoingCommands : Signal (List String)
@@ -47,17 +49,18 @@ initialModel : Model
 initialModel =
   {
     commits = initialCommits
+  , settings = { email = "", name = "" }
   , lastClickedCommitId = 0
   , environment = environment
   }
 
 actions : Signal Action
 actions =
-  Signal.merge inbox.signal updatedCommitSignal
-
-updatedCommitSignal =
-  updatedCommit
-  |> Signal.map UpdatedCommit
+  Signal.mergeMany [
+    inbox.signal
+  , Signal.map UpdatedCommit updatedCommit
+  , Signal.map UpdateSettings settings
+  ]
 
 inbox : Signal.Mailbox Action
 inbox =

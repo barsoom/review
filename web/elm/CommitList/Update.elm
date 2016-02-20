@@ -27,6 +27,9 @@ update action model =
     ShowCommit id ->
       { model | lastClickedCommitId = id }
 
+    UpdateSettings settings ->
+      { model | settings = settings }
+
 updateCommitById : (Commit -> Commit) -> Int -> Model -> Model
 updateCommitById callback id model =
   let

@@ -1,5 +1,7 @@
 module CommitList.Types (Action (..), Commit, Model, CommitButton) where
 
+import Settings.Types exposing (Settings)
+
 type Action
   = NoOp
   | StartReview Int
@@ -8,6 +10,7 @@ type Action
   | MarkAsNew Int
   | ShowCommit Int
   | UpdatedCommit Commit
+  | UpdateSettings Settings
 
 type alias CommitButton =
   {
@@ -34,6 +37,7 @@ type alias Commit =
 type alias Model =
   {
     commits : List Commit
+  , settings : Settings
   , lastClickedCommitId : Int
   , environment : String
   }

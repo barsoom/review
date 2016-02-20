@@ -7,7 +7,7 @@ defmodule Exremit.CommitsTest do
     commit2 = create(:commit)
     commit3 = create(:commit)
 
-    navigate_to "/commits?auth_key=secret"
+    navigate_to_commits_page
 
     elements = find_all_elements(:css, ".test-commit")
     assert length(elements) == 3
@@ -28,7 +28,7 @@ defmodule Exremit.CommitsTest do
     commit1 = create(:commit, reviewed_at: nil)
     commit2 = create(:commit, reviewed_at: Ecto.DateTime.utc)
 
-    navigate_to "/commits?auth_key=secret"
+    navigate_to_commits_page
 
     status = read_status(commit1)
     assert status.summary =~ "This is a very"
@@ -40,15 +40,17 @@ defmodule Exremit.CommitsTest do
   end
 
   test "works for simultaneous visitors" do
-    create(:commit)
+    create(:commit, author: create(:author, name: "charles"))
 
     visitor "ada", fn ->
-      navigate_to "/commits?auth_key=secret"
+      navigate_to_settings_page
+      fill_in "name", with: "ada"
+      navigate_to_commits_page
       can_see_commit
     end
 
     visitor "charles", fn ->
-      navigate_to "/commits?auth_key=secret"
+      navigate_to_commits_page
       can_see_commit
     end
 
@@ -67,17 +69,16 @@ defmodule Exremit.CommitsTest do
       commit_looks_pending
       click_button "Abandon review"
       commit_looks_new
-    end
-
-    visitor "charles", fn ->
-      commit_looks_new
       click_button "Start review"
       click_button "Mark as reviewed"
       commit_looks_reviewed
     end
 
-    visitor "ada", fn ->
+    visitor "charles", fn ->
       commit_looks_reviewed
+    end
+
+    visitor "ada", fn ->
       click_button "Mark as new"
       commit_looks_new
     end
@@ -85,6 +86,23 @@ defmodule Exremit.CommitsTest do
     visitor "charles", fn ->
       commit_looks_new
     end
+  end
+
+  test "shows which commits is authored by you" do
+    navigate_to_settings_page
+    fill_in "name", with: "Jo"
+
+    commit1 = create(:commit, author: create(:author, name: "Charles And Joe"))
+    commit2 = create(:commit, author: create(:author, name: "Jane And Bob"))
+
+    navigate_to_commits_page
+
+    assert authored_by_you(commit1)
+    assert not authored_by_you(commit2)
+  end
+
+  defp authored_by_you(commit) do
+    "test-authored-by-you" in commit_classes(find_element(:id, "commit-#{commit.id}"))
   end
 
   defp visitor(name, callback), do: in_browser_session name, callback
@@ -109,8 +127,8 @@ defmodule Exremit.CommitsTest do
     |> String.split
   end
 
-  def commit_classes do
-    commit_element
+  def commit_classes(element \\ commit_element) do
+    element
     |> attribute_value("class")
     |> String.split
   end
