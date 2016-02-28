@@ -5,6 +5,6 @@ defmodule Exremit.Repo do
   def commits do
     from _ in Exremit.Commit,
       order_by: [ desc: :id ],
-      preload:  [ :author, :reviewed_by_author ]
+      preload:  [ :author, :reviewed_by_author, :review_started_by_author ]
   end
 end

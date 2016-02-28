@@ -25,7 +25,6 @@ defmodule Exremit.PageController do
     Exremit.Repo.commits
     |> Ecto.Query.limit(@max_records)
     |> Exremit.Repo.all
-    |> Exremit.Repo.preload([ :author, :review_started_by_author, :reviewed_by_author ])
     |> Exremit.CommitSerializer.serialize
   end
 end
