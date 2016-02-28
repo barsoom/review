@@ -15,7 +15,7 @@ import String
 port initialCommits : List Commit
 port environment : String
 
--- receives updated commit data
+-- receives updated data
 port updatedCommit : Signal Commit
 port settings : Signal Settings
 
