@@ -10,7 +10,8 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [x] Implement undoing a review
 * [x] Add settings dialog to save the reviewer email and name, probably in a cookie
 * [x] Show commits you can review based on who you are
-* [ ] Show who reviewed what based on email, and so on
+* [x] Show who reviewed what based on email, and so on
+* [ ] Persist who reviews and who reviewed
 * [ ] Store payload from Github commit
   * [ ] In remit: store "repository" outside of payload so that the commit payload can be stored directly into the db?
   * [ ] Does created\_at and updated\_at get updated by ecto?

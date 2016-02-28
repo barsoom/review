@@ -73,6 +73,7 @@ renderButtons address model commit =
       , iconClass = "fa-eye-slash"
       , action = (commitChangeAction MarkAsReviewed model commit)
       }
+    , img [ class "commit-reviewer-avatar", src (avatarUrl commit.pendingReviewerGravatarHash) ] []
     ]
   else if commit.isReviewed then
     [
@@ -82,6 +83,7 @@ renderButtons address model commit =
       , iconClass = "fa-eye-slash"
       , action = (commitChangeAction MarkAsNew model commit)
       }
+    , img [ class "commit-reviewer-avatar", src (avatarUrl commit.reviewerGravatarHash) ] []
     ]
   else
     -- This should never happen

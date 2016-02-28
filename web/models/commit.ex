@@ -15,5 +15,6 @@ defmodule Exremit.Commit do
 
     belongs_to :author, Exremit.Author
     belongs_to :reviewed_by_author, Exremit.Author
+    belongs_to :review_started_by_author, Exremit.Author
   end
 end

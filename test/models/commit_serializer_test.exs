@@ -4,7 +4,8 @@ defmodule Exremit.CommitSerializerTest do
 
   test "serializes a commit" do
     author = build(:author, email: "foo@example.com", name: "Joe")
-    commit = build(:commit, id: 50, author: author)
+    reviewer = build(:author, email: "bar@example.com", name: "Jane")
+    commit = build(:commit, id: 50, author: author, review_started_by_author: reviewer, reviewed_by_author: nil)
 
     data = Exremit.CommitSerializer.serialize(commit)
 
@@ -13,6 +14,8 @@ defmodule Exremit.CommitSerializerTest do
       id: 50,
       summary: "This is a very long message that will be shortened",
       authorGravatarHash: "b48def645758b95537d4424c84d1a9ff",
+      pendingReviewerGravatarHash: "e8da7df89c8bcbfec59336b4e0d5e76d",
+      reviewerGravatarHash: "81a354d1cf8aee4e4fc56cf78d98de00",
       repository: "gridlook",
       authorName: "Joe",
       timestamp: "2016-01-25T08:41:25+01:00",

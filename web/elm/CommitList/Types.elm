@@ -31,6 +31,8 @@ type alias Commit =
     id : Int
   , summary : String
   , authorGravatarHash : String
+  , pendingReviewerGravatarHash : String
+  , reviewerGravatarHash : String
   , repository : String
   , authorName : String
   , timestamp : String
