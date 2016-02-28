@@ -48,8 +48,8 @@ if(elmApps.CommitList) {
 
   app.ports.outgoingCommands.subscribe((event) => {
     var action = event[0];
-    var commitId = event[1];
-    channel.push(action, { id: commitId })
+    var change = event[1];
+    channel.push(action, change)
   })
 
   // Load settings

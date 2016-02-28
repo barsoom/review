@@ -9,7 +9,8 @@ defmodule Exremit.CommitChannel do
     {:ok, socket}
   end
 
-  def handle_in("StartReview", %{ "id" => id }, socket) do
+  def handle_in("StartReview", %{ "id" => id, "byEmail" => email }, socket) do
+    IO.inspect email: email
     update_commit_and_broadcast_changes(id, %{ review_started_at: Ecto.DateTime.utc }, socket)
   end
 

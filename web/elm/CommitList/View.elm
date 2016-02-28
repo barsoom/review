@@ -56,7 +56,7 @@ renderButtons address model commit =
         name = "Start review"
       , class = "start-review"
       , iconClass = "fa-eye"
-      , action = (StartReview commit.id)
+      , action = (commitChangeAction StartReview model commit)
       }
     ]
   else if commit.isBeingReviewed then
@@ -65,13 +65,13 @@ renderButtons address model commit =
         name = "Abandon review"
       , class = "abandon-review"
       , iconClass = "fa-eye-slash"
-      , action = (AbandonReview commit.id)
+      , action = (commitChangeAction AbandonReview model commit)
       }
     , commitButton address {
         name = "Mark as reviewed"
       , class = "mark-as-reviewed"
       , iconClass = "fa-eye-slash"
-      , action = (MarkAsReviewed commit.id)
+      , action = (commitChangeAction MarkAsReviewed model commit)
       }
     ]
   else if commit.isReviewed then
@@ -80,12 +80,15 @@ renderButtons address model commit =
         name = "Mark as new"
       , class = "mark-as-new"
       , iconClass = "fa-eye-slash"
-      , action = (MarkAsNew commit.id)
+      , action = (commitChangeAction MarkAsNew model commit)
       }
     ]
   else
     -- This should never happen
     []
+
+commitChangeAction action model commit =
+  action { byEmail = model.settings.email, id = commit.id }
 
 commitButton : Address Action -> CommitButton -> Html
 commitButton address commitButton =

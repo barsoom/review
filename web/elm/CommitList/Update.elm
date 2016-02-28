@@ -8,17 +8,17 @@ update action model =
     NoOp ->
       model
 
-    StartReview id ->
-      updateCommitById (\commit -> { commit | isBeingReviewed = True }) id model
+    StartReview change ->
+      updateCommitById (\commit -> { commit | isBeingReviewed = True }) change.id model
 
-    AbandonReview id ->
-      updateCommitById (\commit -> { commit | isBeingReviewed = False, isNew = True }) id model
+    AbandonReview change ->
+      updateCommitById (\commit -> { commit | isBeingReviewed = False, isNew = True }) change.id model
 
-    MarkAsReviewed id ->
-      updateCommitById (\commit -> { commit | isBeingReviewed = False, isReviewed = True }) id model
+    MarkAsReviewed change ->
+      updateCommitById (\commit -> { commit | isBeingReviewed = False, isReviewed = True }) change.id model
 
-    MarkAsNew id ->
-      updateCommitById (\commit -> { commit | isReviewed = False, isNew = True }) id model
+    MarkAsNew change ->
+      updateCommitById (\commit -> { commit | isReviewed = False, isNew = True }) change.id model
 
     UpdatedCommit commit ->
       -- triggers when someone else updates a commit and we receive a websocket push with an update for a commit

@@ -19,20 +19,25 @@ port environment : String
 port updatedCommit : Signal Commit
 port settings : Signal Settings
 
--- publishes events like [ "StartReview", "12" ]
-port outgoingCommands : Signal (List String)
+-- publishes events like ("StartReview", { byEmail = "foo@example.com", id = 123 })
+port outgoingCommands : Signal (String, CommitChange)
 port outgoingCommands =
   inbox.signal
-  |> Signal.map (\action -> action |> toString |> String.split(" "))
-  |> Signal.filter isOutgoing []
+  |> Signal.map (\action ->
+    case action of
+      StartReview change -> ("StartReview", change)
+      AbandonReview change -> ("AbandonReview", change)
+      MarkAsReviewed change -> ("MarkAsReviewed", change)
+      MarkAsNew change  -> ("MarkAsNew", change)
+      other -> noCommand
+  )
+  |> Signal.filter isOutgoing noCommand
 
-isOutgoing event =
-  List.member (eventName event) [ "StartReview", "AbandonReview", "MarkAsReviewed", "MarkAsNew" ]
+isOutgoing (command) =
+  command /= noCommand
 
-eventName event =
-  event
-  |> List.head
-  |> Maybe.withDefault ""
+noCommand =
+  ("", { byEmail = "", id = 1 })
 
 
 ---- current state and action collection ----
