@@ -30,7 +30,7 @@ type alias Commit =
   {
     id : Int
   , summary : String
-  , gravatarHash : String
+  , authorGravatarHash : String
   , repository : String
   , authorName : String
   , timestamp : String

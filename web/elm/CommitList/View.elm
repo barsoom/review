@@ -26,7 +26,7 @@ renderCommit address model commit =
     a [ class "block-link", href (commitUrl model commit) ] [
       div [ class "commit-wrapper", onClick address (ShowCommit commit.id)  ] [
         div [ class "commit-controls" ] (renderButtons address model commit)
-      , img [ class "commit-avatar", src (avatarUrl commit) ] []
+      , img [ class "commit-avatar", src (avatarUrl commit.authorGravatarHash) ] []
       , div [ class "commit-summary-and-details" ] [
           div [ class "commit-summary test-summary" ] [ text commit.summary ]
         , div [ class "commit-details" ] [
@@ -124,9 +124,9 @@ formattedTime timestamp =
   |> Result.withDefault (Date.fromTime 0)
   |> Date.Format.format "%a %e %b at %H:%M" -- E.g. Wed 3 Feb at 15:14
 
-avatarUrl : Commit -> String
-avatarUrl commit =
-  "https://secure.gravatar.com/avatar/" ++ commit.gravatarHash ++ "?size=40&amp;rating=x&amp;default=mm"
+avatarUrl : String -> String
+avatarUrl gravatarHash =
+  "https://secure.gravatar.com/avatar/" ++ gravatarHash ++ "?size=40&amp;rating=x&amp;default=mm"
 
 commitId : Commit -> String
 commitId commit =

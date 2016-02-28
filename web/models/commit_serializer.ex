@@ -13,7 +13,7 @@ defmodule Exremit.CommitSerializer do
     %{
       id: commit.id,
       summary: summary(payload),
-      gravatarHash: gravatar_hash(commit),
+      authorGravatarHash: gravatar_hash(commit),
       repository: repository(payload),
       authorName: author_name(commit),
       timestamp: timestamp(payload),
