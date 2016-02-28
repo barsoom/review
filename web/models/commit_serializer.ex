@@ -13,7 +13,7 @@ defmodule Exremit.CommitSerializer do
     %{
       id: commit.id,
       summary: summary(payload),
-      authorGravatarHash: gravatar_hash(commit),
+      authorGravatarHash: gravatar_hash(commit.author),
       repository: repository(payload),
       authorName: author_name(commit),
       timestamp: timestamp(payload),
@@ -31,8 +31,8 @@ defmodule Exremit.CommitSerializer do
     |> String.slice(0, @message_summary_length)
   end
 
-  defp gravatar_hash(commit) do
-    :crypto.hash(:md5, commit.author.email)
+  defp gravatar_hash(author) do
+    :crypto.hash(:md5, author.email)
     |> Base.encode16(case: :lower)
   end
 
