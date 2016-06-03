@@ -39,11 +39,16 @@ defmodule Exremit.Web do
       plug :authenticate
 
       defp authenticate(conn, _options) do
-        if conn.params["auth_key"] == Application.get_env(:exremit, :auth_key) do
+        if valid_credentials?(conn.params["auth_key"], Application.get_env(:exremit, :auth_key)) do
           conn
         else
           conn |> deny_and_halt
         end
+      end
+
+      defp valid_credentials?(_anything, nil), do: true
+      defp valid_credentials?(provided_auth_key, auth_key_in_config) do
+        provided_auth_key == auth_key_in_config
       end
 
       defp deny_and_halt(conn) do
