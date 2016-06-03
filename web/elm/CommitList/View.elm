@@ -29,18 +29,22 @@ renderCommit address model commit =
       , img [ class "commit-avatar", src (avatarUrl commit.authorGravatarHash) ] []
       , div [ class "commit-summary-and-details" ] [
           div [ class "commit-summary test-summary" ] [ text commit.summary ]
-        , div [ class "commit-details" ] [
-            text " in "
-          , strong [] [ text commit.repository ]
-          , span [ class "by-author" ] [
-              text " by "
-            , strong [] [ text commit.authorName ]
-            , text " on "
-            , span [ class "test-timestamp" ] [ text (formattedTime commit.timestamp) ]
-            ]
-          ]
+        , renderCommitDetails commit
         ]
       ]
+    ]
+  ]
+
+renderCommitDetails : Commit -> Html
+renderCommitDetails commit =
+  div [ class "commit-details" ] [
+    text " in "
+  , strong [] [ text commit.repository ]
+  , span [ class "by-author" ] [
+      text " by "
+    , strong [] [ text commit.authorName ]
+    , text " on "
+    , span [ class "test-timestamp" ] [ text (formattedTime commit.timestamp) ]
     ]
   ]
 
