@@ -48,6 +48,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [x] Convert config to coffee script for less noisy config
 * [x] Add a install/update dependencies script
 * [x] Set up instructions from scratch, bootstrapping scripts, etc
+* [ ] Upgrade to Elm 0.17 or later
 * [ ] Use shasum checking for downloads in CI
 * [ ] Figure out how to test the auth\_key check in UserSocket
 * [ ] Possibly make phantomjs part of the phoenix.server in dev
