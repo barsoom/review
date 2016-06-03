@@ -27,7 +27,7 @@ var elmAppElements = document.getElementsByClassName("js-elm-app");
 for(var i = 0; i < elmAppElements.length; i += 1) {
   var element = elmAppElements[i];
   var appName = element.dataset.appName;
-  var options = JSON.parse(atob(element.dataset.options));
+  var options = JSON.parse(element.dataset.options);
 
   window.elmApps[appName] = Elm.embed(Elm[appName], element, options);
 }
