@@ -12,6 +12,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [x] Show commits you can review based on who you are
 * [x] Show who reviewed what based on email, and so on
 * [ ] Fix the annoying not-reloading-code-when-error-in-one-of-multiple-files-unless-you-restart-the-server-bug
+  - As best I can tell this is mostly a "brunch watch" bug: when it decides nothing have happened, it skips the run and displays the last result as if it was a new run.
 * [ ] Persist who reviews and who reviewed
 * [ ] Store payload from Github commit
   * [ ] In remit: store "repository" outside of payload so that the commit payload can be stored directly into the db?
