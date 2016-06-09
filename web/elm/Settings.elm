@@ -1,27 +1,49 @@
-module Settings where
+port module Settings exposing (main)
+
+import Html.App as Html
 
 import Settings.Types exposing (..)
 import Settings.View exposing (view)
-import Settings.Update exposing (update)
-
 
 ---- API to the outside world (javascript/server) ----
 
-port settings : Signal Settings
-port initialized : Signal Bool
-
-port settingsChange : Signal Settings
-port settingsChange =
-  model |> Signal.map .settings
+port settings : (Settings -> msg) -> Sub msg
+port settingsChange : Settings -> Cmd msg
 
 ---- current state and action collection ----
 
 main =
-  Signal.map (view inbox.address) model
+  Html.program
+    { init = (initialModel, Cmd.none)
+    , view = view
+    , update = update
+    , subscriptions = \_ ->
+      settings UpdateSettings
+    }
 
-model : Signal Model
-model =
-  Signal.foldp update initialModel actions
+update : Msg -> Model -> (Model, Cmd a)
+update msg model =
+  case msg of
+    NoOp ->
+      (model, Cmd.none)
+
+    UpdateEmail email ->
+      let
+        s = model.settings
+        settings = { s | email = email }
+      in
+        ({model | settings = settings}, settingsChange settings)
+
+    UpdateName name ->
+      let
+        s = model.settings
+        settings = { s | name = name }
+      in
+        ({model | settings = settings}, settingsChange settings)
+
+    UpdateSettings settings ->
+      ({model | settings = settings}, Cmd.none)
+
 
 initialModel : Model
 initialModel =
@@ -30,18 +52,5 @@ initialModel =
       email = ""
     , name = ""
     }
-  , initialized = False
   , exampleAuthor = "Charles Babbage"
   }
-
-actions : Signal Action
-actions =
-  Signal.mergeMany [
-    inbox.signal
-  , (Signal.map UpdateSettings settings)
-  , (Signal.map Initialized initialized)
-  ]
-
-inbox : Signal.Mailbox Action
-inbox =
-  Signal.mailbox NoOp

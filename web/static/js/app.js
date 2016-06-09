@@ -29,7 +29,11 @@ for(var i = 0; i < elmAppElements.length; i += 1) {
   var appName = element.dataset.appName;
   var options = JSON.parse(element.dataset.options);
 
-  window.elmApps[appName] = Elm.embed(Elm[appName], element, options);
+  window.elmApps[appName] = Elm[appName].embed(element);
+
+  for(let key in options) {
+    window.elmApps[appName].ports[key].send(options[key]);
+  }
 }
 
 var savedSettingsJson = Cookies.get("settings");
@@ -65,8 +69,4 @@ if(elmApps.Settings) {
   app.ports.settingsChange.subscribe((settings) => {
     Cookies.set("settings", JSON.stringify(settings))
   })
-
-  // We don't show anything until we're fully initialized to avoid
-  // a flicker of the settings page without any loaded settings.
-  app.ports.initialized.send(true);
 }

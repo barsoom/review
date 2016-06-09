@@ -1,4 +1,4 @@
-module CommitList where
+module CommitList exposing (main)
 
 import CommitList.Types exposing (..)
 import CommitList.View exposing (view)
