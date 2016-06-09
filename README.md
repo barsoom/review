@@ -18,6 +18,19 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [ ] Consider if temporary state-sync could be setup so both apps could be used at once for a while
 * [ ] Auto reload on code changes to keep everyone up to date (as changes will come somewhat often), or a notice that you are behind like trello
 
+## Make it possible and practial to switch over to this version for normal use
+
+* [ ] Implement the comments page
+* [ ] Add any missing behavior from the angular code
+* [ ] Send entire state when you re-connect, show that this works as it's kind of a killer feature for this version
+
+## More reliable state sync
+
+* [x] Simplify / Usability: Explore the UI-feel when not doing any local updates at all, just displaying the server updates
+  - [ ] Have a offline-label displayed by js (or set as elm state?) on send-to-server-errors, and hidden on join?
+* [ ] Experiment: Keep a list of all actions that have happened in server memory, with an incrementing id?
+  - [ ] Backup the list to redis to handle restarts
+
 ## Make the tools better
 
 * [x] Support multiple files in elm-brunch
@@ -31,19 +44,6 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [ ] Look into using [node-elm-compiler](https://github.com/rtfeldman/node-elm-compiler) in elm-brunch
 * [ ] Figure out why prod sometimes tries to use the non-digested app.js name
 * [ ] elm-brunch: add custom path to elm binary so we can remove `source web/elm/paths.env` when running `mix phoenix.server`
-
-## More reliable state sync
-
-* [ ] Simplify / Usability: Explore the UI-feel when not doing any local updates at all, just displaying the server updates
-  - [ ] Have a offline-label displayed by js (or set as elm state?) on send-to-server-errors, and hidden on join?
-* [ ] Send entire state when you re-connect, show that this works as it's kind of a killer feature for this version
-  * [ ] Does re-connect solve if you're offline for 3 seconds while an update is sent out?
-    * [ ] If so: Keep a list of all actions that have happened in server memory, with an incrementing id?
-      - [ ] Backup the list to redis to handle restarts
-
-## Make code review fully featured
-
-* [ ] Add any missing behavior from the angular code
 
 ## Later
 

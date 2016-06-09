@@ -5,20 +5,14 @@ import CommitList.Types exposing (..)
 update : Action -> Model -> Model
 update action model =
   case action of
-    NoOp ->
-      model
+    NoOp -> model
 
-    StartReview change ->
-      updateCommitById (\commit -> { commit | isBeingReviewed = True }) change.id model
-
-    AbandonReview change ->
-      updateCommitById (\commit -> { commit | isBeingReviewed = False, isNew = True }) change.id model
-
-    MarkAsReviewed change ->
-      updateCommitById (\commit -> { commit | isBeingReviewed = False, isReviewed = True }) change.id model
-
-    MarkAsNew change ->
-      updateCommitById (\commit -> { commit | isReviewed = False, isNew = True }) change.id model
+    -- no local changes so you know if you are in sync
+    -- should work fine as long as network speeds are resonable
+    StartReview change -> model
+    AbandonReview change -> model
+    MarkAsReviewed change -> model
+    MarkAsNew change -> model
 
     UpdatedCommit commit ->
       -- triggers when someone else updates a commit and we receive a websocket push with an update for a commit

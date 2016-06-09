@@ -128,6 +128,8 @@ defmodule Exremit.CommitsTest do
   end
 
   def commit_classes(element \\ commit_element) do
+    :timer.sleep 50 # wait for async updates
+
     element
     |> attribute_value("class")
     |> String.split
