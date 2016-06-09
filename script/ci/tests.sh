@@ -5,7 +5,7 @@ export PATH="$HOME/dependencies/phantomjs/bin:$HOME/dependencies/erlang/bin:$HOM
 
 # Start headless browser server used by javascript-enabled acceptance tests
 # Don't hide it's output since it can show javascript errors.
-phantomjs --webdriver -webdriver-loglevel=ERROR &
+phantomjs -w --webdriver-loglevel=ERROR &
 sleep 2
 
 mix test
