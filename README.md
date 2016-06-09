@@ -11,8 +11,6 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [x] Add settings dialog to save the reviewer email and name, probably in a cookie
 * [x] Show commits you can review based on who you are
 * [x] Show who reviewed what based on email, and so on
-* [ ] Fix the annoying not-reloading-code-when-error-in-one-of-multiple-files-unless-you-restart-the-server-bug
-  - As best I can tell this is mostly a "brunch watch" bug: when it decides nothing have happened, it skips the run and displays the last result as if it was a new run.
 * [ ] Persist who reviews and who reviewed
 * [ ] Store payload from Github commit
   * [ ] In remit: store "repository" outside of payload so that the commit payload can be stored directly into the db?
@@ -26,6 +24,8 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [x] assetsmanager makes the live reload run twice
 * [x] Explore if a view helper like `<%= render_elm "CommitList", environment: Mix.env, initialCommits: [] %>` is pracical, how to expose a way to handle outgoing commands? Maybe something like `window.elmApps.CommitList.ports.subscribe`?
   - This type of helper does make react feel very easy to use in our rails apps. Like rendering a dynamic partial.
+* [ ] Fix the annoying not-reloading-code-when-error-in-one-of-multiple-files-unless-you-restart-the-server-bug
+  - As best I can tell this is mostly a "brunch watch" bug: when it decides nothing have happened, it skips the run and displays the last result as if it was a new run.
 * [ ] render\_elm is a bit problematic as it does not happen at js-time so local storage or cookies can't be loaded
 * [ ] follow up the [elm-brunch discussion](https://github.com/madsflensted/elm-brunch/pull/14) on what changes to make
 * [ ] Look into using [node-elm-compiler](https://github.com/rtfeldman/node-elm-compiler) in elm-brunch
