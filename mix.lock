@@ -13,7 +13,7 @@
   "idna": {:hex, :idna, "1.2.0", "ac62ee99da068f43c50dc69acf700e03a62a348360126260e87f2b54eced86b2", [:rebar3], []},
   "metrics": {:hex, :metrics, "1.0.1", "25f094dea2cda98213cecc3aeff09e940299d950904393b2a29d191c346a8486", [:rebar3], []},
   "mimerl": {:hex, :mimerl, "1.0.2", "993f9b0e084083405ed8252b99460c4f0563e41729ab42d9074fd5e52439be88", [:rebar3], []},
-  "phoenix": {:hex, :phoenix, "1.1.5", "07cee2873e887881782a4beea139598b90bc05151dcfd8ceabb5ce4b38f01575", [:mix], [{:poison, "~> 1.5 or ~> 2.0", [hex: :poison, optional: false]}, {:plug, "~> 1.0", [hex: :plug, optional: false]}, {:cowboy, "~> 1.0", [hex: :cowboy, optional: true]}]},
+  "phoenix": {:hex, :phoenix, "1.1.6", "7bf19002669c8f692f5a9c8d30dab7b49f3dc56228d5bde92a12fb426b4783c2", [:mix], [{:poison, "~> 1.5 or ~> 2.0", [hex: :poison, optional: false]}, {:plug, "~> 1.0", [hex: :plug, optional: false]}, {:cowboy, "~> 1.0", [hex: :cowboy, optional: true]}]},
   "phoenix_ecto": {:hex, :phoenix_ecto, "1.2.0", "3f261f1822d8fba109c23fa584fe921a7a12f69e4d45bf29aea58b04238e7a19", [:mix], [{:poison, "~> 1.3", [hex: :poison, optional: true]}, {:phoenix_html, "~> 2.2", [hex: :phoenix_html, optional: true]}, {:ecto, "~> 1.0", [hex: :ecto, optional: false]}]},
   "phoenix_html": {:hex, :phoenix_html, "2.5.1", "631053f9e345fecb5c87d9e0ccd807f7266d27e2ee4269817067af425fd81ba8", [:mix], [{:plug, "~> 0.13 or ~> 1.0", [hex: :plug, optional: false]}]},
   "phoenix_live_reload": {:hex, :phoenix_live_reload, "1.0.5", "829218c4152ba1e9848e2bf8e161fcde6b4ec679a516259442561d21fde68d0b", [:mix], [{:phoenix, "~> 1.0 or ~> 1.2-rc", [hex: :phoenix, optional: false]}, {:fs, "~> 0.9.1", [hex: :fs, optional: false]}]},
