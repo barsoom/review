@@ -4,7 +4,7 @@ machine:
 
 notify:
   webhooks:
-    - url: http://postbin.link/EJuWjId_b
+    - url: http://postbin.link/4ytg28OO-
 
 dependencies:
   override:
