@@ -2,6 +2,10 @@ machine:
   node:
     version: 4.2.2
 
+notify:
+  webhooks:
+    - url: http://postbin.link/EJuWjId_b
+
 dependencies:
   override:
     - script/ci/prepare.sh
