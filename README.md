@@ -11,8 +11,9 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [x] Add settings dialog to save the reviewer email and name, probably in a cookie
 * [x] Show commits you can review based on who you are
 * [x] Show who reviewed what based on email, and so on
+* [x] Make dev elm compilation reliable
 * [ ] Port to 0.17
-* [ ] Make dev elm compilation reliable
+* [ ] Try having a single main module since other things are shared
 * [ ] Persist who reviews and who reviewed
 * [ ] Store payload from Github commit
   * [ ] In remit: store "repository" outside of payload so that the commit payload can be stored directly into the db?

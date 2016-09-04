@@ -31,8 +31,12 @@ exports.config =
       ignore: [ /web\/static\/vendor/ ]
 
     elmBrunch:
+      executablePath: "../../node_modules/elm/binwrappers"
       elmFolder: "web/elm"
-      outputFile: "../static/vendor/compiled_elm.js"
+      mainModules: [ "Settings.elm", "CommitList.elm", "CommentList.elm" ]
+      outputFolder: "../static/vendor"
+      outputFile: "compiled_elm.js"
+      makeParameters: [ "--warn" ]
 
     assetsmanager:
       # only copy on boot to not trigger double live reloads when other files change

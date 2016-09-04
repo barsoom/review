@@ -48,5 +48,5 @@ type alias Model =
     commits : List Commit
   , settings : Settings
   , lastClickedCommitId : Int
-  --, environment : String
+  , environment : String
   }

@@ -7,7 +7,7 @@
     "clean-css-brunch": ">= 1.0 < 1.8",
     "coffee-script-brunch": "^2.0.0",
     "css-brunch": ">= 1.0 < 1.8",
-    "elm-brunch": "git://github.com/joakimk/elm-brunch.git#simplify",
+    "elm-brunch": "^0.7.0",
     "javascript-brunch": ">= 1.0 < 1.8",
     "phoenix": "file:deps/phoenix",
     "phoenix_html": "file:deps/phoenix_html",

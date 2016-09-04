@@ -1,26 +1,17 @@
-port module CommitList exposing (main)
+module CommitList exposing (main)
 
 import CommitList.Types exposing (..)
 import CommitList.View exposing (view)
 import CommitList.Update exposing (update)
-import Settings.Types exposing (Settings)
+import Ports exposing (..)
 
 import Html.App as Html
-import Html exposing (div, text)
-import String
+--import String
 
 ---- API to the outside world (javascript/server) ----
 
---- receives initial data
-port commits : (List Commit -> msg) -> Sub msg
-port environment : (String -> msg) -> Sub msg
-
-port outgoingCommands : (String, CommitChange) -> Cmd msg
-
 ---- receives updated data
 --port updatedCommit : Signal Commit
---port settings : Signal Settings
---
 ---- publishes events like ("StartReview", { byEmail = "foo@example.com", id = 123 })
 --port outgoingCommands : Signal (String, CommitChange)
 --port outgoingCommands =
@@ -44,13 +35,16 @@ port outgoingCommands : (String, CommitChange) -> Cmd msg
 
 ---- current state and action collection ----
 
+main : Program Never
 main =
   Html.program
     { init = (initialModel, Cmd.none)
     , view = view
     , update = update
     , subscriptions = \_ ->
-      commits UpdateCommits
+      [ commits UpdateCommits
+      , settings UpdateSettings
+      ] |> Sub.batch
     }
 
 --model : Signal Model
@@ -63,7 +57,7 @@ initialModel =
     commits = [] --initialCommits
   , settings = { email = "", name = "" }
   , lastClickedCommitId = 0
-  --, environment = environment
+  , environment = "unknown"
   }
 --
 --actions : Signal Action

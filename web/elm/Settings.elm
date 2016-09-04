@@ -4,14 +4,11 @@ import Html.App as Html
 
 import Settings.Types exposing (..)
 import Settings.View exposing (view)
-
----- API to the outside world (javascript/server) ----
-
-port settings : (Settings -> msg) -> Sub msg
-port settingsChange : Settings -> Cmd msg
+import Ports exposing (..)
 
 ---- current state and action collection ----
 
+main : Program Never
 main =
   Html.program
     { init = (initialModel, Cmd.none)
