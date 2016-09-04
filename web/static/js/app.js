@@ -42,9 +42,8 @@ for(var i = 0; i < elmAppElements.length; i += 1) {
   }
 }
 
-var savedSettingsJson = Cookies.get("settings");
-
 var app = elmApps.Main;
+var ports = app.ports;
 
 // Set up websocket
 let socket = new Socket("/socket", { params: { auth_key: window.authKey } })
@@ -53,18 +52,19 @@ let channel = socket.channel("commits", {})
 channel.join()
 
 // Connect Elm app to websockets
-channel.on("updated_commit", (commit) => app.ports.updatedCommit.send(commit))
+channel.on("updated_commit", (commit) => ports.updatedCommit.send(commit))
 
-app.ports.outgoingCommands.subscribe((event) => {
+ports.outgoingCommands.subscribe((event) => {
   var action = event[0];
   var change = event[1];
   channel.push(action, change)
 })
 
 // Load settings
-if(savedSettingsJson) { app.ports.settings.send(JSON.parse(savedSettingsJson)) }
+var savedSettingsJson = Cookies.get("settings");
+if(savedSettingsJson) { ports.settings.send(JSON.parse(savedSettingsJson)) }
 
-// Store settings changes
-app.ports.settingsChange.subscribe((settings) => {
+// Store setting changes
+ports.settingsChange.subscribe((settings) => {
   Cookies.set("settings", JSON.stringify(settings))
 })
