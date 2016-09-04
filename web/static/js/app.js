@@ -29,7 +29,17 @@ for(var i = 0; i < elmAppElements.length; i += 1) {
   var appName = element.dataset.appName;
   var options = JSON.parse(element.dataset.options);
 
-  window.elmApps[appName] = Elm.embed(Elm[appName], element, options);
+  window.elmApps[appName] = Elm[appName].embed(element);
+
+  for(let key in options) {
+    let port = window.elmApps[appName].ports[key]
+
+    if(port) {
+      port.send(options[key]);
+    } else {
+      throw "render_elm for '" + appName + "' was called with an argument named '" + key + "', which isn't available as a port!"
+    }
+  }
 }
 
 var savedSettingsJson = Cookies.get("settings");
@@ -65,8 +75,4 @@ if(elmApps.Settings) {
   app.ports.settingsChange.subscribe((settings) => {
     Cookies.set("settings", JSON.stringify(settings))
   })
-
-  // We don't show anything until we're fully initialized to avoid
-  // a flicker of the settings page without any loaded settings.
-  app.ports.initialized.send(true);
 }

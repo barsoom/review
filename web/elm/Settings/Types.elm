@@ -1,18 +1,16 @@
-module Settings.Types (Action (..), Model, Field, Settings) where
+module Settings.Types exposing (Msg (..), Model, Field, Settings)
 
 import Html exposing (Attribute)
 
-type Action
+type Msg
   = NoOp
   | UpdateEmail String
   | UpdateName String
   | UpdateSettings Settings
-  | Initialized Bool
 
 type alias Model = {
     settings: Settings
   , exampleAuthor : String
-  , initialized : Bool
   }
 
 type alias Settings = {
@@ -25,6 +23,6 @@ type alias Field = {
   , label : String
   , name : String
   , value : String
-  , onInput : Attribute
+  , onInput : Msg
   }
 

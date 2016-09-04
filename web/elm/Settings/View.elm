@@ -1,53 +1,46 @@
-module Settings.View (view) where
+module Settings.View exposing (view)
 
 import Html exposing (div, span, form, p, label, text, input, Html, Attribute)
 import Html.Attributes exposing (class, for, id, value, property, name)
 import Html.Events exposing (on, targetValue)
 import String.Interpolate exposing (interpolate)
 import Json.Encode
-import Signal exposing (Address)
+import Html.Events exposing (onInput)
 import String
 
 import Settings.Types exposing (..)
 
-view address model =
-  if not model.initialized then
-    div [] []
-  else
-    div [ class "settings-wrapper" ] [
-      form [] [
-        -- type="email" causes "bouncing" of .please-provide-details
-        -- because "foo@bar." is not considered a real value.
-        textField {
-          id = "settings-email"
-        , name = "email"
-        , label = "Your email:"
-        , value = model.settings.email
-        , onInput = (onInput address UpdateEmail)
-      }
-      , emailHelpText
+view : Model -> Html Msg
+view model =
+  div [ class "settings-wrapper" ] [
+    form [] [
+      -- type="email" causes "bouncing" of .please-provide-details
+      -- because "foo@bar." is not considered a real value.
+      textField {
+        id = "settings-email"
+      , name = "email"
+      , label = "Your email:"
+      , value = model.settings.email
+      , onInput = UpdateEmail
+    }
+    , emailHelpText
 
-      , textField {
-        id = "settings-name"
-      , name = "name"
-      , label = "Your name:"
-      , value = model.settings.name
-      , onInput = (onInput address UpdateName)
-      }
-    ]
+    , textField {
+      id = "settings-name"
+    , name = "name"
+    , label = "Your name:"
+    , value = model.settings.name
+    , onInput = UpdateName
+    }
+  ]
 
-    , helpText [
-        p [ innerHtml "Determines <em>your</em> commits and comments by substring." ] []
-      , p [] [
-          span [ class "test-usage-explanation" ] [ text (usageExample model) ]
-        ]
+  , helpText [
+      p [ innerHtml "Determines <em>your</em> commits and comments by substring." ] []
+    , p [] [
+        span [ class "test-usage-explanation" ] [ text (usageExample model) ]
       ]
     ]
-
--- borrowed from https://online.pragmaticstudio.com/courses/elm/steps/36
-onInput : Address a -> (String -> a) -> Attribute
-onInput address f =
-  on "input" targetValue (\v -> Signal.message address (f v))
+  ]
 
 emailHelpText =
   helpText [
@@ -56,13 +49,12 @@ emailHelpText =
   , text " your Gravatar."
   ]
 
-textField : Field -> Html
 textField field =
   p [] [
     label [ for field.id ] [ text field.label ]
   , text " "
 
-  , input [ id field.id, name field.name, value field.value, field.onInput ] []
+  , input [ id field.id, name field.name, value field.value, onInput field.onInput ] []
   ]
 
 usageExample model =
