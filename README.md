@@ -13,7 +13,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [x] Show who reviewed what based on email, and so on
 * [x] Make dev elm compilation reliable
 * [x] Port to 0.17
-* [ ] Try having a single main module since other things are shared
+* [x] Try having a single main module since other things are shared
 * [ ] Persist who reviews and who reviewed
 * [ ] Store payload from Github commit
   * [ ] In remit: store "repository" outside of payload so that the commit payload can be stored directly into the db?
