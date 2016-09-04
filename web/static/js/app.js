@@ -32,7 +32,13 @@ for(var i = 0; i < elmAppElements.length; i += 1) {
   window.elmApps[appName] = Elm[appName].embed(element);
 
   for(let key in options) {
-    window.elmApps[appName].ports[key].send(options[key]);
+    let port = window.elmApps[appName].ports[key]
+
+    if(port) {
+      port.send(options[key]);
+    } else {
+      throw "render_elm for '" + appName + "' was called with an argument named '" + key + "', which isn't available as a port!"
+    }
   }
 }
 

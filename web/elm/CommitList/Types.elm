@@ -1,8 +1,8 @@
-module CommitList.Types exposing (Action (..), Commit, Model, CommitButton, CommitChange)
+module CommitList.Types exposing (Msg (..), Commit, Model, CommitButton, CommitChange)
 
 import Settings.Types exposing (Settings)
 
-type Action
+type Msg
   = NoOp
   | StartReview CommitChange
   | AbandonReview CommitChange
@@ -11,6 +11,7 @@ type Action
   | ShowCommit Int
   | UpdatedCommit Commit
   | UpdateSettings Settings
+  | UpdateCommits (List Commit)
 
 type alias CommitChange =
   {
@@ -23,7 +24,7 @@ type alias CommitButton =
     name : String
   , class : String
   , iconClass : String
-  , action : Action
+  , msg : Msg
   }
 
 type alias Commit =
