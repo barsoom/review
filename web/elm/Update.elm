@@ -6,8 +6,6 @@ import Ports exposing (outgoingCommands, settingsChange)
 update : Msg -> Model -> (Model, Cmd a)
 update msg model =
   case msg of
-    NoOp -> (model, Cmd.none)
-
     -- no local changes so you know if you are in sync
     -- should work fine as long as network speeds are resonable
     StartReview change    -> (model, pushEvent "StartReview" change)

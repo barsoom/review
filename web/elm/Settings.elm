@@ -6,6 +6,7 @@ import Html.Events exposing (on, targetValue)
 import String.Interpolate exposing (interpolate)
 import Json.Encode
 import Html.Events exposing (onInput)
+import VirtualDom exposing (Node, Property)
 import String
 
 import Types exposing (..)
@@ -42,6 +43,7 @@ view model =
     ]
   ]
 
+emailHelpText : Node a
 emailHelpText =
   helpText [
     text "Uniquely identifies you as a reviewer. Used for"
@@ -57,14 +59,17 @@ textField field =
   , input [ id field.id, name field.name, value field.value, onInput field.onInput ] []
   ]
 
+usageExample : Model -> String
 usageExample model =
   if String.isEmpty(model.settings.name) then
     interpolate """If your name is "{0}", a commit authored e.g. by "{0}" or by "Ada Lovelace and {0}" will be considered yours."""  [ model.exampleAuthor ]
   else
     interpolate """A commit authored e.g. by "{0}" or by "Ada Lovelace and {0}" will be considered yours."""  [ model.settings.name ]
 
+innerHtml : String -> Property a
 innerHtml htmlString =
   property "innerHTML" (Json.Encode.string htmlString)
 
+helpText : List (Html a) -> Html a
 helpText =
   p [ class "help-text" ]

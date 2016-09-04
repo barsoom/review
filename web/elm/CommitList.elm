@@ -52,7 +52,10 @@ renderCommitDetails commit =
 -- don't link to github in tests since that makes testing difficult
 commitUrl: Model -> Commit -> String
 commitUrl model commit =
-  if model.environment /= "test" then commit.url else "#"
+  if model.environment == "test" || model.environment == "dev" then
+     "#"
+  else
+    commit.url
 
 renderButtons : Model -> Commit -> List (Node Msg)
 renderButtons model commit =

@@ -6,11 +6,10 @@ import Update exposing (update)
 import Html.App as Html
 import VirtualDom exposing (Node)
 
-import Html exposing (text, div, span, i, li, ul, nav, a)
-import Html.Attributes exposing (class, href)
-import Html.Events exposing (onClick)
-import String
+import Html exposing (div)
+import Html.Attributes exposing (class)
 
+import Menu
 import CommitList
 import CommentList
 import Settings
@@ -29,31 +28,23 @@ main =
       ] |> Sub.batch
     }
 
+initialModel : Model
+initialModel =
+  {
+    activeTab = CommitsTab
+  , environment = "unknown"
+  , settings = { email = "", name = "" }
+  , exampleAuthor = "Charles Babbage"
+  , commits = []
+  , lastClickedCommitId = 0
+  }
+
 view : Model -> Node Msg
 view model =
   div [ class "wrapper" ] [
-    nav [ class "top-nav" ] [
-      ul [] [
-        renderMenuItem "Commits" CommitsTab
-      , renderMenuItem "Comments" CommentsTab
-      , renderMenuItem "Settings" SettingsTab
-      ]
-    ]
+    Menu.view model
   , renderTabContents model
   ]
-
-renderMenuItem name tab =
-  let
-    testClass = "test-menu-item-" ++ (String.toLower name)
-  in
-    li [] [
-      a [ href "#", onClick (SwitchTab tab), class testClass ] [
-        span [] [
-          i [ class "fa.fa-lg.fa-eye" ] []
-          , span [] [ text name ]
-        ]
-      ]
-    ]
 
 renderTabContents : Model -> Node Msg
 renderTabContents model =
@@ -61,14 +52,3 @@ renderTabContents model =
     CommitsTab  -> CommitList.view model
     CommentsTab -> CommentList.view model
     SettingsTab -> Settings.view model
-
-initialModel : Model
-initialModel =
-  {
-    commits = []
-  , settings = { email = "", name = "" }
-  , exampleAuthor = "Charles Babbage"
-  , lastClickedCommitId = 0
-  , environment = "unknown"
-  , activeTab = CommitsTab
-  }

@@ -1,8 +1,7 @@
 module Types exposing (..)
 
 type Msg
-  = NoOp
-  | StartReview CommitChange
+  = StartReview CommitChange
   | AbandonReview CommitChange
   | MarkAsReviewed CommitChange
   | MarkAsNew CommitChange
