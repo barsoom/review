@@ -1,7 +1,7 @@
-module CommitList.Update exposing (update)
+module Update exposing (update)
 
-import CommitList.Types exposing (..)
-import Ports exposing (outgoingCommands)
+import Types exposing (..)
+import Ports exposing (outgoingCommands, settingsChange)
 
 update : Msg -> Model -> (Model, Cmd a)
 update msg model =
@@ -27,6 +27,26 @@ update msg model =
 
     UpdateSettings settings ->
       ({ model | settings = settings }, Cmd.none)
+
+    UpdateEmail email ->
+      let
+        s = model.settings
+        settings = { s | email = email }
+      in
+        ({model | settings = settings}, settingsChange settings)
+
+    UpdateName name ->
+      let
+        s = model.settings
+        settings = { s | name = name }
+      in
+        ({model | settings = settings}, settingsChange settings)
+
+    SwitchTab tab ->
+      ({model | activeTab = tab}, Cmd.none)
+
+    UpdateEnvironment name ->
+      ({model | environment = name}, Cmd.none)
 
 pushEvent : String -> CommitChange -> Cmd a
 pushEvent name change =

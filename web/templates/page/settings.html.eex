@@ -1,1 +1,0 @@
-<%= render_elm "Settings", settings: %{ name: "", email: "" } %>

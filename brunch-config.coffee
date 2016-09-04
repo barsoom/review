@@ -33,7 +33,7 @@ exports.config =
     elmBrunch:
       executablePath: "../../node_modules/elm/binwrappers"
       elmFolder: "web/elm"
-      mainModules: [ "Settings.elm", "CommitList.elm", "CommentList.elm" ]
+      mainModules: [ "Main.elm" ]
       outputFolder: "../static/vendor"
       outputFile: "compiled_elm.js"
       makeParameters: [ "--warn" ]

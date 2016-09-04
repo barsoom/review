@@ -1,7 +1,6 @@
 port module Ports exposing (..)
 
-import CommitList.Types exposing (Commit, CommitChange)
-import Settings.Types exposing (Settings)
+import Types exposing (Commit, CommitChange, Settings)
 
 port commits : (List Commit -> msg) -> Sub msg
 port updatedCommit : (Commit -> msg) -> Sub msg

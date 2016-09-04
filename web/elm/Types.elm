@@ -1,6 +1,4 @@
-module CommitList.Types exposing (Msg (..), Commit, Model, CommitButton, CommitChange)
-
-import Settings.Types exposing (Settings)
+module Types exposing (..)
 
 type Msg
   = NoOp
@@ -12,6 +10,28 @@ type Msg
   | UpdateCommit Commit
   | UpdateSettings Settings
   | UpdateCommits (List Commit)
+  | UpdateEmail String
+  | UpdateName String
+  | UpdateEnvironment String
+  | SwitchTab Tab
+
+type Tab
+  = CommitsTab
+  | CommentsTab
+  | SettingsTab
+
+type alias Settings = {
+    name : String
+  , email : String
+  }
+
+type alias Field = {
+    id : String
+  , label : String
+  , name : String
+  , value : String
+  , onInput : Msg
+  }
 
 type alias CommitChange =
   {
@@ -47,6 +67,8 @@ type alias Model =
   {
     commits : List Commit
   , settings : Settings
+  , exampleAuthor : String
   , lastClickedCommitId : Int
   , environment : String
+  , activeTab : Tab
   }

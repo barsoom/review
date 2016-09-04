@@ -3,7 +3,7 @@ defmodule Exremit.PageControllerTest do
 
   test "allows you to see the page with the correct token" do
     conn = get build_conn(), "/", %{ auth_key: "secret" }
-    assert html_response(conn, 200) =~ "Commits"
+    assert html_response(conn, 200) =~ "Exremit"
   end
 
   test "disallows access for invalid tokens" do

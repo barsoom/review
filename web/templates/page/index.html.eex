@@ -1,3 +1,1 @@
-<a href="/commits?auth_key=<%= @conn.params["auth_key"] %>">Commits</a>
-<a href="/comments?auth_key=<%= @conn.params["auth_key"] %>">Comments</a>
-<a href="/settings?auth_key=<%= @conn.params["auth_key"] %>">Settings</a>
+<%= render_elm "Main", commits: @commits_data, environment: Mix.env %>

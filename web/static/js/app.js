@@ -44,35 +44,27 @@ for(var i = 0; i < elmAppElements.length; i += 1) {
 
 var savedSettingsJson = Cookies.get("settings");
 
-// Specific code for CommitList
-if(elmApps.CommitList) {
-  // Set up websocket
-  let socket = new Socket("/socket", { params: { auth_key: window.authKey } })
-  socket.connect()
-  let channel = socket.channel("commits", {})
-  channel.join()
+var app = elmApps.Main;
 
-  // Connect Elm app to websockets
-  var app = elmApps.CommitList;
-  channel.on("updated_commit", (commit) => app.ports.updatedCommit.send(commit))
+// Set up websocket
+let socket = new Socket("/socket", { params: { auth_key: window.authKey } })
+socket.connect()
+let channel = socket.channel("commits", {})
+channel.join()
 
-  app.ports.outgoingCommands.subscribe((event) => {
-    var action = event[0];
-    var change = event[1];
-    channel.push(action, change)
-  })
+// Connect Elm app to websockets
+channel.on("updated_commit", (commit) => app.ports.updatedCommit.send(commit))
 
-  // Load settings
-  if(savedSettingsJson) { app.ports.settings.send(JSON.parse(savedSettingsJson)) }
-}
+app.ports.outgoingCommands.subscribe((event) => {
+  var action = event[0];
+  var change = event[1];
+  channel.push(action, change)
+})
 
-// Persist changes to settings
-if(elmApps.Settings) {
-  var app = elmApps.Settings;
+// Load settings
+if(savedSettingsJson) { app.ports.settings.send(JSON.parse(savedSettingsJson)) }
 
-  if(savedSettingsJson) { app.ports.settings.send(JSON.parse(savedSettingsJson)) }
-
-  app.ports.settingsChange.subscribe((settings) => {
-    Cookies.set("settings", JSON.stringify(settings))
-  })
-}
+// Store settings changes
+app.ports.settingsChange.subscribe((settings) => {
+  Cookies.set("settings", JSON.stringify(settings))
+})

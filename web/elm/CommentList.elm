@@ -1,6 +1,6 @@
-module CommentList exposing (main)
+module CommentList exposing (view)
 
 import Html exposing (div, text)
 
-main =
+view model =
   div [] [ text "TODO: Add comment listing" ]

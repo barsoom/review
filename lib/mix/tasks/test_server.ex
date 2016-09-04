@@ -23,6 +23,12 @@ defmodule Mix.Tasks.TestServer do
     IO.puts output
   end
 
+  defp run_test([ "mix", "test" ]) do
+    IO.puts "Running tests..."
+    { output, _exit_status } = System.cmd("mix", [ "test", "--color" ])
+    IO.puts output
+  end
+
   defp run_test(_) do
     # ignore unknown commands
   end

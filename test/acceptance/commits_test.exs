@@ -54,6 +54,8 @@ defmodule Exremit.CommitsTest do
       can_see_commit
     end
 
+    # NOTE: If this fails, ensure "Start review" does not trigger
+    #       any browser navigation in tests.
     visitor "ada", fn ->
       commit_looks_new
       click_button "Start review"

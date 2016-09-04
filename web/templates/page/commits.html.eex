@@ -1,1 +1,0 @@
-<%= render_elm "CommitList", commits: @commits_data, environment: Mix.env, settings: %{ email: "", name: "" } %>

@@ -6,19 +6,7 @@ defmodule Exremit.PageController do
   @max_records Application.get_env(:exremit, :max_records)
 
   def index(conn, _params) do
-    render conn, "index.html"
-  end
-
-  def commits(conn, _params) do
-    render conn, "commits.html", commits_data: commits_data
-  end
-
-  def comments(conn, _params) do
-    render conn, "comments.html"
-  end
-
-  def settings(conn, _params) do
-    render conn, "settings.html"
+    render conn, "index.html", commits_data: commits_data
   end
 
   defp commits_data do
