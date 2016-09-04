@@ -1,13 +1,14 @@
 module Main exposing (main)
 
-import Types exposing (..)
-import Ports exposing (..)
-import Update exposing (update)
+import Html exposing (div)
 import Html.App as Html
+import Html.Attributes exposing (class)
 import VirtualDom exposing (Node)
 
-import Html exposing (div)
-import Html.Attributes exposing (class)
+import Types exposing (..)
+import Ports exposing (..)
+
+import Update exposing (update)
 
 import Menu
 import CommitList
