@@ -1,4 +1,4 @@
-module CommitList.Types (Action (..), Commit, Model, CommitButton, CommitChange) where
+module CommitList.Types exposing (Action (..), Commit, Model, CommitButton, CommitChange)
 
 import Settings.Types exposing (Settings)
 
@@ -47,5 +47,5 @@ type alias Model =
     commits : List Commit
   , settings : Settings
   , lastClickedCommitId : Int
-  , environment : String
+  --, environment : String
   }

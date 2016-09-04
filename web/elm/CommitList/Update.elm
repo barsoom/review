@@ -1,4 +1,4 @@
-module CommitList.Update (update) where
+module CommitList.Update exposing (update)
 
 import CommitList.Types exposing (..)
 

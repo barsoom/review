@@ -1,4 +1,4 @@
-module CommitList.View (view) where
+module CommitList.View exposing (view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -6,7 +6,6 @@ import Html.Events exposing (..)
 import Html.Lazy exposing (lazy)
 import Date exposing (..)
 import Date.Format exposing (..)
-import Signal exposing (Address)
 import String
 
 import CommitList.Types exposing (..)
