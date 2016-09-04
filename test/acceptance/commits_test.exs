@@ -3,9 +3,9 @@ defmodule Exremit.CommitsTest do
   import Exremit.Factory
 
   test "shows a list of commits, with the newest on top" do
-    commit1 = create(:commit)
-    commit2 = create(:commit)
-    commit3 = create(:commit)
+    commit1 = insert(:commit)
+    commit2 = insert(:commit)
+    commit3 = insert(:commit)
 
     navigate_to_commits_page
 
@@ -25,8 +25,8 @@ defmodule Exremit.CommitsTest do
   end
 
   test "shows interesting info about commits" do
-    commit1 = create(:commit, reviewed_at: nil)
-    commit2 = create(:commit, reviewed_at: Ecto.DateTime.utc)
+    commit1 = insert(:commit, reviewed_at: nil)
+    commit2 = insert(:commit, reviewed_at: Ecto.DateTime.utc)
 
     navigate_to_commits_page
 
@@ -40,7 +40,7 @@ defmodule Exremit.CommitsTest do
   end
 
   test "works for simultaneous visitors" do
-    create(:commit, author: create(:author, name: "charles"))
+    insert(:commit, author: insert(:author, name: "charles"))
 
     visitor "ada", fn ->
       navigate_to_settings_page
@@ -92,8 +92,8 @@ defmodule Exremit.CommitsTest do
     navigate_to_settings_page
     fill_in "name", with: "Jo"
 
-    commit1 = create(:commit, author: create(:author, name: "Charles And Joe"))
-    commit2 = create(:commit, author: create(:author, name: "Jane And Bob"))
+    commit1 = insert(:commit, author: insert(:author, name: "Charles And Joe"))
+    commit2 = insert(:commit, author: insert(:author, name: "Jane And Bob"))
 
     navigate_to_commits_page
 

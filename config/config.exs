@@ -20,7 +20,8 @@ config :logger, :console,
   metadata: [:request_id]
 
 config :exremit,
-  max_records: 300
+  max_records: 300,
+  ecto_repos: [Exremit.Repo]
 
 # Configure phoenix generators
 config :phoenix, :generators,

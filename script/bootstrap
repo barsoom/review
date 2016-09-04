@@ -25,7 +25,4 @@ cd ../..
 echo
 echo ">> Building assets using brunch"
 
-# Workaround some odd babel bug that only occurs on CI
-ln -sf $PWD/node_modules/babel-brunch/node_modules/babel-preset-es2015 node_modules/
-
 node_modules/brunch/bin/brunch build

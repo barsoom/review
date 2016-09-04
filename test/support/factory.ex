@@ -4,11 +4,11 @@ defmodule Exremit.Factory do
   alias Exremit.Commit
   alias Exremit.Author
 
-  def factory(:author) do
+  def author_factory do
     %Author{ name: "Joe", email: "joe@example.com", username: "joe" }
   end
 
-  def factory(:commit) do
+  def commit_factory do
     %Commit{ sha: "2107c5d7b290c0ca294d4d70029e87b599bc9152", payload: "only-used-by-the-ruby-app", json_payload: commit_payload, author: build(:author) }
   end
 

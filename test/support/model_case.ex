@@ -5,11 +5,6 @@ defmodule Exremit.ModelCase do
 
   You may define functions here to be used as helpers in
   your model tests. See `errors_on/2`'s definition as reference.
-
-  Finally, if the test case interacts with the database,
-  it cannot be async. For this reason, every test runs
-  inside a transaction which is reset at the beginning
-  of the test unless the test case is marked as async.
   """
 
   use ExUnit.CaseTemplate
@@ -24,8 +19,10 @@ defmodule Exremit.ModelCase do
   end
 
   setup tags do
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Exremit.Repo)
+
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(Exremit.Repo, [])
+      Ecto.Adapters.SQL.Sandbox.mode(Exremit.Repo, {:shared, self})
     end
 
     :ok

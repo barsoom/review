@@ -30,14 +30,14 @@ defmodule Exremit.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.1"},
-     {:phoenix_html, "~> 2.3"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:phoenix_ecto, "~> 1.1"},
+    [{:phoenix, ">= 0.0.0"},
+     {:phoenix_html, ">= 0.0.0"},
+     {:phoenix_live_reload, ">= 0.0.0", only: :dev},
+     {:phoenix_ecto, ">= 0.0.0"},
      {:postgrex, ">= 0.0.0"},
-     {:hound, "~> 1.0", only: :test},
-     {:ex_machina, "~> 0.6.1", only: :test},
-     {:cowboy, "~> 1.0"}]
+     {:hound, ">= 0.0.0", only: :test},
+     {:ex_machina, ">= 0.0.0", only: :test},
+     {:cowboy, ">= 0.0.0"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
@@ -47,7 +47,10 @@ defmodule Exremit.Mixfile do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"]]
+    [
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      "test": ["ecto.create --quiet", "ecto.migrate", "test"],
+    ]
   end
 end
