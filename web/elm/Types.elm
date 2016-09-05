@@ -1,31 +1,31 @@
 module Types exposing (..)
 
 type Msg
-  = StartReview CommitChange
+  = SwitchTab Tab
+  | UpdateEnvironment String
+  | UpdateSettings Settings
+  | UpdateEmail String
+  | UpdateName String
+  | UpdateCommits (List Commit)
+  | UpdateCommit Commit
+  | ShowCommit Int
+  | StartReview CommitChange
   | AbandonReview CommitChange
   | MarkAsReviewed CommitChange
   | MarkAsNew CommitChange
-  | ShowCommit Int
-  | UpdateCommit Commit
-  | UpdateSettings Settings
-  | UpdateCommits (List Commit)
-  | UpdateEmail String
-  | UpdateName String
-  | UpdateEnvironment String
-  | SwitchTab Tab
 
 type Tab
   = CommitsTab
   | CommentsTab
   | SettingsTab
 
-type alias Settings = {
-    name : String
+type alias Settings =
+  { name : String
   , email : String
   }
 
-type alias Field = {
-    id : String
+type alias Field =
+  { id : String
   , label : String
   , name : String
   , value : String
@@ -33,22 +33,19 @@ type alias Field = {
   }
 
 type alias CommitChange =
-  {
-    id : Int
+  { id : Int
   , byEmail : String
   }
 
 type alias CommitButton =
-  {
-    name : String
+  { name : String
   , class : String
   , iconClass : String
   , msg : Msg
   }
 
 type alias Commit =
-  {
-    id : Int
+  { id : Int
   , summary : String
   , authorGravatarHash : String
   , pendingReviewerGravatarHash : String
@@ -63,8 +60,7 @@ type alias Commit =
   }
 
 type alias Model =
-  {
-    commits : List Commit
+  { commits : List Commit
   , settings : Settings
   , exampleAuthor : String
   , lastClickedCommitId : Int
