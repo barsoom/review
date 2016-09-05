@@ -13,11 +13,14 @@ import VirtualDom exposing (Node, Property)
 
 view : Model -> Node Msg
 view model =
-  lazy renderList model
+  let
+    commits = commitsToShow model
+  in
+    ul [ class "commits-list" ] (List.map (lazyRenderCommit model) commits)
 
-renderList : Model -> Node Msg
-renderList model =
-  ul [ class "commits-list" ] (List.map (lazyRenderCommit model) model.commits)
+commitsToShow : Model -> List Commit
+commitsToShow model =
+  model.commits |> List.take(model.commitsToShowCount)
 
 -- TODO: figure out if this actually works, the Debug.log is called
 --       for each commit even if only one has changed

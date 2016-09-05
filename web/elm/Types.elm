@@ -1,5 +1,7 @@
 module Types exposing (..)
 
+import Time exposing (Time)
+
 type Msg
   = SwitchTab Tab
   | UpdateEnvironment String
@@ -9,6 +11,7 @@ type Msg
   | UpdateCommits (List Commit)
   | UpdateCommit Commit
   | ShowCommit Int
+  | ListMoreCommits Time
   | StartReview CommitChange
   | AbandonReview CommitChange
   | MarkAsReviewed CommitChange
@@ -63,9 +66,11 @@ type alias Commit =
 
 type alias Model =
   { commits : List Commit
+  , commitCount : Int
   , settings : Settings
   , exampleAuthor : String
   , lastClickedCommitId : Int
+  , commitsToShowCount : Int
   , environment : String
   , activeTab : Tab
   }

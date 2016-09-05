@@ -42,5 +42,4 @@ config :exremit, Exremit.Repo,
   pool_size: 10
 
 config :exremit,
-  auth_key: nil, # no auth_key needed in dev
-  max_records: 30 # smaller number for faster initial load times in dev since you load pages often
+  auth_key: nil # no auth_key needed in dev

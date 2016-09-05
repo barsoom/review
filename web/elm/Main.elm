@@ -6,6 +6,7 @@ import CommentList
 import Settings
 
 import Types exposing (..)
+import Constants exposing (defaultCommitsToShowCount)
 import Update exposing (update)
 import Ports
 
@@ -13,6 +14,7 @@ import Html exposing (div)
 import Html.App as Html
 import Html.Attributes exposing (class)
 import VirtualDom exposing (Node)
+import Time exposing (inMilliseconds)
 
 main : Program Never
 main =
@@ -25,6 +27,7 @@ main =
       , Ports.settings UpdateSettings
       , Ports.updatedCommit UpdateCommit
       , Ports.environment UpdateEnvironment
+      , (Time.every (inMilliseconds 250) ListMoreCommits)
       ] |> Sub.batch
     }
 
@@ -32,10 +35,12 @@ initialModel : Model
 initialModel =
   {
     activeTab = CommitsTab
+  , commitsToShowCount = defaultCommitsToShowCount
   , environment = "unknown"
   , settings = { email = "", name = "" }
   , exampleAuthor = "Charles Babbage"
   , commits = []
+  , commitCount = 0
   , lastClickedCommitId = 0
   }
 
