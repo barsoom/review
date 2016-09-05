@@ -13,6 +13,10 @@ import VirtualDom exposing (Node, Property)
 
 view : Model -> Node Msg
 view model =
+  lazy renderList model
+
+renderList : Model -> Node Msg
+renderList model =
   ul [ class "commits-list" ] (List.map (lazyRenderCommit model) model.commits)
 
 -- TODO: figure out if this actually works, the Debug.log is called
