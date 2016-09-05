@@ -1,19 +1,18 @@
 module Main exposing (main)
 
-import Html exposing (div)
-import Html.App as Html
-import Html.Attributes exposing (class)
-import VirtualDom exposing (Node)
-
-import Types exposing (..)
-import Ports exposing (..)
-
-import Update exposing (update)
-
 import Menu
 import CommitList
 import CommentList
 import Settings
+
+import Types exposing (..)
+import Update exposing (update)
+import Ports
+
+import Html exposing (div)
+import Html.App as Html
+import Html.Attributes exposing (class)
+import VirtualDom exposing (Node)
 
 main : Program Never
 main =
@@ -22,10 +21,10 @@ main =
     , view = view
     , update = update
     , subscriptions = \_ ->
-      [ commits UpdateCommits
-      , settings UpdateSettings
-      , updatedCommit UpdateCommit
-      , environment UpdateEnvironment
+      [ Ports.commits UpdateCommits
+      , Ports.settings UpdateSettings
+      , Ports.updatedCommit UpdateCommit
+      , Ports.environment UpdateEnvironment
       ] |> Sub.batch
     }
 

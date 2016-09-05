@@ -1,7 +1,7 @@
 module Update exposing (update)
 
 import Types exposing (..)
-import Ports exposing (outgoingCommands, settingsChange)
+import Ports
 
 update : Msg -> Model -> (Model, Cmd a)
 update msg model =
@@ -20,14 +20,14 @@ update msg model =
         s = model.settings
         settings = { s | email = email }
       in
-        ({model | settings = settings}, settingsChange settings)
+        ({model | settings = settings}, Ports.settingsChange settings)
 
     UpdateName name ->
       let
         s = model.settings
         settings = { s | name = name }
       in
-        ({model | settings = settings}, settingsChange settings)
+        ({model | settings = settings}, Ports.settingsChange settings)
 
     ShowCommit id ->
       ({ model | lastClickedCommitId = id }, Cmd.none)
@@ -48,7 +48,7 @@ update msg model =
 
 pushEvent : String -> CommitChange -> Cmd a
 pushEvent name change =
-  outgoingCommands (name, change)
+  Ports.outgoingCommands (name, change)
 
 updateCommitById : (Commit -> Commit) -> Int -> Model -> Model
 updateCommitById callback id model =

@@ -1,15 +1,14 @@
 module Settings exposing (view)
 
-import Html exposing (div, span, form, p, label, text, input, Html, Attribute)
+import Types exposing (..)
+
+import Html exposing (div, span, form, p, label, text, input, Html)
 import Html.Attributes exposing (class, for, id, value, property, name)
-import Html.Events exposing (on, targetValue)
+import Html.Events exposing (on, targetValue, onInput)
 import String.Interpolate exposing (interpolate)
 import Json.Encode
-import Html.Events exposing (onInput)
 import VirtualDom exposing (Node, Property)
 import String
-
-import Types exposing (..)
 
 view : Model -> Html Msg
 view model =

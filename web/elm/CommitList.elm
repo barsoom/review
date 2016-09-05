@@ -1,5 +1,7 @@
 module CommitList exposing (view)
 
+import Types exposing (..)
+
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
@@ -8,8 +10,6 @@ import Date
 import Date.Format
 import String
 import VirtualDom exposing (Node, Property)
-
-import Types exposing (..)
 
 view : Model -> Node Msg
 view model =
