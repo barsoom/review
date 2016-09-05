@@ -31,7 +31,7 @@ renderCommit model commit =
     a [ class "block-link", href (commitUrl model commit) ] [
       div [ class "commit-wrapper", onClick (ShowCommit commit.id)  ] [
         div [ class "commit-controls" ] (renderButtons model commit)
-      , img [ class "commit-avatar", src (avatarUrl commit.authorGravatarHash) ] []
+      , img [ class "commit-avatar", src (avatarUrl (Just commit.authorGravatarHash)) ] []
       , div [ class "commit-summary-and-details" ] [
           div [ class "commit-summary test-summary" ] [ text commit.summary ]
         , renderCommitDetails commit
@@ -86,7 +86,7 @@ renderButtons model commit =
       , iconClass = "fa-eye-slash"
       , msg = (commitChangeMsg MarkAsReviewed model commit)
       }
-    , img [ class "commit-reviewer-avatar", src (avatarUrl commit.pendingReviewerGravatarHash) ] []
+    , img [ class "commit-reviewer-avatar test-reviewer", src (avatarUrl commit.pendingReviewerGravatarHash), reviewerDataAttribute(commit.pendingReviewerEmail) ] []
     ]
   else if commit.isReviewed then
     [
@@ -96,11 +96,15 @@ renderButtons model commit =
       , iconClass = "fa-eye-slash"
       , msg = (commitChangeMsg MarkAsNew model commit)
       }
-    , img [ class "commit-reviewer-avatar", src (avatarUrl commit.reviewerGravatarHash) ] []
+    , img [ class "commit-reviewer-avatar test-reviewer", src (avatarUrl commit.reviewerGravatarHash), reviewerDataAttribute(commit.reviewerEmail) ] []
     ]
   else
     -- This should never happen
     []
+
+reviewerDataAttribute : Maybe String -> Attribute a
+reviewerDataAttribute email =
+  attribute "data-test-reviewer-email" (Maybe.withDefault "" email)
 
 commitChangeMsg : (CommitChange -> a) -> Model -> Commit -> a
 commitChangeMsg msg model commit =
@@ -141,9 +145,12 @@ formattedTime timestamp =
   |> Result.withDefault (Date.fromTime 0)
   |> Date.Format.format "%a %e %b at %H:%M" -- E.g. Wed 3 Feb at 15:14
 
-avatarUrl : String -> String
+avatarUrl : Maybe String -> String
 avatarUrl gravatarHash =
-  "https://secure.gravatar.com/avatar/" ++ gravatarHash ++ "?size=40&amp;rating=x&amp;default=mm"
+  let
+    hash = (Maybe.withDefault "" gravatarHash)
+  in
+    "https://secure.gravatar.com/avatar/" ++ hash ++ "?size=40&amp;rating=x&amp;default=mm"
 
 commitId : Commit -> String
 commitId commit =

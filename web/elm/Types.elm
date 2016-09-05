@@ -47,16 +47,18 @@ type alias CommitButton =
 type alias Commit =
   { id : Int
   , summary : String
-  , authorGravatarHash : String
-  , pendingReviewerGravatarHash : String
-  , reviewerGravatarHash : String
   , repository : String
   , authorName : String
+  , authorGravatarHash : String
   , timestamp : String
   , isNew : Bool
   , isReviewed : Bool
   , isBeingReviewed : Bool
   , url : String
+  , pendingReviewerGravatarHash : Maybe String
+  , pendingReviewerEmail : Maybe String
+  , reviewerGravatarHash : Maybe String
+  , reviewerEmail : Maybe String
   }
 
 type alias Model =

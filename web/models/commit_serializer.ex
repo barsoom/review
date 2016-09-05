@@ -15,6 +15,8 @@ defmodule Exremit.CommitSerializer do
       summary: summary(payload),
       authorGravatarHash: gravatar_hash(commit.author),
       pendingReviewerGravatarHash: gravatar_hash(commit.review_started_by_author),
+      pendingReviewerEmail: email(commit.review_started_by_author),
+      reviewerEmail: email(commit.reviewed_by_author),
       reviewerGravatarHash: gravatar_hash(commit.reviewed_by_author),
       repository: repository(payload),
       authorName: author_name(commit),
@@ -32,6 +34,9 @@ defmodule Exremit.CommitSerializer do
     |> List.first
     |> String.slice(0, @message_summary_length)
   end
+
+  defp email(nil), do: nil
+  defp email(author), do: author.email
 
   defp gravatar_hash(nil), do: gravatar_hash(%{ email: "show-a-placeholder" })
   defp gravatar_hash(author) do

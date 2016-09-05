@@ -16,6 +16,8 @@ defmodule Exremit.CommitSerializerTest do
       authorGravatarHash: "b48def645758b95537d4424c84d1a9ff",
       pendingReviewerGravatarHash: "e8da7df89c8bcbfec59336b4e0d5e76d",
       reviewerGravatarHash: "81a354d1cf8aee4e4fc56cf78d98de00",
+      pendingReviewerEmail: "bar@example.com",
+      reviewerEmail: nil,
       repository: "gridlook",
       authorName: "Joe",
       timestamp: "2016-01-25T08:41:25+01:00",

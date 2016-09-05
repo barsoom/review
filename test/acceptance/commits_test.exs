@@ -103,6 +103,44 @@ defmodule Exremit.CommitsTest do
     assert not authored_by_you(commit2)
   end
 
+  test "shows who is reviewing and has reviewed a commit" do
+    insert(:commit, author: insert(:author, name: "charles"))
+
+    visitor "ada", fn ->
+      navigate_to_settings_page
+      fill_in "name", with: "Ada"
+      fill_in "email", with: "ada@example.com"
+      navigate_to_commits_page
+      can_see_commit
+      click_button "Start review"
+    end
+
+    visitor "charles", fn ->
+      navigate_to_commits_page
+      commit_looks_pending
+      assert commit_reviewer_email == "ada@example.com"
+    end
+
+    visitor "ada", fn ->
+      click_button "Abandon review"
+    end
+
+    visitor "charles", fn ->
+      commit_looks_new
+    end
+
+    visitor "ada", fn ->
+      click_button "Start review"
+      click_button "Mark as reviewed"
+      assert commit_reviewer_email == "ada@example.com"
+    end
+
+    visitor "charles", fn ->
+      commit_looks_reviewed
+      assert commit_reviewer_email == "ada@example.com"
+    end
+  end
+
   defp authored_by_you(commit) do
     "test-authored-by-you" in commit_classes(find_element(:id, "commit-#{commit.id}"))
   end
@@ -121,6 +159,11 @@ defmodule Exremit.CommitsTest do
 
   defp commit_looks_reviewed do
     assert "test-is-reviewed" in commit_classes
+  end
+
+  def commit_reviewer_email do
+    find_element(:css, ".test-reviewer")
+    |> attribute_value("data-test-reviewer-email")
   end
 
   def button_classes do
