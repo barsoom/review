@@ -16,17 +16,11 @@ view model =
   let
     commits = commitsToShow model
   in
-    ul [ class "commits-list" ] (List.map (lazyRenderCommit model) commits)
+    ul [ class "commits-list" ] (List.map (renderCommit model) commits)
 
 commitsToShow : Model -> List Commit
 commitsToShow model =
   model.commits |> List.take(model.commitsToShowCount)
-
--- TODO: figure out if this actually works, the Debug.log is called
---       for each commit even if only one has changed
-lazyRenderCommit : Model -> Commit -> Node Msg
-lazyRenderCommit model commit =
-  lazy (renderCommit model) commit
 
 renderCommit : Model -> Commit -> Node Msg
 renderCommit model commit =
