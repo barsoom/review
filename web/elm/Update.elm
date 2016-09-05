@@ -6,22 +6,11 @@ import Ports exposing (outgoingCommands, settingsChange)
 update : Msg -> Model -> (Model, Cmd a)
 update msg model =
   case msg of
-    -- no local changes so you know if you are in sync
-    -- should work fine as long as network speeds are resonable
-    StartReview change    -> (model, pushEvent "StartReview" change)
-    AbandonReview change  -> (model, pushEvent "AbandonReview" change)
-    MarkAsReviewed change -> (model, pushEvent "MarkAsReviewed" change)
-    MarkAsNew change      -> (model, pushEvent "MarkAsNew" change)
+    SwitchTab tab ->
+      ({model | activeTab = tab}, Cmd.none)
 
-    UpdateCommit commit ->
-      -- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
-      (updateCommitById (\_ -> commit) commit.id model, Cmd.none)
-
-    UpdateCommits commits ->
-      ({ model | commits = commits }, Cmd.none)
-
-    ShowCommit id ->
-      ({ model | lastClickedCommitId = id }, Cmd.none)
+    UpdateEnvironment name ->
+      ({model | environment = name}, Cmd.none)
 
     UpdateSettings settings ->
       ({ model | settings = settings }, Cmd.none)
@@ -40,11 +29,22 @@ update msg model =
       in
         ({model | settings = settings}, settingsChange settings)
 
-    SwitchTab tab ->
-      ({model | activeTab = tab}, Cmd.none)
+    ShowCommit id ->
+      ({ model | lastClickedCommitId = id }, Cmd.none)
 
-    UpdateEnvironment name ->
-      ({model | environment = name}, Cmd.none)
+    UpdateCommits commits ->
+      ({ model | commits = commits }, Cmd.none)
+
+    UpdateCommit commit ->
+      -- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
+      (updateCommitById (\_ -> commit) commit.id model, Cmd.none)
+
+    -- no local changes so you know if you are in sync
+    -- should work fine as long as network speeds are resonable
+    StartReview change    -> (model, pushEvent "StartReview" change)
+    AbandonReview change  -> (model, pushEvent "AbandonReview" change)
+    MarkAsReviewed change -> (model, pushEvent "MarkAsReviewed" change)
+    MarkAsNew change      -> (model, pushEvent "MarkAsNew" change)
 
 pushEvent : String -> CommitChange -> Cmd a
 pushEvent name change =
