@@ -29,7 +29,7 @@ type alias Field =
   , label : String
   , name : String
   , value : String
-  , onInput : Msg
+  , onInput : String -> Msg
   }
 
 type alias CommitChange =

@@ -50,6 +50,7 @@ emailHelpText =
   , text " your Gravatar."
   ]
 
+textField : Field -> Html Msg
 textField field =
   p [] [
     label [ for field.id ] [ text field.label ]
