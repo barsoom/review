@@ -15,24 +15,21 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [x] Port to 0.17
 * [x] Try having a single main module since other things are shared
 * [x] Persist who reviews and who reviewed
+* [x] Consider if temporary state-sync could be setup so both apps could be used at once for a while
 * [ ] Store payload from Github commit
   * [ ] In remit: store "repository" outside of payload so that the commit payload can be stored directly into the db?
   * [ ] Does created\_at and updated\_at get updated by ecto?
-* [ ] Consider if temporary state-sync could be setup so both apps could be used at once for a while
 * [ ] Auto reload on code changes to keep everyone up to date (as changes will come somewhat often), or a notice that you are behind like trello
 
 ## Make it possible and practial to switch over to this version for normal use
 
 * [ ] Implement the comments page
 * [ ] Add any missing behavior from the angular code
-* [ ] Send entire state when you re-connect, show that this works as it's kind of a killer feature for this version
+* [ ] Send entire state when you re-connect, [like the welcome hook](https://gist.github.com/joakimk/7b9ed5138c48594f0cdecfe95cb6c41e), show that this works as it's kind of a killer feature for this version
 
 ## More reliable state sync
 
 * [x] Simplify / Usability: Explore the UI-feel when not doing any local updates at all, just displaying the server updates
-  - [ ] Have a offline-label displayed by js (or set as elm state?) on send-to-server-errors, and hidden on join?
-* [ ] Experiment: Keep a list of all actions that have happened in server memory, with an incrementing id?
-  - [ ] Backup the list to redis to handle restarts
 
 ## Make the tools better
 
@@ -53,12 +50,12 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [x] Convert config to coffee script for less noisy config
 * [x] Add a install/update dependencies script
 * [x] Set up instructions from scratch, bootstrapping scripts, etc
-* [ ] Upgrade to Elm 0.17 or later (see elm-0.17 branch, started a bit on Settings since it was the smallest)
+- [ ] Have a offline-label displayed by js (or set as elm state?) on send-to-server-errors, and hidden on join?
 * [ ] Use shasum checking for downloads in CI
 * [ ] Figure out how to test the auth\_key check in UserSocket
 * [ ] Possibly make phantomjs part of the phoenix.server in dev
 * [ ] Cache the last build step
-* [ ] Extract a mix package for `render_elm` and maybe a npm for the ujs
+* [ ] Maybe: Extract a mix package for `render_elm` and maybe a npm for the ujs, or remove both
 * [ ] Display gravatar in settings (didn't do it to start with since we have no other js gravatar code yet and it's not strictly needed)
 
 ## Collect info on how to work with Phoenix and Elm in one place
@@ -99,6 +96,7 @@ Run tests:
 
 If you use a editor plugin to issue a test command in a separate console, you can use `test_server` to do handle both that and run the phoenix.server in the same console window.
 
+    source web/elm/paths.env
     mix test_server
 
 Otherwise, start a phoenix.server in a separate console to get a dev server and build Elm code when it changes.
