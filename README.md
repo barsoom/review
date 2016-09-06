@@ -23,7 +23,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 ## Make it possible and practial to switch over to this version for normal use
 
-* [ ] Implement the comments page
+* [ ] Implement the comments page **started**
 * [ ] Add any missing behavior from the angular code
 * [ ] Send entire state when you re-connect, [like the welcome hook](https://gist.github.com/joakimk/7b9ed5138c48594f0cdecfe95cb6c41e), show that this works as it's kind of a killer feature for this version
 * [ ] NICE: cache the commit serialization (takes 80% of the time)

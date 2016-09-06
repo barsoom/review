@@ -24,6 +24,7 @@ main =
     , update = update
     , subscriptions = \_ ->
       [ Ports.commits UpdateCommits
+      , Ports.comments UpdateComments
       , Ports.settings UpdateSettings
       , Ports.updatedCommit UpdateCommit
       , Ports.environment UpdateEnvironment
@@ -41,6 +42,7 @@ initialModel =
   , exampleAuthor = "Charles Babbage"
   , commits = []
   , commitCount = 0
+  , comments = []
   , lastClickedCommitId = 0
   }
 

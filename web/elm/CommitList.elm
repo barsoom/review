@@ -5,7 +5,6 @@ import Types exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
-import Html.Lazy exposing (lazy)
 import Date
 import Date.Format
 import String

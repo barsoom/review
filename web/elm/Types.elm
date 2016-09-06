@@ -9,6 +9,7 @@ type Msg
   | UpdateEmail String
   | UpdateName String
   | UpdateCommits (List Commit)
+  | UpdateComments (List Comment)
   | UpdateCommit Commit
   | ShowCommit Int
   | ListMoreCommits Time
@@ -64,8 +65,13 @@ type alias Commit =
   , reviewerEmail : Maybe String
   }
 
+type alias Comment =
+  { id : Int
+  }
+
 type alias Model =
   { commits : List Commit
+  , comments: List Comment
   , commitCount : Int
   , settings : Settings
   , exampleAuthor : String

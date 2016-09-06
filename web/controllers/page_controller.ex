@@ -6,7 +6,7 @@ defmodule Exremit.PageController do
   @max_records Application.get_env(:exremit, :max_records)
 
   def index(conn, _params) do
-    render conn, "index.html", commits_data: commits_data
+    render conn, "index.html", commits_data: commits_data, comments_data: comments_data
   end
 
   defp commits_data do
@@ -14,5 +14,12 @@ defmodule Exremit.PageController do
     |> Ecto.Query.limit(@max_records)
     |> Exremit.Repo.all
     |> Exremit.CommitSerializer.serialize
+  end
+
+  defp comments_data do
+    Exremit.Repo.comments
+    |> Ecto.Query.limit(@max_records)
+    |> Exremit.Repo.all
+    |> Exremit.CommentSerializer.serialize
   end
 end

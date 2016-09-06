@@ -36,6 +36,9 @@ update msg model =
     UpdateCommits commits ->
       ({ model | commits = commits, commitCount = List.length commits }, Cmd.none)
 
+    UpdateComments comments ->
+      ({ model | comments = comments }, Cmd.none)
+
     -- This triggers the display of more commits after the initial page load
     -- or when changing tabs. This makes the UI feel instant.
     ListMoreCommits _ ->

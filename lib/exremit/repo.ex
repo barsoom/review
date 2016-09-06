@@ -2,7 +2,7 @@ defmodule Exremit.Repo do
   use Ecto.Repo, otp_app: :exremit
   import Ecto.Query
 
-  alias Exremit.{Commit, Author}
+  alias Exremit.{Commit, Comment, Author}
 
   def find_or_insert_author_by_email(email) do
     author = Author
@@ -14,6 +14,12 @@ defmodule Exremit.Repo do
     from _ in Commit,
       order_by: [ desc: :id ],
       preload:  [ :author, :reviewed_by_author, :review_started_by_author ]
+  end
+
+  def comments do
+    from _ in Comment,
+      order_by: [ desc: :id ],
+      preload:  [ :commit, :author, :resolved_by_author ]
   end
 
   defp one_or_insert(query, data) do

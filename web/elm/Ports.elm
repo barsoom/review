@@ -1,11 +1,12 @@
 port module Ports exposing (..)
 
-import Types exposing (Commit, CommitChange, Settings)
+import Types exposing (Commit, Comment, CommitChange, Settings)
 
 -- 100% of the communication with JS goes tough these
 
 -- Incomming (sent by JS, subscribed to in Elm)
 port commits : (List Commit -> msg) -> Sub msg
+port comments : (List Comment -> msg) -> Sub msg
 port updatedCommit : (Commit -> msg) -> Sub msg
 port environment : (String -> msg) -> Sub msg
 port settings : (Settings -> msg) -> Sub msg
