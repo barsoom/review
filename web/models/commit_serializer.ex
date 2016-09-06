@@ -4,11 +4,7 @@ defmodule Exremit.CommitSerializer do
   @message_summary_length 50
 
   def serialize(commits) when is_list(commits) do
-    commits |> Enum.map(&serialize_with_cache/1)
-  end
-
-  def serialize_with_cache(commit) do
-    Exremit.CommitCache.fetch(commit, &serialize/1)
+    commits |> Parallel.pmap(&serialize/1)
   end
 
   def serialize(commit) do
