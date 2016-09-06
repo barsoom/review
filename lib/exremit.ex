@@ -11,6 +11,7 @@ defmodule Exremit do
       supervisor(Exremit.Endpoint, []),
       # Start the Ecto repository
       worker(Exremit.Repo, []),
+      worker(Cachex, [:commit_cache, []]),
       # Here you could define other workers and supervisors as children
       # worker(Exremit.Worker, [arg1, arg2, arg3]),
     ]

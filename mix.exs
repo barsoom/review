@@ -18,7 +18,7 @@ defmodule Exremit.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Exremit, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger,
+     applications: [:cachex, :phoenix, :phoenix_html, :cowboy, :logger,
                     :phoenix_ecto, :postgrex]]
   end
 
@@ -37,6 +37,7 @@ defmodule Exremit.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:hound, ">= 0.0.0", only: :test},
      {:ex_machina, ">= 0.0.0", only: :test},
+     {:cachex, ">= 0.0.0"},
      {:cowboy, ">= 0.0.0"}]
   end
 
