@@ -70,12 +70,7 @@ ports.settingsChange.subscribe((settings) => {
 })
 
 // Set up some basic URL history support
-ports.navigate.subscribe((path) => { window.history.pushState({}, "", path); })
-
-let updateLocation = (_) => {
-  let path = "/" + window.location.href.split("/").reverse()[0].replace("#", "")
-  ports.location.send(path)
-}
-
+ports.navigate.subscribe((path) => { window.history.pushState({}, "", path + window.location.search); })
+let updateLocation = (_) => { ports.location.send(window.location.pathname) }
 window.onpopstate = updateLocation
 updateLocation()
