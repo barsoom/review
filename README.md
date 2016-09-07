@@ -28,8 +28,10 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   - [x] Implement the simplest possible listing
   - [ ] Add `json_payload` to comments in remit and redo data dump.
   - [x] Implement visual things in the listings.
+  - [ ] Implement dates and texts
   - [ ] Implement mark as resolved
   - [ ] Implement mark as new
+  - [ ] Implement filtering
   - [ ] Add github hook for comments
   - [ ] Maybe: Do performance optimizations if it's slow in any way.
 * [ ] Add any missing behavior from the angular code
