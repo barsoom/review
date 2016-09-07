@@ -27,7 +27,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [ ] Implement the comments page
   - [x] Implement the simplest possible listing
   - [ ] Add `json_payload` to comments in remit and redo data dump.
-  - [ ] Implement visual things in the listings.
+  - [x] Implement visual things in the listings.
   - [ ] Implement mark as resolved
   - [ ] Implement mark as new
   - [ ] Add github hook for comments
