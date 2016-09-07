@@ -7,10 +7,14 @@ import Types exposing (Commit, Comment, CommitChange, Settings)
 -- Incomming (sent by JS, subscribed to in Elm)
 port commits : (List Commit -> msg) -> Sub msg
 port comments : (List Comment -> msg) -> Sub msg
-port updatedCommit : (Commit -> msg) -> Sub msg
 port environment : (String -> msg) -> Sub msg
-port settings : (Settings -> msg) -> Sub msg
 
--- Outgoing (sent by Elm, subscribed to in JS)
+-- Incomming and outgoing (sent by Elm, subscribed to in JS)
+port settings : (Settings -> msg) -> Sub msg
 port settingsChange : Settings -> Cmd msg
+
+port updatedCommit : (Commit -> msg) -> Sub msg
 port outgoingCommands : (String, CommitChange) -> Cmd msg
+
+port location : (String -> msg) -> Sub msg
+port navigate : String -> Cmd msg

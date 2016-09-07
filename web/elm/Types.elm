@@ -17,6 +17,7 @@ type Msg
   | AbandonReview CommitChange
   | MarkAsReviewed CommitChange
   | MarkAsNew CommitChange
+  | LocationChange String
 
 type Tab
   = CommitsTab

@@ -68,3 +68,14 @@ if(savedSettingsJson) { ports.settings.send(JSON.parse(savedSettingsJson)) }
 ports.settingsChange.subscribe((settings) => {
   Cookies.set("settings", JSON.stringify(settings))
 })
+
+// Set up some basic URL history support
+ports.navigate.subscribe((path) => { window.history.pushState({}, "", path); })
+
+let updateLocation = (_) => {
+  let path = "/" + window.location.href.split("/").reverse()[0].replace("#", "")
+  ports.location.send(path)
+}
+
+window.onpopstate = updateLocation
+updateLocation()

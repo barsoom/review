@@ -23,7 +23,7 @@ renderMenuItem name tab =
     testClass = "test-menu-item-" ++ (String.toLower name)
   in
     li [] [
-      a [ href "#", onClick (SwitchTab tab), class testClass ] [
+      a [ onClick (SwitchTab tab), class testClass ] [
         span [] [
           i [ class "fa.fa-lg.fa-eye" ] []
           , span [] [ text name ]

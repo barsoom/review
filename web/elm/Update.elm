@@ -8,7 +8,11 @@ update : Msg -> Model -> (Model, Cmd a)
 update msg model =
   case msg of
     SwitchTab tab ->
-      ({model | activeTab = tab, commitsToShowCount = defaultCommitsToShowCount}, Cmd.none)
+      ({model | activeTab = tab, commitsToShowCount = defaultCommitsToShowCount},
+        Ports.navigate (pathForTab tab))
+
+    LocationChange path ->
+      ({model | activeTab = (tabForPath path)}, Cmd.none)
 
     UpdateEnvironment name ->
       ({model | environment = name}, Cmd.none)
@@ -57,6 +61,21 @@ update msg model =
     AbandonReview change  -> (model, pushEvent "AbandonReview" change)
     MarkAsReviewed change -> (model, pushEvent "MarkAsReviewed" change)
     MarkAsNew change      -> (model, pushEvent "MarkAsNew" change)
+
+pathForTab : Tab -> String
+pathForTab tab =
+  case tab of
+    CommitsTab -> "/commits"
+    CommentsTab -> "/comments"
+    SettingsTab -> "/settings"
+
+tabForPath : String -> Tab
+tabForPath path =
+  case path of
+    "/commits" -> CommitsTab
+    "/comments" -> CommentsTab
+    "/settings" -> SettingsTab
+    _ -> CommitsTab
 
 pushEvent : String -> CommitChange -> Cmd a
 pushEvent name change =

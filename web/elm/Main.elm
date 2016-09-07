@@ -28,6 +28,7 @@ main =
       , Ports.settings UpdateSettings
       , Ports.updatedCommit UpdateCommit
       , Ports.environment UpdateEnvironment
+      , Ports.location LocationChange
       , (Time.every (inMilliseconds 250) ListMoreCommits)
       ] |> Sub.batch
     }
