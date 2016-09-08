@@ -4,29 +4,19 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 
 # TODO
 
-## Make code review possible
-
-* [x] Implement completing a review
-* [x] Implement undoing a review
-* [x] Add settings dialog to save the reviewer email and name, probably in a cookie
-* [x] Show commits you can review based on who you are
-* [x] Show who reviewed what based on email, and so on
-* [x] Make dev elm compilation reliable
-* [x] Port to 0.17
-* [x] Try having a single main module since other things are shared
-* [x] Persist who reviews and who reviewed
-* [x] Consider if temporary state-sync could be setup so both apps could be used at once for a while
-* [x] Auto reload on code changes to keep everyone up to date (as changes will come somewhat often), or a notice that you are behind like trello
-  - [ ] Limit when we do this, e.g. only on data format change
-* [ ] Store payload from Github commit
-  * [x] Does created\_at and updated\_at get updated by ecto?
-
 ## Make it possible and practial to switch over to this version for normal use
 
+* [x] Send entire state when you re-connect, [like the welcome hook](https://gist.github.com/joakimk/7b9ed5138c48594f0cdecfe95cb6c41e), show that this works as it's kind of a killer feature for this version
+  - [x] Send limited data on page load
+* [x] Auto reload on code changes to keep everyone up to date (as changes will come somewhat often), or a notice that you are behind like trello
+  - [ ] Limit when we do this, e.g. only on data format change
+* [ ] Store payload from Github commits and comments
+  * [x] Does created\_at and updated\_at get updated by ecto?
 * [ ] Implement the comments page
   - [x] Implement the simplest possible listing
   - [x] Add `json_payload` to comments in remit and redo data dump.
   - [x] Implement visual things in the listings.
+  - [ ] Implement `json_payload` parsing
   - [ ] Implement dates and texts
   - [ ] Implement mark as resolved
   - [ ] Implement mark as new
@@ -34,8 +24,6 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   - [ ] Add github hook for comments
   - [ ] Maybe: Do performance optimizations if it's slow in any way.
 * [ ] Add any missing behavior from the angular code
-* [x] Send entire state when you re-connect, [like the welcome hook](https://gist.github.com/joakimk/7b9ed5138c48594f0cdecfe95cb6c41e), show that this works as it's kind of a killer feature for this version
-  - [x] Send limited data on page load
 
 ## More reliable state sync
 
