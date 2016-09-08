@@ -10,6 +10,20 @@ defmodule Exremit.Repo do
     |> one_or_insert(%Author{email: email})
   end
 
+  def commits_data(limit) do
+    commits
+    |> Ecto.Query.limit(^limit)
+    |> all
+    |> Exremit.CommitSerializer.serialize
+  end
+
+  def comments_data(limit) do
+    comments
+    |> Ecto.Query.limit(^limit)
+    |> all
+    |> Exremit.CommentSerializer.serialize
+  end
+
   def commits do
     from _ in Commit,
       order_by: [ desc: :id ],

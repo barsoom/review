@@ -1,12 +1,20 @@
 defmodule Exremit.CommitChannel do
   use Phoenix.Channel
 
+  import Ecto.Query
+
   alias Exremit.Repo
   alias Exremit.Commit
   alias Exremit.CommitSerializer
 
   def join(_channel, _auth, socket) do
+    send self, :after_join
     {:ok, socket}
+  end
+
+  def handle_info(:after_join, socket) do
+    push socket, "welcome", %{ commits: commits_data, comments: comments_data, revision: System.get_env("HEROKU_SLUG_COMMIT") }
+    {:noreply, socket}
   end
 
   def handle_in("StartReview", %{ "id" => id, "byEmail" => email }, socket) do
@@ -51,4 +59,11 @@ defmodule Exremit.CommitChannel do
 
     {:noreply, socket}
   end
+
+  # The number of records to show (on load and after updates), for speed.
+  # Gets slower with more records.
+  @max_records Application.get_env(:exremit, :max_records)
+
+  defp commits_data, do: Exremit.Repo.commits_data(@max_records)
+  defp comments_data, do: Exremit.Repo.comments_data(@max_records)
 end

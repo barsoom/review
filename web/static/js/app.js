@@ -51,6 +51,18 @@ socket.connect()
 let channel = socket.channel("commits", {})
 channel.join()
 
+// TODO: include incremental updates in local cache
+
+// Handle disconnected clients and updates
+let revision = null
+channel.on("welcome", (welcome) => {
+  if(!revision) { revision = welcome.revision }
+  if(revision != welcome.revision) { window.location.reload() }
+
+  ports.commits.send(welcome.commits)
+  ports.comments.send(welcome.comments)
+})
+
 // Connect Elm app to websockets
 channel.on("updated_commit", (commit) => ports.updatedCommit.send(commit))
 

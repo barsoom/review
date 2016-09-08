@@ -1,1 +1,1 @@
-<%= render_elm "Main", commits: @commits_data, comments: @comments_data, environment: Mix.env %>
+<%= render_elm "Main", environment: Mix.env, commits: @commits_data, comments: @comments_data %>

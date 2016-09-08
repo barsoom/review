@@ -16,17 +16,16 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [x] Try having a single main module since other things are shared
 * [x] Persist who reviews and who reviewed
 * [x] Consider if temporary state-sync could be setup so both apps could be used at once for a while
+* [x] Auto reload on code changes to keep everyone up to date (as changes will come somewhat often), or a notice that you are behind like trello
+  - [ ] Limit when we do this, e.g. only on data format change
 * [ ] Store payload from Github commit
-  * [ ] In remit: store "repository" outside of payload so that the commit payload can be stored directly into the db?
   * [x] Does created\_at and updated\_at get updated by ecto?
-* [ ] Auto reload on code changes to keep everyone up to date (as changes will come somewhat often), or a notice that you are behind like trello
-  - At the very least keep current tab. Also for regular reloads.
 
 ## Make it possible and practial to switch over to this version for normal use
 
 * [ ] Implement the comments page
   - [x] Implement the simplest possible listing
-  - [ ] Add `json_payload` to comments in remit and redo data dump.
+  - [x] Add `json_payload` to comments in remit and redo data dump.
   - [x] Implement visual things in the listings.
   - [ ] Implement dates and texts
   - [ ] Implement mark as resolved
@@ -35,8 +34,8 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   - [ ] Add github hook for comments
   - [ ] Maybe: Do performance optimizations if it's slow in any way.
 * [ ] Add any missing behavior from the angular code
-* [ ] Send entire state when you re-connect, [like the welcome hook](https://gist.github.com/joakimk/7b9ed5138c48594f0cdecfe95cb6c41e), show that this works as it's kind of a killer feature for this version
-* [ ] NICE: cache the commit serialization (takes 80% of the time)
+* [x] Send entire state when you re-connect, [like the welcome hook](https://gist.github.com/joakimk/7b9ed5138c48594f0cdecfe95cb6c41e), show that this works as it's kind of a killer feature for this version
+  - [x] Send limited data on page load
 
 ## More reliable state sync
 

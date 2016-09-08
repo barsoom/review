@@ -38,7 +38,7 @@ update msg model =
       ({ model | lastClickedCommitId = id }, Cmd.none)
 
     UpdateCommits commits ->
-      ({ model | commits = commits, commitCount = List.length commits }, Cmd.none)
+      ({ model | commits = commits, commitCount = List.length commits, commitsToShowCount = defaultCommitsToShowCount }, Cmd.none)
 
     UpdateComments comments ->
       ({ model | comments = comments }, Cmd.none)
