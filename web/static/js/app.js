@@ -49,7 +49,7 @@ var ports = app.ports;
 let socket = new Socket("/socket", { params: { auth_key: window.authKey } })
 socket.connect()
 let channel = socket.channel("commits", {})
-channel.join()
+channel.join().receive("ok", (_) => { ports.connectionStatus.send(true) })
 
 // Handle disconnected clients and updates
 let revision = null
