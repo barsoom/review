@@ -100,3 +100,20 @@ footer {
   @include block-message;
   background: $red;
 }
+
+.connected {
+  padding: 10px;
+  text-align: center;
+
+  &--unknown {
+    background-color: #FFFFAA;
+  }
+
+  &--yes {
+    background-color: #AAFFAA;
+  }
+
+  &--no {
+    background-color: #FFAAAA;
+  }
+}

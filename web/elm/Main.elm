@@ -61,11 +61,11 @@ renderConnectivity : Model -> Node a
 renderConnectivity model =
   case model.connected of
     Unknown ->
-      div [] [ text "Initializing..." ]
+      div [ class "connected connected--unknown" ] [ text "Initializing..." ]
     Yes ->
-      div [] [ text "Connected" ]
+      div [ class "connected connected--yes" ] [ text "Connected" ]
     No ->
-      div [] [ text "Not connected!" ]
+      div [ class "connected connected--no" ] [ text "Attempting to reconnect..." ]
 
 renderTabContents : Model -> Node Msg
 renderTabContents model =
