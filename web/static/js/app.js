@@ -51,8 +51,6 @@ socket.connect()
 let channel = socket.channel("commits", {})
 channel.join()
 
-// TODO: include incremental updates in local cache
-
 // Handle disconnected clients and updates
 let revision = null
 channel.on("welcome", (welcome) => {
@@ -62,6 +60,23 @@ channel.on("welcome", (welcome) => {
   ports.commits.send(welcome.commits)
   ports.comments.send(welcome.comments)
 })
+
+// Connection status
+// Could probably be made cleaner in Elm, but the important thing
+// is that we know if we're connected.
+let lastPingTime = 0
+let oldConnectionStatus = true
+let pingTime = 0
+channel.on("ping", (_) => { lastPingTime = pingTime })
+setInterval((_) => {
+  pingTime = Date.now() / 1000.0
+  let newConnectionStatus = (pingTime - lastPingTime < 2)
+
+  if(newConnectionStatus != oldConnectionStatus) {
+    oldConnectionStatus = newConnectionStatus
+    if(lastPingTime != 0) { ports.connectionStatus.send(newConnectionStatus) }
+  }
+}, 250)
 
 // Connect Elm app to websockets
 channel.on("updated_commit", (commit) => ports.updatedCommit.send(commit))

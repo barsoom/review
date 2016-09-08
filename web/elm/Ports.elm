@@ -8,6 +8,7 @@ import Types exposing (Commit, Comment, CommitChange, Settings)
 port commits : (List Commit -> msg) -> Sub msg
 port comments : (List Comment -> msg) -> Sub msg
 port environment : (String -> msg) -> Sub msg
+port connectionStatus : (Bool -> msg) -> Sub msg
 
 -- Incomming and outgoing (sent by Elm, subscribed to in JS)
 port settings : (Settings -> msg) -> Sub msg

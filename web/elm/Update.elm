@@ -14,6 +14,12 @@ update msg model =
     LocationChange path ->
       ({model | activeTab = (tabForPath path)}, Cmd.none)
 
+    UpdateConnectionStatus connected ->
+      let
+        status = if connected then Yes else No
+      in
+        ({model | connected = status}, Cmd.none)
+
     UpdateEnvironment name ->
       ({model | environment = name}, Cmd.none)
 
@@ -38,7 +44,7 @@ update msg model =
       ({ model | lastClickedCommitId = id }, Cmd.none)
 
     UpdateCommits commits ->
-      ({ model | commits = commits, commitCount = List.length commits, commitsToShowCount = defaultCommitsToShowCount }, Cmd.none)
+      ({ model | commits = commits, commitCount = List.length commits, commitsToShowCount = defaultCommitsToShowCount, connected = Yes }, Cmd.none)
 
     UpdateComments comments ->
       ({ model | comments = comments }, Cmd.none)

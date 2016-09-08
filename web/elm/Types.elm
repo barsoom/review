@@ -18,6 +18,7 @@ type Msg
   | MarkAsReviewed CommitChange
   | MarkAsNew CommitChange
   | LocationChange String
+  | UpdateConnectionStatus Bool
 
 type Tab
   = CommitsTab
@@ -81,4 +82,10 @@ type alias Model =
   , commitsToShowCount : Int
   , environment : String
   , activeTab : Tab
+  , connected : Connectivity
   }
+
+type Connectivity =
+  Unknown
+  | Yes
+  | No

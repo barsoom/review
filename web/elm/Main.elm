@@ -10,7 +10,7 @@ import Constants exposing (defaultCommitsToShowCount)
 import Update exposing (update)
 import Ports
 
-import Html exposing (div)
+import Html exposing (div, text)
 import Html.App as Html
 import Html.Attributes exposing (class)
 import VirtualDom exposing (Node)
@@ -29,6 +29,7 @@ main =
       , Ports.updatedCommit UpdateCommit
       , Ports.environment UpdateEnvironment
       , Ports.location LocationChange
+      , Ports.connectionStatus UpdateConnectionStatus
       , (Time.every (inMilliseconds 1000) ListMoreCommits)
       ] |> Sub.batch
     }
@@ -45,14 +46,26 @@ initialModel =
   , commitCount = 0
   , comments = []
   , lastClickedCommitId = 0
+  , connected = Unknown
   }
 
 view : Model -> Node Msg
 view model =
   div [ class "wrapper" ] [
-    Menu.view model
+    renderConnectivity model
+  , Menu.view model
   , renderTabContents model
   ]
+
+renderConnectivity : Model -> Node a
+renderConnectivity model =
+  case model.connected of
+    Unknown ->
+      div [] [ text "Initializing..." ]
+    Yes ->
+      div [] [ text "Connected" ]
+    No ->
+      div [] [ text "Not connected!" ]
 
 renderTabContents : Model -> Node Msg
 renderTabContents model =
