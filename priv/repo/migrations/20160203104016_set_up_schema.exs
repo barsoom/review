@@ -20,6 +20,7 @@ defmodule Exremit.Repo.Migrations.SetUpSchema do
       add :resolved_at, :datetime
       add :resolved_by_author_id, :integer
       add :cached_data, :text
+      add :json_payload, :text, null: false
     end
 
     create index(:comments, [:author_id])
