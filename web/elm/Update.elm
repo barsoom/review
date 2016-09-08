@@ -15,12 +15,7 @@ update msg model =
       ({model | activeTab = (tabForPath path)}, Cmd.none)
 
     UpdateConnectionStatus connected ->
-      if not connected then
-        ({model | connected = No}, Cmd.none)
-      else
-        -- We set connected status when the data arrives in UpdateCommits
-        -- to keep the status and listings in sync.
-        (model, Cmd.none)
+      ({model | connected = if connected then Yes else No}, Cmd.none)
 
     UpdateEnvironment name ->
       ({model | environment = name}, Cmd.none)
@@ -46,7 +41,7 @@ update msg model =
       ({ model | lastClickedCommitId = id }, Cmd.none)
 
     UpdateCommits commits ->
-      ({ model | commits = commits, commitCount = List.length commits, commitsToShowCount = defaultCommitsToShowCount, connected = Yes }, Cmd.none)
+      ({ model | commits = commits, commitCount = List.length commits, commitsToShowCount = defaultCommitsToShowCount }, Cmd.none)
 
     UpdateComments comments ->
       ({ model | comments = comments }, Cmd.none)

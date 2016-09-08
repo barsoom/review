@@ -65,7 +65,7 @@ channel.on("welcome", (welcome) => {
 // Could probably be made cleaner in Elm, but the important thing
 // is that we know if we're connected.
 let lastPingTime = 0
-let oldConnectionStatus = true
+let oldConnectionStatus = false
 let pingTime = 0
 channel.on("ping", (_) => { lastPingTime = pingTime })
 setInterval((_) => {
@@ -74,7 +74,7 @@ setInterval((_) => {
 
   if(newConnectionStatus != oldConnectionStatus) {
     oldConnectionStatus = newConnectionStatus
-    if(lastPingTime != 0) { ports.connectionStatus.send(newConnectionStatus) }
+    ports.connectionStatus.send(newConnectionStatus)
   }
 }, 250)
 
