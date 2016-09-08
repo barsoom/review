@@ -4,6 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import VirtualDom exposing (Node, Property)
 import Types exposing (..)
+import Formatting exposing (formattedTime)
 
 view : Model -> Html a
 view model =
@@ -54,7 +55,7 @@ renderComment model comment =
             em [ class "comment-commit-summary" ] [ text "Commit summary" ]
           ]
         , text " on "
-        , span [] [ text "date-and-time" ]
+        , span [] [ text (formattedTime comment.timestamp) ]
         ]
       , div [ class "comment-proper-body" ] [
           text "todo: implement comment listing"

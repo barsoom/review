@@ -5,7 +5,15 @@ defmodule Exremit.CommentSerializer do
 
   def serialize(comment) do
     %{
-      id: comment.id
+      id: comment.id,
+      timestamp: payload.timestamp,
+    }
+  end
+
+  def payload do
+    # TODO: implement json_payload
+    %{
+      timestamp: "2016-01-25T08:41:25+01:00"
     }
   end
 end

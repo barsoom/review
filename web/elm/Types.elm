@@ -68,6 +68,7 @@ type alias Commit =
 
 type alias Comment =
   { id : Int
+  , timestamp: String
   }
 
 type alias Model =

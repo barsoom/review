@@ -5,9 +5,8 @@ import Types exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
-import Date
-import Date.Format
 import String
+import Formatting exposing (formattedTime)
 import VirtualDom exposing (Node, Property)
 
 view : Model -> Node Msg
@@ -133,13 +132,6 @@ commitClassList model commit =
 authoredByYou : Model -> Commit -> Bool
 authoredByYou model commit =
   String.contains model.settings.name commit.authorName
-
-formattedTime : String -> String
-formattedTime timestamp =
-  timestamp
-  |> Date.fromString
-  |> Result.withDefault (Date.fromTime 0)
-  |> Date.Format.format "%a %e %b at %H:%M" -- E.g. Wed 3 Feb at 15:14
 
 avatarUrl : Maybe String -> String
 avatarUrl gravatarHash =
