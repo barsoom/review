@@ -15,10 +15,12 @@ update msg model =
       ({model | activeTab = (tabForPath path)}, Cmd.none)
 
     UpdateConnectionStatus connected ->
-      let
-        status = if connected then Yes else No
-      in
-        ({model | connected = status}, Cmd.none)
+      if not connected then
+        ({model | connected = No}, Cmd.none)
+      else
+        -- We set connected status when the data arrives in UpdateCommits
+        -- to keep the status and listings in sync.
+        (model, Cmd.none)
 
     UpdateEnvironment name ->
       ({model | environment = name}, Cmd.none)
