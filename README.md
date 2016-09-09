@@ -18,6 +18,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   - [x] Add `json_payload` to comments in remit and redo data dump.
   - [x] Implement visual things in the listings.
   - [ ] Implement `json_payload` parsing
+    - [ ] Probably display comment author rather than commit author
   - [ ] Implement dates and texts
   - [ ] Implement mark as resolved
   - [ ] Implement mark as new

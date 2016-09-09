@@ -70,7 +70,8 @@ type alias Commit =
 type alias Comment =
   { id : Int
   , timestamp : String
-  , authorName : String
+  , commitAuthorName : Maybe String
+  , body : String
   }
 
 type alias Model =

@@ -15,6 +15,7 @@ defmodule Exremit.CommitChannel do
 
   def handle_info(:after_join, socket) do
     push socket, "welcome", %{ commits: commits_data, comments: comments_data, revision: System.get_env("HEROKU_SLUG_COMMIT") }
+
     {:noreply, socket}
   end
 

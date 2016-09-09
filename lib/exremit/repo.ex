@@ -33,7 +33,7 @@ defmodule Exremit.Repo do
   def comments do
     from _ in Comment,
       order_by: [ desc: :id ],
-      preload:  [ :commit, :author, :resolved_by_author ]
+      preload:  [ [ commit: :author ], :author, :resolved_by_author ]
   end
 
   defp one_or_insert(query, data) do
