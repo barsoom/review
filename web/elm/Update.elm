@@ -30,6 +30,27 @@ update msg model =
       in
         ({model | settings = settings}, Ports.settingsChange settings)
 
+    UpdateShowCommentsYouWrote value ->
+      let
+        s = model.settings
+        settings = { s | showCommentsYouWrote = value }
+      in
+        ({model | settings = settings}, Ports.settingsChange settings)
+
+    UpdateShowResolvedComments value ->
+      let
+        s = model.settings
+        settings = { s | showResolvedComments = value }
+      in
+        ({model | settings = settings}, Ports.settingsChange settings)
+
+    UpdateShowCommentsOnOthers value ->
+      let
+        s = model.settings
+        settings = { s | showCommentsOnOthers = value }
+      in
+        ({model | settings = settings}, Ports.settingsChange settings)
+
     UpdateName name ->
       let
         s = model.settings

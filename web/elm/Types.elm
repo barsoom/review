@@ -19,6 +19,9 @@ type Msg
   | MarkAsNew CommitChange
   | LocationChange String
   | UpdateConnectionStatus Bool
+  | UpdateShowCommentsYouWrote Bool
+  | UpdateShowResolvedComments Bool
+  | UpdateShowCommentsOnOthers Bool
 
 type Tab
   = CommitsTab
@@ -28,6 +31,9 @@ type Tab
 type alias Settings =
   { name : String
   , email : String
+  , showCommentsYouWrote : Bool
+  , showCommentsOnOthers : Bool
+  , showResolvedComments : Bool
   }
 
 type alias Field =

@@ -40,7 +40,13 @@ initialModel =
     activeTab = CommitsTab
   , commitsToShowCount = defaultCommitsToShowCount
   , environment = "unknown"
-  , settings = { email = "", name = "" }
+  , settings = {
+      email = ""
+    , name = ""
+    , showCommentsYouWrote = True
+    , showCommentsOnOthers = True
+    , showResolvedComments = True
+  }
   , exampleAuthor = "Charles Babbage"
   , commits = []
   , commitCount = 0

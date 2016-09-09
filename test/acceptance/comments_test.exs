@@ -23,4 +23,43 @@ defmodule Exremit.CommentsTest do
       "comment-#{comment1.id}",
     ]
   end
+
+  test "comments can be filtered" do
+    joe = insert(:author, name: "Joe")
+    jane = insert(:author, name: "Jane")
+    fred = insert(:author, name: "Fred")
+
+    your_comment = insert(:comment, author: joe)
+    resolved_comment = insert(:comment, resolved_by_author: jane)
+
+    commit = insert(:commit, author: fred)
+    other_people_comment_on_other_peoples_commit = insert(:comment, author: jane, commit: commit)
+
+    navigate_to_settings_page
+    fill_in "name", with: "Joe"
+
+    navigate_to_comments_page
+    assert comment_visible?(your_comment)
+    assert comment_visible?(resolved_comment)
+    assert comment_visible?(other_people_comment_on_other_peoples_commit)
+
+    uncheck "test-comments-i-wrote"
+
+    #assert !comment_visible?(your_comment)
+    #assert comment_visible?(resolved_comment)
+    #assert comment_visible?(other_people_comment_on_other_peoples_commit)
+
+    # TODO: test persistence of settings
+  end
+
+  defp uncheck(checkbox_class) do
+    checkbox = find_element(:css, ".#{checkbox_class}")
+    assert selected?(checkbox)
+    click(checkbox)
+    assert !selected?(checkbox)
+  end
+
+  defp comment_visible?(comment) do
+    find_element(:id, "comment-#{comment.id}")
+  end
 end

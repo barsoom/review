@@ -2,32 +2,48 @@ module CommentList exposing (view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import VirtualDom exposing (Node, Property)
 import Maybe
 import Types exposing (..)
 import Formatting exposing (formattedTime)
 import Avatar exposing (avatarUrl)
 
-view : Model -> Html a
+view : Model -> Html Msg
 view model =
   div [] [
-    renderCommentSettings
+    renderCommentSettings(model.settings)
   , renderCommentList(model)
   ]
 
-renderCommentSettings : Node a
-renderCommentSettings =
+renderCommentSettings : Settings -> Node Msg
+renderCommentSettings settings =
   div [ class "comment-settings" ] [
-    renderOption "Comments I wrote"
-  , renderOption "Comments on others"
-  , renderOption "Resolved comments"
+    renderOption {
+      checked = settings.showCommentsYouWrote
+    , class = "test-comments-i-wrote"
+    , name = "Comments I wrote"
+    , onCheck = UpdateShowCommentsYouWrote
+    }
+    , renderOption {
+      checked = settings.showCommentsOnOthers
+    , class = "test-comments-on-others"
+    , name = "Comments on others"
+    , onCheck = UpdateShowCommentsOnOthers
+    }
+    , renderOption {
+      checked = settings.showResolvedComments
+    , class = "test-resolved-comments"
+    , name = "Resolved comments"
+    , onCheck = UpdateShowResolvedComments
+    }
   ]
 
-renderOption : String -> Node a
-renderOption name =
+renderOption : { checked : Bool, name : String, class : String, onCheck : Bool -> Msg } ->  Node Msg
+renderOption option =
   label [] [
-    input [ type' "checkbox" ] []
-  ,  text name
+    input [ type' "checkbox", class option.class, checked option.checked, onCheck option.onCheck ] []
+  ,  text option.name
   ]
 
 renderCommentList : Model -> Node a

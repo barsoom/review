@@ -88,12 +88,13 @@ ports.outgoingCommands.subscribe((event) => {
 })
 
 // Load settings
-var savedSettingsJson = Cookies.get("settings");
+var settingsCookieName = "settings-v2"
+var savedSettingsJson = Cookies.get(settingsCookieName);
 if(savedSettingsJson) { ports.settings.send(JSON.parse(savedSettingsJson)) }
 
 // Store setting changes
 ports.settingsChange.subscribe((settings) => {
-  Cookies.set("settings", JSON.stringify(settings))
+  Cookies.set(settingsCookieName, JSON.stringify(settings))
 })
 
 // Set up some basic URL history support
