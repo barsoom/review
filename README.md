@@ -12,6 +12,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   - [ ] Limit when we do this, e.g. only on data format change
 * [ ] Store payload from Github commits and comments
   * [x] Does created\_at and updated\_at get updated by ecto?
+  * [ ] Hook up the webhook
 * [ ] Implement the comments page
   - [x] Implement the simplest possible listing
   - [x] Add `json_payload` to comments in remit and redo data dump.
@@ -24,6 +25,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   - [ ] Add github hook for comments
   - [ ] Maybe: Do performance optimizations if it's slow in any way.
 * [ ] Add any missing behavior from the angular code
+* [ ] Set maintenance on remit, copy the database to exremit, set `REDIRECT_TO_OTHER_REMIT_URL` on remit to redirect to exremit.
 
 ## More reliable state sync
 
