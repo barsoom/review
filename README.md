@@ -9,7 +9,6 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [x] Send entire state when you re-connect, [like the welcome hook](https://gist.github.com/joakimk/7b9ed5138c48594f0cdecfe95cb6c41e), show that this works as it's kind of a killer feature for this version
   - [x] Send limited data on page load
 * [x] Auto reload on code changes to keep everyone up to date (as changes will come somewhat often), or a notice that you are behind like trello
-  - [ ] Limit when we do this, e.g. only on data format change
 * [ ] Store payload from Github commits and comments
   * [x] Does created\_at and updated\_at get updated by ecto?
   * [ ] Hook up the webhook
@@ -17,12 +16,11 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   - [x] Implement the simplest possible listing
   - [x] Add `json_payload` to comments in remit and redo data dump.
   - [x] Implement visual things in the listings.
-  - [ ] Implement `json_payload` parsing
-    - [ ] Probably display comment author rather than commit author
-  - [ ] Implement dates and texts
+  - [x] Implement `json_payload` parsing
+  - [x] Implement dates and texts
+  - [ ] Implement filtering
   - [ ] Implement mark as resolved
   - [ ] Implement mark as new
-  - [ ] Implement filtering
   - [ ] Add github hook for comments
   - [ ] Maybe: Do performance optimizations if it's slow in any way.
 * [ ] Add any missing behavior from the angular code
@@ -51,6 +49,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [x] Convert config to coffee script for less noisy config
 * [x] Add a install/update dependencies script
 * [x] Set up instructions from scratch, bootstrapping scripts, etc
+* [ ] Limit auto-reload on deploy as much as possible (e.g. only on data format or client code changes)
 * [ ] Rename the project, if nothing else then let's call it "review"
 - [ ] Have a offline-label displayed by js (or set as elm state?) on send-to-server-errors, and hidden on join?
 * [ ] Use shasum checking for downloads in CI
