@@ -1,7 +1,7 @@
 module CommitList exposing (view)
 
 import Types exposing (..)
-import Avatar exposing (avatarUrl)
+import Avatar exposing (avatarUrl, maybeAvatarUrl)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -27,7 +27,7 @@ renderCommit model commit =
     a [ class "block-link", href (commitUrl model commit) ] [
       div [ class "commit-wrapper", onClick (ShowCommit commit.id)  ] [
         div [ class "commit-controls" ] (renderButtons model commit)
-      , img [ class "commit-avatar", src (avatarUrl (Just commit.authorGravatarHash)) ] []
+      , img [ class "commit-avatar", src (avatarUrl commit.authorGravatarHash) ] []
       , div [ class "commit-summary-and-details" ] [
           div [ class "commit-summary test-summary" ] [ text commit.summary ]
         , renderCommitDetails commit
@@ -82,7 +82,7 @@ renderButtons model commit =
       , iconClass = "fa-eye-slash"
       , msg = (commitChangeMsg MarkAsReviewed model commit)
       }
-    , img [ class "commit-reviewer-avatar test-reviewer", src (avatarUrl commit.pendingReviewerGravatarHash), reviewerDataAttribute(commit.pendingReviewerEmail) ] []
+    , img [ class "commit-reviewer-avatar test-reviewer", src (maybeAvatarUrl commit.pendingReviewerGravatarHash), reviewerDataAttribute(commit.pendingReviewerEmail) ] []
     ]
   else if commit.isReviewed then
     [
@@ -92,7 +92,7 @@ renderButtons model commit =
       , iconClass = "fa-eye-slash"
       , msg = (commitChangeMsg MarkAsNew model commit)
       }
-    , img [ class "commit-reviewer-avatar test-reviewer", src (avatarUrl commit.reviewerGravatarHash), reviewerDataAttribute(commit.reviewerEmail) ] []
+    , img [ class "commit-reviewer-avatar test-reviewer", src (maybeAvatarUrl commit.reviewerGravatarHash), reviewerDataAttribute(commit.reviewerEmail) ] []
     ]
   else
     -- This should never happen

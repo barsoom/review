@@ -6,7 +6,7 @@ import VirtualDom exposing (Node, Property)
 import Maybe
 import Types exposing (..)
 import Formatting exposing (formattedTime)
-import Avatar exposing (avatarUrl)
+import Avatar exposing (avatarUrl, maybeAvatarUrl)
 
 view : Model -> Html a
 view model =
@@ -48,9 +48,9 @@ renderComment model comment =
               i [ class "fa fa-eye" ] [ text "Mark as resolved" ]
             ]
           ]
-        , img [ class "comment-proper-author-gravatar", src (avatarUrl (Just comment.authorGravatar)) ] []
+        , img [ class "comment-proper-author-gravatar", src (avatarUrl comment.authorGravatar) ] []
         , i [ class "fa fa-chevron-right commenter-to-committer-arrow" ] []
-        , img [ class "comment-commit-author-gravatar", src (avatarUrl comment.commitAuthorGravatar) ] []
+        , img [ class "comment-commit-author-gravatar", src (maybeAvatarUrl comment.commitAuthorGravatar) ] []
         , strong [] [ text (commitAuthorName comment) ]
         , text " on "
         , span [ class "known-commit" ] [

@@ -1,8 +1,10 @@
-module Avatar exposing (avatarUrl)
+module Avatar exposing (avatarUrl, maybeAvatarUrl)
 
-avatarUrl : Maybe String -> String
-avatarUrl gravatarHash =
-  let
-    hash = (Maybe.withDefault "" gravatarHash)
-  in
-    "https://secure.gravatar.com/avatar/" ++ hash ++ "?size=40&amp;rating=x&amp;default=mm"
+avatarUrl : String -> String
+avatarUrl hash =
+  "https://secure.gravatar.com/avatar/" ++ hash ++ "?size=40&amp;rating=x&amp;default=mm"
+
+maybeAvatarUrl : Maybe String -> String
+maybeAvatarUrl gravatarHash =
+  (Maybe.withDefault "" gravatarHash)
+  |> avatarUrl
