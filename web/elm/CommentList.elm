@@ -54,7 +54,7 @@ renderComment model comment =
         , strong [] [ text (commitAuthorName comment) ]
         , text " on "
         , span [ class "known-commit" ] [
-            em [ class "comment-commit-summary" ] [ text "Commit summary" ]
+            em [ class "comment-commit-summary" ] [ text (Maybe.withDefault "" comment.commitSummary) ]
           ]
         , text " on "
         , span [] [ text (formattedTime comment.timestamp) ]

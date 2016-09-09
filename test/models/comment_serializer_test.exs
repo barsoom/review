@@ -15,6 +15,7 @@ defmodule Exremit.CommentSerializerTest do
       authorGravatar: "f5b8fb60c6116331da07c65b96a8a1d1",
       commitAuthorGravatar: "f5b8fb60c6116331da07c65b96a8a1d1",
       commitAuthorName: "Joe",
+      commitSummary: "This is a very long message that will be shortened",
       body: "Since this is an open source lib, how about we doc this in README?",
     }
   end

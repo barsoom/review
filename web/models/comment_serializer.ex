@@ -12,9 +12,13 @@ defmodule Exremit.CommentSerializer do
       authorGravatar: gravatar_hash(comment.author),
       commitAuthorGravatar: commit_author_gravatar(comment.commit),
       commitAuthorName: commit_author_name(comment.commit),
+      commitSummary: commit_summary(comment.commit),
       body: payload.body,
     }
   end
+
+  def commit_summary(nil), do: nil
+  def commit_summary(commit), do: Exremit.CommitSerializer.commit_summary(commit)
 
   def commit_author_gravatar(nil), do: nil
   def commit_author_gravatar(commit) do

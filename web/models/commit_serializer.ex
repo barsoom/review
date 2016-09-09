@@ -28,6 +28,12 @@ defmodule Exremit.CommitSerializer do
     }
   end
 
+  def commit_summary(commit) do
+    commit
+    |> parse_payload
+    |> summary
+  end
+
   defp summary(payload) do
     payload.message
     |> String.split("\n")
