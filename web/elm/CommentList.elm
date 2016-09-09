@@ -50,7 +50,7 @@ renderComment model comment =
           ]
         , img [ class "comment-proper-author-gravatar", src "" ] []
         , i [ class "fa fa-chevron-right commenter-to-committer-arrow" ] []
-        , img [ class "comment-commit-author-gravatar", src (avatarUrl (Just comment.commitAuthorGravatar)) ] []
+        , img [ class "comment-commit-author-gravatar", src (avatarUrl comment.commitAuthorGravatar) ] []
         , strong [] [ text (commitAuthorName comment) ]
         , text " on "
         , span [ class "known-commit" ] [
