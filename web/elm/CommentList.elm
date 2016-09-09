@@ -6,6 +6,7 @@ import VirtualDom exposing (Node, Property)
 import Maybe
 import Types exposing (..)
 import Formatting exposing (formattedTime)
+import Avatar exposing (avatarUrl)
 
 view : Model -> Html a
 view model =
@@ -49,7 +50,7 @@ renderComment model comment =
           ]
         , img [ class "comment-proper-author-gravatar", src "" ] []
         , i [ class "fa fa-chevron-right commenter-to-committer-arrow" ] []
-        , img [ class "comment-commit-author-gravatar", src "" ] []
+        , img [ class "comment-commit-author-gravatar", src (avatarUrl (Just comment.commitAuthorGravatar)) ] []
         , strong [] [ text (commitAuthorName comment) ]
         , text " on "
         , span [ class "known-commit" ] [

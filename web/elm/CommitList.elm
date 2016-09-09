@@ -1,6 +1,7 @@
 module CommitList exposing (view)
 
 import Types exposing (..)
+import Avatar exposing (avatarUrl)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -132,13 +133,6 @@ commitClassList model commit =
 authoredByYou : Model -> Commit -> Bool
 authoredByYou model commit =
   String.contains model.settings.name commit.authorName
-
-avatarUrl : Maybe String -> String
-avatarUrl gravatarHash =
-  let
-    hash = (Maybe.withDefault "" gravatarHash)
-  in
-    "https://secure.gravatar.com/avatar/" ++ hash ++ "?size=40&amp;rating=x&amp;default=mm"
 
 commitId : Commit -> String
 commitId commit =

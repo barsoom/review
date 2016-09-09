@@ -40,8 +40,7 @@ defmodule Exremit.CommitSerializer do
 
   defp gravatar_hash(nil), do: gravatar_hash(%{ email: "show-a-placeholder" })
   defp gravatar_hash(author) do
-    :crypto.hash(:md5, author.email)
-    |> Base.encode16(case: :lower)
+    Gravatar.hash(author.email)
   end
 
   defp repository(payload), do: payload.repository.name

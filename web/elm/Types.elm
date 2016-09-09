@@ -71,6 +71,7 @@ type alias Comment =
   { id : Int
   , timestamp : String
   , commitAuthorName : Maybe String
+  , commitAuthorGravatar : String
   , body : String
   }
 
