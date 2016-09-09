@@ -48,7 +48,7 @@ renderComment model comment =
               i [ class "fa fa-eye" ] [ text "Mark as resolved" ]
             ]
           ]
-        , img [ class "comment-proper-author-gravatar", src "" ] []
+        , img [ class "comment-proper-author-gravatar", src (avatarUrl (Just comment.authorGravatar)) ] []
         , i [ class "fa fa-chevron-right commenter-to-committer-arrow" ] []
         , img [ class "comment-commit-author-gravatar", src (avatarUrl comment.commitAuthorGravatar) ] []
         , strong [] [ text (commitAuthorName comment) ]

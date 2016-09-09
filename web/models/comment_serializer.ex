@@ -9,6 +9,7 @@ defmodule Exremit.CommentSerializer do
     %{
       id: comment.id,
       timestamp: payload.created_at,
+      authorGravatar: gravatar_hash(comment.author),
       commitAuthorGravatar: commit_author_gravatar(comment.commit),
       commitAuthorName: commit_author_name(comment.commit),
       body: payload.body,
