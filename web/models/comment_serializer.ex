@@ -4,16 +4,15 @@ defmodule Exremit.CommentSerializer do
   end
 
   def serialize(comment) do
+    payload = parse_payload(comment)
+
     %{
       id: comment.id,
-      timestamp: payload.timestamp,
+      timestamp: payload.created_at,
     }
   end
 
-  def payload do
-    # TODO: implement json_payload
-    %{
-      timestamp: "2016-01-25T08:41:25+01:00"
-    }
+  defp parse_payload(comment) do
+    Poison.decode!(comment.json_payload, keys: :atoms)
   end
 end
