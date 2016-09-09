@@ -23,41 +23,6 @@ update msg model =
     UpdateSettings settings ->
       ({ model | settings = settings }, Cmd.none)
 
-    UpdateEmail email ->
-      let
-        s = model.settings
-        settings = { s | email = email }
-      in
-        ({model | settings = settings}, Ports.settingsChange settings)
-
-    UpdateShowCommentsYouWrote value ->
-      let
-        s = model.settings
-        settings = { s | showCommentsYouWrote = value }
-      in
-        ({model | settings = settings}, Ports.settingsChange settings)
-
-    UpdateShowResolvedComments value ->
-      let
-        s = model.settings
-        settings = { s | showResolvedComments = value }
-      in
-        ({model | settings = settings}, Ports.settingsChange settings)
-
-    UpdateShowCommentsOnOthers value ->
-      let
-        s = model.settings
-        settings = { s | showCommentsOnOthers = value }
-      in
-        ({model | settings = settings}, Ports.settingsChange settings)
-
-    UpdateName name ->
-      let
-        s = model.settings
-        settings = { s | name = name }
-      in
-        ({model | settings = settings}, Ports.settingsChange settings)
-
     ShowCommit id ->
       ({ model | lastClickedCommitId = id }, Cmd.none)
 
@@ -85,6 +50,20 @@ update msg model =
     AbandonReview change  -> (model, pushEvent "AbandonReview" change)
     MarkAsReviewed change -> (model, pushEvent "MarkAsReviewed" change)
     MarkAsNew change      -> (model, pushEvent "MarkAsNew" change)
+
+    UpdateName value                 -> updateSettings model (\s -> {s | name = value})
+    UpdateEmail value                -> updateSettings model (\s -> {s | email = value})
+    UpdateShowCommentsYouWrote value -> updateSettings model (\s -> {s | showCommentsYouWrote = value})
+    UpdateShowResolvedComments value -> updateSettings model (\s -> {s | showResolvedComments = value})
+    UpdateShowCommentsOnOthers value -> updateSettings model (\s -> {s | showCommentsOnOthers = value})
+
+updateSettings : Model -> (Settings -> Settings) -> (Model, Cmd a)
+updateSettings model callback =
+  let
+    settings = model.settings
+    updatedSettings = (callback settings)
+  in
+    ({model | settings = updatedSettings}, Ports.settingsChange updatedSettings)
 
 pathForTab : Tab -> String
 pathForTab tab =
