@@ -9,6 +9,7 @@ defmodule Exremit.CommentSerializer do
     %{
       id: comment.id,
       timestamp: payload.created_at,
+      authorName: comment.author.name,
     }
   end
 

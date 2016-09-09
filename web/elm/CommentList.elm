@@ -49,7 +49,7 @@ renderComment model comment =
         , img [ class "comment-proper-author-gravatar", src "" ] []
         , i [ class "fa fa-chevron-right commenter-to-committer-arrow" ] []
         , img [ class "comment-commit-author-gravatar", src "" ] []
-        , strong [] [ text "Author Name" ]
+        , strong [] [ text comment.authorName ]
         , text " on "
         , span [ class "known-commit" ] [
             em [ class "comment-commit-summary" ] [ text "Commit summary" ]

@@ -39,7 +39,10 @@ config :exremit, Exremit.Repo,
   password: "",
   database: "exremit_dev",
   hostname: "localhost",
-  pool_size: 10
+  pool_size: 10,
+
+  # Don't log queries in dev since then we don't see the Elm compile results.
+  log: false
 
 config :exremit,
   auth_key: nil # no auth_key needed in dev
