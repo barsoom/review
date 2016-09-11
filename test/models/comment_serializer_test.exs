@@ -12,6 +12,7 @@ defmodule Exremit.CommentSerializerTest do
     assert data == %{
       id: 50,
       timestamp: "2016-09-05T13:31:37Z",
+      authorName: "Joe",
       authorGravatar: "f5b8fb60c6116331da07c65b96a8a1d1",
       commitAuthorGravatar: "f5b8fb60c6116331da07c65b96a8a1d1",
       commitAuthorName: "Joe",

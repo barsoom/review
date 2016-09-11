@@ -3,9 +3,7 @@ defmodule Exremit.CommitChannel do
 
   import Ecto.Query
 
-  alias Exremit.Repo
-  alias Exremit.Commit
-  alias Exremit.CommitSerializer
+  alias Exremit.{Repo, Commit, CommitSerializer}
 
   def join(_channel, _auth, socket) do
     send self, :after_join

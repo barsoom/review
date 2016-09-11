@@ -48,10 +48,10 @@ renderOption option =
 
 renderCommentList : Model -> Node a
 renderCommentList model =
-  if (List.length model.comments) == 0 then
+  if (List.length model.commentsToShow) == 0 then
     text "There are no comments yet! Write some."
   else
-    ul [ class "comments-list" ] (List.map (renderComment model) model.comments)
+    ul [ class "comments-list" ] (List.map (renderComment model) model.commentsToShow)
 
 renderComment : Model -> Comment -> Node a
 renderComment model comment =

@@ -77,6 +77,7 @@ type alias Comment =
   { id : Int
   , timestamp : String
   , authorGravatar : String
+  , authorName : String
   , commitAuthorName : Maybe String
   , commitAuthorGravatar : Maybe String
   , commitSummary : Maybe String
@@ -86,6 +87,7 @@ type alias Comment =
 type alias Model =
   { commits : List Commit
   , comments: List Comment
+  , commentsToShow: List Comment
   , commitCount : Int
   , settings : Settings
   , exampleAuthor : String

@@ -51,6 +51,7 @@ initialModel =
   , commits = []
   , commitCount = 0
   , comments = []
+  , commentsToShow = []
   , lastClickedCommitId = 0
   , connected = Unknown
   }
