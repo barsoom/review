@@ -2,6 +2,7 @@ module CommentList exposing (view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import VirtualDom exposing (Node, Property)
 import Maybe
 
@@ -22,7 +23,7 @@ renderCommentSettings : Settings -> Node Msg
 renderCommentSettings settings =
   CommentSettings.view settings
 
-renderCommentList : Model -> Node a
+renderCommentList : Model -> Node Msg
 renderCommentList model =
   let
     commentsToShow = filterComments model
@@ -37,10 +38,10 @@ filterComments model =
   model.comments
   |> CommentFilter.filter(model.settings)
 
-renderComment : Model -> Comment -> Node a
+renderComment : Model -> Comment -> Node Msg
 renderComment model comment =
-  li [ id (commentId comment), (commentClassList model.comments comment model.settings) ] [
-    a [ class "block-link" ] [
+  li [ id (commentId comment), (commentClassList model comment) ] [
+    a [ class "block-link", onClick (StoreLastClickedCommentId comment.id), href (commentUrl model comment) ] [
       div [ class "comment-proper" ] [
         div [ class "comment-proper-author" ] [
           div [ class "comment-controls" ] [
@@ -70,18 +71,24 @@ commitAuthorName : Comment -> String
 commitAuthorName comment =
   Maybe.withDefault "Unknown" comment.commitAuthorName
 
-commentClassList : List Comment -> Comment -> Settings -> Property a
-commentClassList comments comment settings =
-  -- TODO: logic and tests
+commentClassList : Model -> Comment -> Property a
+commentClassList model comment =
   classList [
     ("comment", True)
   , ("test-comment", True)
-  , ("your-last-clicked", False)
-  , ("authored-by-you", (isYourComment comment settings))
-  , ("on-your-commit", (isYourCommit comment settings))
-  , ("on-your-comment", (isCommentOnYourComment comments comment settings))
+  , ("your-last-clicked", (model.lastClickedCommentId == comment.id))
+  , ("authored-by-you", (isYourComment comment model.settings))
+  , ("on-your-commit", (isYourCommit comment model.settings))
+  , ("on-your-comment", (isCommentOnYourComment model.comments comment model.settings))
   , ("is-resolved", comment.resolved)
   ]
+
+commentUrl : Model -> Comment -> String
+commentUrl model comment =
+  if model.environment == "test" || model.environment == "dev" then
+     "#"
+  else
+    comment.url
 
 commentId : Comment -> String
 commentId comment =

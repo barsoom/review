@@ -14,6 +14,9 @@ update msg model =
     LocationChange path ->
       ({model | activeTab = (tabForPath path)}, Cmd.none)
 
+    StoreLastClickedCommentId id ->
+      ({ model | lastClickedCommentId = id }, Cmd.none)
+
     UpdateConnectionStatus connected ->
       ({model | connected = if connected then Yes else No}, Cmd.none)
 

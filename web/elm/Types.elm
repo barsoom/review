@@ -22,6 +22,7 @@ type Msg
   | UpdateShowCommentsYouWrote Bool
   | UpdateShowResolvedComments Bool
   | UpdateShowCommentsOnOthers Bool
+  | StoreLastClickedCommentId Int
 
 type Tab
   = CommitsTab
@@ -84,6 +85,7 @@ type alias Comment =
   , resolved : Bool
   , body : String
   , threadIdentifier : String
+  , url : String
   }
 
 type alias Model =
@@ -94,6 +96,7 @@ type alias Model =
   , settings : Settings
   , exampleAuthor : String
   , lastClickedCommitId : Int
+  , lastClickedCommentId : Int
   , commitsToShowCount : Int
   , environment : String
   , activeTab : Tab

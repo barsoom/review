@@ -17,6 +17,7 @@ defmodule Exremit.CommentSerializer do
       resolved: !!comment.resolved_by_author,
       threadIdentifier: thread_identifier(payload),
       body: payload.body,
+      url: payload.html_url,
     }
   end
 

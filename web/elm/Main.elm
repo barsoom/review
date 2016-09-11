@@ -53,6 +53,7 @@ initialModel =
   , comments = []
   , commentsToShow = []
   , lastClickedCommitId = 0
+  , lastClickedCommentId = 0
   , connected = Unknown
   }
 

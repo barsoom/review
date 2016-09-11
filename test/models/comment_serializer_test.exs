@@ -20,6 +20,7 @@ defmodule Exremit.CommentSerializerTest do
       body: "Since this is an open source lib, how about we doc this in README?",
       resolved: true,
       threadIdentifier: "2be829b9163897e8bb57ceea9709a5d5e61faee1:4:5",
+      url: "https://github.com/barsoom/gridlook/commit/2be829b9163897e8bb57ceea9709a5d5e61faee1#commitcomment-18900296",
     }
   end
 end
