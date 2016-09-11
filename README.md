@@ -28,7 +28,7 @@ The Elm code is not unit tested but there is acceptance tests that run the entir
 * [ ] Store payload from Github commits and comments
   * [x] Does created\_at and updated\_at get updated by ecto?
   * [ ] Hook up the webhook
-* [ ] Add any missing behavior from the angular code
+* [ ] Fix styling differences, missing icons, missing clickable-hower-icon-on-mouse, etc.
 * [ ] Set maintenance on remit, copy the database to review, set `REDIRECT_TO_OTHER_REMIT_URL` on remit to redirect to review.
 
 ## More reliable state sync
