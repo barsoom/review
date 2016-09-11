@@ -3,6 +3,7 @@ defmodule Review.UserSocket do
 
   ## Channels
   channel "commits", Review.CommitChannel
+  channel "ping", Review.PingChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

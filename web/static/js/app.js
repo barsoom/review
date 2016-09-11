@@ -48,8 +48,28 @@ var ports = app.ports;
 // Set up websocket
 let socket = new Socket("/socket", { params: { auth_key: window.authKey } })
 socket.connect()
+
+// Connection status
+// Could probably be made cleaner in Elm, but the important thing
+// is that we know if we're connected.
+let pingChannel = socket.channel("ping", {})
+pingChannel.join().receive("ok", (_) => { ports.connectionStatus.send(true) })
+let lastPingTime = 0
+let oldConnectionStatus = false
+let pingTime = 0
+pingChannel.on("ping", (_) => { lastPingTime = pingTime })
+setInterval((_) => {
+  pingTime = Date.now() / 1000.0
+  let newConnectionStatus = (pingTime - lastPingTime < 2)
+
+  if(newConnectionStatus != oldConnectionStatus) {
+    oldConnectionStatus = newConnectionStatus
+    ports.connectionStatus.send(newConnectionStatus)
+  }
+}, 250)
+
 let channel = socket.channel("commits", {})
-channel.join().receive("ok", (_) => { ports.connectionStatus.send(true) })
+channel.join()
 
 // Handle disconnected clients and updates
 let revision = null
@@ -60,23 +80,6 @@ channel.on("welcome", (welcome) => {
   ports.commits.send(welcome.commits)
   ports.comments.send(welcome.comments)
 })
-
-// Connection status
-// Could probably be made cleaner in Elm, but the important thing
-// is that we know if we're connected.
-let lastPingTime = 0
-let oldConnectionStatus = false
-let pingTime = 0
-channel.on("ping", (_) => { lastPingTime = pingTime })
-setInterval((_) => {
-  pingTime = Date.now() / 1000.0
-  let newConnectionStatus = (pingTime - lastPingTime < 2)
-
-  if(newConnectionStatus != oldConnectionStatus) {
-    oldConnectionStatus = newConnectionStatus
-    ports.connectionStatus.send(newConnectionStatus)
-  }
-}, 250)
 
 // Connect Elm app to websockets
 channel.on("updated_commit", (commit) => ports.updatedCommit.send(commit))
