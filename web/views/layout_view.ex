@@ -1,3 +1,3 @@
-defmodule Exremit.LayoutView do
-  use Exremit.Web, :view
+defmodule Review.LayoutView do
+  use Review.Web, :view
 end

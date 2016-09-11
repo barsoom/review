@@ -1,29 +1,29 @@
-defmodule Exremit.AcceptanceCase do
+defmodule Review.AcceptanceCase do
   use ExUnit.CaseTemplate
 
   using do
     quote do
       use Hound.Helpers
 
-      alias Exremit.Repo
+      alias Review.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
-      import Exremit.Router.Helpers
+      import Review.Router.Helpers
       import AcceptanceTestHelpers
 
       # The default endpoint for testing
-      @endpoint Exremit.Endpoint
+      @endpoint Review.Endpoint
 
       hound_session
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Exremit.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Review.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Exremit.Repo, {:shared, self})
+      Ecto.Adapters.SQL.Sandbox.mode(Review.Repo, {:shared, self})
     end
 
     :ok

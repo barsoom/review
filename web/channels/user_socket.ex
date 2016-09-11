@@ -1,8 +1,8 @@
-defmodule Exremit.UserSocket do
+defmodule Review.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "commits", Exremit.CommitChannel
+  channel "commits", Review.CommitChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
@@ -22,7 +22,7 @@ defmodule Exremit.UserSocket do
   def connect(%{ "auth_key" => auth_key }, socket) do
     auth_key = if auth_key == "", do: nil, else: auth_key
 
-    if auth_key == Application.get_env(:exremit, :auth_key) do
+    if auth_key == Application.get_env(:review, :auth_key) do
       {:ok, socket}
     else
       :error
@@ -36,7 +36,7 @@ defmodule Exremit.UserSocket do
   # Would allow you to broadcast a "disconnect" event and terminate
   # all active sockets and channels for a given user:
   #
-  #     Exremit.Endpoint.broadcast("users_socket:" <> user.id, "disconnect", %{})
+  #     Review.Endpoint.broadcast("users_socket:" <> user.id, "disconnect", %{})
   #
   # Returning `nil` makes this socket anonymous.
   def id(_socket), do: nil

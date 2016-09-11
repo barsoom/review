@@ -1,4 +1,4 @@
-defmodule Exremit.Repo.Migrations.SetUpSchema do
+defmodule Review.Repo.Migrations.SetUpSchema do
   use Ecto.Migration
 
   def change do

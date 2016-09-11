@@ -1,13 +1,13 @@
-defmodule Exremit.CommentSerializerTest do
+defmodule Review.CommentSerializerTest do
   use ExUnit.Case
-  import Exremit.Factory
+  import Review.Factory
 
   test "serializes a comment" do
     author = build(:author, name: "Joe")
     commit = build(:commit, author: author)
     comment = build(:comment, id: 50, commit: commit)
 
-    data = Exremit.CommentSerializer.serialize(comment)
+    data = Review.CommentSerializer.serialize(comment)
 
     assert data == %{
       id: 50,

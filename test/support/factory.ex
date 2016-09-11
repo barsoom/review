@@ -1,7 +1,7 @@
-defmodule Exremit.Factory do
-  use ExMachina.Ecto, repo: Exremit.Repo
+defmodule Review.Factory do
+  use ExMachina.Ecto, repo: Review.Repo
 
-  alias Exremit.{Commit, Author, Comment}
+  alias Review.{Commit, Author, Comment}
 
   def author_factory do
     %Author{ name: "Joe", email: "joe@example.com", username: "joe" }

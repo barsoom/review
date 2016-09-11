@@ -1,4 +1,4 @@
-defmodule Exremit.CommitSerializer do
+defmodule Review.CommitSerializer do
   # Some argue 50 chars is a good length for the summary part of a commit message.
   # http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
   @message_summary_length 50

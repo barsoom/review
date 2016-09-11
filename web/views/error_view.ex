@@ -1,5 +1,5 @@
-defmodule Exremit.ErrorView do
-  use Exremit.Web, :view
+defmodule Review.ErrorView do
+  use Review.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found"

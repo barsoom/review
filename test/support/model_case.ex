@@ -1,4 +1,4 @@
-defmodule Exremit.ModelCase do
+defmodule Review.ModelCase do
   @moduledoc """
   This module defines the test case to be used by
   model tests.
@@ -11,18 +11,18 @@ defmodule Exremit.ModelCase do
 
   using do
     quote do
-      alias Exremit.Repo
+      alias Review.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
-      import Exremit.ModelCase
+      import Review.ModelCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Exremit.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Review.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Exremit.Repo, {:shared, self})
+      Ecto.Adapters.SQL.Sandbox.mode(Review.Repo, {:shared, self})
     end
 
     :ok

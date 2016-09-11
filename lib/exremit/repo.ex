@@ -1,8 +1,8 @@
-defmodule Exremit.Repo do
-  use Ecto.Repo, otp_app: :exremit
+defmodule Review.Repo do
+  use Ecto.Repo, otp_app: :review
   import Ecto.Query
 
-  alias Exremit.{Commit, Comment, Author}
+  alias Review.{Commit, Comment, Author}
 
   def find_or_insert_author_by_email(email) do
     author = Author
@@ -14,14 +14,14 @@ defmodule Exremit.Repo do
     commits
     |> Ecto.Query.limit(^limit)
     |> all
-    |> Exremit.CommitSerializer.serialize
+    |> Review.CommitSerializer.serialize
   end
 
   def comments_data(limit) do
     comments
     |> Ecto.Query.limit(^limit)
     |> all
-    |> Exremit.CommentSerializer.serialize
+    |> Review.CommentSerializer.serialize
   end
 
   def commits do

@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Exremit</title>
+    <title>Review</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
     <script type="text/javascript">
       window.authKey = "<%= @conn.params["auth_key"] %>";

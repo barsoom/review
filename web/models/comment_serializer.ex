@@ -1,4 +1,4 @@
-defmodule Exremit.CommentSerializer do
+defmodule Review.CommentSerializer do
   def serialize(comments) when is_list(comments) do
     comments |> Parallel.pmap(&serialize/1)
   end
@@ -26,7 +26,7 @@ defmodule Exremit.CommentSerializer do
   end
 
   def commit_summary(nil), do: nil
-  def commit_summary(commit), do: Exremit.CommitSerializer.commit_summary(commit)
+  def commit_summary(commit), do: Review.CommitSerializer.commit_summary(commit)
 
   def commit_author_gravatar(nil), do: nil
   def commit_author_gravatar(commit) do

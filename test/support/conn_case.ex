@@ -1,4 +1,4 @@
-defmodule Exremit.ConnCase do
+defmodule Review.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -20,22 +20,22 @@ defmodule Exremit.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
-      alias Exremit.Repo
+      alias Review.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
-      import Exremit.Router.Helpers
+      import Review.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint Exremit.Endpoint
+      @endpoint Review.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Exremit.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(Review.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Exremit.Repo, {:shared, self})
+      Ecto.Adapters.SQL.Sandbox.mode(Review.Repo, {:shared, self})
     end
 
     :ok

@@ -1,5 +1,5 @@
-defmodule Exremit.Author do
-  use Exremit.Web, :model
+defmodule Review.Author do
+  use Review.Web, :model
 
   schema "authors" do
     field :name, :string

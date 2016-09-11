@@ -1,9 +1,9 @@
-defmodule Exremit.CommitChannel do
+defmodule Review.CommitChannel do
   use Phoenix.Channel
 
   import Ecto.Query
 
-  alias Exremit.{Repo, Commit, CommitSerializer}
+  alias Review.{Repo, Commit, CommitSerializer}
 
   def join(_channel, _auth, socket) do
     send self, :after_join
@@ -54,11 +54,11 @@ defmodule Exremit.CommitChannel do
 
   defp update_commit_and_broadcast_changes(id, changes, socket) do
     commit =
-      Repo.get!(Exremit.Repo.commits, id)
+      Repo.get!(Review.Repo.commits, id)
       |> Ecto.Changeset.change(changes)
       |> Repo.update!
 
-    commit = Repo.get!(Exremit.Repo.commits, id)
+    commit = Repo.get!(Review.Repo.commits, id)
 
     broadcast! socket, "updated_commit", CommitSerializer.serialize(commit)
 
@@ -67,8 +67,8 @@ defmodule Exremit.CommitChannel do
 
   # The number of records to show (on load and after updates), for speed.
   # Gets slower with more records.
-  @max_records Application.get_env(:exremit, :max_records)
+  @max_records Application.get_env(:review, :max_records)
 
-  defp commits_data, do: Exremit.Repo.commits_data(@max_records)
-  defp comments_data, do: Exremit.Repo.comments_data(@max_records)
+  defp commits_data, do: Review.Repo.commits_data(@max_records)
+  defp comments_data, do: Review.Repo.comments_data(@max_records)
 end

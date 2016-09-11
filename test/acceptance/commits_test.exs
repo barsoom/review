@@ -1,6 +1,6 @@
-defmodule Exremit.CommitsTest do
-  use Exremit.AcceptanceCase
-  import Exremit.Factory
+defmodule Review.CommitsTest do
+  use Review.AcceptanceCase
+  import Review.Factory
 
   test "shows a list of commits, with the newest on top" do
     commit1 = insert(:commit)

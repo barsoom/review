@@ -1,4 +1,4 @@
-# Exremit
+# Review
 
 Exploring phoenix and elm based development by reimplementing [remit](https://github.com/henrik/remit).
 
@@ -28,7 +28,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   - [ ] Add github hook for comments
   - [ ] Maybe: Do performance optimizations if it's slow in any way.
 * [ ] Add any missing behavior from the angular code
-* [ ] Set maintenance on remit, copy the database to exremit, set `REDIRECT_TO_OTHER_REMIT_URL` on remit to redirect to exremit.
+* [ ] Set maintenance on remit, copy the database to review, set `REDIRECT_TO_OTHER_REMIT_URL` on remit to redirect to review.
 
 ## More reliable state sync
 
@@ -79,13 +79,13 @@ There is already blog posts, but haven't found anything that describes a develop
 
 ## Loading data for dev
 
-    script/download_and_import_database your-exremit-or-remit-app-name
+    script/download_and_import_database your-review-or-remit-app-name
 
 ## Copy data from one remit installation to another
 
-Can be used to copy from remit to exremit, or just to copy data between two deploys of the same type.
+Can be used to copy from remit to review, or just to copy data between two deploys of the same type.
 
-    script/copy_data_between_remit_deploys remit-app exremit-app
+    script/copy_data_between_remit_deploys remit-app review-app
 
 ## Running tests
 
@@ -122,7 +122,7 @@ If you have problems with the dependencies, elixir, javascript or elm, try runni
 
 ## Commands used to deploy to heroku
 
-    heroku apps:create exremit --region eu
+    heroku apps:create review --region eu
     heroku buildpacks:set https://github.com/gjaldon/phoenix-static-buildpack
     heroku buildpacks:add --index 1 https://github.com/HashNuke/heroku-buildpack-elixir
     heroku config:set SECRET_KEY_BASE=$(elixir -e "IO.puts :crypto.strong_rand_bytes(64) |> Base.encode64")

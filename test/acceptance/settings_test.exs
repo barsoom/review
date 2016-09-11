@@ -1,5 +1,5 @@
-defmodule Exremit.SettingsTest do
-  use Exremit.AcceptanceCase
+defmodule Review.SettingsTest do
+  use Review.AcceptanceCase
 
   test "can save settings on the client" do
     navigate_to_settings_page

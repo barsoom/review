@@ -1,3 +1,3 @@
-defmodule Exremit.PageViewTest do
-  use Exremit.ConnCase, async: true
+defmodule Review.PageViewTest do
+  use Review.ConnCase, async: true
 end

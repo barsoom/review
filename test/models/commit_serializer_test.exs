@@ -1,13 +1,13 @@
-defmodule Exremit.CommitSerializerTest do
+defmodule Review.CommitSerializerTest do
   use ExUnit.Case
-  import Exremit.Factory
+  import Review.Factory
 
   test "serializes a commit" do
     author = build(:author, email: "foo@example.com", name: "Joe")
     reviewer = build(:author, email: "bar@example.com", name: "Jane")
     commit = build(:commit, id: 50, author: author, review_started_by_author: reviewer, reviewed_by_author: nil)
 
-    data = Exremit.CommitSerializer.serialize(commit)
+    data = Review.CommitSerializer.serialize(commit)
 
     # See the test/fixtures/payload.json for the source data
     assert data == %{

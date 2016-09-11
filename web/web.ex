@@ -1,12 +1,12 @@
-defmodule Exremit.Web do
+defmodule Review.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use Exremit.Web, :controller
-      use Exremit.Web, :view
+      use Review.Web, :controller
+      use Review.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -30,16 +30,16 @@ defmodule Exremit.Web do
     quote do
       use Phoenix.Controller
 
-      alias Exremit.Repo
+      alias Review.Repo
       import Ecto
       import Ecto.Query, only: [from: 1, from: 2]
 
-      import Exremit.Router.Helpers
+      import Review.Router.Helpers
 
       plug :authenticate
 
       defp authenticate(conn, _options) do
-        if valid_credentials?(conn.params["auth_key"], Application.get_env(:exremit, :auth_key)) do
+        if valid_credentials?(conn.params["auth_key"], Application.get_env(:review, :auth_key)) do
           conn
         else
           conn |> deny_and_halt
@@ -67,7 +67,7 @@ defmodule Exremit.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import Exremit.Router.Helpers
+      import Review.Router.Helpers
     end
   end
 
@@ -81,7 +81,7 @@ defmodule Exremit.Web do
     quote do
       use Phoenix.Channel
 
-      alias Exremit.Repo
+      alias Review.Repo
       import Ecto
       import Ecto.Query, only: [from: 1, from: 2]
     end

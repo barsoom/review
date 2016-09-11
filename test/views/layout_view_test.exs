@@ -1,3 +1,3 @@
-defmodule Exremit.LayoutViewTest do
-  use Exremit.ConnCase, async: true
+defmodule Review.LayoutViewTest do
+  use Review.ConnCase, async: true
 end

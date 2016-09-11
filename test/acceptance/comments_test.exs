@@ -1,6 +1,6 @@
-defmodule Exremit.CommentsTest do
-  use Exremit.AcceptanceCase
-  import Exremit.Factory
+defmodule Review.CommentsTest do
+  use Review.AcceptanceCase
+  import Review.Factory
 
   test "shows a list of comments, with the newest on top" do
     comment1 = insert(:comment)
@@ -80,7 +80,7 @@ defmodule Exremit.CommentsTest do
   end
 
   defp payload_that_has_different_thread_identifier do
-    Exremit.Factory.comment_payload |> String.replace("2be8", "aaaa")
+    Review.Factory.comment_payload |> String.replace("2be8", "aaaa")
   end
 
   defp uncheck(checkbox_class) do

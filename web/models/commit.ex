@@ -1,5 +1,5 @@
-defmodule Exremit.Commit do
-  use Exremit.Web, :model
+defmodule Review.Commit do
+  use Review.Web, :model
 
   schema "commits" do
     field :sha, :string
@@ -13,8 +13,8 @@ defmodule Exremit.Commit do
 
     timestamps inserted_at: :created_at
 
-    belongs_to :author, Exremit.Author
-    belongs_to :reviewed_by_author, Exremit.Author
-    belongs_to :review_started_by_author, Exremit.Author
+    belongs_to :author, Review.Author
+    belongs_to :reviewed_by_author, Review.Author
+    belongs_to :review_started_by_author, Review.Author
   end
 end

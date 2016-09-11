@@ -1,14 +1,14 @@
-defmodule Exremit.Endpoint do
-  use Phoenix.Endpoint, otp_app: :exremit
+defmodule Review.Endpoint do
+  use Phoenix.Endpoint, otp_app: :review
 
-  socket "/socket", Exremit.UserSocket
+  socket "/socket", Review.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :exremit, gzip: false,
+    at: "/", from: :review, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -32,8 +32,8 @@ defmodule Exremit.Endpoint do
 
   plug Plug.Session,
     store: :cookie,
-    key: "_exremit_key",
+    key: "_review_key",
     signing_salt: "MxNb4C1G"
 
-  plug Exremit.Router
+  plug Review.Router
 end

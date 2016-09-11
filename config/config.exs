@@ -6,12 +6,12 @@
 use Mix.Config
 
 # Configures the endpoint
-config :exremit, Exremit.Endpoint,
+config :review, Review.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
   secret_key_base: "GYJj/FPmO6UO6bO3xF7UB47lwGnS2Vgdc+yjPHOH4YOR+00hsusLtXrtSCr4eac5",
   render_errors: [accepts: ~w(html json)],
-  pubsub: [name: Exremit.PubSub,
+  pubsub: [name: Review.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
@@ -19,9 +19,9 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :exremit,
+config :review,
   max_records: 300,
-  ecto_repos: [Exremit.Repo]
+  ecto_repos: [Review.Repo]
 
 # Configure phoenix generators
 config :phoenix, :generators,

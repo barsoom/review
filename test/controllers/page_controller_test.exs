@@ -1,9 +1,9 @@
-defmodule Exremit.PageControllerTest do
-  use Exremit.ConnCase
+defmodule Review.PageControllerTest do
+  use Review.ConnCase
 
   test "allows you to see the page with the correct token" do
     conn = get build_conn(), "/", %{ auth_key: "secret" }
-    assert html_response(conn, 200) =~ "Exremit"
+    assert html_response(conn, 200) =~ "Review"
   end
 
   test "disallows access for invalid tokens" do
