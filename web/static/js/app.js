@@ -1,24 +1,5 @@
-// Brunch automatically concatenates all files in your
-// watched paths. Those paths can be configured at
-// config.paths.watched in "brunch-config.js".
-//
-// However, those files will only be executed if
-// explicitly imported. The only exception are files
-// in vendor, which are never wrapped in imports and
-// therefore are always executed.
-
-// Import dependencies
-//
-// If you no longer want to use a dependency, remember
-// to also remove its path from "config.paths.watched".
+// Auto reload the app in dev, related to "config.paths.watched".
 import "phoenix_html"
-
-// Import local files
-//
-// Local files can be imported directly using relative
-// paths "./socket" or full ones "web/static/js/socket".
-
-import {Socket} from "phoenix"
 
 // Generic elm app code, works with render_elm in PageView
 window.elmApps = {};
@@ -46,6 +27,7 @@ var app = elmApps.Main;
 var ports = app.ports;
 
 // Set up websocket
+import {Socket} from "phoenix"
 let socket = new Socket("/socket", { params: { auth_key: window.authKey } })
 socket.connect()
 
@@ -68,34 +50,31 @@ setInterval((_) => {
   }
 }, 250)
 
-let channel = socket.channel("commits", {})
-channel.join()
-
 // Handle disconnected clients and updates
 let revision = null
-channel.on("welcome", (welcome) => {
+pingChannel.on("welcome", (welcome) => {
   if(!revision) { revision = welcome.revision }
   if(revision != welcome.revision) { window.location.reload() }
-
-  ports.commits.send(welcome.commits)
-  ports.comments.send(welcome.comments)
 })
 
 // Connect Elm app to websockets
+let channel = socket.channel("review", {})
+channel.join()
 channel.on("updated_commit", (commit) => ports.updatedCommit.send(commit))
-
+channel.on("welcome", (data) => {
+  ports.commits.send(data.commits)
+  ports.comments.send(data.comments)
+})
 ports.outgoingCommands.subscribe((event) => {
   var action = event[0];
   var change = event[1];
   channel.push(action, change)
 })
 
-// Load settings
+// Load and save settings
 var settingsCookieName = "settings-v2"
 var savedSettingsJson = Cookies.get(settingsCookieName);
 if(savedSettingsJson) { ports.settings.send(JSON.parse(savedSettingsJson)) }
-
-// Store setting changes
 ports.settingsChange.subscribe((settings) => {
   Cookies.set(settingsCookieName, JSON.stringify(settings))
 })

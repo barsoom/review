@@ -2,7 +2,7 @@ defmodule Review.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "commits", Review.CommitChannel
+  channel "review", Review.ReviewChannel
   channel "ping", Review.PingChannel
 
   ## Transports

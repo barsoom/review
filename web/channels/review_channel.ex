@@ -1,9 +1,7 @@
-defmodule Review.CommitChannel do
+defmodule Review.ReviewChannel do
   use Phoenix.Channel
 
-  import Ecto.Query
-
-  alias Review.{Repo, Commit, CommitSerializer}
+  alias Review.{Repo, CommitSerializer}
 
   def join(_channel, _auth, socket) do
     send self, :after_join
@@ -11,7 +9,7 @@ defmodule Review.CommitChannel do
   end
 
   def handle_info(:after_join, socket) do
-    push socket, "welcome", %{ commits: commits_data, comments: comments_data, revision: System.get_env("HEROKU_SLUG_COMMIT") }
+    push socket, "welcome", %{ commits: commits_data, comments: comments_data }
 
     {:noreply, socket}
   end
@@ -47,10 +45,9 @@ defmodule Review.CommitChannel do
   end
 
   defp update_commit_and_broadcast_changes(id, changes, socket) do
-    commit =
-      Repo.get!(Review.Repo.commits, id)
-      |> Ecto.Changeset.change(changes)
-      |> Repo.update!
+    Repo.get!(Review.Repo.commits, id)
+    |> Ecto.Changeset.change(changes)
+    |> Repo.update!
 
     commit = Repo.get!(Review.Repo.commits, id)
 
