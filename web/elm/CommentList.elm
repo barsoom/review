@@ -2,13 +2,14 @@ module CommentList exposing (view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (..)
 import VirtualDom exposing (Node, Property)
 import Maybe
+
 import Types exposing (..)
 import Formatting exposing (formattedTime)
 import Avatar exposing (avatarUrl)
-import String
+import CommentFilter exposing (filter)
+import CommentSettings exposing (view)
 
 view : Model -> Html Msg
 view model =
@@ -19,43 +20,22 @@ view model =
 
 renderCommentSettings : Settings -> Node Msg
 renderCommentSettings settings =
-  div [ class "comment-settings" ] [
-    renderOption {
-      checked = settings.showCommentsYouWrote
-    , class = "test-comments-i-wrote"
-    , name = "Comments I wrote"
-    , onCheck = UpdateShowCommentsYouWrote
-    }
-    , renderOption {
-      checked = settings.showCommentsOnOthers
-    , class = "test-comments-on-others"
-    , name = "Comments on others"
-    , onCheck = UpdateShowCommentsOnOthers
-    }
-    , renderOption {
-      checked = settings.showResolvedComments
-    , class = "test-resolved-comments"
-    , name = "Resolved comments"
-    , onCheck = UpdateShowResolvedComments
-    }
-  ]
-
-renderOption : { checked : Bool, name : String, class : String, onCheck : Bool -> Msg } ->  Node Msg
-renderOption option =
-  label [] [
-    input [ type' "checkbox", class option.class, checked option.checked, onCheck option.onCheck ] []
-  ,  text option.name
-  ]
+  CommentSettings.view settings
 
 renderCommentList : Model -> Node a
 renderCommentList model =
   let
-    commentsToShow = (filterComments model.settings model.comments)
+    commentsToShow = filterComments model
   in
     if (List.length commentsToShow) == 0 then
       text "There are no comments yet! Write some."
     else
       ul [ class "comments-list" ] (List.map (renderComment model) commentsToShow)
+
+filterComments : Model -> List Comment
+filterComments model =
+  model.comments
+  |> CommentFilter.filter(model.settings)
 
 renderComment : Model -> Comment -> Node a
 renderComment model comment =
@@ -100,55 +80,6 @@ commentClassList comment =
   , ("is-resolved", False)
   , ("test-comment", True)
   ]
-
-filterComments : Settings -> List Comment -> List Comment
-filterComments settings comments =
-  comments
-  |> filterCommentsNotOnYourCommitsOrComments(settings)
-  |> filterCommentsYouWrote(settings)
-  |> filterCommentsByResolved(settings)
-
-filterCommentsYouWrote : Settings -> List Comment -> List Comment
-filterCommentsYouWrote settings comments =
-  if settings.showCommentsYouWrote then
-    comments
-  else
-    comments |> List.filter (\comment -> not (isYourComment comment settings))
-
-filterCommentsByResolved : Settings -> List Comment -> List Comment
-filterCommentsByResolved settings comments =
-  if settings.showResolvedComments then
-    comments
-  else
-    comments |> List.filter (\comment -> not comment.resolved)
-
-filterCommentsNotOnYourCommitsOrComments : Settings -> List Comment -> List Comment
-filterCommentsNotOnYourCommitsOrComments settings comments =
-  if settings.showCommentsOnOthers then
-    comments
-  else
-    comments |> List.filter (\comment ->
-      (isCommentOnYourComment comments comment settings) || (isYourCommit comment settings)
-    )
-
-isCommentOnYourComment : List Comment -> Comment -> Settings -> Bool
-isCommentOnYourComment comments comment settings =
-  let
-    commentsOnSameThread = comments
-      |> List.filter (\c -> c.threadIdentifier == comment.threadIdentifier)
-    yourCommentsOnSameThread = commentsOnSameThread
-      |> List.filter(\c -> isYourComment c settings)
-  in
-    yourCommentsOnSameThread /= []
-
-isYourComment : Comment -> Settings -> Bool
-isYourComment comment settings =
-  String.contains settings.name comment.authorName
-
-isYourCommit : Comment -> Settings -> Bool
-isYourCommit comment settings =
-  (Maybe.withDefault "Unknown" comment.commitAuthorName)
-  |> String.contains(settings.name)
 
 commentId : Comment -> String
 commentId comment =

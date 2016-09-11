@@ -162,6 +162,7 @@ defmodule Exremit.CommitsTest do
   end
 
   def commit_reviewer_email do
+    :timer.sleep 50 # wait for DOM update
     find_element(:css, ".test-reviewer")
     |> attribute_value("data-test-reviewer-email")
   end

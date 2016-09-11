@@ -32,13 +32,13 @@ defmodule Exremit.CommentsTest do
     your_comment = insert(:comment, author: carl)
     resolved_comment = insert(:comment, resolved_by_author: jane)
 
-    commit = insert(:commit, sha: "a", author: fred)
+    insert(:commit, sha: "a", author: fred)
     other_people_comment_on_other_peoples_commit = insert(:comment, author: jane, commit_sha: "a", json_payload: payload_that_has_different_thread_identifier)
 
-    commit = insert(:commit, sha: "b", author: carl)
+    insert(:commit, sha: "b", author: carl)
     unresolved_comment_on_your_commit = insert(:comment, commit_sha: "b")
 
-    commit = insert(:commit, sha: "c", author: fred)
+    insert(:commit, sha: "c", author: fred)
     _your_comment = insert(:comment, author: carl, commit_sha: "c")
     comment_on_your_comment = insert(:comment, author: jane, commit_sha: "c")
 
