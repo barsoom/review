@@ -9,9 +9,6 @@ A reimplementation of [remit](https://github.com/henrik/remit) in Elixir/Phoenix
 * [x] Send entire state when you re-connect, [like the welcome hook](https://gist.github.com/joakimk/7b9ed5138c48594f0cdecfe95cb6c41e), show that this works as it's kind of a killer feature for this version
   - [x] Send limited data on page load
 * [x] Auto reload on code changes to keep everyone up to date (as changes will come somewhat often), or a notice that you are behind like trello
-* [ ] Store payload from Github commits and comments
-  * [x] Does created\_at and updated\_at get updated by ecto?
-  * [ ] Hook up the webhook
 * [ ] Implement the comments page
   - [x] Implement the simplest possible listing
   - [x] Add `json_payload` to comments in remit and redo data dump.
@@ -26,7 +23,9 @@ A reimplementation of [remit](https://github.com/henrik/remit) in Elixir/Phoenix
   - [ ] Implement mark as resolved
   - [ ] Implement mark as new
   - [ ] Add github hook for comments
-  - [ ] Maybe: Do performance optimizations if it's slow in any way.
+* [ ] Store payload from Github commits and comments
+  * [x] Does created\_at and updated\_at get updated by ecto?
+  * [ ] Hook up the webhook
 * [ ] Add any missing behavior from the angular code
 * [ ] Set maintenance on remit, copy the database to review, set `REDIRECT_TO_OTHER_REMIT_URL` on remit to redirect to review.
 
