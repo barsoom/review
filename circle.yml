@@ -20,4 +20,4 @@ deployment:
   production:
     branch: master
     heroku:
-      appname: exremit
+      appname: auctionet-code-review
