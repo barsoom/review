@@ -2,6 +2,8 @@
 
 A reimplementation of [remit](https://github.com/henrik/remit) in Elixir/Phoenix and Elm that is much faster on both the server and client side and also fixes the known data sync issues.
 
+The Elm code is not unit tested but there is acceptance tests that run the entire application and tests interactions between multiple users and many other things. The Elm compiler is very reliable so it's unlikely you break anything when changing the code.
+
 # TODO
 
 ## Make it possible and practial to switch over to this version for normal use
