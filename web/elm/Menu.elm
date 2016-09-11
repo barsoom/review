@@ -11,14 +11,14 @@ view : Model -> Node Msg
 view model =
   nav [ class "top-nav" ] [
     ul [] [
-      renderMenuItem "Commits" "fa-eye" CommitsTab
-    , renderMenuItem "Comments" "fa-comments" CommentsTab
-    , renderMenuItem "Settings" "fa-cog" SettingsTab
+      renderMenuItem model "Commits" "fa-eye" CommitsTab
+    , renderMenuItem model "Comments" "fa-comments" CommentsTab
+    , renderMenuItem model "Settings" "fa-cog" SettingsTab
     ]
   ]
 
-renderMenuItem : String -> String -> Tab -> Node Msg
-renderMenuItem name customClass tab =
+renderMenuItem : Model -> String -> String -> Tab -> Node Msg
+renderMenuItem model name customClass tab =
   let
     testClass = "test-menu-item-" ++ (String.toLower name)
   in
@@ -27,6 +27,24 @@ renderMenuItem name customClass tab =
         span [] [
           i [ class ("fa fa-lg " ++ customClass) ] []
           , span [] [ text name ]
+          , (renderBadge model tab)
         ]
       ]
     ]
+
+renderBadge : Model -> Tab -> Node a
+renderBadge model tab =
+  if tab == CommitsTab then
+    span [ class "commits-badge" ] [
+      text (toString (reviewableCommitsCount model))
+    ]
+  else
+    span [] []
+
+reviewableCommitsCount : Model -> Int
+reviewableCommitsCount model =
+  model.commits
+  |> List.filter(\c -> not c.isReviewed)
+  |> List.filter(\c -> not (String.contains model.settings.name c.authorName))
+  |> List.length
+
