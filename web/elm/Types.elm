@@ -81,6 +81,7 @@ type alias Comment =
   , commitAuthorName : Maybe String
   , commitAuthorGravatar : Maybe String
   , commitSummary : Maybe String
+  , resolved : Bool
   , body : String
   }
 

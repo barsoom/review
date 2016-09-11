@@ -19,6 +19,9 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   - [x] Implement `json_payload` parsing
   - [x] Implement dates and texts
   - [ ] Implement filtering
+    - [x] Implement full name filtering
+    - [ ] Implement partial-name filtering for pair commits
+    - [ ] Look into filters in the old app, I think comments-i-wrote has an edge case
   - [ ] Implement mark as resolved
   - [ ] Implement mark as new
   - [ ] Add github hook for comments

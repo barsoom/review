@@ -102,10 +102,33 @@ commentClassList comment =
 
 filterComments : Settings -> List Comment -> List Comment
 filterComments settings comments =
-  if not settings.showCommentsYouWrote then
-    comments |> List.filter (\comment -> comment.authorName /= settings.name)
-  else
+  comments
+  |> filterCommentsYouWrote(settings)
+  |> filterCommentsByResolved(settings)
+  |> filterCommentsOnOthers(settings)
+
+filterCommentsYouWrote : Settings -> List Comment -> List Comment
+filterCommentsYouWrote settings comments =
+  if settings.showCommentsYouWrote then
     comments
+  else
+    comments |> List.filter (\comment -> comment.authorName /= settings.name)
+
+filterCommentsByResolved : Settings -> List Comment -> List Comment
+filterCommentsByResolved settings comments =
+  if settings.showResolvedComments then
+    comments
+  else
+    comments |> List.filter (\comment -> not comment.resolved)
+
+filterCommentsOnOthers : Settings -> List Comment -> List Comment
+filterCommentsOnOthers settings comments =
+  if settings.showCommentsOnOthers then
+    comments
+  else
+    comments |> List.filter (\comment ->
+      (Maybe.withDefault "Unknown" comment.commitAuthorName) == settings.name
+    )
 
 commentId : Comment -> String
 commentId comment =

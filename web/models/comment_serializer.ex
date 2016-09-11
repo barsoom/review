@@ -14,6 +14,7 @@ defmodule Exremit.CommentSerializer do
       commitAuthorGravatar: commit_author_gravatar(comment.commit),
       commitAuthorName: commit_author_name(comment.commit),
       commitSummary: commit_summary(comment.commit),
+      resolved: !!comment.resolved_by_author,
       body: payload.body,
     }
   end

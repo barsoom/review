@@ -32,8 +32,11 @@ defmodule Exremit.CommentsTest do
     your_comment = insert(:comment, author: carl)
     resolved_comment = insert(:comment, resolved_by_author: jane)
 
-    commit = insert(:commit, author: fred)
-    other_people_comment_on_other_peoples_commit = insert(:comment, author: jane, commit: commit)
+    commit = insert(:commit, sha: "a", author: fred)
+    other_people_comment_on_other_peoples_commit = insert(:comment, author: jane, commit_sha: "a")
+
+    commit = insert(:commit, sha: "b", author: carl)
+    unresolved_comment_on_your_commit = insert(:comment, commit_sha: "b")
 
     navigate_to_settings_page
     fill_in "name", with: "Carl"
@@ -42,12 +45,28 @@ defmodule Exremit.CommentsTest do
     assert comment_visible?(your_comment)
     assert comment_visible?(resolved_comment)
     assert comment_visible?(other_people_comment_on_other_peoples_commit)
+    assert comment_visible?(unresolved_comment_on_your_commit)
 
     uncheck "test-comments-i-wrote"
 
     assert !comment_visible?(your_comment)
     assert comment_visible?(resolved_comment)
     assert comment_visible?(other_people_comment_on_other_peoples_commit)
+    assert comment_visible?(unresolved_comment_on_your_commit)
+
+    uncheck "test-resolved-comments"
+
+    assert !comment_visible?(your_comment)
+    assert !comment_visible?(resolved_comment)
+    assert comment_visible?(other_people_comment_on_other_peoples_commit)
+    assert comment_visible?(unresolved_comment_on_your_commit)
+
+    uncheck "test-comments-on-others"
+
+    assert !comment_visible?(your_comment)
+    assert !comment_visible?(resolved_comment)
+    assert !comment_visible?(other_people_comment_on_other_peoples_commit)
+    assert comment_visible?(unresolved_comment_on_your_commit)
 
     # TODO: test persistence of settings
   end

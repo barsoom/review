@@ -18,6 +18,7 @@ defmodule Exremit.CommentSerializerTest do
       commitAuthorName: "Joe",
       commitSummary: "This is a very long message that will be shortened",
       body: "Since this is an open source lib, how about we doc this in README?",
+      resolved: true,
     }
   end
 end
