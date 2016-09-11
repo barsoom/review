@@ -8,6 +8,7 @@ import Maybe
 import Types exposing (..)
 import Formatting exposing (formattedTime)
 import Avatar exposing (avatarUrl)
+import String
 
 view : Model -> Html Msg
 view model =
@@ -112,7 +113,7 @@ filterCommentsYouWrote settings comments =
   if settings.showCommentsYouWrote then
     comments
   else
-    comments |> List.filter (\comment -> comment.authorName /= settings.name)
+    comments |> List.filter (\comment -> not (String.contains settings.name comment.authorName))
 
 filterCommentsByResolved : Settings -> List Comment -> List Comment
 filterCommentsByResolved settings comments =
@@ -127,7 +128,8 @@ filterCommentsOnOthers settings comments =
     comments
   else
     comments |> List.filter (\comment ->
-      (Maybe.withDefault "Unknown" comment.commitAuthorName) == settings.name
+      (Maybe.withDefault "Unknown" comment.commitAuthorName)
+      |> String.contains(settings.name)
     )
 
 commentId : Comment -> String

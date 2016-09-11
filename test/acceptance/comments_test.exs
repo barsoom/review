@@ -25,9 +25,9 @@ defmodule Exremit.CommentsTest do
   end
 
   test "comments can be filtered" do
-    carl = insert(:author, name: "Carl")
-    jane = insert(:author, name: "Jane")
-    fred = insert(:author, name: "Fred")
+    carl = insert(:author, name: "Carl Carlsson")
+    jane = insert(:author, name: "Jane Smith")
+    fred = insert(:author, name: "Fred Flintstone")
 
     your_comment = insert(:comment, author: carl)
     resolved_comment = insert(:comment, resolved_by_author: jane)
