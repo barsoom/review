@@ -83,7 +83,7 @@ tabForPath path =
     "/settings" -> SettingsTab
     _ -> CommitsTab
 
-pushEvent : String -> CommitChange -> Cmd a
+pushEvent : String -> Change -> Cmd a
 pushEvent name change =
   Ports.outgoingCommands (name, change)
 

@@ -9,6 +9,7 @@ import Html.Events exposing (onClick)
 import String
 import Formatting exposing (formattedTime)
 import VirtualDom exposing (Node, Property)
+import Change exposing (changeMsg)
 
 view : Model -> Node Msg
 view model =
@@ -65,7 +66,7 @@ renderButtons model commit =
         name = "Start review"
       , class = "start-review"
       , iconClass = "fa-eye"
-      , msg = (commitChangeMsg StartReview model commit)
+      , msg = (changeMsg StartReview model commit)
       }
     ]
   else if commit.isBeingReviewed then
@@ -74,13 +75,13 @@ renderButtons model commit =
         name = "Abandon review"
       , class = "abandon-review"
       , iconClass = "fa-eye-slash"
-      , msg = (commitChangeMsg AbandonReview model commit)
+      , msg = (changeMsg AbandonReview model commit)
       }
     , commitButton {
         name = "Mark as reviewed"
       , class = "mark-as-reviewed"
       , iconClass = "fa-eye-slash"
-      , msg = (commitChangeMsg MarkAsReviewed model commit)
+      , msg = (changeMsg MarkAsReviewed model commit)
       }
     , img [ class "commit-reviewer-avatar test-reviewer", src (avatarUrl commit.pendingReviewerGravatarHash), reviewerDataAttribute(commit.pendingReviewerEmail) ] []
     ]
@@ -90,7 +91,7 @@ renderButtons model commit =
         name = "Mark as new"
       , class = "mark-as-new"
       , iconClass = "fa-eye-slash"
-      , msg = (commitChangeMsg MarkAsNew model commit)
+      , msg = (changeMsg MarkAsNew model commit)
       }
     , img [ class "commit-reviewer-avatar test-reviewer", src (avatarUrl commit.reviewerGravatarHash), reviewerDataAttribute(commit.reviewerEmail) ] []
     ]
@@ -101,10 +102,6 @@ renderButtons model commit =
 reviewerDataAttribute : Maybe String -> Attribute a
 reviewerDataAttribute email =
   attribute "data-test-reviewer-email" (Maybe.withDefault "" email)
-
-commitChangeMsg : (CommitChange -> a) -> Model -> Commit -> a
-commitChangeMsg msg model commit =
-  msg { byEmail = model.settings.email, id = commit.id }
 
 commitButton : CommitButton -> Node Msg
 commitButton commitButton =

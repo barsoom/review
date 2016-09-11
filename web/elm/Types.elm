@@ -13,10 +13,10 @@ type Msg
   | UpdateCommit Commit
   | ShowCommit Int
   | ListMoreCommits Time
-  | StartReview CommitChange
-  | AbandonReview CommitChange
-  | MarkAsReviewed CommitChange
-  | MarkAsNew CommitChange
+  | StartReview Change
+  | AbandonReview Change
+  | MarkAsReviewed Change
+  | MarkAsNew Change
   | LocationChange String
   | UpdateConnectionStatus Bool
   | UpdateShowCommentsYouWrote Bool
@@ -45,7 +45,7 @@ type alias Field =
   , onInput : String -> Msg
   }
 
-type alias CommitChange =
+type alias Change =
   { id : Int
   , byEmail : String
   }
@@ -87,6 +87,8 @@ type alias Comment =
   , threadIdentifier : String
   , url : String
   }
+
+type alias Identifyable a = { a | id : Int }
 
 type alias Model =
   { commits : List Commit

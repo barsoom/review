@@ -1,6 +1,6 @@
 port module Ports exposing (..)
 
-import Types exposing (Commit, Comment, CommitChange, Settings)
+import Types exposing (Commit, Comment, Change, Settings)
 
 -- 100% of the communication with JS goes tough these
 
@@ -15,7 +15,7 @@ port settings : (Settings -> msg) -> Sub msg
 port settingsChange : Settings -> Cmd msg
 
 port updatedCommit : (Commit -> msg) -> Sub msg
-port outgoingCommands : (String, CommitChange) -> Cmd msg
+port outgoingCommands : (String, Change) -> Cmd msg
 
 port location : (String -> msg) -> Sub msg
 port navigate : String -> Cmd msg
