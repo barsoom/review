@@ -6,48 +6,18 @@ The Elm code is not unit tested but there is acceptance tests that run the entir
 
 # TODO
 
-## Make it possible and practial to switch over to this version for normal use
+## Remaining todos before we can use this :)
 
-* [x] Send entire state when you re-connect, [like the welcome hook](https://gist.github.com/joakimk/7b9ed5138c48594f0cdecfe95cb6c41e), show that this works as it's kind of a killer feature for this version
-  - [x] Send limited data on page load
-* [x] Auto reload on code changes to keep everyone up to date (as changes will come somewhat often), or a notice that you are behind like trello
-* [x] Add commits to review count on menu
-* [ ] Implement the comments page
-  - [x] Implement the simplest possible listing
-  - [x] Add `json_payload` to comments in remit and redo data dump.
-  - [x] Implement visual things in the listings.
-  - [x] Implement `json_payload` parsing
-  - [x] Implement dates and texts
-  - [x] Implement filtering
-    - [x] Implement full name filtering
-    - [x] Implement partial-name filtering for pair commits
-    - [x] When everything is filtered, still show unresolved comments on the same thread as you previously commented on by `threadIdentifier`
-  - [x] Fix background coloring and selected comment styling
-  - [x] Implement mark as resolved
-  - [x] Implement mark as new
-  - [ ] Test and write backend for buttons
-  - [ ] Add github hook for comments
-* [ ] Store payload from Github commits and comments
-  * [x] Does created\_at and updated\_at get updated by ecto?
-  * [ ] Hook up the webhook
-  * [ ] Add websocket handing of new commits
-  * [ ] Consider making the rails app use the json columns, or at least be able to copy data over from them, so it's possible to go back in case something doesn't work?
+* [ ] Test and write backend for comment buttons
+* [ ] Add github hook for comments
+* [ ] Add github hook for commits
+* [ ] Add websocket handing of new commits/comments
+* [ ] Add commits-to-review-count text and links on commits page
 * [ ] Fix styling differences, missing icons, missing clickable-hower-icon-on-mouse, etc.
-* [ ] Add commits to review text and links on commits page
 * [ ] Set maintenance on remit, copy the database to review, set `REDIRECT_TO_OTHER_REMIT_URL` on remit to redirect to review.
-
-## More reliable state sync
-
-* [x] Simplify / Usability: Explore the UI-feel when not doing any local updates at all, just displaying the server updates
 
 ## Make the tools better
 
-* [x] Support multiple files in elm-brunch
-* [x] assetsmanager makes the live reload run twice
-* [x] Explore if a view helper like `<%= render_elm "CommitList", environment: Mix.env, initialCommits: [] %>` is pracical, how to expose a way to handle outgoing commands? Maybe something like `window.elmApps.CommitList.ports.subscribe`?
-  - This type of helper does make react feel very easy to use in our rails apps. Like rendering a dynamic partial.
-* [x] Fix the annoying not-reloading-code-when-error-in-one-of-multiple-files-unless-you-restart-the-server-bug
-  - Not 100% fixed, but close.
 * [ ] render\_elm is a bit problematic as it does not happen at js-time so local storage or cookies can't be loaded
 * [ ] follow up the [elm-brunch discussion](https://github.com/madsflensted/elm-brunch/pull/14) on what changes to make
 * [ ] Look into using [node-elm-compiler](https://github.com/rtfeldman/node-elm-compiler) in elm-brunch
@@ -55,11 +25,6 @@ The Elm code is not unit tested but there is acceptance tests that run the entir
 
 ## Later
 
-* [x] Convert config to coffee script for less noisy config
-* [x] Add a install/update dependencies script
-* [x] Set up instructions from scratch, bootstrapping scripts, etc
-* [x] Rename the project, if nothing else then let's call it "review"
-- [x] Have a offline-label displayed by js (or set as elm state?) on send-to-server-errors, and hidden on join?
 * [ ] Add proper getting started docs and example install like remit has
 * [ ] Limit auto-reload on deploy as much as possible (e.g. only on data format or client code changes)
 * [ ] Use shasum checking for downloads in CI
