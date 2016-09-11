@@ -11,6 +11,7 @@ import Formatting exposing (formattedTime)
 import Avatar exposing (avatarUrl)
 import CommentFilter exposing (filter, isYourCommit, isYourComment, isCommentOnYourComment)
 import CommentSettings exposing (view)
+import Change exposing (changeMsg)
 
 view : Model -> Html Msg
 view model =
@@ -45,7 +46,7 @@ renderComment model comment =
       div [ class "comment-proper" ] [
         div [ class "comment-proper-author" ] [
           div [ class "comment-controls" ] [
-            renderButton comment
+            renderButton model comment
           ]
         , img [ class "comment-proper-author-gravatar", src (avatarUrl (Just comment.authorGravatar)) ] []
         , i [ class "fa fa-chevron-right commenter-to-committer-arrow" ] []
@@ -65,17 +66,17 @@ renderComment model comment =
     ]
   ]
 
-renderButton : Comment -> Node a
-renderButton comment  =
+renderButton : Model -> Comment -> Html Msg
+renderButton model comment  =
   if comment.resolved then
     div [] [
       img [ class "comment-resolver-avatar", src (avatarUrl comment.resolverGravatar) ] []
-    , button [ class "small mark-as-new" ] [
+    , button [ class "small mark-as-new", onClick (changeMsg MarkCommentAsNew model comment) ] [
         i [ class "fa fa-eye-slash" ] [ text "Mark as new" ]
       ]
     ]
   else
-    button [ class "small mark-as-resolved" ] [
+    button [ class "small mark-as-resolved", onClick (changeMsg MarkCommentAsResolved model comment) ] [
       i [ class "fa fa-eye" ] [ text "Mark as resolved" ]
     ]
 

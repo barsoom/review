@@ -44,6 +44,16 @@ defmodule Review.ReviewChannel do
          review_started_by_author_id: nil }, socket)
   end
 
+  def handle_in("MarkCommentAsResolved", %{ "id" => id, "byEmail" => email }, socket) do
+    # TODO: implement and test
+    {:noreply, socket}
+  end
+
+  def handle_in("MarkCommentAsNew", %{ "id" => id, "byEmail" => email }, socket) do
+    # TODO: implement and test
+    {:noreply, socket}
+  end
+
   defp update_commit_and_broadcast_changes(id, changes, socket) do
     Repo.get!(Review.Repo.commits, id)
     |> Ecto.Changeset.change(changes)

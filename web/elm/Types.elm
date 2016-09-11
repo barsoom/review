@@ -17,6 +17,8 @@ type Msg
   | AbandonReview Change
   | MarkAsReviewed Change
   | MarkAsNew Change
+  | MarkCommentAsResolved Change
+  | MarkCommentAsNew Change
   | LocationChange String
   | UpdateConnectionStatus Bool
   | UpdateShowCommentsYouWrote Bool

@@ -23,8 +23,9 @@ The Elm code is not unit tested but there is acceptance tests that run the entir
     - [x] Implement partial-name filtering for pair commits
     - [x] When everything is filtered, still show unresolved comments on the same thread as you previously commented on by `threadIdentifier`
   - [x] Fix background coloring and selected comment styling
-  - [ ] Implement mark as resolved
-  - [ ] Implement mark as new
+  - [x] Implement mark as resolved
+  - [x] Implement mark as new
+  - [ ] Test and write backend for buttons
   - [ ] Add github hook for comments
 * [ ] Store payload from Github commits and comments
   * [x] Does created\_at and updated\_at get updated by ecto?

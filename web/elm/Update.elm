@@ -49,10 +49,12 @@ update msg model =
 
     -- no local changes so you know if you are in sync
     -- should work fine as long as network speeds are resonable
-    StartReview change    -> (model, pushEvent "StartReview" change)
-    AbandonReview change  -> (model, pushEvent "AbandonReview" change)
-    MarkAsReviewed change -> (model, pushEvent "MarkAsReviewed" change)
-    MarkAsNew change      -> (model, pushEvent "MarkAsNew" change)
+    StartReview change           -> (model, pushEvent "StartReview" change)
+    AbandonReview change         -> (model, pushEvent "AbandonReview" change)
+    MarkAsReviewed change        -> (model, pushEvent "MarkAsReviewed" change)
+    MarkAsNew change             -> (model, pushEvent "MarkAsNew" change)
+    MarkCommentAsResolved change -> (model, pushEvent "MarkCommentAsResolved" change)
+    MarkCommentAsNew change      -> (model, pushEvent "MarkCommentAsNew" change)
 
     UpdateName value                 -> updateSettings model (\s -> {s | name = value})
     UpdateEmail value                -> updateSettings model (\s -> {s | email = value})
