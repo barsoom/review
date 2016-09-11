@@ -53,6 +53,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
 * [x] Convert config to coffee script for less noisy config
 * [x] Add a install/update dependencies script
 * [x] Set up instructions from scratch, bootstrapping scripts, etc
+* [ ] Add proper getting started docs and example install like remit has
 * [ ] Limit auto-reload on deploy as much as possible (e.g. only on data format or client code changes)
 * [ ] Rename the project, if nothing else then let's call it "review"
 - [ ] Have a offline-label displayed by js (or set as elm state?) on send-to-server-errors, and hidden on join?
