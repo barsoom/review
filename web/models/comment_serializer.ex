@@ -15,6 +15,7 @@ defmodule Review.CommentSerializer do
       commitAuthorName: commit_author_name(comment.commit),
       commitSummary: commit_summary(comment.commit),
       resolved: !!comment.resolved_by_author,
+      resolverGravatar: gravatar_hash(comment.resolved_by_author),
       threadIdentifier: thread_identifier(payload),
       body: payload.body,
       url: payload.html_url,

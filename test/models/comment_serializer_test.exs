@@ -5,7 +5,8 @@ defmodule Review.CommentSerializerTest do
   test "serializes a comment" do
     author = build(:author, name: "Joe")
     commit = build(:commit, author: author)
-    comment = build(:comment, id: 50, commit: commit)
+    resolver = build(:author, name: "Foo", email: "foo@example.com")
+    comment = build(:comment, id: 50, commit: commit, resolved_by_author: resolver)
 
     data = Review.CommentSerializer.serialize(comment)
 
@@ -19,6 +20,7 @@ defmodule Review.CommentSerializerTest do
       commitSummary: "This is a very long message that will be shortened",
       body: "Since this is an open source lib, how about we doc this in README?",
       resolved: true,
+      resolverGravatar: "b48def645758b95537d4424c84d1a9ff",
       threadIdentifier: "2be829b9163897e8bb57ceea9709a5d5e61faee1:4:5",
       url: "https://github.com/barsoom/gridlook/commit/2be829b9163897e8bb57ceea9709a5d5e61faee1#commitcomment-18900296",
     }

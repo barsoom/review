@@ -83,6 +83,7 @@ type alias Comment =
   , commitAuthorGravatar : Maybe String
   , commitSummary : Maybe String
   , resolved : Bool
+  , resolverGravatar : Maybe String
   , body : String
   , threadIdentifier : String
   , url : String
