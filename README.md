@@ -45,17 +45,16 @@ A reimplementation of [remit](https://github.com/henrik/remit) in Elixir/Phoenix
 * [ ] follow up the [elm-brunch discussion](https://github.com/madsflensted/elm-brunch/pull/14) on what changes to make
 * [ ] Look into using [node-elm-compiler](https://github.com/rtfeldman/node-elm-compiler) in elm-brunch
 * [ ] Figure out why prod sometimes tries to use the non-digested app.js name
-* [ ] elm-brunch: add custom path to elm binary so we can remove `source web/elm/paths.env` when running `mix phoenix.server`
 
 ## Later
 
 * [x] Convert config to coffee script for less noisy config
 * [x] Add a install/update dependencies script
 * [x] Set up instructions from scratch, bootstrapping scripts, etc
+* [x] Rename the project, if nothing else then let's call it "review"
+- [x] Have a offline-label displayed by js (or set as elm state?) on send-to-server-errors, and hidden on join?
 * [ ] Add proper getting started docs and example install like remit has
 * [ ] Limit auto-reload on deploy as much as possible (e.g. only on data format or client code changes)
-* [ ] Rename the project, if nothing else then let's call it "review"
-- [ ] Have a offline-label displayed by js (or set as elm state?) on send-to-server-errors, and hidden on join?
 * [ ] Use shasum checking for downloads in CI
 * [ ] Figure out how to test the auth\_key check in UserSocket
 * [ ] Possibly make phantomjs part of the phoenix.server in dev
