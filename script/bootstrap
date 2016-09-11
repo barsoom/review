@@ -29,4 +29,9 @@ echo ">> Building assets using brunch"
 
 [ "$CIRCLECI" ] && ln -sf $PWD/node_modules/babel-brunch/node_modules/babel-preset-es2016 node_modules/
 
-node_modules/brunch/bin/brunch build
+# https://github.com/elm-lang/elm-compiler/issues/1473
+if [ "$CIRCLECI" ]; then
+  ~/dependencies/sysconfcpus/bin/sysconfcpus -n 2 node_modules/brunch/bin/brunch build
+else
+  node_modules/brunch/bin/brunch build
+fi
