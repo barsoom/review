@@ -1,4 +1,4 @@
-module CommentFilter exposing (filter)
+module CommentFilter exposing (filter, isYourCommit, isYourComment, isCommentOnYourComment)
 
 import Types exposing (..)
 import String

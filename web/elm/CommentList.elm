@@ -8,7 +8,7 @@ import Maybe
 import Types exposing (..)
 import Formatting exposing (formattedTime)
 import Avatar exposing (avatarUrl)
-import CommentFilter exposing (filter)
+import CommentFilter exposing (filter, isYourCommit, isYourComment, isCommentOnYourComment)
 import CommentSettings exposing (view)
 
 view : Model -> Html Msg
@@ -39,7 +39,7 @@ filterComments model =
 
 renderComment : Model -> Comment -> Node a
 renderComment model comment =
-  li [ id (commentId comment), (commentClassList comment) ] [
+  li [ id (commentId comment), (commentClassList model.comments comment model.settings) ] [
     a [ class "block-link" ] [
       div [ class "comment-proper" ] [
         div [ class "comment-proper-author" ] [
@@ -70,15 +70,17 @@ commitAuthorName : Comment -> String
 commitAuthorName comment =
   Maybe.withDefault "Unknown" comment.commitAuthorName
 
-commentClassList : Comment -> Property a
-commentClassList comment =
+commentClassList : List Comment -> Comment -> Settings -> Property a
+commentClassList comments comment settings =
   -- TODO: logic and tests
   classList [
-    ("your-last-clicked", False)
-  , ("authored-by-you", False)
-  , ("on-your-commit", True)
-  , ("is-resolved", False)
+    ("comment", True)
   , ("test-comment", True)
+  , ("your-last-clicked", False)
+  , ("authored-by-you", (isYourComment comment settings))
+  , ("on-your-commit", (isYourCommit comment settings))
+  , ("on-your-comment", (isCommentOnYourComment comments comment settings))
+  , ("is-resolved", comment.resolved)
   ]
 
 commentId : Comment -> String
