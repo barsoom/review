@@ -15,8 +15,13 @@ defmodule Exremit.CommentSerializer do
       commitAuthorName: commit_author_name(comment.commit),
       commitSummary: commit_summary(comment.commit),
       resolved: !!comment.resolved_by_author,
+      threadIdentifier: thread_identifier(payload),
       body: payload.body,
     }
+  end
+
+  def thread_identifier(payload) do
+    [ payload.commit_id, payload.position, payload.line ] |> Enum.join(":")
   end
 
   def commit_summary(nil), do: nil

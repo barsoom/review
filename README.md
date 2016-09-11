@@ -21,7 +21,7 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   - [ ] Implement filtering
     - [x] Implement full name filtering
     - [x] Implement partial-name filtering for pair commits
-    - [ ] Look into filters in the old app, I think comments-i-wrote has an edge case
+    - [ ] When everything is filtered, still show unresolved comments on the same thread as you previously commented on by `threadIdentifier`
   - [ ] Implement mark as resolved
   - [ ] Implement mark as new
   - [ ] Add github hook for comments

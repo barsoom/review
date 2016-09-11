@@ -106,7 +106,7 @@ filterComments settings comments =
   comments
   |> filterCommentsYouWrote(settings)
   |> filterCommentsByResolved(settings)
-  |> filterCommentsOnOthers(settings)
+  |> filterCommentsNotOnYourCommits(settings)
 
 filterCommentsYouWrote : Settings -> List Comment -> List Comment
 filterCommentsYouWrote settings comments =
@@ -122,8 +122,8 @@ filterCommentsByResolved settings comments =
   else
     comments |> List.filter (\comment -> not comment.resolved)
 
-filterCommentsOnOthers : Settings -> List Comment -> List Comment
-filterCommentsOnOthers settings comments =
+filterCommentsNotOnYourCommits : Settings -> List Comment -> List Comment
+filterCommentsNotOnYourCommits settings comments =
   if settings.showCommentsOnOthers then
     comments
   else

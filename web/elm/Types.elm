@@ -83,6 +83,7 @@ type alias Comment =
   , commitSummary : Maybe String
   , resolved : Bool
   , body : String
+  , threadIdentifier : String
   }
 
 type alias Model =
