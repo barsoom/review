@@ -33,42 +33,54 @@ defmodule Exremit.CommentsTest do
     resolved_comment = insert(:comment, resolved_by_author: jane)
 
     commit = insert(:commit, sha: "a", author: fred)
-    other_people_comment_on_other_peoples_commit = insert(:comment, author: jane, commit_sha: "a")
+    other_people_comment_on_other_peoples_commit = insert(:comment, author: jane, commit_sha: "a", json_payload: payload_that_has_different_thread_identifier)
 
     commit = insert(:commit, sha: "b", author: carl)
     unresolved_comment_on_your_commit = insert(:comment, commit_sha: "b")
+
+    commit = insert(:commit, sha: "c", author: fred)
+    _your_comment = insert(:comment, author: carl, commit_sha: "c")
+    comment_on_your_comment = insert(:comment, author: jane, commit_sha: "c")
 
     navigate_to_settings_page
     fill_in "name", with: "Carl"
 
     navigate_to_comments_page
-    assert comment_visible?(your_comment)
-    assert comment_visible?(resolved_comment)
-    assert comment_visible?(other_people_comment_on_other_peoples_commit)
-    assert comment_visible?(unresolved_comment_on_your_commit)
+    assert visible?(your_comment)
+    assert visible?(resolved_comment)
+    assert visible?(other_people_comment_on_other_peoples_commit)
+    assert visible?(unresolved_comment_on_your_commit)
+    assert visible?(comment_on_your_comment)
 
     uncheck "test-comments-i-wrote"
 
-    assert !comment_visible?(your_comment)
-    assert comment_visible?(resolved_comment)
-    assert comment_visible?(other_people_comment_on_other_peoples_commit)
-    assert comment_visible?(unresolved_comment_on_your_commit)
+    assert !visible?(your_comment)
+    assert visible?(resolved_comment)
+    assert visible?(other_people_comment_on_other_peoples_commit)
+    assert visible?(unresolved_comment_on_your_commit)
+    assert visible?(comment_on_your_comment)
 
     uncheck "test-resolved-comments"
 
-    assert !comment_visible?(your_comment)
-    assert !comment_visible?(resolved_comment)
-    assert comment_visible?(other_people_comment_on_other_peoples_commit)
-    assert comment_visible?(unresolved_comment_on_your_commit)
+    assert !visible?(your_comment)
+    assert !visible?(resolved_comment)
+    assert visible?(other_people_comment_on_other_peoples_commit)
+    assert visible?(unresolved_comment_on_your_commit)
+    assert visible?(comment_on_your_comment)
 
     uncheck "test-comments-on-others"
 
-    assert !comment_visible?(your_comment)
-    assert !comment_visible?(resolved_comment)
-    assert !comment_visible?(other_people_comment_on_other_peoples_commit)
-    assert comment_visible?(unresolved_comment_on_your_commit)
+    assert !visible?(your_comment)
+    assert !visible?(resolved_comment)
+    assert !visible?(other_people_comment_on_other_peoples_commit)
+    assert visible?(unresolved_comment_on_your_commit)
+    assert visible?(comment_on_your_comment)
 
     # TODO: test persistence of settings
+  end
+
+  defp payload_that_has_different_thread_identifier do
+    Exremit.Factory.comment_payload |> String.replace("2be8", "aaaa")
   end
 
   defp uncheck(checkbox_class) do
@@ -78,7 +90,7 @@ defmodule Exremit.CommentsTest do
     assert !selected?(checkbox)
   end
 
-  defp comment_visible?(comment) do
+  defp visible?(comment) do
     find_all_elements(:id, "comment-#{comment.id}") != []
   end
 end

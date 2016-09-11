@@ -18,10 +18,11 @@ Exploring phoenix and elm based development by reimplementing [remit](https://gi
   - [x] Implement visual things in the listings.
   - [x] Implement `json_payload` parsing
   - [x] Implement dates and texts
-  - [ ] Implement filtering
+  - [x] Implement filtering
     - [x] Implement full name filtering
     - [x] Implement partial-name filtering for pair commits
-    - [ ] When everything is filtered, still show unresolved comments on the same thread as you previously commented on by `threadIdentifier`
+    - [x] When everything is filtered, still show unresolved comments on the same thread as you previously commented on by `threadIdentifier`
+  - [ ] Fix background coloring and selected comment styling
   - [ ] Implement mark as resolved
   - [ ] Implement mark as new
   - [ ] Add github hook for comments
