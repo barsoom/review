@@ -26,7 +26,6 @@ echo
 echo ">> Building assets using brunch"
 
 # Workaround some odd babel bug that only occurs on CI
-
 [ "$CIRCLECI" ] && ln -sf $PWD/node_modules/babel-brunch/node_modules/babel-preset-es2015 node_modules/
 [ "$CIRCLECI" ] && ln -sf $PWD/node_modules/babel-brunch/node_modules/babel-preset-es2016 node_modules/
 
