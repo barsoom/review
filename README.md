@@ -30,7 +30,7 @@ The Elm code is not unit tested but there is acceptance tests that run the entir
   * [x] Does created\_at and updated\_at get updated by ecto?
   * [ ] Hook up the webhook
   * [ ] Add websocket handing of new commits
-  * [ ] Consider making the rails app use the json columns so it's possible to go back in case something doesn't work?
+  * [ ] Consider making the rails app use the json columns, or at least be able to copy data over from them, so it's possible to go back in case something doesn't work?
 * [ ] Fix styling differences, missing icons, missing clickable-hower-icon-on-mouse, etc.
 * [ ] Add commits to review text and links on commits page
 * [ ] Set maintenance on remit, copy the database to review, set `REDIRECT_TO_OTHER_REMIT_URL` on remit to redirect to review.
