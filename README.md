@@ -1,8 +1,6 @@
 # Review
 
-A reimplementation of [remit](https://github.com/henrik/remit) that is faster on both the server and client side and fixes many of the data sync issues.
-
-This tool is built in Elixir/Phoenix and Elm.
+A reimplementation of [remit](https://github.com/henrik/remit) in Elixir/Phoenix and Elm that is faster on both the server and client side and fixes many of the data sync issues.
 
 # TODO
 
