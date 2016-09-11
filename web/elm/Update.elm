@@ -30,7 +30,7 @@ update msg model =
       ({ model | commits = commits, commitCount = List.length commits, commitsToShowCount = defaultCommitsToShowCount }, Cmd.none)
 
     UpdateComments comments ->
-      ({ model | comments = comments, commentsToShow = (filterComments model.settings comments) }, Cmd.none)
+      ({ model | comments = comments }, Cmd.none)
 
     -- This triggers the display of more commits after the initial page load
     -- or when changing tabs. This makes the UI feel instant.
@@ -63,16 +63,7 @@ updateSettings model callback =
     settings = model.settings
     updatedSettings = (callback settings)
   in
-    ({
-      model | settings = updatedSettings, commentsToShow = (filterComments updatedSettings model.comments)
-    }, Ports.settingsChange updatedSettings)
-
-filterComments : Settings -> List Comment -> List Comment
-filterComments settings comments =
-  if not settings.showCommentsYouWrote then
-    comments |> List.filter (\comment -> comment.authorName /= settings.name)
-  else
-    comments
+    ({ model | settings = updatedSettings }, Ports.settingsChange updatedSettings)
 
 pathForTab : Tab -> String
 pathForTab tab =

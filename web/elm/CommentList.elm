@@ -48,10 +48,13 @@ renderOption option =
 
 renderCommentList : Model -> Node a
 renderCommentList model =
-  if (List.length model.commentsToShow) == 0 then
-    text "There are no comments yet! Write some."
-  else
-    ul [ class "comments-list" ] (List.map (renderComment model) model.commentsToShow)
+  let
+    commentsToShow = (filterComments model.settings model.comments)
+  in
+    if (List.length commentsToShow) == 0 then
+      text "There are no comments yet! Write some."
+    else
+      ul [ class "comments-list" ] (List.map (renderComment model) commentsToShow)
 
 renderComment : Model -> Comment -> Node a
 renderComment model comment =
@@ -96,6 +99,13 @@ commentClassList comment =
   , ("is-resolved", False)
   , ("test-comment", True)
   ]
+
+filterComments : Settings -> List Comment -> List Comment
+filterComments settings comments =
+  if not settings.showCommentsYouWrote then
+    comments |> List.filter (\comment -> comment.authorName /= settings.name)
+  else
+    comments
 
 commentId : Comment -> String
 commentId comment =
