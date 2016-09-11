@@ -1,6 +1,8 @@
 # Review
 
-Exploring phoenix and elm based development by reimplementing [remit](https://github.com/henrik/remit).
+A reimplementation of [remit](https://github.com/henrik/remit) that is faster on both the server and client side and fixes many of the data sync issues.
+
+This tool is built in Elixir/Phoenix and Elm.
 
 # TODO
 
