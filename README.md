@@ -12,7 +12,7 @@ Also tracks comments on commits.
 
 ## History
 
-Review is a reimplementation of [remit](https://github.com/henrik/remit) in Elixir/Phoenix and Elm that is much faster on both the server and client side and also fixes the known data sync issues.
+Review was built to explore how practical it was to build applications in Elixir/Phoenix and Elm. Review is a reimplementation of [remit](https://github.com/henrik/remit), which in turn was inspired by [hubreview](https://github.com/joakimk/hubreview).
 
 ## TODO
 
