@@ -1,6 +1,6 @@
-# Review
+**Status** : A few more things is needed before it's usable, see todos.
 
-**Status**: A few more things is needed before it's usable, see todos.
+# Review
 
 Review is a web app for commit-by-commit code review of GitHub repositories. A modern, live UI thanks to Elixir/Phoenix and Elm.
 
