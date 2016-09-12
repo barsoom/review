@@ -1,4 +1,4 @@
-**Status** : A few more things is needed before it's usable, see todos.
+***Status***: A few more things is needed before it's usable, see todos.
 
 # Review
 
