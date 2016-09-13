@@ -3,6 +3,8 @@ defmodule AcceptanceTestHelpers do
 
   def fill_in(field, with: value), do: find_element(:name, field) |> fill_field(value)
 
+  def visitor(name, callback), do: in_browser_session name, callback
+
   def navigate_to_commits_page, do: navigate_to_page "commits"
 
   def navigate_to_settings_page, do: navigate_to_page "settings"

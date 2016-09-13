@@ -145,8 +145,6 @@ defmodule Review.CommitsTest do
     "test-authored-by-you" in commit_classes(find_element(:id, "commit-#{commit.id}"))
   end
 
-  defp visitor(name, callback), do: in_browser_session name, callback
-
   defp can_see_commit, do: commit_element
 
   defp commit_looks_new do
