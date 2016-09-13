@@ -1,4 +1,6 @@
-module Types exposing (..)
+module SharedTypes exposing (..)
+
+import SettingsTypes exposing (SettingsMsg, Settings)
 
 import Time exposing (Time)
 
@@ -6,8 +8,6 @@ type Msg
   = SwitchTab Tab
   | UpdateEnvironment String
   | UpdateSettings Settings
-  | UpdateEmail String
-  | UpdateName String
   | UpdateCommits (List Commit)
   | UpdateComments (List Comment)
   | UpdateCommit Commit
@@ -21,23 +21,13 @@ type Msg
   | MarkCommentAsNew Change
   | LocationChange String
   | UpdateConnectionStatus Bool
-  | UpdateShowCommentsYouWrote Bool
-  | UpdateShowResolvedComments Bool
-  | UpdateShowCommentsOnOthers Bool
   | StoreLastClickedCommentId Int
+  | ChangeSettings SettingsMsg
 
 type Tab
   = CommitsTab
   | CommentsTab
   | SettingsTab
-
-type alias Settings =
-  { name : String
-  , email : String
-  , showCommentsYouWrote : Bool
-  , showCommentsOnOthers : Bool
-  , showResolvedComments : Bool
-  }
 
 type alias Field =
   { id : String

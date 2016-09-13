@@ -1,6 +1,6 @@
 module Menu exposing (view)
 
-import Types exposing (..)
+import SharedTypes exposing (..)
 import Html exposing (text, div, span, i, li, ul, nav, a)
 import Html.Attributes exposing (class, href)
 import Html.Events exposing (onClick)
@@ -44,4 +44,3 @@ reviewableCommitsCount model =
   |> List.filter(\c -> not c.isReviewed)
   |> List.filter(\c -> not (String.contains model.settings.name c.authorName))
   |> List.length
-

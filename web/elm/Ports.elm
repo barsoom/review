@@ -1,6 +1,7 @@
 port module Ports exposing (..)
 
-import Types exposing (Commit, Comment, Change, Settings)
+import SharedTypes exposing (Commit, Comment, Change)
+import SettingsTypes exposing (Settings)
 
 -- 100% of the communication with JS goes tough these
 

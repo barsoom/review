@@ -1,22 +1,13 @@
 module Update exposing (update)
 
-import Types exposing (..)
+import SharedTypes exposing (..)
 import Constants exposing (defaultCommitsToShowCount)
+import Settings exposing (update)
 import Ports
 
 update : Msg -> Model -> (Model, Cmd a)
 update msg model =
   case msg of
-    SwitchTab tab ->
-      ({model | activeTab = tab, commitsToShowCount = defaultCommitsToShowCount},
-        Ports.navigate (pathForTab tab))
-
-    LocationChange path ->
-      ({model | activeTab = (tabForPath path)}, Cmd.none)
-
-    StoreLastClickedCommentId id ->
-      ({ model | lastClickedCommentId = id }, Cmd.none)
-
     UpdateConnectionStatus connected ->
       ({model | connected = if connected then Yes else No}, Cmd.none)
 
@@ -26,14 +17,24 @@ update msg model =
     UpdateSettings settings ->
       ({ model | settings = settings }, Cmd.none)
 
-    ShowCommit id ->
-      ({ model | lastClickedCommitId = id }, Cmd.none)
-
     UpdateCommits commits ->
       ({ model | commits = commits, commitCount = List.length commits, commitsToShowCount = defaultCommitsToShowCount }, Cmd.none)
 
     UpdateComments comments ->
       ({ model | comments = comments }, Cmd.none)
+
+    SwitchTab tab ->
+      ({model | activeTab = tab, commitsToShowCount = defaultCommitsToShowCount},
+        Ports.navigate (pathForTab tab))
+
+    LocationChange path ->
+      ({model | activeTab = (tabForPath path)}, Cmd.none)
+
+    ShowCommit id ->
+      ({ model | lastClickedCommitId = id }, Cmd.none)
+
+    StoreLastClickedCommentId id ->
+      ({ model | lastClickedCommentId = id }, Cmd.none)
 
     -- This triggers the display of more commits after the initial page load
     -- or when changing tabs. This makes the UI feel instant.
@@ -56,19 +57,11 @@ update msg model =
     MarkCommentAsResolved change -> (model, pushEvent "MarkCommentAsResolved" change)
     MarkCommentAsNew change      -> (model, pushEvent "MarkCommentAsNew" change)
 
-    UpdateName value                 -> updateSettings model (\s -> {s | name = value})
-    UpdateEmail value                -> updateSettings model (\s -> {s | email = value})
-    UpdateShowCommentsYouWrote value -> updateSettings model (\s -> {s | showCommentsYouWrote = value})
-    UpdateShowResolvedComments value -> updateSettings model (\s -> {s | showResolvedComments = value})
-    UpdateShowCommentsOnOthers value -> updateSettings model (\s -> {s | showCommentsOnOthers = value})
-
-updateSettings : Model -> (Settings -> Settings) -> (Model, Cmd a)
-updateSettings model callback =
-  let
-    settings = model.settings
-    updatedSettings = (callback settings)
-  in
-    ({ model | settings = updatedSettings }, Ports.settingsChange updatedSettings)
+    ChangeSettings msg ->
+      let
+        updatedSettings = Settings.update model.settings msg
+      in
+        ({ model | settings = updatedSettings}, Ports.settingsChange updatedSettings)
 
 pathForTab : Tab -> String
 pathForTab tab =

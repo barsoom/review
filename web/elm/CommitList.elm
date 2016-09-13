@@ -1,6 +1,6 @@
 module CommitList exposing (view)
 
-import Types exposing (..)
+import SharedTypes exposing (..)
 import Avatar exposing (avatarUrl)
 
 import Html exposing (..)

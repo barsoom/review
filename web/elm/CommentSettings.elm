@@ -1,9 +1,11 @@
 module CommentSettings exposing (view)
 
+import SharedTypes exposing (..)
+import SettingsTypes exposing (..)
+
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Types exposing (..)
 import VirtualDom exposing (Node, Property)
 
 view : Settings -> Node Msg
@@ -13,19 +15,19 @@ view settings =
       checked = settings.showCommentsYouWrote
     , class = "test-comments-i-wrote"
     , name = "Comments I wrote"
-    , onCheck = UpdateShowCommentsYouWrote
+    , onCheck = (ChangeSettings << UpdateShowCommentsYouWrote)
     }
     , renderOption {
       checked = settings.showCommentsOnOthers
     , class = "test-comments-on-others"
     , name = "Comments on others"
-    , onCheck = UpdateShowCommentsOnOthers
+    , onCheck = (ChangeSettings << UpdateShowCommentsOnOthers)
     }
     , renderOption {
       checked = settings.showResolvedComments
     , class = "test-resolved-comments"
     , name = "Resolved comments"
-    , onCheck = UpdateShowResolvedComments
+    , onCheck = (ChangeSettings << UpdateShowResolvedComments)
     }
   ]
 

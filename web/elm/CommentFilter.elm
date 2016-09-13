@@ -1,6 +1,8 @@
 module CommentFilter exposing (filter, isYourCommit, isYourComment, isCommentOnYourComment)
 
-import Types exposing (..)
+import SharedTypes exposing (..)
+import SettingsTypes exposing (Settings)
+
 import String
 
 filter : Settings -> List Comment -> List Comment

@@ -1,6 +1,7 @@
-module Settings exposing (view)
+module Settings exposing (view, update)
 
-import Types exposing (..)
+import SharedTypes exposing (..)
+import SettingsTypes exposing (..)
 
 import Html exposing (div, span, form, p, label, text, input, Html)
 import Html.Attributes exposing (class, for, id, value, property, name)
@@ -9,6 +10,15 @@ import String.Interpolate exposing (interpolate)
 import Json.Encode
 import VirtualDom exposing (Node, Property)
 import String
+
+update : Settings -> SettingsMsg -> Settings
+update settings msg =
+  case msg of
+    UpdateName value                 -> {settings | name = value}
+    UpdateEmail value                -> {settings | email = value}
+    UpdateShowCommentsYouWrote value -> {settings | showCommentsYouWrote = value}
+    UpdateShowResolvedComments value -> {settings | showResolvedComments = value}
+    UpdateShowCommentsOnOthers value -> {settings | showCommentsOnOthers = value}
 
 view : Model -> Html Msg
 view model =
@@ -21,7 +31,7 @@ view model =
       , name = "email"
       , label = "Your email:"
       , value = model.settings.email
-      , onInput = UpdateEmail
+      , onInput = (ChangeSettings << UpdateEmail)
     }
     , emailHelpText
 
@@ -30,7 +40,7 @@ view model =
     , name = "name"
     , label = "Your name:"
     , value = model.settings.name
-    , onInput = UpdateName
+    , onInput = (ChangeSettings << UpdateName)
     }
   ]
 

@@ -5,7 +5,7 @@ import CommitList
 import CommentList
 import Settings
 
-import Types exposing (..)
+import SharedTypes exposing (..)
 import Constants exposing (defaultCommitsToShowCount)
 import Update exposing (update)
 import Ports
