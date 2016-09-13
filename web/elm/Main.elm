@@ -31,7 +31,7 @@ main =
       , Ports.environment UpdateEnvironment
       , Ports.location LocationChange
       , Ports.connectionStatus UpdateConnectionStatus
-      , (Time.every (inMilliseconds 1000) ListMoreCommits)
+      , (Time.every (inMilliseconds 500) ListMoreCommits)
       ] |> Sub.batch
     }
 

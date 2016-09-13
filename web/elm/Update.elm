@@ -40,7 +40,7 @@ update msg model =
     -- or when changing tabs. This makes the UI feel instant.
     ListMoreCommits _ ->
       if model.activeTab == CommitsTab && model.commitsToShowCount < model.commitCount then
-        ({ model | commitsToShowCount = model.commitsToShowCount + 25 }, Cmd.none)
+        ({ model | commitsToShowCount = model.commitsToShowCount + 100 }, Cmd.none)
       else
         (model, Cmd.none)
 
