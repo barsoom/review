@@ -87,15 +87,22 @@ commitAuthorName comment =
 
 commentClassList : Model -> Comment -> Property a
 commentClassList model comment =
-  classList [
-    ("comment", True)
-  , ("test-comment", True)
-  , ("your-last-clicked", (model.lastClickedCommentId == comment.id))
-  , ("authored-by-you", (isYourComment comment model.settings))
-  , ("on-your-commit", (isYourCommit comment model.settings))
-  , ("on-your-comment", (isCommentOnYourComment model.comments comment model.settings))
-  , ("is-resolved", comment.resolved)
-  ]
+  let
+    onYourCommit = isYourCommit comment model.settings
+    onYourComment = isCommentOnYourComment model.comments comment model.settings
+    authoredByYou = isYourComment comment model.settings
+  in
+    classList [
+      ("comment", True)
+    , ("your-last-clicked", (model.lastClickedCommentId == comment.id))
+    , ("authored-by-you", authoredByYou)
+    , ("on-your-commit", onYourCommit)
+    , ("on-your-comment", onYourComment)
+    , ("is-resolved", comment.resolved)
+    , ("test-comment", True)
+    , ("test-authored-by-you", authoredByYou)
+    , ("test-resolved", comment.resolved)
+    ]
 
 commentUrl : Model -> Comment -> String
 commentUrl model comment =
