@@ -38,22 +38,15 @@ initialModel : Model
 initialModel =
   {
     activeTab = CommitsTab
-  , commitsToShowCount = defaultCommitsToShowCount
   , environment = "unknown"
-  , settings = {
-      email = ""
-    , name = ""
-    , showCommentsYouWrote = True
-    , showCommentsOnOthers = True
-    , showResolvedComments = True
-  }
-  , exampleAuthor = "Charles Babbage"
+  , settings = Settings.initialModel
   , commits = []
   , commitCount = 0
   , comments = []
   , commentsToShow = []
   , lastClickedCommitId = 0
   , lastClickedCommentId = 0
+  , commitsToShowCount = defaultCommitsToShowCount
   , connected = Unknown
   }
 
@@ -80,4 +73,4 @@ renderTabContents model =
   case model.activeTab of
     CommitsTab  -> CommitList.view model
     CommentsTab -> CommentList.view model
-    SettingsTab -> Settings.view model
+    SettingsTab -> Html.map ChangeSettings (Settings.view model.settings)

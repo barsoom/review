@@ -29,14 +29,6 @@ type Tab
   | CommentsTab
   | SettingsTab
 
-type alias Field =
-  { id : String
-  , label : String
-  , name : String
-  , value : String
-  , onInput : String -> Msg
-  }
-
 type alias Change =
   { id : Int
   , byEmail : String
@@ -89,7 +81,6 @@ type alias Model =
   , commentsToShow: List Comment
   , commitCount : Int
   , settings : Settings
-  , exampleAuthor : String
   , lastClickedCommitId : Int
   , lastClickedCommentId : Int
   , commitsToShowCount : Int

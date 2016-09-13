@@ -14,3 +14,11 @@ type SettingsMsg
   | UpdateShowCommentsOnOthers Bool
   | UpdateEmail String
   | UpdateName String
+
+type alias Field =
+  { id : String
+  , label : String
+  , name : String
+  , value : String
+  , onInput : String -> SettingsMsg
+  }

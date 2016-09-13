@@ -1,6 +1,5 @@
-module Settings exposing (view, update)
+module Settings exposing (view, update, initialModel)
 
-import SharedTypes exposing (..)
 import SettingsTypes exposing (..)
 
 import Html exposing (div, span, form, p, label, text, input, Html)
@@ -11,6 +10,15 @@ import Json.Encode
 import VirtualDom exposing (Node, Property)
 import String
 
+initialModel : Settings
+initialModel =
+  { email = ""
+  , name = ""
+  , showCommentsYouWrote = True
+  , showCommentsOnOthers = True
+  , showResolvedComments = True
+  }
+
 update : Settings -> SettingsMsg -> Settings
 update settings msg =
   case msg of
@@ -20,8 +28,8 @@ update settings msg =
     UpdateShowResolvedComments value -> {settings | showResolvedComments = value}
     UpdateShowCommentsOnOthers value -> {settings | showCommentsOnOthers = value}
 
-view : Model -> Html Msg
-view model =
+view : Settings -> Html SettingsMsg
+view settings =
   div [ class "settings-wrapper" ] [
     form [] [
       -- type="email" causes "bouncing" of .please-provide-details
@@ -30,8 +38,8 @@ view model =
         id = "settings-email"
       , name = "email"
       , label = "Your email:"
-      , value = model.settings.email
-      , onInput = (ChangeSettings << UpdateEmail)
+      , value = settings.email
+      , onInput = UpdateEmail
     }
     , emailHelpText
 
@@ -39,15 +47,15 @@ view model =
       id = "settings-name"
     , name = "name"
     , label = "Your name:"
-    , value = model.settings.name
-    , onInput = (ChangeSettings << UpdateName)
+    , value = settings.name
+    , onInput = UpdateName
     }
   ]
 
   , helpText [
       p [ innerHtml "Determines <em>your</em> commits and comments by substring." ] []
     , p [] [
-        span [ class "test-usage-explanation" ] [ text (usageExample model) ]
+        span [ class "test-usage-explanation" ] [ text (usageExample settings) ]
       ]
     ]
   ]
@@ -60,7 +68,7 @@ emailHelpText =
   , text " your Gravatar."
   ]
 
-textField : Field -> Html Msg
+textField : Field -> Html SettingsMsg
 textField field =
   p [] [
     label [ for field.id ] [ text field.label ]
@@ -69,12 +77,12 @@ textField field =
   , input [ id field.id, name field.name, value field.value, onInput field.onInput ] []
   ]
 
-usageExample : Model -> String
-usageExample model =
-  if String.isEmpty(model.settings.name) then
-    interpolate """If your name is "{0}", a commit authored e.g. by "{0}" or by "Ada Lovelace and {0}" will be considered yours."""  [ model.exampleAuthor ]
+usageExample : Settings -> String
+usageExample settings =
+  if String.isEmpty(settings.name) then
+    interpolate """If your name is "{0}", a commit authored e.g. by "{0}" or by "Ada Lovelace and {0}" will be considered yours."""  [ exampleAuthor ]
   else
-    interpolate """A commit authored e.g. by "{0}" or by "Ada Lovelace and {0}" will be considered yours."""  [ model.settings.name ]
+    interpolate """A commit authored e.g. by "{0}" or by "Ada Lovelace and {0}" will be considered yours."""  [ settings.name ]
 
 innerHtml : String -> Property a
 innerHtml htmlString =
@@ -83,3 +91,6 @@ innerHtml htmlString =
 helpText : List (Html a) -> Html a
 helpText =
   p [ class "help-text" ]
+
+exampleAuthor : String
+exampleAuthor = "Charles Babbage"
