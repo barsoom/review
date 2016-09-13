@@ -32,6 +32,8 @@ view model =
     , value = model.settings.name
     , onInput = UpdateName
     }
+
+    , input [ onInput (ChangeSettings UpdateName2) ] []
   ]
 
   , helpText [

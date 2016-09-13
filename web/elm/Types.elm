@@ -25,6 +25,10 @@ type Msg
   | UpdateShowResolvedComments Bool
   | UpdateShowCommentsOnOthers Bool
   | StoreLastClickedCommentId Int
+  | ChangeSettings SettingsMsg
+
+type SettingsMsg
+  = UpdateName2 String
 
 type Tab
   = CommitsTab

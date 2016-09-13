@@ -62,6 +62,14 @@ update msg model =
     UpdateShowResolvedComments value -> updateSettings model (\s -> {s | showResolvedComments = value})
     UpdateShowCommentsOnOthers value -> updateSettings model (\s -> {s | showCommentsOnOthers = value})
 
+    ChangeSettings msg ->
+      ({ model | settings = (updateSettings2 model.settings msg)}, Cmd.none)
+
+updateSettings2 settings msg =
+  case msg of
+    UpdateName2 value ->
+      {settings | name = value}
+
 updateSettings : Model -> (Settings -> Settings) -> (Model, Cmd a)
 updateSettings model callback =
   let
