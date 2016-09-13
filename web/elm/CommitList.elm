@@ -1,8 +1,5 @@
 module CommitList exposing (view)
 
-import SharedTypes exposing (..)
-import Avatar exposing (avatarUrl)
-
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
@@ -10,6 +7,9 @@ import String
 import Formatting exposing (formattedTime)
 import VirtualDom exposing (Node, Property)
 import Change exposing (changeMsg)
+
+import SharedTypes exposing (..)
+import Avatar exposing (avatarUrl)
 
 view : Model -> Node Msg
 view model =

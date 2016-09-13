@@ -1,8 +1,8 @@
 module SharedTypes exposing (..)
 
-import SettingsTypes exposing (SettingsMsg, Settings)
-
 import Time exposing (Time)
+
+import SettingsTypes exposing (SettingsMsg, Settings)
 
 type Msg
   = SwitchTab Tab

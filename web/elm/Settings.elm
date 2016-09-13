@@ -1,7 +1,5 @@
 module Settings exposing (view, update, initialModel)
 
-import SettingsTypes exposing (..)
-
 import Html exposing (div, span, form, p, label, text, input, Html)
 import Html.Attributes exposing (class, for, id, value, property, name)
 import Html.Events exposing (on, targetValue, onInput)
@@ -9,6 +7,8 @@ import String.Interpolate exposing (interpolate)
 import Json.Encode
 import VirtualDom exposing (Node, Property)
 import String
+
+import SettingsTypes exposing (..)
 
 initialModel : Settings
 initialModel =
