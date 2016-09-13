@@ -19,18 +19,15 @@ view model =
 
 renderMenuItem : Model -> String -> String -> Tab -> Node Msg
 renderMenuItem model name customClass tab =
-  let
-    testClass = "test-menu-item-" ++ (String.toLower name)
-  in
-    li [] [
-      a [ onClick (SwitchTab tab), class testClass ] [
-        span [] [
-          i [ class ("fa fa-lg " ++ customClass) ] []
-          , span [] [ text name ]
-          , (renderBadge model tab)
-        ]
+  li [] [
+    a [ onClick (SwitchTab tab) ] [
+      span [] [
+        i [ class ("fa fa-lg " ++ customClass) ] []
+        , span [] [ text name ]
+        , (renderBadge model tab)
       ]
     ]
+  ]
 
 renderBadge : Model -> Tab -> Node a
 renderBadge model tab =

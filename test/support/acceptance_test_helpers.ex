@@ -10,7 +10,6 @@ defmodule AcceptanceTestHelpers do
   def navigate_to_comments_page, do: navigate_to_page "comments"
 
   defp navigate_to_page(page_name) do
-    navigate_to "/?auth_key=secret"
-    find_element(:class, "test-menu-item-#{page_name}") |> click
+    navigate_to "/#{page_name}?auth_key=secret"
   end
 end
