@@ -1,10 +1,10 @@
 module Connectivity.View exposing (view)
 
-import Shared.Types exposing (..)
-
 import VirtualDom exposing (Node)
 import Html exposing (div, text)
 import Html.Attributes exposing (class)
+
+import Shared.Types exposing (..)
 
 view : Model -> Node a
 view model =

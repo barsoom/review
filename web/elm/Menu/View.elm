@@ -1,11 +1,12 @@
 module Menu.View exposing (view)
 
-import Shared.Types exposing (..)
 import Html exposing (text, div, span, i, li, ul, nav, a)
 import Html.Attributes exposing (class, href, classList)
 import Html.Events exposing (onClick)
 import VirtualDom exposing (Node, Property)
 import String
+
+import Shared.Types exposing (..)
 
 view : Model -> Node Msg
 view model =
