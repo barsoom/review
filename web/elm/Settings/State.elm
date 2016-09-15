@@ -1,12 +1,12 @@
 module Settings.State exposing (subscriptions, initialModel, update)
 
-import Ports
+import Shared.Ports
 import Settings.Types exposing (..)
 import Shared.Types exposing (Msg (UpdateSettings))
 
 subscriptions : Sub Msg
 subscriptions =
-  Ports.settings UpdateSettings
+  Shared.Ports.settings UpdateSettings
 
 initialModel : Settings
 initialModel =

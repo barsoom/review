@@ -1,4 +1,4 @@
-port module Ports exposing (..)
+port module Shared.Ports exposing (..)
 
 import Shared.Types exposing (Commit, Comment, Change)
 import Settings.Types exposing (Settings)

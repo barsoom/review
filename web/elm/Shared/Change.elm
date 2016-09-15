@@ -1,4 +1,4 @@
-module Change exposing (changeMsg)
+module Shared.Change exposing (changeMsg)
 
 import Shared.Types exposing (..)
 

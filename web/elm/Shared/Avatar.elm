@@ -1,4 +1,4 @@
-module Avatar exposing (avatarUrl)
+module Shared.Avatar exposing (avatarUrl)
 
 avatarUrl : Maybe String -> String
 avatarUrl gravatarHash =

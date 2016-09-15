@@ -4,12 +4,12 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import String
-import Formatting exposing (formattedTime)
 import VirtualDom exposing (Node, Property)
-import Change exposing (changeMsg)
 
+import Shared.Formatting exposing (formattedTime)
 import Shared.Types exposing (..)
-import Avatar exposing (avatarUrl)
+import Shared.Change exposing (changeMsg)
+import Shared.Avatar exposing (avatarUrl)
 
 view : Model -> Node Msg
 view model =

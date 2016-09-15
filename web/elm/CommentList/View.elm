@@ -7,12 +7,12 @@ import VirtualDom exposing (Node, Property)
 import Maybe
 
 import Shared.Types exposing (..)
+import Shared.Formatting exposing (formattedTime)
+import Shared.Change exposing (changeMsg)
+import Shared.Avatar exposing (avatarUrl)
 import Settings.Types exposing (..)
-import Formatting exposing (formattedTime)
-import Avatar exposing (avatarUrl)
 import CommentFilter exposing (filter, isYourCommit, isYourComment, isCommentOnYourComment)
 import CommentSettings exposing (view)
-import Change exposing (changeMsg)
 
 view : Model -> Html Msg
 view model =

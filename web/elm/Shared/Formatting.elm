@@ -1,4 +1,4 @@
-module Formatting exposing (formattedTime)
+module Shared.Formatting exposing (formattedTime)
 
 import Date
 import Date.Format

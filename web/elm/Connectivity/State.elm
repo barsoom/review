@@ -1,8 +1,8 @@
 module Connectivity.State exposing (subscriptions)
 
 import Shared.Types exposing (Msg (UpdateConnectionStatus))
-import Ports
+import Shared.Ports
 
 subscriptions : Sub Msg
 subscriptions =
-  Ports.connectionStatus UpdateConnectionStatus
+  Shared.Ports.connectionStatus UpdateConnectionStatus

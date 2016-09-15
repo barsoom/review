@@ -3,18 +3,18 @@ module Shared.State exposing (subscriptions, initialModel, update)
 import Time exposing (inMilliseconds)
 
 import Shared.Types exposing (..)
-import Constants exposing (defaultCommitsToShowCount)
-import Ports
+import Shared.Constants exposing (defaultCommitsToShowCount)
+import Shared.Ports
 import Settings.State
 import Connectivity.State
 
 subscriptions : a -> Sub Msg
 subscriptions _ =
-  [ Ports.commits UpdateCommits
-  , Ports.comments UpdateComments
-  , Ports.updatedCommit UpdateCommit
-  , Ports.environment UpdateEnvironment
-  , Ports.location LocationChange
+  [ Shared.Ports.commits UpdateCommits
+  , Shared.Ports.comments UpdateComments
+  , Shared.Ports.updatedCommit UpdateCommit
+  , Shared.Ports.environment UpdateEnvironment
+  , Shared.Ports.location LocationChange
   , Connectivity.State.subscriptions
   , Settings.State.subscriptions
   , (Time.every (inMilliseconds 500) ListMoreCommits)
@@ -56,7 +56,7 @@ update msg model =
 
     SwitchTab tab ->
       ({model | activeTab = tab, commitsToShowCount = defaultCommitsToShowCount},
-        Ports.navigate (pathForTab tab))
+        Shared.Ports.navigate (pathForTab tab))
 
     LocationChange path ->
       ({model | activeTab = (tabForPath path)}, Cmd.none)
@@ -92,7 +92,7 @@ update msg model =
       let
         updatedSettings = Settings.State.update model.settings msg
       in
-        ({ model | settings = updatedSettings}, Ports.settingsChange updatedSettings)
+        ({ model | settings = updatedSettings}, Shared.Ports.settingsChange updatedSettings)
 
 pathForTab : Tab -> String
 pathForTab tab =
@@ -111,7 +111,7 @@ tabForPath path =
 
 pushEvent : String -> Change -> Cmd a
 pushEvent name change =
-  Ports.outgoingCommands (name, change)
+  Shared.Ports.outgoingCommands (name, change)
 
 updateCommitById : (Commit -> Commit) -> Int -> Model -> Model
 updateCommitById callback id model =
