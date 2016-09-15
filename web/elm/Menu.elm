@@ -2,9 +2,9 @@ module Menu exposing (view)
 
 import SharedTypes exposing (..)
 import Html exposing (text, div, span, i, li, ul, nav, a)
-import Html.Attributes exposing (class, href)
+import Html.Attributes exposing (class, href, classList)
 import Html.Events exposing (onClick)
-import VirtualDom exposing (Node)
+import VirtualDom exposing (Node, Property)
 import String
 
 view : Model -> Node Msg
@@ -19,7 +19,7 @@ view model =
 
 renderMenuItem : Model -> String -> String -> Tab -> Node Msg
 renderMenuItem model name customClass tab =
-  li [] [
+  li [ (menuClassList model tab) ] [
     a [ onClick (SwitchTab tab) ] [
       span [] [
         i [ class ("fa fa-lg " ++ customClass) ] []
@@ -27,6 +27,12 @@ renderMenuItem model name customClass tab =
         , (renderBadge model tab)
       ]
     ]
+  ]
+
+menuClassList : Model -> Tab -> Property a
+menuClassList model tab =
+  classList [
+    ("current", model.activeTab == tab)
   ]
 
 renderBadge : Model -> Tab -> Node a
