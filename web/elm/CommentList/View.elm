@@ -1,4 +1,4 @@
-module CommentList exposing (view)
+module CommentList.View exposing (view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)

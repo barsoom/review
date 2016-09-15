@@ -1,4 +1,4 @@
-module Connectivity exposing (view)
+module Connectivity.View exposing (view)
 
 import Shared.Types exposing (..)
 

@@ -7,11 +7,12 @@ import VirtualDom exposing (Node)
 
 import Shared.Types exposing (..)
 import Shared.State
-import Connectivity
-import Menu
-import CommitList
-import CommentList
+
+import Connectivity.View
+import CommitList.View
+import CommentList.View
 import Settings.View
+import Menu.View
 
 main : Program Never
 main =
@@ -25,14 +26,14 @@ main =
 view : Model -> Node Msg
 view model =
   div [ class "wrapper" ] [
-    Connectivity.view model
-  , Menu.view model
+    Connectivity.View.view model
+  , Menu.View.view model
   , renderTabContents model
   ]
 
 renderTabContents : Model -> Node Msg
 renderTabContents model =
   case model.activeTab of
-    CommitsTab  -> CommitList.view model
-    CommentsTab -> CommentList.view model
+    CommitsTab  -> CommitList.View.view model
+    CommentsTab -> CommentList.View.view model
     SettingsTab -> Html.map ChangeSettings (Settings.View.view model.settings)

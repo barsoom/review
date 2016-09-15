@@ -6,6 +6,7 @@ import Shared.Types exposing (..)
 import Constants exposing (defaultCommitsToShowCount)
 import Ports
 import Settings.State
+import Connectivity.State
 
 subscriptions : a -> Sub Msg
 subscriptions _ =
@@ -14,7 +15,7 @@ subscriptions _ =
   , Ports.updatedCommit UpdateCommit
   , Ports.environment UpdateEnvironment
   , Ports.location LocationChange
-  , Ports.connectionStatus UpdateConnectionStatus
+  , Connectivity.State.subscriptions
   , Settings.State.subscriptions
   , (Time.every (inMilliseconds 500) ListMoreCommits)
   ] |> Sub.batch

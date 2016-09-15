@@ -1,4 +1,4 @@
-module Menu exposing (view)
+module Menu.View exposing (view)
 
 import Shared.Types exposing (..)
 import Html exposing (text, div, span, i, li, ul, nav, a)

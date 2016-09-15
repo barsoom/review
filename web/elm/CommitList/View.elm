@@ -1,4 +1,4 @@
-module CommitList exposing (view)
+module CommitList.View exposing (view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
