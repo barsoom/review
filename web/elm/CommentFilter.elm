@@ -1,7 +1,7 @@
 module CommentFilter exposing (filter, isYourCommit, isYourComment, isCommentOnYourComment)
 
-import SharedTypes exposing (..)
-import SettingsTypes exposing (Settings)
+import Shared.Types exposing (..)
+import Settings.Types exposing (Settings)
 
 import String
 

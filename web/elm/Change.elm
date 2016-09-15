@@ -1,6 +1,6 @@
 module Change exposing (changeMsg)
 
-import SharedTypes exposing (..)
+import Shared.Types exposing (..)
 
 changeMsg : (Change -> a) -> Model -> Identifyable b -> a
 changeMsg msg model record =

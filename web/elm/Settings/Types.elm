@@ -1,4 +1,4 @@
-module SettingsTypes exposing (..)
+module Settings.Types exposing (..)
 
 type alias Settings =
   { name : String

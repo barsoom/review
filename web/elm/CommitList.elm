@@ -8,7 +8,7 @@ import Formatting exposing (formattedTime)
 import VirtualDom exposing (Node, Property)
 import Change exposing (changeMsg)
 
-import SharedTypes exposing (..)
+import Shared.Types exposing (..)
 import Avatar exposing (avatarUrl)
 
 view : Model -> Node Msg

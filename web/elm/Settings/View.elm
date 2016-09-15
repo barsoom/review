@@ -1,4 +1,4 @@
-module Settings exposing (view, update, initialModel)
+module Settings.View exposing (view)
 
 import Html exposing (div, span, form, p, label, text, input, Html)
 import Html.Attributes exposing (class, for, id, value, property, name)
@@ -8,25 +8,7 @@ import Json.Encode
 import VirtualDom exposing (Node, Property)
 import String
 
-import SettingsTypes exposing (..)
-
-initialModel : Settings
-initialModel =
-  { email = ""
-  , name = ""
-  , showCommentsYouWrote = True
-  , showCommentsOnOthers = True
-  , showResolvedComments = True
-  }
-
-update : Settings -> SettingsMsg -> Settings
-update settings msg =
-  case msg of
-    UpdateName value                 -> {settings | name = value}
-    UpdateEmail value                -> {settings | email = value}
-    UpdateShowCommentsYouWrote value -> {settings | showCommentsYouWrote = value}
-    UpdateShowResolvedComments value -> {settings | showResolvedComments = value}
-    UpdateShowCommentsOnOthers value -> {settings | showCommentsOnOthers = value}
+import Settings.Types exposing (..)
 
 view : Settings -> Html SettingsMsg
 view settings =

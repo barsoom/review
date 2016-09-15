@@ -1,6 +1,6 @@
 module Connectivity exposing (view)
 
-import SharedTypes exposing (..)
+import Shared.Types exposing (..)
 
 import VirtualDom exposing (Node)
 import Html exposing (div, text)

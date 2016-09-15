@@ -1,7 +1,7 @@
 module CommentSettings exposing (view)
 
-import SharedTypes exposing (..)
-import SettingsTypes exposing (..)
+import Shared.Types exposing (..)
+import Settings.Types exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)

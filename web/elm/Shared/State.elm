@@ -1,9 +1,39 @@
-module Update exposing (update)
+module Shared.State exposing (subscriptions, initialModel, update)
 
-import SharedTypes exposing (..)
+import Time exposing (inMilliseconds)
+
+import Shared.Types exposing (..)
 import Constants exposing (defaultCommitsToShowCount)
-import Settings exposing (update)
 import Ports
+import Settings.State
+
+subscriptions : a -> Sub Msg
+subscriptions _ =
+  [ Ports.commits UpdateCommits
+  , Ports.comments UpdateComments
+  , Ports.updatedCommit UpdateCommit
+  , Ports.environment UpdateEnvironment
+  , Ports.location LocationChange
+  , Ports.connectionStatus UpdateConnectionStatus
+  , Settings.State.subscriptions
+  , (Time.every (inMilliseconds 500) ListMoreCommits)
+  ] |> Sub.batch
+
+initialModel : Model
+initialModel =
+  {
+    activeTab = CommitsTab
+  , environment = "unknown"
+  , settings = Settings.State.initialModel
+  , commits = []
+  , commitCount = 0
+  , comments = []
+  , commentsToShow = []
+  , lastClickedCommitId = 0
+  , lastClickedCommentId = 0
+  , commitsToShowCount = defaultCommitsToShowCount
+  , connected = Unknown
+  }
 
 update : Msg -> Model -> (Model, Cmd a)
 update msg model =
@@ -59,7 +89,7 @@ update msg model =
 
     ChangeSettings msg ->
       let
-        updatedSettings = Settings.update model.settings msg
+        updatedSettings = Settings.State.update model.settings msg
       in
         ({ model | settings = updatedSettings}, Ports.settingsChange updatedSettings)
 

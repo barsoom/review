@@ -6,8 +6,8 @@ import Html.Events exposing (..)
 import VirtualDom exposing (Node, Property)
 import Maybe
 
-import SharedTypes exposing (..)
-import SettingsTypes exposing (..)
+import Shared.Types exposing (..)
+import Settings.Types exposing (..)
 import Formatting exposing (formattedTime)
 import Avatar exposing (avatarUrl)
 import CommentFilter exposing (filter, isYourCommit, isYourComment, isCommentOnYourComment)

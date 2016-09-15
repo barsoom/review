@@ -1,6 +1,6 @@
 module Menu exposing (view)
 
-import SharedTypes exposing (..)
+import Shared.Types exposing (..)
 import Html exposing (text, div, span, i, li, ul, nav, a)
 import Html.Attributes exposing (class, href, classList)
 import Html.Events exposing (onClick)
