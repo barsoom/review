@@ -1,4 +1,4 @@
-module CommentSettings exposing (view)
+module CommentList.Settings.View exposing (view)
 
 import Shared.Types exposing (..)
 import Settings.Types exposing (..)

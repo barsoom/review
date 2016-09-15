@@ -11,8 +11,8 @@ import Shared.Formatting exposing (formattedTime)
 import Shared.Change exposing (changeMsg)
 import Shared.Avatar exposing (avatarUrl)
 import Settings.Types exposing (..)
-import CommentFilter exposing (filter, isYourCommit, isYourComment, isCommentOnYourComment)
-import CommentSettings exposing (view)
+import CommentList.Filter exposing (filter, isYourCommit, isYourComment, isCommentOnYourComment)
+import CommentList.Settings.View
 
 view : Model -> Html Msg
 view model =
@@ -23,7 +23,7 @@ view model =
 
 renderCommentSettings : Settings -> Node Msg
 renderCommentSettings settings =
-  CommentSettings.view settings
+  CommentList.Settings.View.view settings
 
 renderCommentList : Model -> Node Msg
 renderCommentList model =
@@ -38,7 +38,7 @@ renderCommentList model =
 filterComments : Model -> List Comment
 filterComments model =
   model.comments
-  |> CommentFilter.filter(model.settings)
+  |> CommentList.Filter.filter(model.settings)
 
 renderComment : Model -> Comment -> Node Msg
 renderComment model comment =

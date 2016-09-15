@@ -1,4 +1,4 @@
-module CommentFilter exposing (filter, isYourCommit, isYourComment, isCommentOnYourComment)
+module CommentList.Filter exposing (filter, isYourCommit, isYourComment, isCommentOnYourComment)
 
 import Shared.Types exposing (..)
 import Settings.Types exposing (Settings)
