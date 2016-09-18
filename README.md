@@ -24,6 +24,7 @@ Review was built to explore how practical it was to build applications in Elixir
   * [ ] Add github hook for comments
   * [ ] Add github hook for commits
   * [ ] Add websocket handing of new commits/comments
+  * [ ] Deploy review-on-review on heroku as part of CI to test this out
 * Minor missing UI
   * [ ] Add commits-to-review-count text and links on commits page
   * [ ] Add all-commits-reviewed-banner
