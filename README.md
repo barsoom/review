@@ -18,12 +18,17 @@ Review was built to explore how practical it was to build applications in Elixir
 
 ### Remaining todos before we can use this :)
 
-* [x] Test and write backend for comment buttons
-* [ ] Add github hook for comments
-* [ ] Add github hook for commits
-* [ ] Add websocket handing of new commits/comments
-* [ ] Add commits-to-review-count text and links on commits page
-* [ ] Fix styling differences, missing icons, missing clickable-hower-icon-on-mouse, etc.
+* Workflow
+  * [x] Test and write backend for comment buttons
+* Github hooks
+  * [ ] Add github hook for comments
+  * [ ] Add github hook for commits
+  * [ ] Add websocket handing of new commits/comments
+* Minor missing UI
+  * [ ] Add commits-to-review-count text and links on commits page
+  * [ ] Add all-commits-reviewed-banner
+  * [ ] Add all-comments-resolved-banner
+  * [ ] Fix styling differences, if any
 * [ ] Set maintenance on remit, copy the database to review, set `REDIRECT_TO_OTHER_REMIT_URL` on remit to redirect to review.
 
 ### Make the tools better
