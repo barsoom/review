@@ -18,7 +18,7 @@ Review was built to explore how practical it was to build applications in Elixir
 
 ### Remaining todos before we can use this :)
 
-* [ ] Test and write backend for comment buttons
+* [x] Test and write backend for comment buttons
 * [ ] Add github hook for comments
 * [ ] Add github hook for commits
 * [ ] Add websocket handing of new commits/comments

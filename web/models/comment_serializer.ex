@@ -16,6 +16,7 @@ defmodule Review.CommentSerializer do
       commitSummary: commit_summary(comment.commit),
       resolved: !!comment.resolved_by_author,
       resolverGravatar: gravatar_hash(comment.resolved_by_author),
+      resolverEmail: email(comment.resolved_by_author),
       threadIdentifier: thread_identifier(payload),
       body: payload.body,
       url: payload.html_url,
@@ -43,6 +44,9 @@ defmodule Review.CommentSerializer do
   defp gravatar_hash(author) do
     Gravatar.hash(author.email)
   end
+
+  defp email(nil), do: nil
+  defp email(author), do: author.email
 
   defp parse_payload(comment) do
     Poison.decode!(comment.json_payload, keys: :atoms)

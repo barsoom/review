@@ -11,6 +11,7 @@ type Msg
   | UpdateCommits (List Commit)
   | UpdateComments (List Comment)
   | UpdateCommit Commit
+  | UpdateComment Comment
   | ShowCommit Int
   | ListMoreCommits Time
   | StartReview Change
@@ -68,6 +69,7 @@ type alias Comment =
   , commitSummary : Maybe String
   , resolved : Bool
   , resolverGravatar : Maybe String
+  , resolverEmail : Maybe String
   , body : String
   , threadIdentifier : String
   , url : String

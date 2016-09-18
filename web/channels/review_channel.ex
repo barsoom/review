@@ -1,7 +1,7 @@
 defmodule Review.ReviewChannel do
   use Phoenix.Channel
 
-  alias Review.{Repo, CommitSerializer}
+  alias Review.{Repo, CommitSerializer, CommentSerializer}
 
   def join(_channel, _auth, socket) do
     send self, :after_join
@@ -45,13 +45,17 @@ defmodule Review.ReviewChannel do
   end
 
   def handle_in("MarkCommentAsResolved", %{ "id" => id, "byEmail" => email }, socket) do
-    # TODO: implement and test
-    {:noreply, socket}
+    resolver = Repo.find_or_insert_author_by_email(email)
+
+    update_comment_and_broadcast_changes(id,
+      %{ resolved_at: Ecto.DateTime.utc,
+         resolved_by_author_id: resolver.id }, socket)
   end
 
-  def handle_in("MarkCommentAsNew", %{ "id" => id, "byEmail" => email }, socket) do
-    # TODO: implement and test
-    {:noreply, socket}
+  def handle_in("MarkCommentAsNew", %{ "id" => id, "byEmail" => _email }, socket) do
+    update_comment_and_broadcast_changes(id,
+      %{ resolved_at: nil,
+         resolved_by_author_id: nil }, socket)
   end
 
   defp update_commit_and_broadcast_changes(id, changes, socket) do
@@ -62,6 +66,18 @@ defmodule Review.ReviewChannel do
     commit = Repo.get!(Review.Repo.commits, id)
 
     broadcast! socket, "updated_commit", CommitSerializer.serialize(commit)
+
+    {:noreply, socket}
+  end
+
+  defp update_comment_and_broadcast_changes(id, changes, socket) do
+    Repo.get!(Review.Repo.comments, id)
+    |> Ecto.Changeset.change(changes)
+    |> Repo.update!
+
+    comment = Repo.get!(Review.Repo.comments, id)
+
+    broadcast! socket, "updated_comment", CommentSerializer.serialize(comment)
 
     {:noreply, socket}
   end

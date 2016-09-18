@@ -61,6 +61,7 @@ pingChannel.on("welcome", (welcome) => {
 let channel = socket.channel("review", {})
 channel.join()
 channel.on("updated_commit", (commit) => ports.updatedCommit.send(commit))
+channel.on("updated_comment", (comment) => ports.updatedComment.send(comment))
 channel.on("welcome", (data) => {
   ports.commits.send(data.commits)
   ports.comments.send(data.comments)

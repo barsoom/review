@@ -42,7 +42,7 @@ filterComments model =
 
 renderComment : Model -> Comment -> Node Msg
 renderComment model comment =
-  li [ id (commentId comment), (commentClassList model comment) ] [
+  li [ id (commentId comment), (commentClassList model comment), resolverDataAttribute(comment.resolverEmail) ] [
     a [ class "block-link", onClick (StoreLastClickedCommentId comment.id), href (commentUrl model comment) ] [
       div [ class "comment-proper" ] [
         div [ class "comment-proper-author" ] [
@@ -72,14 +72,18 @@ renderButton model comment  =
   if comment.resolved then
     div [] [
       img [ class "comment-resolver-avatar", src (avatarUrl comment.resolverGravatar) ] []
-    , button [ class "small mark-as-new", onClick (changeMsg MarkCommentAsNew model comment) ] [
+    , button [ class "small mark-as-new test-button", onClick (changeMsg MarkCommentAsNew model comment) ] [
         i [ class "fa fa-eye-slash" ] [ text "Mark as new" ]
       ]
     ]
   else
-    button [ class "small mark-as-resolved", onClick (changeMsg MarkCommentAsResolved model comment) ] [
+    button [ class "small mark-as-resolved test-button", onClick (changeMsg MarkCommentAsResolved model comment) ] [
       i [ class "fa fa-eye" ] [ text "Mark as resolved" ]
     ]
+
+resolverDataAttribute : Maybe String -> Attribute a
+resolverDataAttribute email =
+  attribute "data-test-resolver-email" (Maybe.withDefault "" email)
 
 commitAuthorName : Comment -> String
 commitAuthorName comment =

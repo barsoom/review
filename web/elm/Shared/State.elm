@@ -13,6 +13,7 @@ subscriptions _ =
   [ Shared.Ports.commits UpdateCommits
   , Shared.Ports.comments UpdateComments
   , Shared.Ports.updatedCommit UpdateCommit
+  , Shared.Ports.updatedComment UpdateComment
   , Shared.Ports.environment UpdateEnvironment
   , Shared.Ports.location LocationChange
   , Connectivity.State.subscriptions
@@ -79,6 +80,10 @@ update msg model =
       -- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
       (updateCommitById (\_ -> commit) commit.id model, Cmd.none)
 
+    UpdateComment comment ->
+      -- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
+      (updateCommentById (\_ -> comment) comment.id model, Cmd.none)
+
     -- no local changes so you know if you are in sync
     -- should work fine as long as network speeds are resonable
     StartReview change           -> (model, pushEvent "StartReview" change)
@@ -123,3 +128,14 @@ updateCommitById callback id model =
         commit
   in
      { model | commits = (List.map updateCommit model.commits)}
+
+updateCommentById : (Comment -> Comment) -> Int -> Model -> Model
+updateCommentById callback id model =
+  let
+    updateComment comment =
+      if comment.id == id then
+        (callback comment)
+      else
+        comment
+  in
+     { model | comments = (List.map updateComment model.comments)}

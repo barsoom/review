@@ -89,6 +89,7 @@ defmodule Review.CommentsTest do
     visitor "ada", fn ->
       navigate_to_settings_page
       fill_in "name", with: "ada"
+      fill_in "email", with: "ada@example.com"
       navigate_to_comments_page
       refute "test-resolved" in css_classes(comment)
       refute "test-authored-by-you" in css_classes(comment)
@@ -100,15 +101,43 @@ defmodule Review.CommentsTest do
       assert "test-authored-by-you" in css_classes(comment)
     end
 
-    # TODO: test resolving comments
+    visitor "ada", fn ->
+      click_button "Mark as resolved"
+      assert "test-resolved" in css_classes(comment)
+      assert resolver_email(comment) == "ada@example.com"
+    end
+
+    visitor "charles", fn ->
+      assert "test-resolved" in css_classes(comment)
+    end
+
+    visitor "ada", fn ->
+      click_button "Mark as new"
+      refute "test-resolved" in css_classes(comment)
+      assert resolver_email(comment) == ""
+    end
+
+    visitor "charles", fn ->
+      refute "test-resolved" in css_classes(comment)
+    end
+  end
+
+  def resolver_email(comment) do
+    find_comment(comment)
+    |> attribute_value("data-test-resolver-email")
   end
 
   defp css_classes(comment) do
-    [ element ] = find_comments(comment)
+    :timer.sleep 50 # wait for websocket and DOM updates
 
-    element
+    find_comment(comment)
     |> attribute_value("class")
     |> String.split
+  end
+
+  defp find_comment(comment) do
+    [ element ] = find_comments(comment)
+    element
   end
 
   defp payload_that_has_different_thread_identifier do
