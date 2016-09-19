@@ -10,6 +10,8 @@ Keeps track of what has been reviewed and links to GitHub commits for the actual
 
 Also tracks comments on commits.
 
+[Demo app on heroku](https://review-on-review.herokuapp.com/?auth_key=demo)
+
 ## History
 
 Review was built to explore how practical it was to build applications in Elixir/Phoenix and Elm. Review is a reimplementation of [remit](https://github.com/henrik/remit), which in turn was inspired by [hubreview](https://github.com/joakimk/hubreview).
@@ -24,7 +26,7 @@ Review was built to explore how practical it was to build applications in Elixir
   * [ ] Add github hook for comments
   * [ ] Add github hook for commits
   * [ ] Add websocket handing of new commits/comments
-  * [ ] Deploy review-on-review on heroku as part of CI to test this out
+  * [x] Deploy review-on-review on heroku
 * Minor missing UI
   * [ ] Add commits-to-review-count text and links on commits page
   * [ ] Add all-commits-reviewed-banner
