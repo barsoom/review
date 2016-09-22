@@ -65,7 +65,7 @@ defmodule Review.ReviewChannel do
 
     commit = Repo.get!(Review.Repo.commits, id)
 
-    broadcast! socket, "updated_commit", CommitSerializer.serialize(commit)
+    broadcast! socket, "new_or_updated_commit", CommitSerializer.serialize(commit)
 
     {:noreply, socket}
   end
@@ -77,7 +77,7 @@ defmodule Review.ReviewChannel do
 
     comment = Repo.get!(Review.Repo.comments, id)
 
-    broadcast! socket, "updated_comment", CommentSerializer.serialize(comment)
+    broadcast! socket, "new_or_updated_comment", CommentSerializer.serialize(comment)
 
     {:noreply, socket}
   end

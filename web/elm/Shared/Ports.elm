@@ -15,8 +15,8 @@ port connectionStatus : (Bool -> msg) -> Sub msg
 port settings : (Settings -> msg) -> Sub msg
 port settingsChange : Settings -> Cmd msg
 
-port updatedCommit : (Commit -> msg) -> Sub msg
-port updatedComment : (Comment -> msg) -> Sub msg
+port newOrUpdatedCommit : (Commit -> msg) -> Sub msg
+port newOrUpdatedComment : (Comment -> msg) -> Sub msg
 port outgoingCommands : (String, Change) -> Cmd msg
 
 port location : (String -> msg) -> Sub msg

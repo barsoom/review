@@ -10,8 +10,8 @@ type Msg
   | UpdateSettings Settings
   | UpdateCommits (List Commit)
   | UpdateComments (List Comment)
-  | UpdateCommit Commit
-  | UpdateComment Comment
+  | AddOrUpdateCommit Commit
+  | AddOrUpdateComment Comment
   | ShowCommit Int
   | ListMoreCommits Time
   | StartReview Change

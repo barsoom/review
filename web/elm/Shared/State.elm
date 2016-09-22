@@ -5,6 +5,7 @@ import Time exposing (inMilliseconds)
 import Shared.Types exposing (..)
 import Shared.Constants exposing (defaultCommitsToShowCount)
 import Shared.Ports
+import Shared.UpdateList exposing (addOrUpdateById)
 import Settings.State
 import Connectivity.State
 
@@ -12,8 +13,8 @@ subscriptions : a -> Sub Msg
 subscriptions _ =
   [ Shared.Ports.commits UpdateCommits
   , Shared.Ports.comments UpdateComments
-  , Shared.Ports.updatedCommit UpdateCommit
-  , Shared.Ports.updatedComment UpdateComment
+  , Shared.Ports.newOrUpdatedCommit AddOrUpdateCommit
+  , Shared.Ports.newOrUpdatedComment AddOrUpdateComment
   , Shared.Ports.environment UpdateEnvironment
   , Shared.Ports.location LocationChange
   , Connectivity.State.subscriptions
@@ -76,13 +77,11 @@ update msg model =
       else
         (model, Cmd.none)
 
-    UpdateCommit commit ->
-      -- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
-      (updateCommitById (\_ -> commit) commit.id model, Cmd.none)
+    AddOrUpdateCommit commit ->
+      ({model | commits = model.commits |> addOrUpdateById commit}, Cmd.none)
 
-    UpdateComment comment ->
-      -- triggers when someone else updates a commit and we receive a websocket push with an update for a commit
-      (updateCommentById (\_ -> comment) comment.id model, Cmd.none)
+    AddOrUpdateComment comment ->
+      ({model | comments = model.comments |> addOrUpdateById comment}, Cmd.none)
 
     -- no local changes so you know if you are in sync
     -- should work fine as long as network speeds are resonable
@@ -117,25 +116,3 @@ tabForPath path =
 pushEvent : String -> Change -> Cmd a
 pushEvent name change =
   Shared.Ports.outgoingCommands (name, change)
-
-updateCommitById : (Commit -> Commit) -> Int -> Model -> Model
-updateCommitById callback id model =
-  let
-    updateCommit commit =
-      if commit.id == id then
-        (callback commit)
-      else
-        commit
-  in
-     { model | commits = (List.map updateCommit model.commits)}
-
-updateCommentById : (Comment -> Comment) -> Int -> Model -> Model
-updateCommentById callback id model =
-  let
-    updateComment comment =
-      if comment.id == id then
-        (callback comment)
-      else
-        comment
-  in
-     { model | comments = (List.map updateComment model.comments)}
