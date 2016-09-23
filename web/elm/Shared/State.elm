@@ -51,7 +51,10 @@ update msg model =
       ({ model | settings = settings }, Cmd.none)
 
     UpdateCommits commits ->
-      ({ model | commits = commits, commitCount = List.length commits, commitsToShowCount = defaultCommitsToShowCount }, Cmd.none)
+      let
+        m = (updateCommits model commits)
+      in
+        ({ m | commitsToShowCount = defaultCommitsToShowCount }, Cmd.none)
 
     UpdateComments comments ->
       ({ model | comments = comments }, Cmd.none)
@@ -78,7 +81,10 @@ update msg model =
         (model, Cmd.none)
 
     AddOrUpdateCommit commit ->
-      ({model | commits = model.commits |> addOrUpdateById commit}, Cmd.none)
+      let
+        commits = (model.commits |> addOrUpdateById commit)
+      in
+        (updateCommits model commits, Cmd.none)
 
     AddOrUpdateComment comment ->
       ({model | comments = model.comments |> addOrUpdateById comment}, Cmd.none)
@@ -97,6 +103,10 @@ update msg model =
         updatedSettings = Settings.State.update model.settings msg
       in
         ({ model | settings = updatedSettings}, Shared.Ports.settingsChange updatedSettings)
+
+updateCommits : Model -> List Commit -> Model
+updateCommits model commits =
+  {model | commits = commits, commitCount = List.length commits}
 
 pathForTab : Tab -> String
 pathForTab tab =
