@@ -61,7 +61,7 @@ config :logger, level: :info
 config :review, Review.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
-  pool_size: 20
+  pool_size: 5
 
 config :review,
   auth_key: System.get_env("AUTH_KEY"),
