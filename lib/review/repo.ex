@@ -4,6 +4,12 @@ defmodule Review.Repo do
 
   alias Review.{Commit, Comment, Author}
 
+  def find_or_insert_author_by_username(username) do
+    Author
+    |> where(username: ^username)
+    |> one_or_insert(%Author{email: "todo@example.com", username: username})
+  end
+
   def find_or_insert_author_by_email(email) do
     Author
     |> where(email: ^email)

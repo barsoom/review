@@ -18,15 +18,20 @@ defmodule Review.GithubController do
     comment_data = Poison.decode!(comment_json, keys: :atoms)
 
     # TODO: figure out how to keep authors in sync by username and email
-    author = nil #Review.Repo.find_or_insert_author_by_username(comment_data.user.login)
+    author = Review.Repo.find_or_insert_author_by_username(comment_data.user.login)
 
-    IO.inspect comment: %Review.Comment{
+    comment = %Review.Comment{
       github_id: comment_data.id,
       payload: "not-used-by-the-elixir-app",
       json_payload: comment_json,
       commit_sha: comment_data.commit_id,
       author: author,
     }
+
+    {:ok, comment} = Review.Repo.insert(comment)
+    comment = Review.Repo.get!(Review.Repo.comments, comment.id)
+
+    Review.Endpoint.broadcast! "review", "new_or_updated_comment", Review.CommentSerializer.serialize(comment)
 
     conn |> text("ok")
   end
