@@ -14,8 +14,8 @@ defmodule Review.GithubController do
   end
 
   # WIP: handle comments payload
-  defp handle_event(conn, "commit_comment", %{ "comment" => comment_json }) do
-    comment_data = Poison.decode!(comment_json, keys: :atoms)
+  defp handle_event(conn, "commit_comment", %{ "comment" => comment_data_with_string_keys }) do
+    comment_data = AtomicMap.convert(comment_data_with_string_keys, safe: false)
 
     # TODO: figure out how to keep authors in sync by username and email
     author = Review.Repo.find_or_insert_author_by_username(comment_data.user.login)
@@ -23,7 +23,7 @@ defmodule Review.GithubController do
     comment = %Review.Comment{
       github_id: comment_data.id,
       payload: "not-used-by-the-elixir-app",
-      json_payload: comment_json,
+      json_payload: Poison.encode!(comment_data),
       commit_sha: comment_data.commit_id,
       author: author,
     }

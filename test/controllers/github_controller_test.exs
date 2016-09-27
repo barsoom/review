@@ -16,7 +16,7 @@ defmodule Review.GithubControllerTest do
 
     conn = build_conn
       |> put_req_header("x-github-event", "commit_comment")
-      |> post("/webhooks/github?secret=webhook_secret", %{ comment: Review.Factory.comment_payload })
+      |> post("/webhooks/github?secret=webhook_secret", %{ comment: Poison.decode!(Review.Factory.comment_payload) })
 
     assert text_response(conn, 200) =~ "ok"
 

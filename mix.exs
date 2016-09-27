@@ -35,6 +35,7 @@ defmodule Review.Mixfile do
      {:phoenix_live_reload, ">= 0.0.0", only: :dev},
      {:phoenix_ecto, ">= 0.0.0"},
      {:postgrex, ">= 0.0.0"},
+     {:atomic_map, "~> 0.8"},
      {:hound, ">= 0.0.0", only: :test},
      {:ex_machina, ">= 0.0.0", only: :test},
      {:cowboy, ">= 0.0.0"}]
