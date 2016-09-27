@@ -5,7 +5,7 @@ defmodule Review.Repo do
   alias Review.{Commit, Comment, Author}
 
   def find_or_insert_author_by_email(email) do
-    author = Author
+    Author
     |> where(email: ^email)
     |> one_or_insert(%Author{email: email})
   end
@@ -46,5 +46,5 @@ defmodule Review.Repo do
     {:ok, record} = data |> insert
     record
   end
-  defp one_or_insert_result(record, data), do: record
+  defp one_or_insert_result(record, _data), do: record
 end

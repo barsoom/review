@@ -8,6 +8,6 @@ defmodule Review.PageControllerTest do
 
   test "disallows access for invalid tokens" do
     conn = get build_conn(), "/", %{ auth_key: "invalid" }
-    assert response(conn, 403) =~ "Denied (probably an invalid auth_key?)"
+    assert response(conn, 403) =~ "Denied (probably an invalid key?)"
   end
 end

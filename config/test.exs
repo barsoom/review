@@ -19,6 +19,7 @@ config :review, Review.Repo,
   pool: Ecto.Adapters.SQL.Sandbox
 
 config :review,
-  auth_key: "secret"
+  auth_key: "secret",
+  webhook_secret: "webhook_secret"
 
 config :hound, driver: "phantomjs"

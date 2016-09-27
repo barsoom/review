@@ -64,4 +64,5 @@ config :review, Review.Repo,
   pool_size: 20
 
 config :review,
-  auth_key: System.get_env("AUTH_KEY")
+  auth_key: System.get_env("AUTH_KEY"),
+  webhook_secret: System.get_env("WEBHOOK_SECRET")

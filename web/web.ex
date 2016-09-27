@@ -26,6 +26,15 @@ defmodule Review.Web do
     end
   end
 
+  def webhook do
+    quote do
+      use Phoenix.Controller
+      use Review.Authentication
+
+      plug :authenticate, param: "secret", secret: Application.get_env(:review, :webhook_secret)
+    end
+  end
+
   def controller do
     quote do
       use Phoenix.Controller
@@ -35,25 +44,9 @@ defmodule Review.Web do
       import Ecto.Query, only: [from: 1, from: 2]
 
       import Review.Router.Helpers
+      use Review.Authentication
 
-      plug :authenticate
-
-      defp authenticate(conn, _options) do
-        if valid_credentials?(conn.params["auth_key"], Application.get_env(:review, :auth_key)) do
-          conn
-        else
-          conn |> deny_and_halt
-        end
-      end
-
-      defp valid_credentials?(_anything, nil), do: true
-      defp valid_credentials?(provided_auth_key, auth_key_in_config) do
-        provided_auth_key == auth_key_in_config
-      end
-
-      defp deny_and_halt(conn) do
-        conn |> send_resp(403, "Denied (probably an invalid auth_key?)") |> halt
-      end
+      plug :authenticate, param: "auth_key", secret: Application.get_env(:review, :auth_key)
     end
   end
 

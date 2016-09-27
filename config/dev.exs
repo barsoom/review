@@ -44,5 +44,7 @@ config :review, Review.Repo,
   # Don't log queries in dev since then we don't see the Elm compile results.
   log: false
 
+# no keys needed in dev
 config :review,
-  auth_key: nil # no auth_key needed in dev
+  auth_key: nil,
+  webhook_secret: nil

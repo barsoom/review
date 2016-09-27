@@ -13,6 +13,12 @@ defmodule Review.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/webhooks", Review do
+    pipe_through :api
+
+    post "/github", GithubController, :create
+  end
+
   scope "/", Review do
     pipe_through :browser # Use the default browser stack
 

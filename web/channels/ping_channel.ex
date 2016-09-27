@@ -1,8 +1,6 @@
 defmodule Review.PingChannel do
   use Phoenix.Channel
 
-  import Ecto.Query
-
   def join(_channel, _auth, socket) do
     send self, :after_join
 
