@@ -7,7 +7,7 @@ defmodule Review.Repo do
   def find_or_insert_author_by_username(username) do
     Author
     |> where(username: ^username)
-    |> one_or_insert(%Author{email: "todo@example.com", username: username})
+    |> one_or_insert(%Author{email: "todo@example.com", username: username, name: "Todo"})
   end
 
   def find_or_insert_author_by_email(email) do
