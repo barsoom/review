@@ -9,6 +9,14 @@ defmodule Review.GithubController do
     conn |> text("pong")
   end
 
+  defp handle_event(conn, "push", _params) do
+    conn |> text("not-yet-implemented")
+  end
+
+  defp handle_event(conn, "commit_comment", _params) do
+    conn |> text("not-yet-implemented")
+  end
+
   defp event_name(conn) do
     conn.req_headers
       |> Enum.into(%{})
