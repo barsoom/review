@@ -39,10 +39,13 @@ config :review, Review.Repo,
   password: "",
   database: "review_dev",
   hostname: "localhost",
-  pool_size: 10,
+  pool_size: 10
 
-  # Don't log queries in dev since then we don't see the Elm compile results.
-  log: false
+# Skip db logging in dev, except when doing db imports since
+# disabling logging breaks that for some unknown reason.
+if !System.get_env("DB_IMPORT") do
+  config :review, Review.Repo, log: false
+end
 
 # no keys needed in dev
 config :review,

@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+export DB_IMPORT=true
+
 echo ">> Making backup and downloading database from $1"
 heroku pg:backups capture -a $1
 curl --output /tmp/data.dump `heroku pg:backups public-url -a $1`
@@ -12,5 +14,5 @@ mix ecto.create
 
 echo
 echo ">> Importing database from $1 as exremit_dev"
-pg_restore --no-acl --no-owner -d exremit_dev /tmp/data.dump
+pg_restore --no-acl --no-owner -d review_dev /tmp/data.dump
 echo ">> Done"
