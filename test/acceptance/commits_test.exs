@@ -159,19 +159,19 @@ defmodule Review.CommitsTest do
     assert "test-is-reviewed" in commit_classes
   end
 
-  def commit_reviewer_email do
+  defp commit_reviewer_email do
     :timer.sleep 50 # wait for DOM update
     find_element(:css, ".test-reviewer")
     |> attribute_value("data-test-reviewer-email")
   end
 
-  def button_classes do
+  defp button_classes do
     find_element(:css, ".test-button")
     |> attribute_value("class")
     |> String.split
   end
 
-  def commit_classes(element \\ commit_element) do
+  defp commit_classes(element \\ commit_element) do
     :timer.sleep 50 # wait for async updates
 
     element

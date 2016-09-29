@@ -122,7 +122,7 @@ defmodule Review.CommentsTest do
     end
   end
 
-  def resolver_email(comment) do
+  defp resolver_email(comment) do
     find_comment(comment)
     |> attribute_value("data-test-resolver-email")
   end
