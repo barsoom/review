@@ -43,7 +43,7 @@ config :review, Review.Repo,
 
 # Skip db logging in dev, except when doing db imports since
 # disabling logging breaks that for some unknown reason.
-if !System.get_env("DB_IMPORT") do
+unless System.get_env("DB_IMPORT") do
   config :review, Review.Repo, log: false
 end
 
