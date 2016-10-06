@@ -28,7 +28,7 @@ renderCommit model commit =
     a [ class "block-link", href (commitUrl model commit) ] [
       div [ class "commit-wrapper", onClick (ShowCommit commit.id)  ] [
         div [ class "commit-controls" ] (renderButtons model commit)
-      , img [ class "commit-avatar", src (avatarUrl (Just commit.authorGravatarHash)) ] []
+      , img [ class "commit-avatar", src (avatarUrl commit.authorGravatarHash) ] []
       , div [ class "commit-summary-and-details" ] [
           div [ class "commit-summary test-summary" ] [ text commit.summary ]
         , renderCommitDetails commit
@@ -44,7 +44,7 @@ renderCommitDetails commit =
   , strong [] [ text commit.repository ]
   , span [ class "by-author" ] [
       text " by "
-    , strong [] [ text commit.authorName ]
+    , strong [] [ text (commitAuthorName commit) ]
     , text " on "
     , span [ class "test-timestamp" ] [ text (formattedTime commit.timestamp) ]
     ]
@@ -129,7 +129,11 @@ commitClassList model commit =
 
 authoredByYou : Model -> Commit -> Bool
 authoredByYou model commit =
-  String.contains model.settings.name commit.authorName
+  String.contains model.settings.name (commitAuthorName commit)
+
+commitAuthorName : Commit -> String
+commitAuthorName commit =
+  Maybe.withDefault "Unknown" commit.authorName
 
 commitId : Commit -> String
 commitId commit =

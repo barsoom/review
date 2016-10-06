@@ -46,8 +46,8 @@ type alias Commit =
   { id : Int
   , summary : String
   , repository : String
-  , authorName : String
-  , authorGravatarHash : String
+  , authorName : Maybe String
+  , authorGravatarHash : Maybe String
   , timestamp : String
   , isNew : Bool
   , isReviewed : Bool
@@ -62,8 +62,8 @@ type alias Commit =
 type alias Comment =
   { id : Int
   , timestamp : String
-  , authorGravatar : String
-  , authorName : String
+  , authorGravatar : Maybe String
+  , authorName : Maybe String
   , commitAuthorName : Maybe String
   , commitAuthorGravatar : Maybe String
   , commitSummary : Maybe String
