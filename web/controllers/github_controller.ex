@@ -18,9 +18,7 @@ defmodule Review.GithubController do
     comment_json = Poison.encode!(comment_data_with_string_keys)
     comment_data = Poison.decode!(comment_json, keys: :atoms)
 
-    # TODO: figure out how to keep authors in sync by username and email and what
-    # to do about the name. Should it be not required, or be set to "Unknown", etc?
-    author = Review.Repo.find_or_insert_author_by_username(comment_data.user.login)
+    author = Review.Repo.insert_or_update_author(%{ username: comment_data.user.login })
 
     comment = %Review.Comment{
       github_id: comment_data.id,

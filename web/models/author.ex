@@ -1,5 +1,6 @@
 defmodule Review.Author do
   use Review.Web, :model
+  import Ecto.Changeset
 
   schema "authors" do
     field :name, :string
@@ -7,6 +8,11 @@ defmodule Review.Author do
     field :username, :string
     field :created_at, Ecto.DateTime
     field :updated_at, Ecto.DateTime
+  end
+
+  def changeset(author, params \\ %{}) do
+    author
+    |> cast(params, [:name, :email, :username])
   end
 end
 

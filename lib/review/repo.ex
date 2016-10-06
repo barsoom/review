@@ -2,19 +2,9 @@ defmodule Review.Repo do
   use Ecto.Repo, otp_app: :review
   import Ecto.Query
 
-  alias Review.{Commit, Comment, Author}
+  alias Review.{Commit, Comment, AuthorQuery}
 
-  def find_or_insert_author_by_username(username) do
-    Author
-    |> where(username: ^username)
-    |> one_or_insert(%Author{username: username})
-  end
-
-  def find_or_insert_author_by_email(email) do
-    Author
-    |> where(email: ^email)
-    |> one_or_insert(%Author{email: email})
-  end
+  def insert_or_update_author(params), do: AuthorQuery.insert_or_update_author(params)
 
   def commits_data(limit) do
     commits
@@ -41,16 +31,4 @@ defmodule Review.Repo do
       order_by: [ desc: :id ],
       preload:  [ [ commit: :author ], :author, :resolved_by_author ]
   end
-
-  defp one_or_insert(query, data) do
-    query
-    |> one
-    |> one_or_insert_result(data)
-  end
-
-  defp one_or_insert_result(nil, data) do
-    {:ok, record} = data |> insert
-    record
-  end
-  defp one_or_insert_result(record, _data), do: record
 end

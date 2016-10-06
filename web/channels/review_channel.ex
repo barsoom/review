@@ -15,7 +15,7 @@ defmodule Review.ReviewChannel do
   end
 
   def handle_in("StartReview", %{ "id" => id, "byEmail" => email }, socket) do
-    reviewer = Repo.find_or_insert_author_by_email(email)
+    reviewer = Review.Repo.insert_or_update_author(%{ email: email })
 
     update_commit_and_broadcast_changes(id,
       %{ review_started_at: Ecto.DateTime.utc,
@@ -29,7 +29,7 @@ defmodule Review.ReviewChannel do
   end
 
   def handle_in("MarkAsReviewed", %{ "id" => id, "byEmail" => email }, socket) do
-    reviewer = Repo.find_or_insert_author_by_email(email)
+    reviewer = Review.Repo.insert_or_update_author(%{ email: email })
 
     update_commit_and_broadcast_changes(id,
       %{ reviewed_at: Ecto.DateTime.utc,
@@ -45,7 +45,7 @@ defmodule Review.ReviewChannel do
   end
 
   def handle_in("MarkCommentAsResolved", %{ "id" => id, "byEmail" => email }, socket) do
-    resolver = Repo.find_or_insert_author_by_email(email)
+    resolver = Review.Repo.insert_or_update_author(%{ email: email })
 
     update_comment_and_broadcast_changes(id,
       %{ resolved_at: Ecto.DateTime.utc,
