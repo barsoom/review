@@ -29,8 +29,8 @@ Review was built to explore how practical it was to build applications in Elixir
   * [x] Add github hook for ping
   * [x] Add github hook for comments
   * [ ] Add github hook for commits
-  * [ ] Only open links on clicking outside of buttons or start review
 * Minor missing UI
+  * [ ] Only open links on clicking outside of buttons or start review
   * [ ] Add commits-to-review-count text and links on commits page
   * [ ] Add all-commits-reviewed-banner
   * [ ] Add all-comments-resolved-banner
