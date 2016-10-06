@@ -47,7 +47,7 @@ isCommentOnYourComment comments comment settings =
 
 isYourComment : Comment -> Settings -> Bool
 isYourComment comment settings =
-  String.contains settings.name comment.authorName
+  String.contains settings.name (Maybe.withDefault "Unknown" comment.authorName)
 
 isYourCommit : Comment -> Settings -> Bool
 isYourCommit comment settings =

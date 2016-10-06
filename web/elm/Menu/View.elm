@@ -49,5 +49,5 @@ reviewableCommitsCount : Model -> Int
 reviewableCommitsCount model =
   model.commits
   |> List.filter(\c -> not c.isReviewed)
-  |> List.filter(\c -> not (String.contains model.settings.name c.authorName))
+  |> List.filter(\c -> not (String.contains model.settings.name (Maybe.withDefault "Unknown" c.authorName)))
   |> List.length

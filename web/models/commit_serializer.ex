@@ -44,6 +44,7 @@ defmodule Review.CommitSerializer do
   defp email(nil), do: nil
   defp email(author), do: author.email
 
+  defp gravatar_hash(%{email: nil}), do: gravatar_hash(nil)
   defp gravatar_hash(nil), do: gravatar_hash(%{ email: "show-a-placeholder" })
   defp gravatar_hash(author) do
     Gravatar.hash(author.email)

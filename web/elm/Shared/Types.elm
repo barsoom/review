@@ -46,13 +46,13 @@ type alias Commit =
   { id : Int
   , summary : String
   , repository : String
-  , authorName : Maybe String
-  , authorGravatarHash : Maybe String
   , timestamp : String
   , isNew : Bool
   , isReviewed : Bool
   , isBeingReviewed : Bool
   , url : String
+  , authorName : Maybe String
+  , authorGravatarHash : Maybe String
   , pendingReviewerGravatarHash : Maybe String
   , pendingReviewerEmail : Maybe String
   , reviewerGravatarHash : Maybe String
@@ -62,17 +62,17 @@ type alias Commit =
 type alias Comment =
   { id : Int
   , timestamp : String
+  , resolved : Bool
+  , body : String
+  , threadIdentifier : String
+  , url : String
   , authorGravatar : Maybe String
   , authorName : Maybe String
   , commitAuthorName : Maybe String
   , commitAuthorGravatar : Maybe String
   , commitSummary : Maybe String
-  , resolved : Bool
   , resolverGravatar : Maybe String
   , resolverEmail : Maybe String
-  , body : String
-  , threadIdentifier : String
-  , url : String
   }
 
 type alias Identifyable a = { a | id : Int }

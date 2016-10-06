@@ -40,6 +40,7 @@ defmodule Review.CommentSerializer do
     commit.author.name
   end
 
+  defp gravatar_hash(%{email: nil}), do: gravatar_hash(nil)
   defp gravatar_hash(nil), do: gravatar_hash(%{ email: "show-a-placeholder" })
   defp gravatar_hash(author) do
     Gravatar.hash(author.email)
