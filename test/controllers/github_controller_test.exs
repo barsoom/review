@@ -26,6 +26,38 @@ defmodule Review.GithubControllerTest do
     assert comment.commit_sha == "2be829b9163897e8bb57ceea9709a5d5e61faee1"
   end
 
+  test "can handle a push update" do
+    {:ok, _, _socket} = socket("", %{})
+      |> subscribe_and_join(Review.ReviewChannel, "review")
+
+    conn = build_conn
+      |> put_req_header("x-github-event", "push")
+      |> post("/webhooks/github?secret=webhook_secret", Poison.decode!(Review.Factory.push_payload))
+
+    assert text_response(conn, 200) =~ "ok"
+
+    assert_broadcast "new_or_updated_commit", %{}
+
+    commit = Review.Repo.commits |> Review.Repo.one
+    assert commit.sha == "c5472c5276f564621afe4b56b14f50e7c298dff9"
+    assert Review.CommitSerializer.serialize(commit).repository == "gridlook"
+  end
+
+  test "ignores non-master commits in push updates" do
+    data =
+      Poison.decode!(Review.Factory.push_payload)
+      |> Map.put("ref", "refs/heads/lab")
+
+    conn = build_conn
+      |> put_req_header("x-github-event", "push")
+      |> post("/webhooks/github?secret=webhook_secret", data)
+
+    assert text_response(conn, 200) =~ "ok"
+
+    commit_count = Review.Repo.commits |> Review.Repo.all |> Enum.count
+    assert commit_count == 0
+  end
+
   test "requires a valid key" do
     conn = build_conn
       |> put_req_header("x-github-event", "ping")

@@ -5,7 +5,7 @@ defmodule Review.StoreCommitComment do
     |> build_comment
     |> add_author
     |> insert_comment
-    |> ensure_all_associations_are_loaded
+    |> load_associations
   end
 
   defp parse_json(comment_json) do
@@ -33,7 +33,7 @@ defmodule Review.StoreCommitComment do
     Review.Repo.insert(comment)
   end
 
-  defp ensure_all_associations_are_loaded({:ok, comment}) do
+  defp load_associations({:ok, comment}) do
     Review.Repo.get!(Review.Repo.comments, comment.id)
   end
 end

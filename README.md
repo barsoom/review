@@ -28,7 +28,8 @@ Review was built to explore how practical it was to build applications in Elixir
   * [x] Connect github hooks to the demo app and the production app
   * [x] Add github hook for ping
   * [x] Add github hook for comments
-  * [ ] Add github hook for commits
+  * [x] Add github hook for commits
+    - [x] Ignore non-master commits
 * Minor missing UI
   * [ ] Only open links on clicking outside of buttons or start review
   * [ ] Add commits-to-review-count text and links on commits page

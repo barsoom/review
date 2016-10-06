@@ -20,6 +20,10 @@ defmodule Review.Factory do
     File.read!("test/fixtures/comment_payload.json")
   end
 
+  def push_payload do
+    File.read!("test/fixtures/push_payload.json")
+  end
+
   # This payload is actually the commit payload + repository from the push payload, but that is
   # what we save in the database.
   defp commit_payload do
