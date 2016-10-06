@@ -79,6 +79,10 @@ Can be used to copy from remit to review, or just to copy data between two deplo
 
     script/copy_data_between_remit_deploys remit-app review-app
 
+### Dumping schema to priv/repo/structure.sql
+
+They way we've disabled logging in dev isn't compatible with most other commands, so you need to run `ENABLE_DB_LOGGING=true mix ecto.dump` to dump schema.
+
 ### Running tests
 
 Start headless browser in another terminal window:
