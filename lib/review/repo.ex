@@ -2,9 +2,11 @@ defmodule Review.Repo do
   use Ecto.Repo, otp_app: :review
   import Ecto.Query
 
-  alias Review.{Commit, Comment, AuthorQuery}
+  alias Review.{Commit, Comment, AuthorQuery, StoreCommitComment}
 
   def insert_or_update_author(params), do: AuthorQuery.insert_or_update_author(params)
+
+  def store_commit_comment(comment_json), do: StoreCommitComment.call(comment_json)
 
   def commits_data(limit) do
     commits
