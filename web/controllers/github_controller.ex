@@ -14,14 +14,20 @@ defmodule Review.GithubController do
   end
 
   defp handle_event(conn, "commit_comment", %{ "comment" => comment_data_with_string_keys }) do
-    comment = Poison.encode!(comment_data_with_string_keys) |> Review.Repo.store_commit_comment
-    Review.Endpoint.broadcast! "review", "new_or_updated_comment", Review.CommentSerializer.serialize(comment)
+    Poison.encode!(comment_data_with_string_keys)
+    |> Review.Repo.store_commit_comment
+    |> broadcast_new_or_updated_comment
+
     conn |> text("ok")
   end
 
   defp event_name(conn) do
     conn.req_headers
-      |> Enum.into(%{})
-      |> Map.fetch!("x-github-event")
+    |> Enum.into(%{})
+    |> Map.fetch!("x-github-event")
+  end
+
+  defp broadcast_new_or_updated_comment(comment) do
+    Review.Endpoint.broadcast! "review", "new_or_updated_comment", Review.CommentSerializer.serialize(comment)
   end
 end
