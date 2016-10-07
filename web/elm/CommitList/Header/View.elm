@@ -50,20 +50,20 @@ number : Int -> Node a
 number n =
   n |> toString |> text
 
+reviewableByYouCount : Model -> Int
+reviewableByYouCount model =
+  (reviewableCount model) - (reviewableByOthersCount model)
+
 reviewableByOthersCount : Model -> Int
 reviewableByOthersCount model =
-  (reviewableCount model) - (reviewableByYouCount model)
+  model
+  |> reviewableCommits
+  |> List.length
 
 reviewableCount : Model -> Int
 reviewableCount model =
   model.commits
   |> List.filter (\commit -> not commit.isReviewed)
-  |> List.length
-
-reviewableByYouCount : Model -> Int
-reviewableByYouCount model =
-  model
-  |> reviewableCommits
   |> List.length
 
 oldestReviewableCommitId : Model -> Int
