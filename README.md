@@ -47,6 +47,7 @@ Review was built to explore how practical it was to build applications in Elixir
 
 ### Later
 
+* [ ] Attempt to fetch more info on authors when comments arrive and we don't already have their name/email.
 * [ ] Add proper getting started docs and example install like remit has
 * [ ] Limit auto-reload on deploy as much as possible (e.g. only on data format or client code changes)
 * [ ] Use shasum checking for downloads in CI

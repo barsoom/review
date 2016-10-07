@@ -13,7 +13,7 @@ defmodule Review.GithubController do
     params
     |> Poison.encode!
     |> Review.Repo.store_push
-    |> Enum.each &broadcast_new_or_updated_commit/1
+    |> Enum.each(&broadcast_new_or_updated_commit/1)
 
     conn |> text("ok")
   end
@@ -33,11 +33,11 @@ defmodule Review.GithubController do
     |> Map.fetch!("x-github-event")
   end
 
-  defp broadcast_new_or_updated_comment(comment) do
-    Review.Endpoint.broadcast! "review", "new_or_updated_comment", Review.CommentSerializer.serialize(comment)
-  end
-
   defp broadcast_new_or_updated_commit(commit) do
     Review.Endpoint.broadcast! "review", "new_or_updated_commit", Review.CommitSerializer.serialize(commit)
+  end
+
+  defp broadcast_new_or_updated_comment(comment) do
+    Review.Endpoint.broadcast! "review", "new_or_updated_comment", Review.CommentSerializer.serialize(comment)
   end
 end
