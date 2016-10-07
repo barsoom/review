@@ -10,20 +10,31 @@ import Shared.Formatting exposing (authorName)
 
 view : Model -> Node a
 view model =
-  p [ class "left-to-review" ] [
-    strong [] [ number <| reviewableCount model ]
-  , text " commits to review: "
-  , strong [] [ number <| reviewableByOthersCount model ]
-  , text " by others, "
-  , strong [] [ number <| reviewableByYouCount model ]
-  , text " by you "
-  , br [] []
-  , text "Oldest by others: "
-  , a [ href "" ] [ text "wip" ]
-  ]
+  let
+    totalCount = reviewableCount model
+  in
+    if totalCount == 0 then
+      p [ class "nothing-left-to-review" ] [
+        i [ class "fa fa-trophy fa-2x trophy" ] []
+      , span [ class "text" ] [
+          strong [] [ text "Nothing left to review!" ]
+        , text " Good job."
+        ]
+      ]
+    else
+      p [ class "left-to-review" ] [
+        strong [] [ number <| reviewableCount model ]
+      , text " commits to review: "
+      , strong [] [ number <| reviewableByOthersCount model ]
+      , text " by others, "
+      , strong [] [ number <| reviewableByYouCount model ]
+      , text " by you "
+      , br [] []
+      , text "Oldest by others: "
+      , a [ href "" ] [ text "wip" ]
+      ]
 
   --, a fluid-app-link="" href="https://github.com/barsoom/auctionet/commit/8bca6a3b1a5d8cc0065bb17d9cb94a1899c32505" ng-click="jumpTo(stats.oldestCommitYouCanReview)" class="ng-binding">Fri 7 Oct at 11:21 </a></span><!-- end ngIf: stats.oldestCommitYouCanReview --></p>
--- p [ class "nothing-left-to-review" ] [ s="fa fa-trophy fa-2x trophy"></i> <span class="text"><strong>Nothing left to review!</strong> Good job. </span></p>
 
 number : Int -> Node a
 number n =
