@@ -11,12 +11,17 @@ import Shared.Types exposing (..)
 import Shared.Change exposing (changeMsg)
 import Shared.Avatar exposing (avatarUrl)
 
+import CommitList.Header.View
+
 view : Model -> Node Msg
 view model =
   let
     commits = commitsToShow model
   in
-    ul [ class "commits-list" ] (List.map (renderCommit model) commits)
+    div [] [
+      CommitList.Header.View.view model,
+      ul [ class "commits-list" ] (List.map (renderCommit model) commits)
+    ]
 
 commitsToShow : Model -> List Commit
 commitsToShow model =

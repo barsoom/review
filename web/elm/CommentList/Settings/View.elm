@@ -1,12 +1,12 @@
 module CommentList.Settings.View exposing (view)
 
-import Shared.Types exposing (..)
-import Settings.Types exposing (..)
-
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import VirtualDom exposing (Node, Property)
+
+import Shared.Types exposing (..)
+import Settings.Types exposing (..)
 
 view : Settings -> Node Msg
 view settings =
