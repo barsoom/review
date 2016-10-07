@@ -6,7 +6,7 @@ import Html.Events exposing (onClick)
 import String
 import VirtualDom exposing (Node, Property)
 
-import Shared.Formatting exposing (formattedTime)
+import Shared.Formatting exposing (formattedTime, authorName)
 import Shared.Types exposing (..)
 import Shared.Change exposing (changeMsg)
 import Shared.Avatar exposing (avatarUrl)
@@ -44,7 +44,7 @@ renderCommitDetails commit =
   , strong [] [ text commit.repository ]
   , span [ class "by-author" ] [
       text " by "
-    , strong [] [ text (commitAuthorName commit) ]
+    , strong [] [ text (authorName commit.authorName) ]
     , text " on "
     , span [ class "test-timestamp" ] [ text (formattedTime commit.timestamp) ]
     ]
@@ -129,11 +129,7 @@ commitClassList model commit =
 
 authoredByYou : Model -> Commit -> Bool
 authoredByYou model commit =
-  String.contains model.settings.name (commitAuthorName commit)
-
-commitAuthorName : Commit -> String
-commitAuthorName commit =
-  Maybe.withDefault "Unknown" commit.authorName
+  String.contains model.settings.name (authorName commit.authorName)
 
 commitId : Commit -> String
 commitId commit =

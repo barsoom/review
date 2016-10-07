@@ -7,6 +7,7 @@ import VirtualDom exposing (Node, Property)
 import String
 
 import Shared.Types exposing (..)
+import Shared.Formatting exposing (authorName)
 
 view : Model -> Node Msg
 view model =
@@ -49,5 +50,5 @@ reviewableCommitsCount : Model -> Int
 reviewableCommitsCount model =
   model.commits
   |> List.filter(\c -> not c.isReviewed)
-  |> List.filter(\c -> not (String.contains model.settings.name (Maybe.withDefault "Unknown" c.authorName)))
+  |> List.filter(\c -> not (String.contains model.settings.name (authorName c.authorName)))
   |> List.length

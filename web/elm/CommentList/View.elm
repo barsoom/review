@@ -7,7 +7,7 @@ import VirtualDom exposing (Node, Property)
 import Maybe
 
 import Shared.Types exposing (..)
-import Shared.Formatting exposing (formattedTime)
+import Shared.Formatting exposing (formattedTime, authorName)
 import Shared.Change exposing (changeMsg)
 import Shared.Avatar exposing (avatarUrl)
 import Settings.Types exposing (..)
@@ -52,7 +52,7 @@ renderComment model comment =
         , img [ class "comment-proper-author-gravatar", src (avatarUrl comment.authorGravatar) ] []
         , i [ class "fa fa-chevron-right commenter-to-committer-arrow" ] []
         , img [ class "comment-commit-author-gravatar", src (avatarUrl comment.commitAuthorGravatar) ] []
-        , strong [] [ text (commitAuthorName comment) ]
+        , strong [] [ text (authorName comment.commitAuthorName) ]
         , text " on "
         , span [ class "known-commit" ] [
             em [ class "comment-commit-summary" ] [ text (Maybe.withDefault "" comment.commitSummary) ]
@@ -84,10 +84,6 @@ renderButton model comment  =
 resolverDataAttribute : Maybe String -> Attribute a
 resolverDataAttribute email =
   attribute "data-test-resolver-email" (Maybe.withDefault "" email)
-
-commitAuthorName : Comment -> String
-commitAuthorName comment =
-  Maybe.withDefault "Unknown" comment.commitAuthorName
 
 commentClassList : Model -> Comment -> Property a
 commentClassList model comment =

@@ -1,6 +1,7 @@
 module CommentList.Filter exposing (filter, isYourCommit, isYourComment, isCommentOnYourComment)
 
 import Shared.Types exposing (..)
+import Shared.Formatting exposing (authorName)
 import Settings.Types exposing (Settings)
 
 import String
@@ -47,7 +48,7 @@ isCommentOnYourComment comments comment settings =
 
 isYourComment : Comment -> Settings -> Bool
 isYourComment comment settings =
-  String.contains settings.name (Maybe.withDefault "Unknown" comment.authorName)
+  String.contains settings.name (authorName comment.authorName)
 
 isYourCommit : Comment -> Settings -> Bool
 isYourCommit comment settings =
