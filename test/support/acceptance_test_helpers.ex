@@ -21,7 +21,7 @@ defmodule AcceptanceTestHelpers do
 
   defp find_button(name, attempt \\ 0) do
     find_all_elements(:css, ".test-button")
-    |> Enum.find(fn (element) -> inner_text(element) == name end)
+    |> Enum.find(fn (element) -> String.strip(inner_text(element)) == name end)
     |> retry_find_button(name, attempt)
   end
 
