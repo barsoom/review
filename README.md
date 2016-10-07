@@ -31,9 +31,9 @@ Review was built to explore how practical it was to build applications in Elixir
   * [x] Add github hook for commits
     - [x] Ignore non-master commits
 * Minor missing UI
-  * [ ] Add commits-to-review-count text and links on commits page
+  * [x] Add commits-to-review-count text and links on commits page
+  * [x] Add all-commits-reviewed-banner
   * [ ] Only open links on clicking outside of buttons or start review
-  * [ ] Add all-commits-reviewed-banner
   * [ ] Add all-comments-resolved-banner
   * [ ] Fix styling differences, if any
 * [ ] Set maintenance on remit, copy the database to review, set `REDIRECT_TO_OTHER_REMIT_URL` on remit to redirect to review.
