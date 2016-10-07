@@ -33,8 +33,8 @@ Review was built to explore how practical it was to build applications in Elixir
 * Minor missing UI
   * [x] Add commits-to-review-count text and links on commits page
   * [x] Add all-commits-reviewed-banner
-  * [ ] Add all-comments-resolved-banner
-  * [ ] Fix styling differences, if any
+  * [x] Add all-comments-resolved-banner
+  * [x] Fix styling differences, if any
   * [ ] If there is time: Only open links on clicking outside of buttons or start review
     - Slightly tricky to do, in Elm it seems better to handle all that using Cmd's rather than disabling other events onClick
 * [ ] Set maintenance on remit, copy the database to review, set `REDIRECT_TO_OTHER_REMIT_URL` on remit to redirect to review.
