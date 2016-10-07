@@ -111,7 +111,9 @@ reviewerDataAttribute email =
 commitButton : CommitButton -> Node Msg
 commitButton commitButton =
   button [ class ("small test-button" ++ " " ++ commitButton.class), onClick commitButton.msg ] [
-    i [ class ("fa" ++ " " ++ commitButton.iconClass) ] [ text commitButton.name ]
+    i [ class ("fa" ++ " " ++ commitButton.iconClass) ] [ ]
+  , text " "
+  , text commitButton.name
   ]
 
 commitClassList : Model -> Commit -> Property a

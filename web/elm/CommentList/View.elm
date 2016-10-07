@@ -73,12 +73,14 @@ renderButton model comment  =
     div [] [
       img [ class "comment-resolver-avatar", src (avatarUrl comment.resolverGravatar) ] []
     , button [ class "small mark-as-new test-button", onClick (changeMsg MarkCommentAsNew model comment) ] [
-        i [ class "fa fa-eye-slash" ] [ text "Mark as new" ]
+        i [ class "fa fa-eye-slash" ] []
+      , text " Mark as new"
       ]
     ]
   else
     button [ class "small mark-as-resolved test-button", onClick (changeMsg MarkCommentAsResolved model comment) ] [
-      i [ class "fa fa-eye" ] [ text "Mark as resolved" ]
+      i [ class "fa fa-eye" ] []
+    , text " Mark as resolved"
     ]
 
 resolverDataAttribute : Maybe String -> Attribute a
