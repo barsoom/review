@@ -77,7 +77,8 @@ var settingsCookieName = "settings-v2"
 var savedSettingsJson = Cookies.get(settingsCookieName);
 if(savedSettingsJson) { ports.settings.send(JSON.parse(savedSettingsJson)) }
 ports.settingsChange.subscribe((settings) => {
-  Cookies.set(settingsCookieName, JSON.stringify(settings))
+  // expires is number of days
+  Cookies.set(settingsCookieName, JSON.stringify(settings), { expires: 999999 })
 })
 
 // Set up some basic URL history support
