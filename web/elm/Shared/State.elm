@@ -89,6 +89,9 @@ update msg model =
     AddOrUpdateComment comment ->
       ({model | comments = model.comments |> addOrUpdateById comment}, Cmd.none)
 
+    FocusCommitById id ->
+      (model, Shared.Ports.focusCommitById id)
+
     -- no local changes so you know if you are in sync
     -- should work fine as long as network speeds are resonable
     StartReview change           -> (model, pushEvent "StartReview" change)

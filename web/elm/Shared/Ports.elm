@@ -21,3 +21,5 @@ port outgoingCommands : (String, Change) -> Cmd msg
 
 port location : (String -> msg) -> Sub msg
 port navigate : String -> Cmd msg
+
+port focusCommitById : Int -> Cmd msg

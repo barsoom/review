@@ -85,3 +85,6 @@ ports.navigate.subscribe((path) => { window.history.pushState({}, "", path + win
 let updateLocation = (_) => { ports.location.send(window.location.pathname) }
 window.onpopstate = updateLocation
 updateLocation()
+
+// Helpers for things that are just simpler to do in JS
+ports.focusCommitById.subscribe((id) => { document.getElementById("commit-" + id).scrollIntoView(true); })

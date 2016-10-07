@@ -23,6 +23,7 @@ type Msg
   | LocationChange String
   | UpdateConnectionStatus Bool
   | StoreLastClickedCommentId Int
+  | FocusCommitById Int
   | ChangeSettings SettingsMsg
 
 type Tab

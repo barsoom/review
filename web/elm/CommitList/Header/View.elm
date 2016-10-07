@@ -2,13 +2,14 @@ module CommitList.Header.View exposing (view)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import VirtualDom exposing (Node)
 import String
 
 import Shared.Types exposing (..)
 import Shared.Formatting exposing (authorName, formattedTime)
 
-view : Model -> Node a
+view : Model -> Node Msg
 view model =
   let
     totalCount = reviewableCount model
@@ -32,18 +33,18 @@ view model =
       , renderOldestReviewableCommitLink model
       ]
 
--- TODO: make clicking on it focus the commit in the list
-renderOldestReviewableCommitLink : Model -> Node a
+renderOldestReviewableCommitLink : Model -> Node Msg
 renderOldestReviewableCommitLink model =
   if hasOldestReviewableCommit model then
     div [] [
         text "Oldest by others: "
-      , a [ href <| oldestReviewableCommitUrl model ] [ text <| oldestReviewableCommitTimestamp model ]
+      , a [ href <| oldestReviewableCommitUrl model
+          , onClick (FocusCommitById <| oldestReviewableCommitId model) ] [
+            text <| oldestReviewableCommitTimestamp model
+          ]
     ]
   else
     div [] []
-
-  --, a fluid-app-link="" href="https://github.com/barsoom/auctionet/commit/8bca6a3b1a5d8cc0065bb17d9cb94a1899c32505" ng-click="jumpTo(stats.oldestCommitYouCanReview)" class="ng-binding">Fri 7 Oct at 11:21 </a></span><!-- end ngIf: stats.oldestCommitYouCanReview --></p>
 
 number : Int -> Node a
 number n =
@@ -64,6 +65,14 @@ reviewableByYouCount model =
   model
   |> reviewableCommits
   |> List.length
+
+oldestReviewableCommitId : Model -> Int
+oldestReviewableCommitId model =
+  case oldestReviewableCommit model of
+    Just commit ->
+      commit.id
+    Nothing ->
+      -1
 
 oldestReviewableCommitTimestamp : Model -> String
 oldestReviewableCommitTimestamp model =
