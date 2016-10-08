@@ -1,4 +1,4 @@
-***Status***: A few more things is needed before it's usable, see todos.
+***Status***: Beta. Used internally at <http://devs.auctionet.com>. Docs and polish would help if others want to use it.
 
 # Review
 
@@ -103,10 +103,7 @@ Run tests:
 
 ### Developing
 
-If you use a editor plugin to issue a test command in a separate console, you can use `test_server` to do handle both that and run the phoenix.server in the same console window.
-
-**Important:** If you get a compile error that should not happen it's very likely this is some kind of caching issue in brunch, restart the `test_server
-`. Another, but very unlikely error could be a cache issue in elm, then you have to remove `web/elm/elm-stuff/build-artifacts`.
+If you use a editor plugin to issue a test command in a separate console, you can use `mix test_server` to do handle both that and run the phoenix.server in the same console window.
 
     source web/elm/paths.env
     mix test_server
@@ -116,6 +113,12 @@ Otherwise, start a phoenix.server in a separate console to get a dev server and 
     mix phoenix.server
 
 And run tests somewhere else.
+
+### Important notice about build tool cache invalidation bugs
+
+If you get a compile error that you don't think is actually an error you've likely run into a brunch build caching issue. In that case, restart `mix test_server`. This happens fairly often when editing multiple files.
+
+If that does not work, you could try to remove `web/elm/elm-stuff/build-artifacts` and then restart `mix test_server` (I've only had to do this once).
 
 ### Installing an elm package or running other elm tools
 
