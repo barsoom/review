@@ -18,43 +18,16 @@ Review was built to explore how practical it was to build applications in Elixir
 
 ## TODO
 
-### Remaining todos before we can use this :)
-
-* Workflow
-  * [x] Test and write backend for comment buttons
-* Github hooks
-  * [x] Add websocket handing of new commits/comments
-  * [x] Deploy review-on-review on heroku
-  * [x] Connect github hooks to the demo app and the production app
-  * [x] Add github hook for ping
-  * [x] Add github hook for comments
-  * [x] Add github hook for commits
-    - [x] Ignore non-master commits
-* Minor missing UI
-  * [x] Add commits-to-review-count text and links on commits page
-  * [x] Add all-commits-reviewed-banner
-  * [x] Add all-comments-resolved-banner
-  * [x] Fix styling differences, if any
-  * [x] If there is time: Only open links on clicking outside of buttons or start review
-    - Slightly tricky to do, in Elm it seems better to handle all that using Cmd's rather than disabling other events onClick
-* API
- * [x] Unreviewed commits API for our internal dashboard `/api/v1/unreviewed_commits` returns `{ count: 1/0, oldest_age_in_seconds: 1/nil }`, see <https://github.com/henrik/remit/blob/master/app/controllers/api/v1/unreviewed_commits_controller.rb>
-* [x] Set maintenance on remit, copy the database to review, set `REDIRECT_TO_OTHER_REMIT_URL` on remit to redirect to review.
-
-### Later
-
 * [x] Be able to hide reviewed commits?
 * [ ] Show a helpful message when settings are not filled in. Also hide "to review" stats until name exists.
-* [ ] Find out how to handle dates in tests properly for the api tests
-* [ ] Attempt to fetch more info on authors when comments arrive and we don't already have their name/email.
 * [ ] Add proper getting started docs and example install like remit has
-* [ ] Limit auto-reload on deploy as much as possible (e.g. only on data format or client code changes)
+* [ ] Attempt to fetch more info on authors when comments arrive and we don't already have their name/email.
+* [ ] Find out how to handle dates in tests properly for the api tests
 * [ ] Use shasum checking for downloads in CI
 * [ ] Figure out how to test the auth\_key check in UserSocket
 * [ ] Possibly make phantomjs part of the phoenix.server in dev
 * [ ] Cache the last build step
 * [ ] Maybe: Extract a mix package for `render_elm` and maybe a npm for the ujs, or remove both
-* [ ] Display gravatar in settings (didn't do it to start with since we have no other js gravatar code yet and it's not strictly needed)
 
 ### Make the tools better
 
@@ -65,7 +38,7 @@ Review was built to explore how practical it was to build applications in Elixir
 
 ### Collect info on how to work with Phoenix and Elm in one place
 
-There is already blog posts, but haven't found anything that describes a development enviornment that works as well as something like react / rails. Might write one based on this.
+There is already blog posts, but haven't found anything that describes a development environment that works as well as something like react / rails. Might write one based on this.
 
 * [ ] Write down ideas for a blog post or gist or something
 * [ ] Finish up tools (elm-phoenix, elm-brunch, elm-phoenix-ujs)
