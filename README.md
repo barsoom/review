@@ -37,6 +37,8 @@ Review was built to explore how practical it was to build applications in Elixir
   * [x] Fix styling differences, if any
   * [x] If there is time: Only open links on clicking outside of buttons or start review
     - Slightly tricky to do, in Elm it seems better to handle all that using Cmd's rather than disabling other events onClick
+* API
+ * [ ] Unreviewed commits API for our internal dashboard `/api/v1/unreviewed_commits` returns `{ count: 1/0, oldest_age_in_seconds: 1/nil }`, see <https://github.com/henrik/remit/blob/master/app/controllers/api/v1/unreviewed_commits_controller.rb>
 * [ ] Set maintenance on remit, copy the database to review, set `REDIRECT_TO_OTHER_REMIT_URL` on remit to redirect to review.
 
 ### Make the tools better
