@@ -43,7 +43,8 @@ Review was built to explore how practical it was to build applications in Elixir
 
 ### Later
 
-* [ ] Be able to hide reviewed commits?
+* [x] Be able to hide reviewed commits?
+* [ ] Show a helpful message when settings are not filled in. Also hide "to review" stats until name exists.
 * [ ] Find out how to handle dates in tests properly for the api tests
 * [ ] Attempt to fetch more info on authors when comments arrive and we don't already have their name/email.
 * [ ] Add proper getting started docs and example install like remit has
