@@ -26,8 +26,8 @@ main =
 view : Model -> Node Msg
 view model =
   div [ class "wrapper" ] [
-    Connectivity.View.view model
-  , Menu.View.view model
+    Menu.View.view model
+  , Connectivity.View.view model
   , renderTabContents model
   ]
 
