@@ -19,14 +19,14 @@ view : Model -> Node Msg
 view model =
   let
     commits = commitsToShow model
-    toggleButtonText = (if model.settings.showAllResolvedCommits then "Hide most resolved commits" else "Show more resolved commits")
+    toggleButtonText = (if model.settings.showAllReviewedCommits then "Hide most reviewed commits" else "Show more reviewed commits")
   in
     div [] [
       CommitList.Header.View.view model,
       ul [ class "commits-list" ] (List.map (renderCommit model) commits)
     , ul [ class "commits-list" ] [
         li [ class "centered-button-commit-row" ] [
-          button [ onClick (ChangeSettings ToggleShowAllResolvedCommits) ] [ text toggleButtonText ]
+          button [ onClick (ChangeSettings ToggleShowAllReviewedCommits) ] [ text toggleButtonText ]
         ]
       ]
     ]
@@ -36,20 +36,20 @@ commitsToShow model =
   let
     list = model.commits |> List.take(model.commitsToShowCount)
   in
-    if model.settings.showAllResolvedCommits then
+    if model.settings.showAllReviewedCommits then
       list
     else
-      limitShownResolvedCommits list
+      limitShownReviewedCommits list
 
-limitShownResolvedCommits : List Commit -> List Commit
-limitShownResolvedCommits list =
+limitShownReviewedCommits : List Commit -> List Commit
+limitShownReviewedCommits list =
   let
     oldestUnreviewedCommit = list |> List.filter (\commit -> not commit.isReviewed) |> List.sortBy .timestamp |> List.head
-    minResolvedCommitsToShowCount = 5
+    minReviewedCommitsToShowCount = 5
   in
    case oldestUnreviewedCommit of
      Just commit ->
-       fst (list |> List.partition (\c -> c.id + minResolvedCommitsToShowCount >= commit.id))
+       fst (list |> List.partition (\c -> c.id + minReviewedCommitsToShowCount >= commit.id))
      Nothing ->
        list
 

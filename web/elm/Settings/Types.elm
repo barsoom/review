@@ -6,14 +6,14 @@ type alias Settings =
   , showCommentsYouWrote : Bool
   , showCommentsOnOthers : Bool
   , showResolvedComments : Bool
-  , showAllResolvedCommits : Bool
+  , showAllReviewedCommits : Bool
   }
 
 type SettingsMsg
   = UpdateShowCommentsYouWrote Bool
   | UpdateShowResolvedComments Bool
   | UpdateShowCommentsOnOthers Bool
-  | ToggleShowAllResolvedCommits
+  | ToggleShowAllReviewedCommits
   | UpdateEmail String
   | UpdateName String
 

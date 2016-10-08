@@ -79,8 +79,8 @@ if(savedSettingsJson) {
   let data = JSON.parse(savedSettingsJson)
 
   // Upgrade old settings data (remove after nov 2016)
-  if(data.showAllResolvedCommits == undefined) {
-    data.showAllResolvedCommits = false
+  if(data.showAllReviewedCommits == undefined) {
+    data.showAllReviewedCommits = false
   }
 
   ports.settings.send(data)
