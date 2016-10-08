@@ -8,6 +8,7 @@ defmodule Review.CommentsTest do
     comment3 = insert(:comment)
 
     navigate_to_comments_page
+    show_all_comments
 
     elements = find_all_elements(:css, ".test-comment")
     assert length(elements) == 3
@@ -46,40 +47,39 @@ defmodule Review.CommentsTest do
     fill_in "name", with: "Carl"
 
     navigate_to_comments_page
+    assert !visible?(your_comment)
+    assert !visible?(resolved_comment)
+    assert !visible?(other_people_comment_on_other_peoples_commit)
+    assert visible?(unresolved_comment_on_your_commit)
+    assert visible?(comment_on_your_comment)
+
+    check "test-comments-i-wrote"
+
+    assert visible?(your_comment)
+    assert !visible?(resolved_comment)
+    assert !visible?(other_people_comment_on_other_peoples_commit)
+    assert visible?(unresolved_comment_on_your_commit)
+    assert visible?(comment_on_your_comment)
+
+    check "test-resolved-comments"
+
+    assert visible?(your_comment)
+    assert visible?(resolved_comment)
+    assert !visible?(other_people_comment_on_other_peoples_commit)
+    assert visible?(unresolved_comment_on_your_commit)
+    assert visible?(comment_on_your_comment)
+
+    check "test-comments-on-others"
+
     assert visible?(your_comment)
     assert visible?(resolved_comment)
     assert visible?(other_people_comment_on_other_peoples_commit)
     assert visible?(unresolved_comment_on_your_commit)
     assert visible?(comment_on_your_comment)
 
-    uncheck "test-comments-i-wrote"
-
-    assert !visible?(your_comment)
-    assert visible?(resolved_comment)
-    assert visible?(other_people_comment_on_other_peoples_commit)
-    assert visible?(unresolved_comment_on_your_commit)
-    assert visible?(comment_on_your_comment)
-
-    uncheck "test-resolved-comments"
-
-    assert !visible?(your_comment)
-    assert !visible?(resolved_comment)
-    assert visible?(other_people_comment_on_other_peoples_commit)
-    assert visible?(unresolved_comment_on_your_commit)
-    assert visible?(comment_on_your_comment)
-
-    uncheck "test-comments-on-others"
-
-    assert !visible?(your_comment)
-    assert !visible?(resolved_comment)
-    assert !visible?(other_people_comment_on_other_peoples_commit)
-    assert visible?(unresolved_comment_on_your_commit)
-    assert visible?(comment_on_your_comment)
-
     # Settings are persisted
 
     navigate_to_comments_page
-    assert !visible?(other_people_comment_on_other_peoples_commit)
     assert visible?(unresolved_comment_on_your_commit)
   end
 
@@ -91,12 +91,14 @@ defmodule Review.CommentsTest do
       fill_in "name", with: "ada"
       fill_in "email", with: "ada@example.com"
       navigate_to_comments_page
+      show_all_comments
       refute "test-resolved" in css_classes(comment)
       refute "test-authored-by-you" in css_classes(comment)
     end
 
     visitor "charles", fn ->
       navigate_to_comments_page
+      show_all_comments
       assert visible?(comment)
       assert "test-authored-by-you" in css_classes(comment)
     end
@@ -122,6 +124,12 @@ defmodule Review.CommentsTest do
     end
   end
 
+  def show_all_comments do
+    check "test-comments-i-wrote"
+    check "test-resolved-comments"
+    check "test-comments-on-others"
+  end
+
   defp resolver_email(comment) do
     find_comment(comment)
     |> attribute_value("data-test-resolver-email")
@@ -144,11 +152,11 @@ defmodule Review.CommentsTest do
     Review.Factory.comment_payload |> String.replace("2be8", "aaaa")
   end
 
-  defp uncheck(checkbox_class) do
+  defp check(checkbox_class) do
     checkbox = find_element(:css, ".#{checkbox_class}")
-    assert selected?(checkbox)
+    refute selected?(checkbox)
     click(checkbox)
-    assert !selected?(checkbox)
+    assert selected?(checkbox)
   end
 
   defp visible?(comment) do

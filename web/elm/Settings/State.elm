@@ -12,9 +12,9 @@ initialModel : Settings
 initialModel =
   { email = ""
   , name = ""
-  , showCommentsYouWrote = True
-  , showCommentsOnOthers = True
-  , showResolvedComments = True
+  , showCommentsYouWrote = False
+  , showCommentsOnOthers = False
+  , showResolvedComments = False
   }
 
 update : Settings -> SettingsMsg -> Settings
