@@ -10,6 +10,7 @@ import Shared.Types exposing (..)
 import Shared.Formatting exposing (formattedTime, authorName)
 import Shared.Change exposing (changeMsg)
 import Shared.Avatar exposing (avatarUrl)
+import Shared.Helpers exposing (onClickWithPreventDefault)
 import Settings.Types exposing (..)
 import CommentList.Filter exposing (filter, isYourCommit, isYourComment, isCommentOnYourComment)
 import CommentList.Settings.View
@@ -72,13 +73,13 @@ renderButton model comment  =
   if comment.resolved then
     div [] [
       img [ class "comment-resolver-avatar", src (avatarUrl comment.resolverGravatar) ] []
-    , button [ class "small mark-as-new test-button", onClick (changeMsg MarkCommentAsNew model comment) ] [
+    , button [ class "small mark-as-new test-button", onClickWithPreventDefault True (changeMsg MarkCommentAsNew model comment) ] [
         i [ class "fa fa-eye-slash" ] []
       , text " Mark as new"
       ]
     ]
   else
-    button [ class "small mark-as-resolved test-button", onClick (changeMsg MarkCommentAsResolved model comment) ] [
+    button [ class "small mark-as-resolved test-button", onClickWithPreventDefault True (changeMsg MarkCommentAsResolved model comment) ] [
       i [ class "fa fa-eye" ] []
     , text " Mark as resolved"
     ]

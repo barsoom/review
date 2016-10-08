@@ -35,7 +35,7 @@ Review was built to explore how practical it was to build applications in Elixir
   * [x] Add all-commits-reviewed-banner
   * [x] Add all-comments-resolved-banner
   * [x] Fix styling differences, if any
-  * [ ] If there is time: Only open links on clicking outside of buttons or start review
+  * [x] If there is time: Only open links on clicking outside of buttons or start review
     - Slightly tricky to do, in Elm it seems better to handle all that using Cmd's rather than disabling other events onClick
 * [ ] Set maintenance on remit, copy the database to review, set `REDIRECT_TO_OTHER_REMIT_URL` on remit to redirect to review.
 
@@ -99,6 +99,9 @@ Run tests:
 ### Developing
 
 If you use a editor plugin to issue a test command in a separate console, you can use `test_server` to do handle both that and run the phoenix.server in the same console window.
+
+**Important:** If you get a compile error that should not happen it's very likely this is some kind of caching issue in brunch, restart the `test_server
+`. Another, but very unlikely error could be a cache issue in elm, then you have to remove `web/elm/elm-stuff/build-artifacts`.
 
     source web/elm/paths.env
     mix test_server

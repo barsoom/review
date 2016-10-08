@@ -41,6 +41,7 @@ type alias CommitButton =
   , class : String
   , iconClass : String
   , msg : Msg
+  , openCommitOnGithub : Bool
   }
 
 type alias Commit =

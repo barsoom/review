@@ -10,6 +10,7 @@ import Shared.Formatting exposing (formattedTime, authorName)
 import Shared.Types exposing (..)
 import Shared.Change exposing (changeMsg)
 import Shared.Avatar exposing (avatarUrl)
+import Shared.Helpers exposing (onClickWithPreventDefault)
 
 import CommitList.Header.View
 
@@ -72,6 +73,7 @@ renderButtons model commit =
       , class = "start-review"
       , iconClass = "fa-eye"
       , msg = (changeMsg StartReview model commit)
+      , openCommitOnGithub = True
       }
     ]
   else if commit.isBeingReviewed then
@@ -81,12 +83,14 @@ renderButtons model commit =
       , class = "abandon-review"
       , iconClass = "fa-eye-slash"
       , msg = (changeMsg AbandonReview model commit)
+      , openCommitOnGithub = False
       }
     , commitButton {
         name = "Mark as reviewed"
       , class = "mark-as-reviewed"
       , iconClass = "fa-eye-slash"
       , msg = (changeMsg MarkAsReviewed model commit)
+      , openCommitOnGithub = False
       }
     , img [ class "commit-reviewer-avatar test-reviewer", src (avatarUrl commit.pendingReviewerGravatarHash), reviewerDataAttribute(commit.pendingReviewerEmail) ] []
     ]
@@ -97,6 +101,7 @@ renderButtons model commit =
       , class = "mark-as-new"
       , iconClass = "fa-eye-slash"
       , msg = (changeMsg MarkAsNew model commit)
+      , openCommitOnGithub = False
       }
     , img [ class "commit-reviewer-avatar test-reviewer", src (avatarUrl commit.reviewerGravatarHash), reviewerDataAttribute(commit.reviewerEmail) ] []
     ]
@@ -110,7 +115,10 @@ reviewerDataAttribute email =
 
 commitButton : CommitButton -> Node Msg
 commitButton commitButton =
-  button [ class ("small test-button" ++ " " ++ commitButton.class), onClick commitButton.msg ] [
+  button [
+    class ("small test-button" ++ " " ++ commitButton.class),
+    onClickWithPreventDefault (not commitButton.openCommitOnGithub) commitButton.msg
+  ] [
     i [ class ("fa" ++ " " ++ commitButton.iconClass) ] [ ]
   , text " "
   , text commitButton.name
