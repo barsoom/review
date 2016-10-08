@@ -1,4 +1,4 @@
-***Status***: Beta. Used internally at <http://devs.auctionet.com>. Docs and polish would help if others want to use it.
+***Status***: Beta. In use by [auctionet devs](http://dev.auctionet.com). Docs and polish would make it easier for others to adopt it.
 
 # Review
 
