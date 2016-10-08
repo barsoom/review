@@ -19,7 +19,7 @@ view : Model -> Node Msg
 view model =
   let
     commits = commitsToShow model
-    toggleButtonText = (if model.settings.showAllResolvedCommits then "Hide most resolved commits" else "Show all resolved commits")
+    toggleButtonText = (if model.settings.showAllResolvedCommits then "Hide most resolved commits" else "Show more resolved commits")
   in
     div [] [
       CommitList.Header.View.view model,
