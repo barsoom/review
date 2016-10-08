@@ -18,4 +18,5 @@ config :review, Review.Repo,
 config :review,
   auth_key: System.get_env("AUTH_KEY"),
   webhook_secret: System.get_env("WEBHOOK_SECRET"),
-  api_secret: System.get_env("API_SECRET")
+  api_secret: System.get_env("API_SECRET"),
+  max_records: String.to_integer(System.get_env("MAX_RECORDS") || "500")
