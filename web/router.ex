@@ -13,6 +13,12 @@ defmodule Review.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/api/v1", Review do
+    pipe_through :api
+
+    get "/unreviewed_commit_stats", ApiController, :unreviewed_commit_stats
+  end
+
   scope "/webhooks", Review do
     pipe_through :api
 

@@ -35,6 +35,15 @@ defmodule Review.Web do
     end
   end
 
+  def api do
+    quote do
+      use Phoenix.Controller
+      use Review.Authentication
+
+      plug :authenticate, param: "secret", secret: Application.get_env(:review, :api_secret)
+    end
+  end
+
   def controller do
     quote do
       use Phoenix.Controller

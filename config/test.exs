@@ -20,6 +20,7 @@ config :review, Review.Repo,
 
 config :review,
   auth_key: "secret",
-  webhook_secret: "webhook_secret"
+  webhook_secret: "webhook_secret",
+  api_secret: "api_secret"
 
 config :hound, driver: "phantomjs"

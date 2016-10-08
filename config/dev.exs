@@ -50,4 +50,5 @@ end
 # no keys needed in dev
 config :review,
   auth_key: nil,
-  webhook_secret: nil
+  webhook_secret: nil,
+  api_secret: nil
