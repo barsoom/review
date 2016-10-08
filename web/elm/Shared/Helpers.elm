@@ -1,6 +1,5 @@
 module Shared.Helpers exposing (onClickWithPreventDefault)
 
-import Html.Attributes exposing (..)
 import Json.Decode
 import Html exposing (..)
 import Html.Events exposing (onWithOptions)
