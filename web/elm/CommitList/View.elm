@@ -8,6 +8,7 @@ import VirtualDom exposing (Node, Property)
 
 import Shared.Formatting exposing (formattedTime, authorName)
 import Shared.Types exposing (..)
+import Settings.Types exposing (..)
 import Shared.Change exposing (changeMsg)
 import Shared.Avatar exposing (avatarUrl)
 import Shared.Helpers exposing (onClickWithPreventDefault)
@@ -18,15 +19,39 @@ view : Model -> Node Msg
 view model =
   let
     commits = commitsToShow model
+    toggleButtonText = (if model.settings.showAllResolvedCommits then "Hide most resolved commits" else "Show all resolved commits")
   in
     div [] [
       CommitList.Header.View.view model,
       ul [ class "commits-list" ] (List.map (renderCommit model) commits)
+    , ul [ class "commits-list" ] [
+        li [ class "centered-button-commit-row" ] [
+          button [ onClick (ChangeSettings ToggleShowAllResolvedCommits) ] [ text toggleButtonText ]
+        ]
+      ]
     ]
 
 commitsToShow : Model -> List Commit
 commitsToShow model =
-  model.commits |> List.take(model.commitsToShowCount)
+  let
+    list = model.commits |> List.take(model.commitsToShowCount)
+  in
+    if model.settings.showAllResolvedCommits then
+      list
+    else
+      limitShownResolvedCommits list
+
+limitShownResolvedCommits : List Commit -> List Commit
+limitShownResolvedCommits list =
+  let
+    oldestUnreviewedCommit = list |> List.filter (\commit -> not commit.isReviewed) |> List.sortBy .timestamp |> List.head
+    minResolvedCommitsToShowCount = 5
+  in
+   case oldestUnreviewedCommit of
+     Just commit ->
+       fst (list |> List.partition (\c -> c.id + minResolvedCommitsToShowCount >= commit.id))
+     Nothing ->
+       list
 
 renderCommit : Model -> Commit -> Node Msg
 renderCommit model commit =

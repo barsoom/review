@@ -39,6 +39,10 @@
   margin: 2px 4px;
 }
 
+.centered-button-commit-row {
+  text-align: center;
+}
+
 .commit-wrapper {
   @include contain-floats;
   margin: 0 10px;

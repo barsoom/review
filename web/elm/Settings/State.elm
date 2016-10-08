@@ -15,6 +15,7 @@ initialModel =
   , showCommentsYouWrote = False
   , showCommentsOnOthers = False
   , showResolvedComments = False
+  , showAllResolvedCommits = False
   }
 
 update : Settings -> SettingsMsg -> Settings
@@ -25,3 +26,4 @@ update settings msg =
     UpdateShowCommentsYouWrote value -> {settings | showCommentsYouWrote = value}
     UpdateShowResolvedComments value -> {settings | showResolvedComments = value}
     UpdateShowCommentsOnOthers value -> {settings | showCommentsOnOthers = value}
+    ToggleShowAllResolvedCommits     -> {settings | showAllResolvedCommits = not settings.showAllResolvedCommits}

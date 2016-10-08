@@ -75,7 +75,16 @@ ports.outgoingCommands.subscribe((event) => {
 // Load and save settings
 var settingsCookieName = "settings-v2"
 var savedSettingsJson = Cookies.get(settingsCookieName);
-if(savedSettingsJson) { ports.settings.send(JSON.parse(savedSettingsJson)) }
+if(savedSettingsJson) {
+  let data = JSON.parse(savedSettingsJson)
+
+  // Upgrade old settings data (remove after nov 2016)
+  if(data.showAllResolvedCommits == undefined) {
+    data.showAllResolvedCommits = false
+  }
+
+  ports.settings.send(data)
+}
 ports.settingsChange.subscribe((settings) => {
   // expires is number of days
   Cookies.set(settingsCookieName, JSON.stringify(settings), { expires: 999999 })
