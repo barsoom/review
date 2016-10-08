@@ -73,7 +73,7 @@ renderButtons model commit =
       , class = "start-review"
       , iconClass = "fa-eye"
       , msg = (changeMsg StartReview model commit)
-      , openCommitOnGithub = True
+      , openCommitOnGithub = (model.lastClickedCommitId /= commit.id)
       }
     ]
   else if commit.isBeingReviewed then
