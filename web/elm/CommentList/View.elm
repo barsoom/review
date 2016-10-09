@@ -11,6 +11,7 @@ import Shared.Formatting exposing (formattedTime, authorName)
 import Shared.Change exposing (changeMsg)
 import Shared.Avatar exposing (avatarUrl)
 import Shared.Helpers exposing (onClickWithPreventDefault)
+import Shared.CompletedBadge
 import Settings.Types exposing (..)
 import CommentList.Filter exposing (filter, isYourCommit, isYourComment, isCommentOnYourComment)
 import CommentList.Settings.View
@@ -32,7 +33,7 @@ renderCommentList model =
     commentsToShow = filterComments model
   in
     if (List.length commentsToShow) == 0 then
-      text "There are no comments yet! Write some."
+      Shared.CompletedBadge.view "resolve"
     else
       ul [ class "comments-list" ] (List.map (renderComment model) commentsToShow)
 

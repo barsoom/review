@@ -8,6 +8,7 @@ import String
 
 import Shared.Types exposing (..)
 import Shared.Formatting exposing (authorName, formattedTime)
+import Shared.CompletedBadge
 
 view : Model -> Node Msg
 view model =
@@ -15,13 +16,7 @@ view model =
     totalCount = reviewableCount model
   in
     if totalCount == 0 then
-      p [ class "nothing-left-to-review" ] [
-        i [ class "fa fa-trophy fa-2x trophy" ] []
-      , span [ class "text" ] [
-          strong [] [ text "Nothing left to review!" ]
-        , text " Good job."
-        ]
-      ]
+      Shared.CompletedBadge.view "review"
     else
       p [ class "left-to-review" ] [
         strong [] [ number <| reviewableCount model ]

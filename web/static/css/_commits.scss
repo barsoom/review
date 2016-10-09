@@ -9,24 +9,6 @@
   background: $mid-gray;
 }
 
-.nothing-left-to-review {
-  @include block-message;
-  background: $gold;
-  font-size: $font-large;
-
-  .trophy {
-    color: #fff;
-    margin-right: 0.4em;
-    vertical-align: middle;
-  }
-
-  .text {
-    // Fix vertical centering in relation to trophy.
-    position: relative;
-    top: 2px;
-  }
-}
-
 .commits-list {
   list-style-type: none;
   padding: 0;
