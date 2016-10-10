@@ -79,6 +79,10 @@
   width: 100%;
   max-width: 700px;
   padding: 0 0 $vspace 0;
+
+  &--disconnected {
+    opacity: $disabled-opacity;
+  }
 }
 
 footer {
@@ -111,7 +115,7 @@ footer {
   }
 
   &--yes {
-    opacity: 0.2;
+    opacity: $disabled-opacity;
     background-color: #AAFFAA;
   }
 

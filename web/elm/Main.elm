@@ -2,7 +2,7 @@ module Main exposing (main)
 
 import Html.App as Html
 import Html exposing (div, text)
-import Html.Attributes exposing (class)
+import Html.Attributes exposing (classList)
 import VirtualDom exposing (Node)
 
 import Shared.Types exposing (..)
@@ -25,11 +25,19 @@ main =
 
 view : Model -> Node Msg
 view model =
-  div [ class "wrapper" ] [
-    Connectivity.View.view model
-  , Menu.View.view model
-  , renderTabContents model
-  ]
+  let
+    wrapperClasses = classList [
+      ("wrapper", True)
+    , ("wrapper--disconnected", model.connected /= Yes)
+    ]
+  in
+    div [] [
+      Connectivity.View.view model
+    , div [ wrapperClasses ] [
+        Menu.View.view model
+      , renderTabContents model
+      ]
+    ]
 
 renderTabContents : Model -> Node Msg
 renderTabContents model =
