@@ -51,7 +51,7 @@ limitShownReviewedCommits list =
      Just commit ->
        fst (list |> List.partition (\c -> c.id + minReviewedCommitsToShowCount >= commit.id))
      Nothing ->
-       list
+       list |> List.take(minReviewedCommitsToShowCount)
 
 renderCommit : Model -> Commit -> Node Msg
 renderCommit model commit =
