@@ -42,7 +42,7 @@ let pingTime = 0
 pingChannel.on("ping", (_) => { lastPingTime = pingTime })
 setInterval((_) => {
   pingTime = Date.now() / 1000.0
-  let newConnectionStatus = (pingTime - lastPingTime < 2)
+  let newConnectionStatus = (pingTime - lastPingTime < 4)
 
   if(newConnectionStatus != oldConnectionStatus) {
     oldConnectionStatus = newConnectionStatus
