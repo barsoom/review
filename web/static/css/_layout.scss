@@ -103,7 +103,6 @@ footer {
 }
 
 .connected {
-  margin-top: 10px;
   padding: 5px;
   text-align: center;
 
@@ -112,6 +111,7 @@ footer {
   }
 
   &--yes {
+    opacity: 0.2;
     background-color: #AAFFAA;
   }
 
