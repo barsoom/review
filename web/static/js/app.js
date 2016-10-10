@@ -39,10 +39,11 @@ pingChannel.join().receive("ok", (_) => { ports.connectionStatus.send(true) })
 let lastPingTime = 0
 let oldConnectionStatus = false
 let pingTime = 0
+let consideredDisconnectedIfNoPingReceivedInSeconds = 4
 pingChannel.on("ping", (_) => { lastPingTime = pingTime })
 setInterval((_) => {
   pingTime = Date.now() / 1000.0
-  let newConnectionStatus = (pingTime - lastPingTime < 4)
+  let newConnectionStatus = (pingTime - lastPingTime < consideredDisconnectedIfNoPingReceivedInSeconds)
 
   if(newConnectionStatus != oldConnectionStatus) {
     oldConnectionStatus = newConnectionStatus

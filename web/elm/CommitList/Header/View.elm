@@ -75,7 +75,7 @@ oldestReviewableCommitTimestamp model =
     Just commit ->
       formattedTime commit.timestamp
     Nothing ->
-      "If this is shown, someone forgot to check hasOldestReviewableCommit"
+      "If this is shown, someone forgot to ask if hasOldestReviewableCommit is true before calling this function."
 
 oldestReviewableCommitUrl : Model -> String
 oldestReviewableCommitUrl model =
@@ -83,7 +83,7 @@ oldestReviewableCommitUrl model =
     Just commit ->
       commit.url
     Nothing ->
-      "If this is shown, someone forgot to check hasOldestReviewableCommit"
+      "If this is shown, someone forgot to ask if hasOldestReviewableCommit is true before calling this function."
 
 hasOldestReviewableCommit : Model -> Bool
 hasOldestReviewableCommit model =

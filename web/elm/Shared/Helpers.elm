@@ -9,7 +9,7 @@ import Shared.Types exposing (..)
 onClickWithPreventDefault : Bool -> Msg -> Attribute Msg
 onClickWithPreventDefault preventDefault msg =
   onWithOptions "click" {
-    stopPropagation = True,
+    stopPropagation = False,
     preventDefault = preventDefault
   } (Json.Decode.succeed msg)
 
