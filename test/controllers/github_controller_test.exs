@@ -43,6 +43,14 @@ defmodule Review.GithubControllerTest do
     assert Review.CommitSerializer.serialize(commit).repository == "gridlook"
   end
 
+  test "can handle a push update caused by a pair commit" do
+    conn = build_conn
+      |> put_req_header("x-github-event", "push")
+      |> post("/webhooks/github?secret=webhook_secret", Poison.decode!(Review.Factory.pair_commit_push_payload))
+
+    assert text_response(conn, 200) =~ "ok"
+  end
+
   test "ignores non-master commits in push updates" do
     data =
       Poison.decode!(Review.Factory.push_payload)

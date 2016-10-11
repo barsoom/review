@@ -47,12 +47,16 @@ defmodule Review.StorePush do
   end
 
   defp add_author(commit, commit_data) do
-    author_data = commit_data.author
-    author = Review.Repo.insert_or_update_author(%{
-      email: author_data.email,
-      name: author_data.name,
-      username: author_data.username
-    })
+    raw_author_data = commit_data.author
+
+    author =
+      %{
+        email: raw_author_data.email,
+        name: raw_author_data.name
+      }
+      |> add_username(raw_author_data)
+      |> Review.Repo.insert_or_update_author
+
     Map.put(commit, :author, author)
   end
 
@@ -66,5 +70,13 @@ defmodule Review.StorePush do
     |> Enum.map(fn (commit) ->
       Review.Repo.get!(Review.Repo.commits, commit.id)
     end)
+  end
+
+  # Pair commits does not have username
+  defp add_username(author_data, %{username: username}) do
+    Map.put(author_data, :username, username)
+  end
+  defp add_username(author_data, _raw_author_data) do
+    author_data
   end
 end
