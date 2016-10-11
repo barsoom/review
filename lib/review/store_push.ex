@@ -73,10 +73,6 @@ defmodule Review.StorePush do
   end
 
   # Pair commits does not have username
-  defp add_username(author_data, %{username: username}) do
-    Map.put(author_data, :username, username)
-  end
-  defp add_username(author_data, _raw_author_data) do
-    author_data
-  end
+  defp add_username(author_data, %{username: username}), do: Map.put(author_data, :username, username)
+  defp add_username(author_data, _raw_author_data),      do: author_data
 end
