@@ -19,7 +19,7 @@ defmodule Review.Mixfile do
   def application do
     [mod: {Review, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex, :calendar]]
+                    :phoenix_ecto, :postgrex, :calendar, :honeybadger]]
   end
 
   # Specifies which paths to compile per environment.
@@ -36,6 +36,7 @@ defmodule Review.Mixfile do
      {:phoenix_ecto, ">= 0.0.0"},
      {:postgrex, ">= 0.0.0"},
      {:calendar, "~> 0.14.2"},
+     {:honeybadger, "~> 0.1"},
      {:hound, ">= 0.0.0", only: :test},
      {:ex_machina, ">= 0.0.0", only: :test},
      {:cowboy, ">= 0.0.0"}]

@@ -1,5 +1,6 @@
 defmodule Review.Router do
   use Review.Web, :router
+  use Honeybadger.Plug
 
   pipeline :browser do
     plug :accepts, ["html"]
