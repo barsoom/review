@@ -18,12 +18,12 @@ onClickWithPreventDefault preventDefault msg =
 Before:
 
   users
-  |> (filterByName profile)
+  |> (filterByName search)
 
 After:
 
   users
-  |> with profile filterByName
+  |> with search filterByName
 -}
 with : a -> (a -> b -> c) -> b -> c
 with a callback b =
