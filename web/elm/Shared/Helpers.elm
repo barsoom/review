@@ -1,4 +1,4 @@
-module Shared.Helpers exposing (onClickWithPreventDefault, with)
+module Shared.Helpers exposing (onClickWithPreventDefault)
 
 import Json.Decode
 import Html exposing (..)
@@ -12,19 +12,3 @@ onClickWithPreventDefault preventDefault msg =
     stopPropagation = False,
     preventDefault = preventDefault
   } (Json.Decode.succeed msg)
-
-{-| Curry a default argument to a function
-
-Before:
-
-  users
-  |> (filterByName search)
-
-After:
-
-  users
-  |> with search filterByName
--}
-with : a -> (a -> b -> c) -> b -> c
-with a callback b =
-  callback a b

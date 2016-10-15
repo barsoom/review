@@ -1,7 +1,6 @@
 module CommentList.Filter exposing (filter, isYourCommit, isYourComment, isCommentOnYourComment)
 
 import Shared.Types exposing (..)
-import Shared.Helpers exposing (with)
 import Shared.Formatting exposing (authorName)
 import Settings.Types exposing (Settings)
 
@@ -10,9 +9,9 @@ import String
 filter : Settings -> List Comment -> List Comment
 filter settings comments =
   comments
-  |> with settings filterCommentsNotOnYourCommitsOrComments
-  |> with settings filterCommentsYouWrote
-  |> with settings filterCommentsByResolved
+  |> filterCommentsNotOnYourCommitsOrComments settings
+  |> filterCommentsYouWrote settings
+  |> filterCommentsByResolved settings
 
 filterCommentsYouWrote : Settings -> List Comment -> List Comment
 filterCommentsYouWrote settings comments =
