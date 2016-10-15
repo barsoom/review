@@ -9,9 +9,9 @@ import String
 filter : Settings -> List Comment -> List Comment
 filter settings comments =
   comments
-  |> filterCommentsNotOnYourCommitsOrComments(settings)
-  |> filterCommentsYouWrote(settings)
-  |> filterCommentsByResolved(settings)
+  |> (filterCommentsNotOnYourCommitsOrComments settings)
+  |> (filterCommentsYouWrote settings)
+  |> (filterCommentsByResolved settings)
 
 filterCommentsYouWrote : Settings -> List Comment -> List Comment
 filterCommentsYouWrote settings comments =
