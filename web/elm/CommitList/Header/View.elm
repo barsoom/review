@@ -5,107 +5,126 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import VirtualDom exposing (Node)
 import String
-
 import Shared.Types exposing (..)
 import Shared.Formatting exposing (authorName, formattedTime)
 import Shared.CompletedBadge
 
+
 view : Model -> Node Msg
 view model =
-  let
-    totalCount = reviewableCount model
-  in
-    if totalCount == 0 then
-      Shared.CompletedBadge.view "review"
-    else
-      p [ class "left-to-review" ] [
-        strong [] [ number <| reviewableCount model ]
-      , text " commits to review: "
-      , strong [] [ number <| reviewableByOthersCount model ]
-      , text " by others, "
-      , strong [] [ number <| reviewableByYouCount model ]
-      , text " by you "
-      , renderOldestReviewableCommitLink model
-      ]
+    let
+        totalCount =
+            reviewableCount model
+    in
+        if totalCount == 0 then
+            Shared.CompletedBadge.view "review"
+        else
+            p [ class "left-to-review" ]
+                [ strong [] [ number <| reviewableCount model ]
+                , text " commits to review: "
+                , strong [] [ number <| reviewableByOthersCount model ]
+                , text " by others, "
+                , strong [] [ number <| reviewableByYouCount model ]
+                , text " by you "
+                , renderOldestReviewableCommitLink model
+                ]
+
 
 renderOldestReviewableCommitLink : Model -> Node Msg
 renderOldestReviewableCommitLink model =
-  if hasOldestReviewableCommit model then
-    div [] [
-        text "Oldest by others: "
-      , a [ href <| oldestReviewableCommitUrl model
-          , onClick (FocusCommitById <| oldestReviewableCommitId model) ] [
-            text <| oldestReviewableCommitTimestamp model
-          ]
-    ]
-  else
-    div [] []
+    if hasOldestReviewableCommit model then
+        div []
+            [ text "Oldest by others: "
+            , a
+                [ href <| oldestReviewableCommitUrl model
+                , onClick (FocusCommitById <| oldestReviewableCommitId model)
+                ]
+                [ text <| oldestReviewableCommitTimestamp model
+                ]
+            ]
+    else
+        div [] []
+
 
 number : Int -> Node a
 number n =
-  n |> toString |> text
+    n |> toString |> text
+
 
 reviewableByYouCount : Model -> Int
 reviewableByYouCount model =
-  (reviewableCount model) - (reviewableByOthersCount model)
+    (reviewableCount model) - (reviewableByOthersCount model)
+
 
 reviewableByOthersCount : Model -> Int
 reviewableByOthersCount model =
-  model
-  |> reviewableCommits
-  |> List.length
+    model
+        |> reviewableCommits
+        |> List.length
+
 
 reviewableCount : Model -> Int
 reviewableCount model =
-  model.commits
-  |> List.filter (\commit -> not commit.isReviewed)
-  |> List.length
+    model.commits
+        |> List.filter (\commit -> not commit.isReviewed)
+        |> List.length
+
 
 oldestReviewableCommitId : Model -> Int
 oldestReviewableCommitId model =
-  case oldestReviewableCommit model of
-    Just commit ->
-      commit.id
-    Nothing ->
-      -1
+    case oldestReviewableCommit model of
+        Just commit ->
+            commit.id
+
+        Nothing ->
+            -1
+
 
 oldestReviewableCommitTimestamp : Model -> String
 oldestReviewableCommitTimestamp model =
-  case oldestReviewableCommit model of
-    Just commit ->
-      formattedTime commit.timestamp
-    Nothing ->
-      "If this is shown, someone forgot to ask if hasOldestReviewableCommit is true before calling this function."
+    case oldestReviewableCommit model of
+        Just commit ->
+            formattedTime commit.timestamp
+
+        Nothing ->
+            "If this is shown, someone forgot to ask if hasOldestReviewableCommit is true before calling this function."
+
 
 oldestReviewableCommitUrl : Model -> String
 oldestReviewableCommitUrl model =
-  case oldestReviewableCommit model of
-    Just commit ->
-      commit.url
-    Nothing ->
-      "If this is shown, someone forgot to ask if hasOldestReviewableCommit is true before calling this function."
+    case oldestReviewableCommit model of
+        Just commit ->
+            commit.url
+
+        Nothing ->
+            "If this is shown, someone forgot to ask if hasOldestReviewableCommit is true before calling this function."
+
 
 hasOldestReviewableCommit : Model -> Bool
 hasOldestReviewableCommit model =
-  case oldestReviewableCommit model of
-    Just commit ->
-      True
-    Nothing ->
-      False
+    case oldestReviewableCommit model of
+        Just commit ->
+            True
+
+        Nothing ->
+            False
+
 
 oldestReviewableCommit : Model -> Maybe Commit
 oldestReviewableCommit model =
-  model
-  |> reviewableCommits
-  |> List.sortBy .timestamp
-  |> List.head
+    model
+        |> reviewableCommits
+        |> List.sortBy .timestamp
+        |> List.head
+
 
 reviewableCommits : Model -> List Commit
 reviewableCommits model =
-  model.commits
-  |> List.filter (\commit ->
-    not (
-      commit.isReviewed ||
-      (String.contains model.settings.name (authorName commit.authorName))
-    )
-  )
+    model.commits
+        |> List.filter
+            (\commit ->
+                not
+                    (commit.isReviewed
+                        || (String.contains model.settings.name (authorName commit.authorName))
+                    )
+            )
