@@ -1,0 +1,1 @@
+wc -l $(find . |egrep '\.elm'|grep -v elm-stuff|grep -v Interpolate)
