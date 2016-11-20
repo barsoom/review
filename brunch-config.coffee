@@ -36,7 +36,7 @@ exports.config =
       mainModules: [ "Main.elm" ]
       outputFolder: "../static/vendor"
       outputFile: "compiled_elm.js"
-      makeParameters: [ "--warn --debug" ]
+      makeParameters: [ "--warn" ]
 
     assetsmanager:
       # only copy on boot to not trigger double live reloads when other files change
