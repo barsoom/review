@@ -20,9 +20,10 @@ view model =
         if totalCount == 0 then
             Shared.CompletedBadge.view "review"
         else
+            calculatedReviewableCount = reviewableCount model
             p [ class "left-to-review" ]
-                [ strong [] [ number <| reviewableCount model ]
-                , text " commits to review: "
+                [ strong [] [ number <| calculatedReviewableCount ]
+                , text " " ++ (pluralize calculatedReviewableCount "commit" "commits") ++ " to review: "
                 , strong [] [ number <| reviewableByOthersCount model ]
                 , text " by others, "
                 , strong [] [ number <| reviewableByYouCount model ]
@@ -47,6 +48,9 @@ renderOldestReviewableCommitLink model =
     else
         div [] []
 
+pluralize : Int -> String -> String -> String
+pluralize count singularString pluralString =
+    if count == 1 then singularString else pluralString
 
 number : Int -> Node a
 number n =
