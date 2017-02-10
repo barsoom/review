@@ -144,7 +144,7 @@ oldestCommitInReviewByYouTimestamp model =
     in
         case commit of
             Just commit ->
-                formattedTime commit.timestamp
+                formattedTime (Maybe.withDefault commit.timestamp commit.reviewStartedTimestamp)
 
             Nothing ->
                 "If this is shown, someone forgot to ask if hasCommitInReviewByYouTooLong is true before calling this function."
