@@ -102,14 +102,15 @@ update msg model =
 
         AnimateInReviewLink time ->
             let
-                speed =
+                numberOfColorsToMoveToEndOfList =
                     6
 
-                firstInList =
-                    model.inReviewByYouLinkColors |> List.take speed
+                colorsAtEndOfList =
+                    model.inReviewByYouLinkColors |> List.take numberOfColorsToMoveToEndOfList
+
 
                 newColorList =
-                    List.concat [ (model.inReviewByYouLinkColors |> List.drop speed), firstInList ]
+                    List.concat [ (model.inReviewByYouLinkColors |> List.drop numberOfColorsToMoveToEndOfList), colorsAtEndOfList ]
             in
                 ( { model | inReviewByYouLinkColors = newColorList }, Cmd.none )
 
