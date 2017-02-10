@@ -13,7 +13,9 @@ type Msg
     | AddOrUpdateCommit Commit
     | AddOrUpdateComment Comment
     | ShowCommit Int
+    | StoreCurrentTime Time
     | ListMoreCommits Time
+    | AnimateInReviewLink Time
     | StartReview Change
     | AbandonReview Change
     | MarkAsReviewed Change
@@ -100,6 +102,9 @@ type alias Model =
     , environment : String
     , activeTab : Tab
     , connected : Connectivity
+    , inReviewByYouLinkColorIndex : Int
+    , inReviewByYouLinkColors : List Int
+    , currentTime : Time
     }
 
 

@@ -8,6 +8,7 @@ import String
 import Shared.Types exposing (..)
 import Shared.Formatting exposing (authorName, formattedTime)
 import Shared.CompletedBadge
+import CommitList.Header.InReviewByYou
 
 
 view : Model -> Node Msg
@@ -41,6 +42,7 @@ renderOldestReviewableCommitLink model =
                 ]
                 [ text <| oldestReviewableCommitTimestamp model
                 ]
+            , CommitList.Header.InReviewByYou.view model
             ]
     else
         div [] []

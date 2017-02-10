@@ -1,6 +1,6 @@
 module Shared.State exposing (subscriptions, initialModel, update)
 
-import Time exposing (inMilliseconds)
+import Time exposing (inMilliseconds, second)
 import Shared.Types exposing (..)
 import Shared.Constants exposing (defaultCommitsToShowCount)
 import Shared.Ports
@@ -19,7 +19,9 @@ subscriptions _ =
     , Shared.Ports.location LocationChange
     , Connectivity.State.subscriptions
     , Settings.State.subscriptions
+    , (Time.every (second) StoreCurrentTime)
     , (Time.every (inMilliseconds 500) ListMoreCommits)
+    , (Time.every (inMilliseconds 50) AnimateInReviewLink)
     ]
         |> Sub.batch
 
@@ -37,6 +39,9 @@ initialModel =
     , lastClickedCommentId = 0
     , commitsToShowCount = defaultCommitsToShowCount
     , connected = Unknown
+    , inReviewByYouLinkColorIndex = 0
+    , inReviewByYouLinkColors = List.concat [ (List.range 0 255), (List.range 254 1) ]
+    , currentTime = 0
     }
 
 
@@ -84,6 +89,9 @@ update msg model =
         StoreLastClickedCommentId id ->
             ( { model | lastClickedCommentId = id }, Cmd.none )
 
+        StoreCurrentTime time ->
+            ( { model | currentTime = time }, Cmd.none )
+
         -- This triggers the display of more commits after the initial page load
         -- or when changing tabs. This makes the UI feel instant.
         ListMoreCommits _ ->
@@ -91,6 +99,19 @@ update msg model =
                 ( { model | commitsToShowCount = model.commitsToShowCount + 100 }, Cmd.none )
             else
                 ( model, Cmd.none )
+
+        AnimateInReviewLink time ->
+            let
+                speed =
+                    6
+
+                firstInList =
+                    model.inReviewByYouLinkColors |> List.take speed
+
+                newColorList =
+                    List.concat [ (model.inReviewByYouLinkColors |> List.drop speed), firstInList ]
+            in
+                ( { model | inReviewByYouLinkColors = newColorList }, Cmd.none )
 
         AddOrUpdateCommit commit ->
             let
