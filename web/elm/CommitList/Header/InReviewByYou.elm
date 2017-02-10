@@ -1,5 +1,7 @@
 -- Somewhat overengineered (for fun and to learn more Elm) feature to encourage people
 -- to finish reviews early, or abort them so other people can review.
+
+
 module CommitList.Header.InReviewByYou exposing (view)
 
 import Html exposing (..)
@@ -26,16 +28,20 @@ view model =
                             (\charIndex ->
                                 \data ->
                                     let
-                                        character = Tuple.first data
-                                        colorIndex = Tuple.second data
+                                        character =
+                                            Tuple.first data
+
+                                        colorIndex =
+                                            Tuple.second data
                                     in
-                                       renderCharacter model character charIndex colorIndex
+                                        renderCharacter model character charIndex colorIndex
                             )
                     )
                 ]
             ]
     else
         span [] []
+
 
 renderCharacter : Model -> String -> Int -> Int -> Node Msg
 renderCharacter model character charIndex colorIndex =

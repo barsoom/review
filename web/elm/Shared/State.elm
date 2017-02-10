@@ -108,7 +108,6 @@ update msg model =
                 colorsAtEndOfList =
                     model.inReviewByYouLinkColors |> List.take numberOfColorsToMoveToEndOfList
 
-
                 newColorList =
                     List.concat [ (model.inReviewByYouLinkColors |> List.drop numberOfColorsToMoveToEndOfList), colorsAtEndOfList ]
             in
