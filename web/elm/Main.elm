@@ -22,6 +22,7 @@ main =
         , subscriptions = Shared.State.subscriptions
         }
 
+
 view : Model -> Node Msg
 view model =
     let
