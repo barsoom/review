@@ -20,9 +20,10 @@ defmodule Review.CommitSerializer do
       reviewerGravatarHash: gravatar_hash(commit.reviewed_by_author),
       repository: repository(payload),
       authorName: author_name(commit),
-      timestamp: timestamp(payload),
+      timestamp: payload.timestamp,
       isNew: !commit.review_started_at,
       isBeingReviewed: !!commit.review_started_at && !commit.reviewed_at,
+      reviewStartedTimestamp: timestamp(commit.review_started_at),
       isReviewed: !!commit.reviewed_at,
       url: url(payload),
     }
@@ -52,7 +53,8 @@ defmodule Review.CommitSerializer do
 
   defp repository(payload), do: payload.repository.name
   defp author_name(commit), do: commit.author.name
-  defp timestamp(payload), do: payload.timestamp
+  defp timestamp(nil), do: nil
+  defp timestamp(datetime), do: datetime |> Ecto.DateTime.to_iso8601
   defp url(payload), do: payload.url
 
   defp parse_payload(commit) do

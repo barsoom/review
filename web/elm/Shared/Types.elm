@@ -53,6 +53,7 @@ type alias Commit =
     , summary : String
     , repository : String
     , timestamp : String
+    , reviewStartedTimestamp : Maybe String
     , isNew : Bool
     , isReviewed : Bool
     , isBeingReviewed : Bool

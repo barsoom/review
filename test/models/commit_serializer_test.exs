@@ -5,7 +5,7 @@ defmodule Review.CommitSerializerTest do
   test "serializes a commit" do
     author = build(:author, email: "foo@example.com", name: "Joe")
     reviewer = build(:author, email: "bar@example.com", name: "Jane")
-    commit = build(:commit, id: 50, author: author, review_started_by_author: reviewer, reviewed_by_author: nil)
+    commit = build(:commit, id: 50, author: author, review_started_by_author: reviewer, review_started_at: Ecto.DateTime.from_erl({{2011, 1, 1}, {0, 0, 0}}), reviewed_by_author: nil)
 
     data = Review.CommitSerializer.serialize(commit)
 
@@ -21,9 +21,10 @@ defmodule Review.CommitSerializerTest do
       repository: "gridlook",
       authorName: "Joe",
       timestamp: "2016-01-25T08:41:25+01:00",
-      isNew: true,
+      reviewStartedTimestamp: "2011-01-01T00:00:00",
+      isNew: false,
       isReviewed: false,
-      isBeingReviewed: false,
+      isBeingReviewed: true,
       url: "https://github.com/barsoom/gridlook/commit/c5472c5276f564621afe4b56b14f50e7c298dff9",
     }
   end
