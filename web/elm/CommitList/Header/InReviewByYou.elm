@@ -17,8 +17,7 @@ view model =
     if hasCommitInReviewByYouTooLong model then
         span []
             [ text ". "
-            , text "Oldest being reviewed by you"
-            , text ": "
+            , text "A commit is waiting for your review since "
             , span []
                 [ span [ class "in-review-by-you" ]
                     (model
