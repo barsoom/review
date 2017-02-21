@@ -40,6 +40,8 @@ initialModel =
     , commitsToShowCount = defaultCommitsToShowCount
     , connected = Unknown
     , inReviewByYouLinkColorIndex = 0
+    -- List of colors from 0 to 255 and 254 to 1. E.g. like [ 0, 1, 2, 3, 4, 5, 4, 3, 2, 1 ]
+    -- We move through the list when animating, looping around
     , inReviewByYouLinkColors = List.concat [ (List.range 0 255), (List.range 254 1) ]
     , currentTime = 0
     }
