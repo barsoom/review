@@ -22,7 +22,7 @@ view model =
         else
             p [ class "left-to-review" ]
                 [ strong [] [ number <| totalCount ]
-                , text " " ++ (pluralize totalCount "commit" "commits") ++ " to review: "
+                , text (" " ++ (pluralize totalCount "commit" "commits") ++ " to review: ")
                 , strong [] [ number <| reviewableByOthersCount model ]
                 , text " by others, "
                 , strong [] [ number <| reviewableByYouCount model ]
