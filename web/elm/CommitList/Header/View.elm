@@ -20,10 +20,9 @@ view model =
         if totalCount == 0 then
             Shared.CompletedBadge.view "review"
         else
-            calculatedReviewableCount = reviewableCount model
             p [ class "left-to-review" ]
-                [ strong [] [ number <| calculatedReviewableCount ]
-                , text " " ++ (pluralize calculatedReviewableCount "commit" "commits") ++ " to review: "
+                [ strong [] [ number <| totalCount ]
+                , text " " ++ (pluralize totalCount "commit" "commits") ++ " to review: "
                 , strong [] [ number <| reviewableByOthersCount model ]
                 , text " by others, "
                 , strong [] [ number <| reviewableByYouCount model ]
