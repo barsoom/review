@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 export ENABLE_DB_LOGGING=true
@@ -13,6 +13,11 @@ mix ecto.drop
 mix ecto.create
 
 echo
-echo ">> Importing database from $1 as exremit_dev"
-pg_restore --no-acl --no-owner -d review_dev /tmp/data.dump
+echo ">> Importing database from $1 as review_dev"
+if [ $DEVBOX ]; then
+  PGUSER=postgres PGPASSWORD=dev pg_restore --no-acl --no-owner -h localhost -d review_dev -p $(service_port postgres) /tmp/data.dump
+else
+  pg_restore --no-acl --no-owner -h localhost -d review_dev /tmp/data.dump
+fi
+
 echo ">> Done"

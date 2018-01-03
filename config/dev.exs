@@ -33,13 +33,24 @@ config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
 
 # Configure your database
-config :review, Review.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "jocke",
-  password: "",
-  database: "review_dev",
-  hostname: "localhost",
-  pool_size: 10
+if System.get_env("DEVBOX") do
+  config :review, Review.Repo,
+    adapter: Ecto.Adapters.Postgres,
+    username: "postgres",
+    password: "dev",
+    database: "review_dev",
+    hostname: "localhost",
+    port: System.cmd("service_port", ["postgres"]) |> elem(0) |> String.strip,
+    pool_size: 10
+else
+  config :review, Review.Repo,
+    adapter: Ecto.Adapters.Postgres,
+    username: System.get_env("USER"),
+    password: "",
+    database: "review_dev",
+    hostname: "localhost",
+    pool_size: 10
+end
 
 # Skip db logging in dev, except when doing db imports since
 # disabling logging breaks that for some unknown reason.
