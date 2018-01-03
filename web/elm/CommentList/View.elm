@@ -127,7 +127,8 @@ commentUrl model comment =
     if model.environment == "test" || model.environment == "dev" then
         "#"
     else
-        comment.url
+        -- Github has changed the anchor link format
+        comment.url |> String.split "commitcomment-" |> String.join "r"
 
 
 commentId : Comment -> String
