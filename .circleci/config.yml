@@ -64,8 +64,26 @@ jobs:
 
       - run: script/ci/tests.sh
 
-      - store_test_results:
-          path: _build/test/junit
+  deploy:
+    docker:
+      - image: circleci/ruby:latest  # Any common image that can run bash is fine
 
+    steps:
+      - checkout:
+          name: "Checking out code"
 
-# todo deploy  auctionet-code-review
+      - run:
+          name: "Deploying to production"
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              script/ci/deploy.sh $HEROKU_APP_NAME
+            fi
+
+workflows:
+  version: 2
+  test_and_deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
