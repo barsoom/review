@@ -6,6 +6,10 @@
 build_name=$1
 command_to_run=$2
 
+# Add config for heroku
+echo -e "machine api.heroku.com\n  login $HEROKU_API_USER\n  password $HEROKU_API_TOKEN\nmachine code.heroku.com\n  login $HEROKU_API_USER\n  password $HEROKU_API_TOKEN\nmachine git.heroku.com\n  login $HEROKU_API_USER\n  password $HEROKU_API_TOKEN" > ~/.netrc
+chmod 0600 ~/.netrc
+
 # Shortcut to just run the build command if pipeline is not configured
 if [[ ! -v "PIPELINE_API_TOKEN" ]]; then
   $command_to_run || exit 1
