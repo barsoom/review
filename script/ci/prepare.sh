@@ -13,5 +13,5 @@ if [ ! -d $INSTALL_PATH/sysconfcpus/bin ]; then
 fi
 
 # Fetch and compile dependencies and application code (and include testing tools)
-cd $HOME/$CIRCLE_PROJECT_REPONAME
+cd $HOME/app
 script/bootstrap
