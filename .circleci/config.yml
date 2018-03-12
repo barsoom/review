@@ -50,10 +50,16 @@ jobs:
       - restore_cache:
           keys:
             - v1-deps-cache
+      - restore_cache:
+          keys:
+            - v1-node-cache
       - run: script/ci/prepare.sh
       - save_cache:
           key: v1-deps-cache
           paths: /home/circleci/dependencies
+      - save_cache:
+          key: v1-node-cache
+          paths: node_modules
 
       - run: script/ci/tests.sh
 
