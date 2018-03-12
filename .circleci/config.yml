@@ -62,7 +62,7 @@ jobs:
           key: v1-node-cache
           paths: node_modules
 
-      - run: script/ci/tests.sh
+      - run: script/ci/pipeline.sh tests script/ci/tests.sh
 
   deploy:
     docker:
@@ -76,7 +76,7 @@ jobs:
           name: "Deploying to production"
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              script/ci/deploy.sh $HEROKU_APP_NAME
+              script/ci/pipeline.sh deploy_production "script/ci/deploy.sh $HEROKU_APP_NAME"
             fi
 
 workflows:
