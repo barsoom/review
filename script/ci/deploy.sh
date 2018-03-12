@@ -4,6 +4,10 @@ set -e
 
 app_name=$1
 
+# Add config for heroku
+echo -e "machine api.heroku.com\n  login $HEROKU_API_USER\n  password $HEROKU_API_TOKEN\nmachine code.heroku.com\n  login $HEROKU_API_USER\n  password $HEROKU_API_TOKEN\nmachine git.heroku.com\n  login $HEROKU_API_USER\n  password $HEROKU_API_TOKEN" > ~/.netrc
+chmod 0600 ~/.netrc
+
 function _main {
   _deploy_to_heroku
 }
