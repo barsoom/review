@@ -47,7 +47,14 @@ jobs:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
+      - restore_cache:
+          keys:
+            - v1-deps-cache
       - run: script/ci/prepare.sh
+      - save_cache:
+          key: v1-deps-cache
+          paths: /home/circleci/dependencies
+
       - run: script/ci/tests.sh
 
       - store_test_results:
