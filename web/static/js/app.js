@@ -30,6 +30,13 @@ var ports = app.ports;
 import {Socket} from "phoenix"
 let socket = new Socket("/socket", { params: { auth_key: window.authKey } })
 socket.connect()
+socket.onError(() => {
+  console.log("Socket error, reloading page in 5 seconds.")
+
+  setTimeout(5000, function() {
+    window.location.reload()
+  })
+})
 
 // Connection status
 // Could probably be made cleaner in Elm, but the important thing
