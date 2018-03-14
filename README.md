@@ -103,6 +103,10 @@ If that does not work, you could try to remove `web/elm/elm-stuff/build-artifact
 
 If you have problems with the dependencies, elixir, javascript or elm, try running `script/clean` and then `script/bootstrap` to reinstall all of it.
 
+#### Remove commits from an unwanted repo
+
+    heroku pg:psql -c "DELETE FROM commits WHERE id IN (SELECT id FROM commits WHERE json_payload::jsonb->'repository'->>'full_name' LIKE '%<name of the repo you want to remove commits from>%');" --app <your app name>
+
 ### Commands used to deploy to heroku
 
     heroku apps:create review --region eu
