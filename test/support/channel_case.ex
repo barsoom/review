@@ -21,7 +21,7 @@ defmodule Review.ChannelCase do
       use Phoenix.ChannelTest
 
       alias Review.Repo
-      import Ecto.Model
+      import Ecto.Schema
       import Ecto.Query, only: [from: 2]
 
 
@@ -34,7 +34,7 @@ defmodule Review.ChannelCase do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Review.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Review.Repo, {:shared, self})
+      Ecto.Adapters.SQL.Sandbox.mode(Review.Repo, {:shared, self()})
     end
 
     :ok

@@ -6,7 +6,7 @@ defmodule Review.AcceptanceCase do
       use Hound.Helpers
 
       alias Review.Repo
-      import Ecto.Model
+      import Ecto.Schema
       import Ecto.Query, only: [from: 2]
 
       import Review.Router.Helpers
@@ -15,7 +15,7 @@ defmodule Review.AcceptanceCase do
       # The default endpoint for testing
       @endpoint Review.Endpoint
 
-      hound_session
+      hound_session()
     end
   end
 
@@ -23,7 +23,7 @@ defmodule Review.AcceptanceCase do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Review.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Review.Repo, {:shared, self})
+      Ecto.Adapters.SQL.Sandbox.mode(Review.Repo, {:shared, self()})
     end
 
     :ok

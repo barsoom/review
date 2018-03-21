@@ -9,11 +9,11 @@ defmodule AcceptanceTestHelpers do
 
   def visitor(name, callback), do: in_browser_session name, callback
 
-  def navigate_to_commits_page, do: navigate_to_page "commits"
+  def navigate_to_commits_page, do: navigate_to_page("commits")
 
-  def navigate_to_settings_page, do: navigate_to_page "settings"
+  def navigate_to_settings_page, do: navigate_to_page("settings")
 
-  def navigate_to_comments_page, do: navigate_to_page "comments"
+  def navigate_to_comments_page, do: navigate_to_page("comments")
 
   defp navigate_to_page(page_name) do
     navigate_to "/#{page_name}?auth_key=secret"

@@ -12,7 +12,7 @@ defmodule Review.ModelCase do
   using do
     quote do
       alias Review.Repo
-      import Ecto.Model
+      import Ecto.Schema
       import Ecto.Query, only: [from: 2]
       import Review.ModelCase
     end
@@ -22,7 +22,7 @@ defmodule Review.ModelCase do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(Review.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(Review.Repo, {:shared, self})
+      Ecto.Adapters.SQL.Sandbox.mode(Review.Repo, {:shared, self()})
     end
 
     :ok

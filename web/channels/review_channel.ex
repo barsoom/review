@@ -4,12 +4,12 @@ defmodule Review.ReviewChannel do
   alias Review.{Repo, CommitSerializer, CommentSerializer}
 
   def join(_channel, _auth, socket) do
-    send self, :after_join
+    send self(), :after_join
     {:ok, socket}
   end
 
   def handle_info(:after_join, socket) do
-    push socket, "welcome", %{ commits: commits_data, comments: comments_data }
+    push socket, "welcome", %{ commits: commits_data(), comments: comments_data() }
 
     {:noreply, socket}
   end

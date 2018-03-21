@@ -6,7 +6,7 @@ defmodule Mix.Tasks.TestServer do
       Mix.Tasks.Phoenix.Server.run([])
     end
 
-    run_test_commands
+    run_test_commands()
   end
 
   defp run_test_commands do
@@ -14,7 +14,7 @@ defmodule Mix.Tasks.TestServer do
     |> String.split
     |> run_test
 
-    run_test_commands
+    run_test_commands()
   end
 
   defp run_test([ "mix", "test", path ]) do

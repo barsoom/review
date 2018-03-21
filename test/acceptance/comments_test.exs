@@ -7,8 +7,8 @@ defmodule Review.CommentsTest do
     comment2 = insert(:comment)
     comment3 = insert(:comment)
 
-    navigate_to_comments_page
-    show_all_comments
+    navigate_to_comments_page()
+    show_all_comments()
 
     elements = find_all_elements(:css, ".test-comment")
     assert length(elements) == 3
@@ -34,7 +34,7 @@ defmodule Review.CommentsTest do
     resolved_comment = insert(:comment, resolved_by_author: jane)
 
     insert(:commit, sha: "a", author: fred)
-    other_people_comment_on_other_peoples_commit = insert(:comment, author: jane, commit_sha: "a", json_payload: payload_that_has_different_thread_identifier)
+    other_people_comment_on_other_peoples_commit = insert(:comment, author: jane, commit_sha: "a", json_payload: payload_that_has_different_thread_identifier())
 
     insert(:commit, sha: "b", author: carl)
     unresolved_comment_on_your_commit = insert(:comment, commit_sha: "b")
@@ -43,10 +43,10 @@ defmodule Review.CommentsTest do
     _your_comment = insert(:comment, author: carl, commit_sha: "c")
     comment_on_your_comment = insert(:comment, author: jane, commit_sha: "c")
 
-    navigate_to_settings_page
+    navigate_to_settings_page()
     fill_in "name", with: "Carl"
 
-    navigate_to_comments_page
+    navigate_to_comments_page()
     assert !visible?(your_comment)
     assert !visible?(resolved_comment)
     assert !visible?(other_people_comment_on_other_peoples_commit)
@@ -79,7 +79,7 @@ defmodule Review.CommentsTest do
 
     # Settings are persisted
 
-    navigate_to_comments_page
+    navigate_to_comments_page()
     assert visible?(unresolved_comment_on_your_commit)
   end
 
@@ -87,18 +87,18 @@ defmodule Review.CommentsTest do
     comment = insert(:comment, author: insert(:author, name: "charles"))
 
     visitor "ada", fn ->
-      navigate_to_settings_page
+      navigate_to_settings_page()
       fill_in "name", with: "ada"
       fill_in "email", with: "ada@example.com"
-      navigate_to_comments_page
-      show_all_comments
+      navigate_to_comments_page()
+      show_all_comments()
       refute "test-resolved" in css_classes(comment)
       refute "test-authored-by-you" in css_classes(comment)
     end
 
     visitor "charles", fn ->
-      navigate_to_comments_page
-      show_all_comments
+      navigate_to_comments_page()
+      show_all_comments()
       assert visible?(comment)
       assert "test-authored-by-you" in css_classes(comment)
     end

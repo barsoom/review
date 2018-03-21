@@ -9,8 +9,8 @@ defmodule Review.Mixfile do
      compilers: [:phoenix] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     aliases: aliases,
-     deps: deps]
+     aliases: aliases(),
+     deps: deps()]
   end
 
   # Configuration for the OTP application.
@@ -35,8 +35,8 @@ defmodule Review.Mixfile do
      {:phoenix_live_reload, ">= 0.0.0", only: :dev},
      {:phoenix_ecto, ">= 0.0.0"},
      {:postgrex, ">= 0.0.0"},
-     {:calendar, "~> 0.14.2"},
-     {:honeybadger, "~> 0.1"},
+     {:calendar, ">= 0.0.0"},
+     {:honeybadger, ">= 0.0.0"},
      {:hound, ">= 0.0.0", only: :test},
      {:ex_machina, ">= 0.0.0", only: :test},
      {:cowboy, ">= 0.0.0"}]

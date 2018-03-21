@@ -7,7 +7,7 @@ defmodule Review.CommitsTest do
     commit2 = insert(:commit)
     commit3 = insert(:commit)
 
-    navigate_to_commits_page
+    navigate_to_commits_page()
 
     elements = find_all_elements(:css, ".test-commit")
     assert length(elements) == 3
@@ -28,7 +28,7 @@ defmodule Review.CommitsTest do
     commit1 = insert(:commit, reviewed_at: nil)
     commit2 = insert(:commit, reviewed_at: Ecto.DateTime.utc)
 
-    navigate_to_commits_page
+    navigate_to_commits_page()
 
     status = read_status(commit1)
     assert status.summary =~ "This is a very"
@@ -43,61 +43,61 @@ defmodule Review.CommitsTest do
     insert(:commit, author: insert(:author, name: "charles"))
 
     visitor "ada", fn ->
-      navigate_to_settings_page
+      navigate_to_settings_page()
       fill_in "name", with: "ada"
-      navigate_to_commits_page
-      can_see_commit
+      navigate_to_commits_page()
+      can_see_commit()
     end
 
     visitor "charles", fn ->
-      navigate_to_commits_page
-      can_see_commit
+      navigate_to_commits_page()
+      can_see_commit()
     end
 
     # NOTE: If this fails, ensure "Start review" does not trigger
     #       any browser navigation in tests.
     visitor "ada", fn ->
-      commit_looks_new
+      commit_looks_new()
       click_button "Start review"
-      commit_looks_pending
+      commit_looks_pending()
     end
 
     # NOTE: you need a new phantomjs for this, newer than 2, 2.1.1 is known to work.
     visitor "charles", fn ->
-      commit_looks_pending
+      commit_looks_pending()
     end
 
     visitor "ada", fn ->
-      commit_looks_pending
+      commit_looks_pending()
       click_button "Abandon review"
-      commit_looks_new
+      commit_looks_new()
       click_button "Start review"
       click_button "Mark as reviewed"
-      commit_looks_reviewed
+      commit_looks_reviewed()
     end
 
     visitor "charles", fn ->
-      commit_looks_reviewed
+      commit_looks_reviewed()
     end
 
     visitor "ada", fn ->
       click_button "Mark as new"
-      commit_looks_new
+      commit_looks_new()
     end
 
     visitor "charles", fn ->
-      commit_looks_new
+      commit_looks_new()
     end
   end
 
   test "shows which commits is authored by you" do
-    navigate_to_settings_page
+    navigate_to_settings_page()
     fill_in "name", with: "Jo"
 
     commit1 = insert(:commit, author: insert(:author, name: "Charles And Joe"))
     commit2 = insert(:commit, author: insert(:author, name: "Jane And Bob"))
 
-    navigate_to_commits_page
+    navigate_to_commits_page()
 
     assert authored_by_you(commit1)
     assert not authored_by_you(commit2)
@@ -107,18 +107,18 @@ defmodule Review.CommitsTest do
     insert(:commit, author: insert(:author, name: "charles"))
 
     visitor "ada", fn ->
-      navigate_to_settings_page
+      navigate_to_settings_page()
       fill_in "name", with: "Ada"
       fill_in "email", with: "ada@example.com"
-      navigate_to_commits_page
-      can_see_commit
+      navigate_to_commits_page()
+      can_see_commit()
       click_button "Start review"
     end
 
     visitor "charles", fn ->
-      navigate_to_commits_page
-      commit_looks_pending
-      assert commit_reviewer_email == "ada@example.com"
+      navigate_to_commits_page()
+      commit_looks_pending()
+      assert commit_reviewer_email() == "ada@example.com"
     end
 
     visitor "ada", fn ->
@@ -126,18 +126,18 @@ defmodule Review.CommitsTest do
     end
 
     visitor "charles", fn ->
-      commit_looks_new
+      commit_looks_new()
     end
 
     visitor "ada", fn ->
       click_button "Start review"
       click_button "Mark as reviewed"
-      assert commit_reviewer_email == "ada@example.com"
+      assert commit_reviewer_email() == "ada@example.com"
     end
 
     visitor "charles", fn ->
-      commit_looks_reviewed
-      assert commit_reviewer_email == "ada@example.com"
+      commit_looks_reviewed()
+      assert commit_reviewer_email() == "ada@example.com"
     end
   end
 
@@ -145,18 +145,18 @@ defmodule Review.CommitsTest do
     "test-authored-by-you" in commit_classes(find_element(:id, "commit-#{commit.id}"))
   end
 
-  defp can_see_commit, do: commit_element
+  defp can_see_commit, do: commit_element()
 
   defp commit_looks_new do
-    assert "test-is-new" in commit_classes
+    assert "test-is-new" in commit_classes()
   end
 
   defp commit_looks_pending do
-    assert "test-is-being-reviewed" in commit_classes
+    assert "test-is-being-reviewed" in commit_classes()
   end
 
   defp commit_looks_reviewed do
-    assert "test-is-reviewed" in commit_classes
+    assert "test-is-reviewed" in commit_classes()
   end
 
   defp commit_reviewer_email do
@@ -165,7 +165,7 @@ defmodule Review.CommitsTest do
     |> attribute_value("data-test-reviewer-email")
   end
 
-  defp commit_classes(element \\ commit_element) do
+  defp commit_classes(element \\ commit_element()) do
     :timer.sleep 50 # wait for async updates
 
     element
