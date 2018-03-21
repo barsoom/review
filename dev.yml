@@ -2,8 +2,9 @@
 
 dependencies:
   node: "6.9.2"
+  phantomjs: "2.1.1"
 
 docker_services:
   postgres:
-    image: "postgres:9.5"
+    image: "postgres:9.5.12"
     options: "-e POSTGRES_PASSWORD=dev --publish 5432 -v $DATABASE_ROOT/review/postgres:/var/lib/postgresql/data"
