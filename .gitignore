@@ -27,3 +27,6 @@ erl_crash.dump
 # Elm
 /web/elm/elm-stuff
 /web/static/vendor/compiled_elm.js
+
+# Devbox
+.bundle/
