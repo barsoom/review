@@ -12,6 +12,12 @@ if [[ ! -v "PIPELINE_API_TOKEN" ]]; then
   exit 0
 fi
 
+# Don't report non-master builds
+if [ "${CIRCLE_BRANCH}" != "master" ]; then
+  $command_to_run || exit 1
+  exit 0
+fi
+
 function _main {
   # Report start of build
   _post_build_status "building"
