@@ -22,5 +22,5 @@ config :review,
   max_records: String.to_integer(System.get_env("MAX_RECORDS") || "500")
 
 # Disabling tzdata autoupdate since I don't think using old data would affect this app
-# and is frequently raises errors. https://github.com/bitwalker/timex/issues/396
+# and it frequently raises errors. https://github.com/bitwalker/timex/issues/396
 config :tzdata, :autoupdate, :disabled
