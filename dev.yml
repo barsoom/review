@@ -2,6 +2,7 @@
 
 dependencies:
   node: "6.9.2"
+  phantomjs: "2.1.1"
 
 docker_services:
   postgres:
