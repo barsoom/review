@@ -1,4 +1,4 @@
-***Status***: Beta. In use by [auctionet devs](http://dev.auctionet.com). Docs and polish would make it easier for others to adopt it.
+***Status***: [auctionet devs](http://dev.auctionet.com) has used it for more than a year. It's stable. Some docs and polish would make it easier for others to adopt it.
 
 # Review
 
@@ -16,7 +16,7 @@ Also tracks comments on commits.
 
 Review was built to explore how practical it was to build applications in Elixir/Phoenix and Elm. Review is a reimplementation of [remit](https://github.com/henrik/remit), which in turn was inspired by [hubreview](https://github.com/joakimk/hubreview).
 
-## TODO
+## Possible things to do
 
 * [x] Be able to hide reviewed commits?
 * [ ] Show a helpful message when settings are not filled in. Also hide "to review" stats until name exists.
