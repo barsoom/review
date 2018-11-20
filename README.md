@@ -121,9 +121,8 @@ If you have problems with the dependencies, elixir, javascript or elm, try runni
 
 So we can use a small DB plan.
 
-* [Enable using the `heroku` CLI in Scheduler](http://stackoverflow.com/a/40758564/6962)
 * Add the Heroku Scheduler add-on
-* Schedule a task like: `vendor/heroku-toolbelt/bin/heroku pg:psql -c "DELETE FROM commits WHERE created_at < now() - INTERVAL '100 days'; DELETE FROM comments WHERE created_at < now() - INTERVAL '100 days';" -a $HEROKU_APP_NAME`
+* Schedule a task like: `psql $DATABASE_URL -c "DELETE FROM commits WHERE created_at < now() - INTERVAL '100 days'; DELETE FROM comments WHERE created_at < now() - INTERVAL '100 days';"`
 
 ## License
 
