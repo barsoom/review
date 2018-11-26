@@ -2,7 +2,7 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/elixir:1.7.4-node-browsers # NOTE: keep in sync with elixir_buildpack.conf
+      - image: circleci/elixir:1.7.4-node-browsers-legacy # NOTE: keep in sync with elixir_buildpack.conf
         environment:
           MIX_ENV: test
           POSTGRES_USER: postgres
