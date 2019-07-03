@@ -12,6 +12,8 @@ Also tracks comments on commits.
 
 [Demo app on heroku](https://review-on-review.herokuapp.com/?auth_key=demo)
 
+We recommend using Review inside Fluid.app to get a split view with Review next to GitHub. [See the instructions for how to do this in Review's predecessor.](https://github.com/henrik/remit#use-with-fluidapp)
+
 ## History
 
 Review was built to explore how practical it was to build applications in Elixir/Phoenix and Elm. Review is a reimplementation of [remit](https://github.com/henrik/remit), which in turn was inspired by [hubreview](https://github.com/joakimk/hubreview).
