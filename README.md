@@ -101,6 +101,10 @@ If that does not work, you could try to remove `web/elm/elm-stuff/build-artifact
     source paths.env
     elm package install name
 
+### Opening a production console
+
+    heroku run 'iex -S mix'
+
 ### Troubleshooting
 
 If you have problems with the dependencies, elixir, javascript or elm, try running `script/clean` and then `script/bootstrap` to reinstall all of it.
