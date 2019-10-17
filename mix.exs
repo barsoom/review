@@ -52,7 +52,7 @@ defmodule Review.Mixfile do
       {:honeybadger, "~> 0.1"},
       {:hound, ">= 0.0.0", only: :test},
       {:ex_machina, ">= 0.0.0", only: :test},
-      {:cowboy, ">= 0.0.0"}
+      {:plug_cowboy, ">= 0.0.0"}
     ]
   end
 

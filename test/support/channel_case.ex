@@ -21,9 +21,8 @@ defmodule Review.ChannelCase do
       use Phoenix.ChannelTest
 
       alias Review.Repo
-      import Ecto.Model
+      import Ecto.Schema
       import Ecto.Query, only: [from: 2]
-
 
       # The default endpoint for testing
       @endpoint Review.Endpoint

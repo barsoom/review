@@ -6,9 +6,10 @@ defmodule Review.ApiController do
 
   def unreviewed_commit_stats(conn, params) do
     query =
-      from c in Commit,
+      from(c in Commit,
         where: is_nil(c.reviewed_at),
-        select: %{ count: count(c.id), oldest_created_at: min(c.created_at) }
+        select: %{count: count(c.id), oldest_created_at: min(c.created_at)}
+      )
 
     data = Repo.one(query)
     data = convert_oldest_created_at_to_oldest_age_in_seconds(data)
@@ -26,11 +27,12 @@ defmodule Review.ApiController do
   end
 
   defp oldest_age_in_seconds(nil), do: nil
+
   defp oldest_age_in_seconds(oldest_created_at) do
-    {:ok, oldest_age_in_seconds, _, _ } =
+    {:ok, oldest_age_in_seconds, _, _} =
       Calendar.NaiveDateTime.diff(
-        Ecto.DateTime.to_erl(Ecto.DateTime.utc),
-        Ecto.DateTime.to_erl(oldest_created_at)
+        Ecto.DateTime.to_erl(Ecto.DateTime.utc()),
+        NaiveDateTime.to_erl(oldest_created_at)
       )
 
     oldest_age_in_seconds

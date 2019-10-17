@@ -12,7 +12,7 @@ defmodule Review.ModelCase do
   using do
     quote do
       alias Review.Repo
-      import Ecto.Model
+      import Ecto.Schema
       import Ecto.Query, only: [from: 2]
       import Review.ModelCase
     end

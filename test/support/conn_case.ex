@@ -21,7 +21,7 @@ defmodule Review.ConnCase do
       use Phoenix.ConnTest
 
       alias Review.Repo
-      import Ecto.Model
+      import Ecto.Schema
       import Ecto.Query, only: [from: 2]
 
       import Review.Router.Helpers
