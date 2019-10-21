@@ -9,11 +9,11 @@ defmodule Review.AcceptanceCase do
       import Ecto.Schema
       import Ecto.Query, only: [from: 2]
 
-      import Review.Router.Helpers
+      import ReviewWeb.Router.Helpers
       import AcceptanceTestHelpers
 
       # The default endpoint for testing
-      @endpoint Review.Endpoint
+      @endpoint ReviewWeb.Endpoint
 
       hound_session
     end

@@ -1,7 +1,7 @@
-defmodule Review.Endpoint do
+defmodule ReviewWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :review
 
-  socket("/socket", Review.UserSocket)
+  socket("/socket", ReviewWeb.UserSocket)
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -40,5 +40,5 @@ defmodule Review.Endpoint do
     signing_salt: "MxNb4C1G"
   )
 
-  plug(Review.Router)
+  plug(ReviewWeb.Router)
 end

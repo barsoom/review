@@ -1,5 +1,5 @@
 defmodule Review.GithubControllerTest do
-  use Review.ConnCase
+  use ReviewWeb.ConnCase
   use Phoenix.ChannelTest
 
   test "can handle a ping" do

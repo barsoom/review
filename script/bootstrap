@@ -9,25 +9,28 @@ cd "$(dirname "$0")"/..
 export MIX_ENV="test"
 export LC_ALL=en_US.UTF-8
 
-source web/elm/paths.env
+source lib/review_web/elm/paths.env
 mix do deps.get, compile
 
 echo
 echo ">> Getting Brunch dependencies"
+cd assets
 npm install
+cd ..
 
-cd web/elm
+cd lib/review_web/elm
 echo
 echo ">> Getting Elm dependencies"
 elm package install -y
-cd ../..
+cd ../../..
 
 echo
 echo ">> Building assets using brunch"
-
+cd assets
 # https://github.com/elm-lang/elm-compiler/issues/1473
 if [ "$CIRCLECI" ]; then
   ~/dependencies/sysconfcpus/bin/sysconfcpus -n 2 node_modules/brunch/bin/brunch build
 else
   node_modules/brunch/bin/brunch build
 fi
+cd ..

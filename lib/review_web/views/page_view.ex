@@ -1,4 +1,4 @@
-defmodule Review.PageView do
+defmodule ReviewWeb.PageView do
   use Review.Web, :view
 
   def render_elm(app_name, options \\ []) do

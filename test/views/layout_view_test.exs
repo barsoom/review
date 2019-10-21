@@ -1,3 +1,3 @@
 defmodule Review.LayoutViewTest do
-  use Review.ConnCase, async: true
+  use ReviewWeb.ConnCase, async: true
 end

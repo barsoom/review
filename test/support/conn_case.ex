@@ -1,4 +1,4 @@
-defmodule Review.ConnCase do
+defmodule ReviewWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -24,10 +24,10 @@ defmodule Review.ConnCase do
       import Ecto.Schema
       import Ecto.Query, only: [from: 2]
 
-      import Review.Router.Helpers
+      import ReviewWeb.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint Review.Endpoint
+      @endpoint ReviewWeb.Endpoint
     end
   end
 

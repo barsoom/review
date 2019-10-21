@@ -1,12 +1,12 @@
-defmodule Review.UserSocket do
+defmodule ReviewWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "review", Review.ReviewChannel
-  channel "ping", Review.PingChannel
+  channel("review", Review.ReviewChannel)
+  channel("ping", Review.PingChannel)
 
   ## Transports
-  transport :websocket, Phoenix.Transports.WebSocket
+  transport(:websocket, Phoenix.Transports.WebSocket)
   # transport :longpoll, Phoenix.Transports.LongPoll
 
   # Socket params are passed from the client and can
@@ -20,7 +20,7 @@ defmodule Review.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(%{ "auth_key" => auth_key }, socket) do
+  def connect(%{"auth_key" => auth_key}, socket) do
     auth_key = if auth_key == "", do: nil, else: auth_key
 
     if auth_key == Application.get_env(:review, :auth_key) do
@@ -37,7 +37,7 @@ defmodule Review.UserSocket do
   # Would allow you to broadcast a "disconnect" event and terminate
   # all active sockets and channels for a given user:
   #
-  #     Review.Endpoint.broadcast("users_socket:" <> user.id, "disconnect", %{})
+  #     ReviewWeb.Endpoint.broadcast("users_socket:" <> user.id, "disconnect", %{})
   #
   # Returning `nil` makes this socket anonymous.
   def id(_socket), do: nil

@@ -1,12 +1,12 @@
-defmodule Review.PageController do
+defmodule ReviewWeb.PageController do
   use Review.Web, :controller
 
-  def index(_conn, %{ "page" => "boom" }) do
+  def index(_conn, %{"page" => "boom"}) do
     raise "this is an error made to test the error reporter"
   end
 
   def index(conn, _params) do
-    render conn, "index.html", commits_data: commits_data, comments_data: comments_data
+    render(conn, "index.html", commits_data: commits_data, comments_data: comments_data)
   end
 
   defp commits_data, do: Review.Repo.commits_data(25)

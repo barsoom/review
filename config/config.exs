@@ -6,7 +6,7 @@
 use Mix.Config
 
 # Configures the endpoint
-config :review, Review.Endpoint,
+config :review, ReviewWeb.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
   secret_key_base: "GYJj/FPmO6UO6bO3xF7UB47lwGnS2Vgdc+yjPHOH4YOR+00hsusLtXrtSCr4eac5",
@@ -25,8 +25,10 @@ config :review,
 # Configure phoenix generators
 config :phoenix, :generators,
   migration: true,
-  binary_id: false,
-  json_library: Jason
+  binary_id: false
+
+# Configure phoenix json library
+config :phoenix, :json_library, Jason
 
 config :honeybadger, :environment_name, Mix.env()
 
