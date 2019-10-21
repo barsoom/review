@@ -19,32 +19,29 @@ defmodule Review.CommentSerializer do
       resolverEmail: email(comment.resolved_by_author),
       threadIdentifier: thread_identifier(payload),
       body: payload.body,
-      url: payload.html_url
+      url: payload.html_url,
     }
   end
 
   def thread_identifier(payload) do
-    [payload.commit_id, payload.position, payload.line] |> Enum.join(":")
+    [ payload.commit_id, payload.position, payload.line ] |> Enum.join(":")
   end
 
   def commit_summary(nil), do: nil
   def commit_summary(commit), do: Review.CommitSerializer.commit_summary(commit)
 
   def commit_author_gravatar(nil), do: nil
-
   def commit_author_gravatar(commit) do
     gravatar_hash(commit.author)
   end
 
   defp commit_author_name(nil), do: nil
-
   defp commit_author_name(commit) do
     commit.author.name
   end
 
   defp gravatar_hash(%{email: nil}), do: gravatar_hash(nil)
-  defp gravatar_hash(nil), do: gravatar_hash(%{email: "show-a-placeholder"})
-
+  defp gravatar_hash(nil), do: gravatar_hash(%{ email: "show-a-placeholder" })
   defp gravatar_hash(author) do
     Gravatar.hash(author.email)
   end
@@ -53,6 +50,6 @@ defmodule Review.CommentSerializer do
   defp email(author), do: author.email
 
   defp parse_payload(comment) do
-    Jason.decode!(comment.json_payload, keys: :atoms)
+    Poison.decode!(comment.json_payload, keys: :atoms)
   end
 end

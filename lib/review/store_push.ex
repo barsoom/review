@@ -8,13 +8,11 @@ defmodule Review.StorePush do
   end
 
   defp parse_json(push_json) do
-    Jason.decode!(push_json, keys: :atoms)
+    Poison.decode!(push_json, keys: :atoms)
   end
 
-  defp build_and_insert_commits(
-         push_data = %{ref: ref, repository: %{master_branch: master_branch}}
-       ) do
-    branch = String.split(ref, "/") |> Enum.reverse() |> hd
+  defp build_and_insert_commits(push_data = %{ ref: ref, repository: %{ master_branch: master_branch } }) do
+    branch = String.split(ref, "/") |> Enum.reverse |> hd
 
     # Ignore commits outside the master branch.
     # It's usually experimental work in progress and not ready for review.
@@ -30,7 +28,7 @@ defmodule Review.StorePush do
 
   defp build_commits_and_authors(push_data) do
     push_data.commits
-    |> Enum.map(fn commit_data ->
+    |> Enum.map(fn (commit_data) ->
       build_commit(commit_data, push_data)
       |> add_author(commit_data)
     end)
@@ -39,12 +37,12 @@ defmodule Review.StorePush do
   defp build_commit(commit_data, push_data) do
     json_payload =
       Map.put(commit_data, :repository, push_data.repository)
-      |> Jason.encode!()
+      |> Poison.encode!
 
     %Commit{
       payload: "not-used-by-the-elixir-app",
       json_payload: json_payload,
-      sha: commit_data.id
+      sha: commit_data.id,
     }
   end
 
@@ -57,7 +55,7 @@ defmodule Review.StorePush do
         name: raw_author_data.name
       }
       |> add_username(raw_author_data)
-      |> Review.Repo.insert_or_update_author()
+      |> Review.Repo.insert_or_update_author
 
     Map.put(commit, :author, author)
   end
@@ -69,14 +67,12 @@ defmodule Review.StorePush do
 
   defp load_associations(commits) do
     commits
-    |> Enum.map(fn commit ->
-      Review.Repo.get!(Review.Repo.commits(), commit.id)
+    |> Enum.map(fn (commit) ->
+      Review.Repo.get!(Review.Repo.commits, commit.id)
     end)
   end
 
   # Pair commits does not have username
-  defp add_username(author_data, %{username: username}),
-    do: Map.put(author_data, :username, username)
-
-  defp add_username(author_data, _raw_author_data), do: author_data
+  defp add_username(author_data, %{username: username}), do: Map.put(author_data, :username, username)
+  defp add_username(author_data, _raw_author_data),      do: author_data
 end

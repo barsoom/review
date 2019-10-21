@@ -11,7 +11,8 @@ config :review, Review.Endpoint,
   root: Path.dirname(__DIR__),
   secret_key_base: "GYJj/FPmO6UO6bO3xF7UB47lwGnS2Vgdc+yjPHOH4YOR+00hsusLtXrtSCr4eac5",
   render_errors: [accepts: ~w(html json)],
-  pubsub: [name: Review.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Review.PubSub,
+           adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -25,11 +26,10 @@ config :review,
 # Configure phoenix generators
 config :phoenix, :generators,
   migration: true,
-  binary_id: false,
-  json_library: Jason
+  binary_id: false
 
-config :honeybadger, :environment_name, Mix.env()
+config :honeybadger, :environment_name, Mix.env
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env()}.exs"
+import_config "#{Mix.env}.exs"
