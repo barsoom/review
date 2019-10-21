@@ -1,4 +1,4 @@
-defmodule ReviewWeb.ChannelCase do
+defmodule Review.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -25,7 +25,7 @@ defmodule ReviewWeb.ChannelCase do
       import Ecto.Query, only: [from: 2]
 
       # The default endpoint for testing
-      @endpoint ReviewWeb.Endpoint
+      @endpoint Review.Endpoint
     end
   end
 

@@ -1,4 +1,4 @@
-defmodule Review.Application do
+defmodule Review do
   use Application
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
@@ -8,9 +8,9 @@ defmodule Review.Application do
 
     children = [
       # Start the endpoint when the application starts
-      supervisor(ReviewWeb.Endpoint, []),
+      supervisor(Review.Endpoint, []),
       # Start the Ecto repository
-      worker(Review.Repo, [])
+      worker(Review.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(Review.Worker, [arg1, arg2, arg3]),
     ]
@@ -24,7 +24,7 @@ defmodule Review.Application do
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    ReviewWeb.Endpoint.config_change(changed, removed)
+    Review.Endpoint.config_change(changed, removed)
     :ok
   end
 end

@@ -1,4 +1,4 @@
-defmodule ReviewWeb.GithubController do
+defmodule Review.GithubController do
   use Review.Web, :webhook
 
   def create(conn, params) do
@@ -34,7 +34,7 @@ defmodule ReviewWeb.GithubController do
   end
 
   defp broadcast_new_or_updated_commit(commit) do
-    ReviewWeb.Endpoint.broadcast!(
+    Review.Endpoint.broadcast!(
       "review",
       "new_or_updated_commit",
       Review.CommitSerializer.serialize(commit)
@@ -42,7 +42,7 @@ defmodule ReviewWeb.GithubController do
   end
 
   defp broadcast_new_or_updated_comment(comment) do
-    ReviewWeb.Endpoint.broadcast!(
+    Review.Endpoint.broadcast!(
       "review",
       "new_or_updated_comment",
       Review.CommentSerializer.serialize(comment)

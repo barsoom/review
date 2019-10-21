@@ -1,4 +1,4 @@
-defmodule ReviewWeb.ApiController do
+defmodule Review.ApiController do
   use Review.Web, :api
 
   alias Review.{Repo, Commit}

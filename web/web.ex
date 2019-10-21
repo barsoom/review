@@ -31,7 +31,7 @@ defmodule Review.Web do
       use Phoenix.Controller
       use Review.Authentication
 
-      plug(:authenticate, param: "secret", secret: Application.get_env(:review, :webhook_secret))
+      plug :authenticate, param: "secret", secret: Application.get_env(:review, :webhook_secret)
     end
   end
 
@@ -40,28 +40,28 @@ defmodule Review.Web do
       use Phoenix.Controller
       use Review.Authentication
 
-      plug(:authenticate, param: "secret", secret: Application.get_env(:review, :api_secret))
+      plug :authenticate, param: "secret", secret: Application.get_env(:review, :api_secret)
     end
   end
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: ReviewWeb
+      use Phoenix.Controller
 
       alias Review.Repo
       import Ecto
       import Ecto.Query, only: [from: 1, from: 2]
 
-      import ReviewWeb.Router.Helpers
+      import Review.Router.Helpers
       use Review.Authentication
 
-      plug(:authenticate, param: "auth_key", secret: Application.get_env(:review, :auth_key))
+      plug :authenticate, param: "auth_key", secret: Application.get_env(:review, :auth_key)
     end
   end
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/review_web/templates", namespace: ReviewWeb
+      use Phoenix.View, root: "web/templates"
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
@@ -69,7 +69,7 @@ defmodule Review.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import ReviewWeb.Router.Helpers
+      import Review.Router.Helpers
     end
   end
 

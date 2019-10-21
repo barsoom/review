@@ -10,7 +10,7 @@ exports.config =
       joinTo: "js/app.js"
 
   conventions:
-    assets: /^(static)/
+    assets: /^(web\/static\/assets)/
     ignored: [
       /\/_.*/
       /elm-stuff/
@@ -19,16 +19,16 @@ exports.config =
     ]
 
   paths:
-    public: "../priv/static"
+    public: "priv/static"
     watched: [
-      "static"
-      "elm"
-      "../test/static"
+      "web/static"
+      "web/elm"
+      "test/static"
     ]
 
   plugins:
     babel:
-      ignore: [ /vendor/ ]
+      ignore: [ /web\/static\/vendor/ ]
 
     elmBrunch:
       executablePath: "../../node_modules/elm/binwrappers"
@@ -47,7 +47,7 @@ exports.config =
 
   modules:
     autoRequire:
-      "js/app.js": [ "js/app" ]
+      "js/app.js": [ "web/static/js/app" ]
 
   npm:
     enabled: true

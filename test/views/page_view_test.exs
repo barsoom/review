@@ -1,3 +1,3 @@
 defmodule Review.PageViewTest do
-  use ReviewWeb.ConnCase, async: true
+  use Review.ConnCase, async: true
 end

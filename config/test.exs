@@ -2,7 +2,7 @@ use Mix.Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :review, ReviewWeb.Endpoint,
+config :review, Review.Endpoint,
   http: [port: 4001],
   server: true
 
@@ -23,7 +23,7 @@ if System.get_env("DEVBOX") do
     password: "dev",
     database: "review_test",
     hostname: "localhost",
-    port: System.cmd("service_port", ["postgres"]) |> elem(0) |> String.strip(),
+    port: System.cmd("service_port", ["postgres"]) |> elem(0) |> String.strip,
     pool: Ecto.Adapters.SQL.Sandbox
 else
   config :review, Review.Repo,

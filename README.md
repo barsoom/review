@@ -27,7 +27,7 @@ Review was built to explore how practical it was to build applications in Elixir
 * [ ] Find out how to handle dates in tests properly for the api tests
 * [ ] Use shasum checking for downloads in CI
 * [ ] Figure out how to test the auth\_key check in UserSocket
-* [ ] Possibly make phantomjs part of the phx.server in dev
+* [ ] Possibly make phantomjs part of the phoenix.server in dev
 * [ ] Cache the last build step
 * [ ] Maybe: Extract a mix package for `render_elm` and maybe a npm for the ujs, or remove both
 
@@ -78,14 +78,14 @@ Run tests:
 
 ### Developing
 
-If you use a editor plugin to issue a test command in a separate console, you can use `mix test_server` to do handle both that and run the phx.server in the same console window.
+If you use a editor plugin to issue a test command in a separate console, you can use `mix test_server` to do handle both that and run the phoenix.server in the same console window.
 
     source web/elm/paths.env
     mix test_server
 
-Otherwise, start a phx.server in a separate console to get a dev server and build Elm code when it changes.
+Otherwise, start a phoenix.server in a separate console to get a dev server and build Elm code when it changes.
 
-    mix phx.server
+    mix phoenix.server
 
 And run tests somewhere else.
 
