@@ -9,7 +9,7 @@ defmodule Review.StoreCommitComment do
   end
 
   defp parse_json(comment_json) do
-    comment_data = Poison.decode!(comment_json, keys: :atoms)
+    comment_data = Jason.decode!(comment_json, keys: :atoms)
     {comment_json, comment_data}
   end
 
@@ -18,14 +18,14 @@ defmodule Review.StoreCommitComment do
       github_id: comment_data.id,
       payload: "not-used-by-the-elixir-app",
       json_payload: comment_json,
-      commit_sha: comment_data.commit_id,
+      commit_sha: comment_data.commit_id
     }
 
     {comment, comment_data}
   end
 
   defp add_author({comment, comment_data}) do
-    author = Review.Repo.insert_or_update_author(%{ username: comment_data.user.login })
+    author = Review.Repo.insert_or_update_author(%{username: comment_data.user.login})
     Map.put(comment, :author, author)
   end
 
@@ -34,6 +34,6 @@ defmodule Review.StoreCommitComment do
   end
 
   defp load_associations({:ok, comment}) do
-    Review.Repo.get!(Review.Repo.comments, comment.id)
+    Review.Repo.get!(Review.Repo.comments(), comment.id)
   end
 end

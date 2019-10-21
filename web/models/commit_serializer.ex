@@ -25,7 +25,7 @@ defmodule Review.CommitSerializer do
       isBeingReviewed: !!commit.review_started_at && !commit.reviewed_at,
       reviewStartedTimestamp: timestamp(commit.review_started_at),
       isReviewed: !!commit.reviewed_at,
-      url: url(payload),
+      url: url(payload)
     }
   end
 
@@ -38,7 +38,7 @@ defmodule Review.CommitSerializer do
   defp summary(payload) do
     payload.message
     |> String.split("\n")
-    |> List.first
+    |> List.first()
     |> String.slice(0, @message_summary_length)
   end
 
@@ -46,7 +46,8 @@ defmodule Review.CommitSerializer do
   defp email(author), do: author.email
 
   defp gravatar_hash(%{email: nil}), do: gravatar_hash(nil)
-  defp gravatar_hash(nil), do: gravatar_hash(%{ email: "show-a-placeholder" })
+  defp gravatar_hash(nil), do: gravatar_hash(%{email: "show-a-placeholder"})
+
   defp gravatar_hash(author) do
     Gravatar.hash(author.email)
   end
@@ -54,10 +55,10 @@ defmodule Review.CommitSerializer do
   defp repository(payload), do: payload.repository.name
   defp author_name(commit), do: commit.author.name
   defp timestamp(nil), do: nil
-  defp timestamp(datetime), do: datetime |> Ecto.DateTime.to_iso8601
+  defp timestamp(datetime), do: datetime |> Ecto.DateTime.to_iso8601()
   defp url(payload), do: payload.url
 
   defp parse_payload(commit) do
-    Poison.decode!(commit.json_payload, keys: :atoms)
+    Jason.decode!(commit.json_payload, keys: :atoms)
   end
 end
