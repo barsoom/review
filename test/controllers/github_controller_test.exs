@@ -3,7 +3,7 @@ defmodule Review.GithubControllerTest do
   use Phoenix.ChannelTest
 
   test "can handle a ping" do
-    conn = build_conn
+    conn = build_conn()
       |> put_req_header("x-github-event", "ping")
       |> post("/webhooks/github?secret=webhook_secret", %{ zen: "Yo.", hook_id: 123 })
 
@@ -14,7 +14,7 @@ defmodule Review.GithubControllerTest do
     {:ok, _, _socket} = socket("", %{})
       |> subscribe_and_join(Review.ReviewChannel, "review")
 
-    conn = build_conn
+    conn = build_conn()
       |> put_req_header("x-github-event", "commit_comment")
       |> post("/webhooks/github?secret=webhook_secret", %{ comment: Poison.decode!(Review.Factory.comment_payload) })
 
@@ -30,7 +30,7 @@ defmodule Review.GithubControllerTest do
     {:ok, _, _socket} = socket("", %{})
       |> subscribe_and_join(Review.ReviewChannel, "review")
 
-    conn = build_conn
+    conn = build_conn()
       |> put_req_header("x-github-event", "push")
       |> post("/webhooks/github?secret=webhook_secret", Poison.decode!(Review.Factory.push_payload))
 
@@ -44,7 +44,7 @@ defmodule Review.GithubControllerTest do
   end
 
   test "can handle a push update caused by a pair commit" do
-    conn = build_conn
+    conn = build_conn()
       |> put_req_header("x-github-event", "push")
       |> post("/webhooks/github?secret=webhook_secret", Poison.decode!(Review.Factory.pair_commit_push_payload))
 
@@ -56,7 +56,7 @@ defmodule Review.GithubControllerTest do
       Poison.decode!(Review.Factory.push_payload)
       |> Map.put("ref", "refs/heads/lab")
 
-    conn = build_conn
+    conn = build_conn()
       |> put_req_header("x-github-event", "push")
       |> post("/webhooks/github?secret=webhook_secret", data)
 
@@ -67,7 +67,7 @@ defmodule Review.GithubControllerTest do
   end
 
   test "requires a valid key" do
-    conn = build_conn
+    conn = build_conn()
       |> put_req_header("x-github-event", "ping")
       |> post("/webhooks/github?secret=invalid", %{ zen: "Yo.", hook_id: 123 })
 

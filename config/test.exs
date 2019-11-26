@@ -23,7 +23,7 @@ if System.get_env("DEVBOX") do
     password: "dev",
     database: "review_test",
     hostname: "localhost",
-    port: System.cmd("service_port", ["postgres"]) |> elem(0) |> String.strip,
+    port: System.cmd("service_port", ["postgres"]) |> elem(0) |> String.trim(),
     pool: Ecto.Adapters.SQL.Sandbox
 else
   config :review, Review.Repo,
