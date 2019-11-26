@@ -3,7 +3,7 @@ use Mix.Config
 config :review, Review.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/manifest.json",
+  cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: {:system, "SECRET_KEY_BASE"},
   check_origin: [ "https://#{System.get_env("HEROKU_APP_NAME")}.herokuapp.com" ]
 

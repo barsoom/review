@@ -43,7 +43,7 @@ defmodule Review.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, ">= 0.0.0"},
+      {:phoenix, "< 1.4.0"},
       {:phoenix_html, ">= 0.0.0"},
       {:phoenix_live_reload, ">= 0.0.0", only: :dev},
       {:phoenix_ecto, ">= 0.0.0"},
