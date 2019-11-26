@@ -4,7 +4,7 @@ defmodule Review.ApiController do
   alias Review.{Repo, Commit}
   import Ecto.Query
 
-  def unreviewed_commit_stats(conn, params) do
+  def unreviewed_commit_stats(conn, _params) do
     query =
       from(c in Commit,
         where: is_nil(c.reviewed_at),

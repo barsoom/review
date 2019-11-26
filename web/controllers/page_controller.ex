@@ -6,7 +6,7 @@ defmodule Review.PageController do
   end
 
   def index(conn, _params) do
-    render conn, "index.html", commits_data: commits_data, comments_data: comments_data
+    render conn, "index.html", commits_data: commits_data(), comments_data: comments_data()
   end
 
   defp commits_data, do: Review.Repo.commits_data(25)

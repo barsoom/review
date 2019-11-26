@@ -8,12 +8,12 @@ defmodule Review.Factory do
   end
 
   def commit_factory do
-    %Commit{ sha: "2107c5d7b290c0ca294d4d70029e87b599bc9152", payload: "only-used-by-the-ruby-app-but-can-not-be-null", json_payload: commit_payload, author: build(:author) }
+    %Commit{ sha: "2107c5d7b290c0ca294d4d70029e87b599bc9152", payload: "only-used-by-the-ruby-app-but-can-not-be-null", json_payload: commit_payload(), author: build(:author) }
   end
 
   def comment_factory do
     # TODO: add payload as json_payload when the field exists
-    %Comment{ github_id: -1, commit_sha: "2107c5d7b290c0ca294d4d70029e87b599bc9152", payload: "only-used-by-the-ruby-app-but-can-not-be-null", author: build(:author), json_payload: comment_payload }
+    %Comment{ github_id: -1, commit_sha: "2107c5d7b290c0ca294d4d70029e87b599bc9152", payload: "only-used-by-the-ruby-app-but-can-not-be-null", author: build(:author), json_payload: comment_payload() }
   end
 
   def comment_payload do
