@@ -2,7 +2,7 @@ defmodule Review.PingChannel do
   use Phoenix.Channel
 
   def join(_channel, _auth, socket) do
-    send self, :after_join
+    send self(), :after_join
 
     {:ok, _} = :timer.send_interval(1 * 1000, :send_ping)
     {:ok, socket}
