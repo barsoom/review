@@ -48,7 +48,7 @@ defmodule Review.Mixfile do
       {:phoenix_live_reload, ">= 0.0.0", only: :dev},
       {:phoenix_ecto, ">= 0.0.0"},
       {:postgrex, ">= 0.0.0"},
-      {:calendar, "~> 0.14.2"},
+      {:calendar, ">= 1.0.0"},
       {:honeybadger, "~> 0.1"},
       {:hound, ">= 0.0.0", only: :test},
       {:ex_machina, ">= 0.0.0", only: :test},
