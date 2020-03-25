@@ -11,14 +11,14 @@ defmodule Review.Repo do
   def store_push(push_json), do: StorePush.call(push_json)
 
   def commits_data(limit) do
-    commits
+    commits()
     |> Ecto.Query.limit(^limit)
     |> all
     |> Review.CommitSerializer.serialize
   end
 
   def comments_data(limit) do
-    comments
+    comments()
     |> Ecto.Query.limit(^limit)
     |> all
     |> Review.CommentSerializer.serialize
