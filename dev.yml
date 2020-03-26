@@ -1,7 +1,7 @@
 # Config file used for internal tools at Auctionet
 
 dependencies:
-  node: "6.9.2"
+  node: "12.16.1"
   phantomjs: "2.1.1"
 
 docker_services:
