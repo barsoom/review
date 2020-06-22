@@ -6,7 +6,13 @@ defmodule Review.PageController do
   end
 
   def index(conn, _params) do
-    render conn, "index.html", commits_data: commits_data(), comments_data: comments_data()
+    redirect_to_url = System.get_env("REDIRECT_TO_URL")
+
+    if redirect_to_url do
+      redirect conn, external: redirect_to_url
+    else
+      render conn, "index.html", commits_data: commits_data(), comments_data: comments_data()
+    end
   end
 
   defp commits_data, do: Review.Repo.commits_data(25)
