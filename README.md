@@ -1,4 +1,4 @@
-***Status***: [auctionet devs](http://dev.auctionet.com) has used it for more than a year. It's stable. Some docs and polish would make it easier for others to adopt it.
+***Status***: Not maintained! See [Remit](https://github.com/barsoom/ex-remit) instead.
 
 # Review
 
